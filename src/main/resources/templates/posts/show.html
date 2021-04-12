@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:include="partials.html::head('A detailed view of this post')">
+    <meta charset="UTF-8">
+    <title>Detailed view of this post</title>
+</head>
+<body>
+<div th:replace="partials.html::navbar"></div>
+
+<div class="container">
+<div class="text-center p-2 m-2"><h1>Here is post: Post #<span th:text="${post.id}"></span> <span th:text="${post.title}"></span></h1></div>
+
+<div class="text-start p-2 m-2"><p th:text="${post.getBody()}">Body will go here.</p>
+    <p>Posted by: <span th:text="${post.author.getUsername()}"></span> - <a th:href ="@{/profile/__${post.author.username}__}">profile</a> - <a th:href="'mailto:' + ${post.author.email}">email</a> </p></div>
+<!--    <br><p>Posted: <span th:text="${post.created_on_string}"></span>. Last updated: <span th:text="${post.modified_on_string}"></span> </div>-->
+   <div th:if="${owner}"> <div class="center-text p-2 m-2"><a th:href="@{'/posts/'+ ${post.id} + '/edit'}"><button type="button" class="btn btn-primary">Edit</button></a>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+        Delete
+    </button></div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="deleteModalLabel">Confirm delete?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deleting your blog post cannot be undone! Are you sure you want to continue?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<!--                    <form th:action="@{/posts/__${post.id}__}" method="post">-->
+                        <form action="/posts/delete" method="post"><input hidden name="id" th:value="${post.id}"><button type="submit" class="btn btn-danger">Delete</button></form>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+    <div th:each="comment,iterStat : ${post.getComments()}" th:class="${iterStat.count}">
+        <div class="card">
+            <div class="card-body">
+                <span th:text="${comment.author.username}"></span> on <span class="text-muted" th:text="${#dates.format(comment.createDate,'E, MMM dd yyyy HH:mm:ss')}"></span><br>
+                <img th:src="${comment.author.getAvatar_path()}" height="30px" width="30px"> <span th:text="${comment.comment}"></span>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+<!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
+            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" method="post" >
+            <div class="input-group mb-3">
+                <input class="form-control" name="comment" id="comment" type="text">
+<!--                    <input class="form-control" th:field="*{comment}" type="text">-->
+                    <button class="btn" type="submit">Submit</button></div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+    <footer th:replace="partials.html::footer"></footer>
+
+</body>
+</html>

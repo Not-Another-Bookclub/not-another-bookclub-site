@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <head th:include="partials.html::head">
+    <meta charset="UTF-8">
+    <title>Rolling Dice</title>
+</head>
+<body>
+<nav th:replace="partials.html :: navbar"></nav>
+<h1>Hey! Pick which number you would like to guess.</h1>
+
+<a href="/roll-dice/1">Number 1</a>
+<a href="/roll-dice/2">Number 2</a>
+<a href="/roll-dice/3">Number 3</a>
+<a href="/roll-dice/4">Number 4</a>
+<a href="/roll-dice/5">Number 5</a>
+<a href="/roll-dice/6">Number 6</a>
+
+<!--<div class="" th:if ="${guess != null}">-->
+<!--    <span th:each="actual : ${actuals}"><p>The actual roll was <span th:text="${actual}"></span>, you guessed <span th:text="${guess}"></span></span></p>-->
+<!--</div>-->
+
+<div class="" th:if="${hash != null}">
+    <p>You guessed right <span th:text="${count}"></span> times!</p>
+    <div th:each="set : ${hash}"><p>You guessed <span th:text="${guess}"></span> - the actual dive roll was <span th:text="${set.key}"></span> <span th:if="${set.value}">You were right!</span> </p></div>
+</div>
+
+</body>
+</html>

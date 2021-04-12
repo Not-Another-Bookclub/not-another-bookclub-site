@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:include="partials.html::head('Here you can edit a page')" >
+    <meta charset="UTF-8">
+    <title>Edit Your Blog Post!</title>
+</head>
+<body>
+<div th:replace="partials.html::navbar">You shouldn't see this.</div>
+
+<div class="container">
+    <h1>Use the form below to edit an existing post!</h1>
+    <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title of the post</label>
+            <input class="form-control" type="text" th:field="*{title}">
+        </div>
+        <div class="mb-3">
+            <label for="body" class="form-label">Body of the blog post</label>
+            <textarea class="form-control" rows="6" th:field="*{body}"></textarea>
+<!--            <input hidden id="id" name="id" th:value="${post.id}">-->
+        </div>
+        <button class="btn btn-secondary text-center">Submit Post</button>
+    </form>
+</div>
+<footer th:replace="partials.html::footer"></footer>
+</body>
+</html>
