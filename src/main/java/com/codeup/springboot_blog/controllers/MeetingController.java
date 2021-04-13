@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MeetingController {
     @GetMapping("/meeting/{id}")
-    public String showOneMeeting(@PathVariable long id){
+    public String showOneMeeting(@PathVariable long id, Model model){
+
+        model.addAttribute("id", id);
         return "meeting";
     }
 }
