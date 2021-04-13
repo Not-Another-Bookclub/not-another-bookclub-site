@@ -28,7 +28,7 @@ public class User {
     @Column (columnDefinition = "TEXT")
     private String bio;
 
-    @Column
+    @Column (columnDefinition = "VARCHAR(255) default '/img/user-solid.svg'")
     private String avatar_path;
 
     @Column
@@ -36,6 +36,9 @@ public class User {
 
     @Column
     private boolean is_private;
+
+    @Column
+    private String zipcode;
 
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "id")
     private List<Post> posts;
@@ -137,6 +140,30 @@ public class User {
 
     public boolean isIs_private() {
         return is_private;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public List<BookclubMembership> getBookclubs() {
+        return bookclubs;
+    }
+
+    public void setBookclubs(List<BookclubMembership> bookclubs) {
+        this.bookclubs = bookclubs;
+    }
+
+    public List<UserBook> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<UserBook> books) {
+        this.books = books;
     }
 
     public void setIs_private(boolean is_private) {

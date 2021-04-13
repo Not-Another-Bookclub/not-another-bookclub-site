@@ -26,9 +26,10 @@ public class UserController {
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
-        model.addAttribute("user", new User());
         User user = new User();
-        System.out.println("user.getUsername() = " + user.getUsername());
+        user.setIs_admin(false);
+        user.setIs_private(false);
+        model.addAttribute("user", user);
         return "users/sign-up";
     }
 
@@ -36,12 +37,21 @@ public class UserController {
     public String saveUser(@ModelAttribute User user, Model model){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
-//        if (userDao.findByUsername(user.getUsername()) != null) {
-//            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
-//                    "  That username is already in use, please select another.</div>");
-//            model.addAttribute("user", user);
-//            return "users/sign-up";
-//        }
+
+        if (user.getAvatar_path().isEmpty()) {user.setAvatar_path("/img/user-solid.svg");}
+        if (userDao.findByUsername(user.getUsername()) != null) {
+            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                    "  That username is already in use, please select another.</div>");
+            model.addAttribute("user", user);
+            return "users/sign-up";
+        }
+        if (userDao.findByEmail(user.getEmail()) != null) {
+            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                    "  That email address is already in use, please select another.</div>");
+            model.addAttribute("user", user);
+            return "users/sign-up";
+        }
+
         userDao.save(user);
         return "redirect:/login";
     }
@@ -50,7 +60,7 @@ public class UserController {
     public String profileEditRender(@PathVariable String username, Model model) {
         User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", userDao.findByUsername(loggedin.getUsername()));
-        return "users/sign-up";
+        return "users/edit";
     }
 
     @PostMapping("profile/{username}/edit")
