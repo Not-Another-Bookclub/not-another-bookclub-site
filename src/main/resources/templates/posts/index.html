@@ -1,78 +1,92 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head th:include="partials.html::head('All current posts')" >
-    <meta charset="UTF-8">
-    <title>Books Search Software</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="static/css/main.css"/>
-</head>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">-->
+<!--<html lang="en">-->
+<!--<head th:include="partials.html::head('All current posts')" >-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Books Search Software</title>-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">&ndash;&gt;-->
+<!--    <link rel="stylesheet" href="static/css/main.css"/>-->
 
-<body class="#212121 grey lighten-4">
-        <div th:replace="partials.html::navbar">You shouldn't see this.</div>
-<!--    <main class="flex-shrinkg-0">-->
-        <div class="container">
-            <div id="search" class="#f5f5f5 grey lighten-4 z-depth-5">
-                <form id="myform">
-                    <div class="input-field">
-                    <input type="search" id="books">
-                <label for="search">Search Books</label>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--</head>-->
+
+
+
+<!--<body class="#212121 grey lighten-4">-->
+
+<!--&lt;!&ndash; Load the Google Books API [DON'T FORGET TO USE A KEY] &ndash;&gt;-->
+
+<!--<script src="https://maps.googleapis.com/books/api/js?key=booksToken"></script>-->
+
+
+
+<!--&lt;!&ndash;GET https://www.googleapis.com/books/v1/mylibrary/bookshelves?key=AIzaSyChxQmAq5xeCpMDMDm5O7R8FWW50Hi9K38&ndash;&gt;-->
+<!--&lt;!&ndash;Authorization: /* auth token here */&ndash;&gt;-->
+
+
+
+<!--        <div th:replace="partials.html::navbar">You shouldn't see this.</div>-->
+<!--&lt;!&ndash;    <main class="flex-shrink-0">&ndash;&gt;-->
+<!--        <div class="container">-->
+<!--            <div id="search" class="#f5f5f5 grey lighten-4 z-depth-5">-->
+<!--                <form id="myform">-->
+<!--                    <div class="input-field">-->
+<!--                        <input type="search" id="books">-->
+<!--                        <label for="search">Search Books</label>-->
+<!--                    </div>-->
+<!--                    <button class="btn red">Search Books</button>-->
+<!--                </form>-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+<!--    <div id="result"></div>-->
+
+
+
+
+
+
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <body class = "bg-light">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Google Books embedded API example</title>
+
+    <div class="container">
+        <h1 class="display-4 align-middle mt-5 text-dark">Google API App</h1>
+    </div>
+
+    <div class="container mt-5 p-3 border-0">
+        <div class="card text-white bg-dark mb-3 float-left shadow-lg" style="max-width:20rem;">
+            <div class="card-header">Google Books API App</div>
+            <div class="card-body">
+                <h4 class="card-title">Type your ISBN below</h4>
+
             </div>
-                <button class="btn red">Search Books</button>
-        </form>
+
+        </div>
     </div>
 
-    <div id="result">
 
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudfare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 </body>
+
+</head>
 </html>
 
 
 
 
-<!--<div th:if="${user != null}">-->
 
-<!--    <div class="card col-12 col-sm-8 col-md-6">-->
-<!--        <img th:src="${user.avatar_path}" class="card-img-top" height="250px" width="250px">-->
-<!--&lt;!&ndash;        th:alt="${user.username}'s Avatar">&ndash;&gt;-->
-<!--        <div class="card-body">-->
-<!--            <h5 class="card-title"><span th:text="${user.username}"></span></h5>-->
-<!--            <p class="card-text"><span th:text="${user.bio}"></span></p>-->
-<!--            <a th:if="${owner}" th:href="@{/profile/__${user.username}__/edit}"><button class="btn btn-primary">Edit Profile</button></a>-->
-<!--        </div>-->
-<!--    </div>-->
 
-<!--</div>-->
 
-<!--    <div th:if="${search != null}">-->
-<!--        <h1>Here's all titles and posts that contained: "<span th:text="${search}"></span>"</h1>-->
-<!--    </div>-->
-<!--    <div th:if="${user != null}"}>-->
-<!--        <h1>Here's all the posts for username "<span th:text="${user.username}"></span>"</h1>-->
-<!--    </div>-->
-
-<!--    <div th:if="${user == null && username != null}"}>-->
-<!--        <h1>No posts by user with a username "<span th:text="${username}"></span>"</h1>-->
-<!--    </div>-->
-
-<!--    <div th:if="${search == null && user == null}">-->
-<!--<h1>Here's a list of all posts</h1>-->
-<!--    </div>-->
-
-<!--<div th:each="post,iterStat : ${posts}" th:class="${iterStat.count}" class="text-center">-->
-
-<!--    <a th:href="@{/posts/__${post.id}__}"><h2><span th:text="${post.title}"></span> - Post #<span th:text="${post.id}"></span> </h2></a>-->
-<!--    <div class="text-start"><p th:text="${post.getBody()}"></p>-->
-<!--        <p>Posted by: <span th:text="${post.author.username}"></span></p>-->
-<!--        <p>There are <span th:text="${post.getComments().size()}"></span> comments.</p>-->
-<!--&lt;!&ndash;        <p>Posted: <span th:text="${post.created_on_string}"> </span> </div>&ndash;&gt;-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</main>-->
-<!--    <footer th:replace="partials.html::footer"></footer>-->
