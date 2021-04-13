@@ -3,52 +3,76 @@
 <html lang="en">
 <head th:include="partials.html::head('All current posts')" >
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Books Search Software</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="static/css/main.css"/>
 </head>
-<body>
-<div th:replace="partials.html::navbar">You shouldn't see this.</div>
-<main class="flex-shrinkg-0">
-<div class="container">
-<div th:if="${user != null}">
 
-    <div class="card col-12 col-sm-8 col-md-6">
-        <img th:src="${user.avatar_path}" class="card-img-top" height="250px" width="250px">
-<!--        th:alt="${user.username}'s Avatar">-->
-        <div class="card-body">
-            <h5 class="card-title"><span th:text="${user.username}"></span></h5>
-            <p class="card-text"><span th:text="${user.bio}"></span></p>
-            <a th:if="${owner}" th:href="@{/profile/__${user.username}__/edit}"><button class="btn btn-primary">Edit Profile</button></a>
-        </div>
+<body class="#212121 grey lighten-4">
+        <div th:replace="partials.html::navbar">You shouldn't see this.</div>
+<!--    <main class="flex-shrinkg-0">-->
+        <div class="container">
+            <div id="search" class="#f5f5f5 grey lighten-4 z-depth-5">
+                <form id="myform">
+                    <div class="input-field">
+                    <input type="search" id="books">
+                <label for="search">Search Books</label>
+            </div>
+                <button class="btn red">Search Books</button>
+        </form>
     </div>
 
-</div>
+    <div id="result">
 
-    <div th:if="${search != null}">
-        <h1>Here's all titles and posts that contained: "<span th:text="${search}"></span>"</h1>
-    </div>
-    <div th:if="${user != null}"}>
-        <h1>Here's all the posts for username "<span th:text="${user.username}"></span>"</h1>
     </div>
 
-    <div th:if="${user == null && username != null}"}>
-        <h1>No posts by user with a username "<span th:text="${username}"></span>"</h1>
-    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudfare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-    <div th:if="${search == null && user == null}">
-<h1>Here's a list of all posts</h1>
-    </div>
-
-<div th:each="post,iterStat : ${posts}" th:class="${iterStat.count}" class="text-center">
-
-    <a th:href="@{/posts/__${post.id}__}"><h2><span th:text="${post.title}"></span> - Post #<span th:text="${post.id}"></span> </h2></a>
-    <div class="text-start"><p th:text="${post.getBody()}"></p>
-        <p>Posted by: <span th:text="${post.author.username}"></span></p>
-        <p>There are <span th:text="${post.getComments().size()}"></span> comments.</p>
-<!--        <p>Posted: <span th:text="${post.created_on_string}"> </span> </div>-->
-</div>
-</div>
-</div>
-</main>
-    <footer th:replace="partials.html::footer"></footer>
 </body>
 </html>
+
+
+
+
+<!--<div th:if="${user != null}">-->
+
+<!--    <div class="card col-12 col-sm-8 col-md-6">-->
+<!--        <img th:src="${user.avatar_path}" class="card-img-top" height="250px" width="250px">-->
+<!--&lt;!&ndash;        th:alt="${user.username}'s Avatar">&ndash;&gt;-->
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title"><span th:text="${user.username}"></span></h5>-->
+<!--            <p class="card-text"><span th:text="${user.bio}"></span></p>-->
+<!--            <a th:if="${owner}" th:href="@{/profile/__${user.username}__/edit}"><button class="btn btn-primary">Edit Profile</button></a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<!--    <div th:if="${search != null}">-->
+<!--        <h1>Here's all titles and posts that contained: "<span th:text="${search}"></span>"</h1>-->
+<!--    </div>-->
+<!--    <div th:if="${user != null}"}>-->
+<!--        <h1>Here's all the posts for username "<span th:text="${user.username}"></span>"</h1>-->
+<!--    </div>-->
+
+<!--    <div th:if="${user == null && username != null}"}>-->
+<!--        <h1>No posts by user with a username "<span th:text="${username}"></span>"</h1>-->
+<!--    </div>-->
+
+<!--    <div th:if="${search == null && user == null}">-->
+<!--<h1>Here's a list of all posts</h1>-->
+<!--    </div>-->
+
+<!--<div th:each="post,iterStat : ${posts}" th:class="${iterStat.count}" class="text-center">-->
+
+<!--    <a th:href="@{/posts/__${post.id}__}"><h2><span th:text="${post.title}"></span> - Post #<span th:text="${post.id}"></span> </h2></a>-->
+<!--    <div class="text-start"><p th:text="${post.getBody()}"></p>-->
+<!--        <p>Posted by: <span th:text="${post.author.username}"></span></p>-->
+<!--        <p>There are <span th:text="${post.getComments().size()}"></span> comments.</p>-->
+<!--&lt;!&ndash;        <p>Posted: <span th:text="${post.created_on_string}"> </span> </div>&ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</main>-->
+<!--    <footer th:replace="partials.html::footer"></footer>-->
