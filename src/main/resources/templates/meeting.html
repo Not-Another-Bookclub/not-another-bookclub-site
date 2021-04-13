@@ -9,8 +9,18 @@
     <nav th:replace="partials.html :: navbar"></nav>
     <h2>THIS IS THE INDIVIDUAL MEETING PAGE!!!</h2>
 
-    <div>
+    <div >
         <p>The id is: <span th:text="${id}"></span></p>
+    </div>
+    <div style="border: 2px solid black">
+        <span>These will only show if you own the club.</span>
+        <button class="btn btn-warning">Edit?</button>
+        <button class="btn btn-danger">Delete?</button>
+    </div>
+    <div>
+        <p>This will be the area where the details are displayed.</p>
+        <p>Tricky thing is do we have a conditional if it is a physical location meeting or virtual.</p>
+        <p>last lines of detail </p>
     </div>
 
     <footer th:replace="partials.html::footer"></footer>
