@@ -9,10 +9,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column
+    private String firstname;
+
+    @Column
+    private String lastname;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column
@@ -24,16 +30,44 @@ public class User {
     @Column
     private String avatar_path;
 
+    @Column
+    private boolean is_admin;
+
+    @Column
+    private boolean is_private;
+
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "id")
     private List<Post> posts;
 
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "comment_id")
     private List<Comment> comments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookclub")
+    private List<BookclubMembership> bookclubs;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    private List<UserBook> books;
+
+    public User(long id, String username, String firstname, String lastname, String email, String password, String bio, String avatar_path, boolean is_admin, boolean is_private, List<Post> posts, List<Comment> comments) {
+        this.id = id;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.bio = bio;
+        this.avatar_path = avatar_path;
+        this.is_admin = is_admin;
+        this.is_private = is_private;
+        this.posts = posts;
+        this.comments = comments;
+    }
+
     public User(User copy) {
         id = copy.id;
         email = copy.email;
         username = copy.username;
+
         password = copy.password;
         bio = copy.bio;
         avatar_path = copy.avatar_path;
@@ -74,6 +108,38 @@ public class User {
         this.avatar_path = avatar_path;
         this.posts = posts;
         this.comments = comments;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public boolean isIs_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(boolean is_admin) {
+        this.is_admin = is_admin;
+    }
+
+    public boolean isIs_private() {
+        return is_private;
+    }
+
+    public void setIs_private(boolean is_private) {
+        this.is_private = is_private;
     }
 
     public List<Comment> getComments() {
