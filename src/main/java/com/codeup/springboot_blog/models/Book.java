@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +18,9 @@ public class Book {
 
     @OneToMany(mappedBy = "book")
     private List<UserBook> users;
+
+    @OneToMany(mappedBy = "book")
+    private List<Post> posts;
 
     public Book() {};
 

@@ -1,21 +1,24 @@
 package com.codeup.springboot_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "meetings")
 public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "when")
-    private Date when;
+    @Column(name = "timedate")
+    private Date timedate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Where where;
+    private Location location;
 
     @Column
     private String address;
@@ -27,20 +30,30 @@ public class Meeting {
     private String zipPlusFour;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "bookclub_id", referencedColumnName = "id", nullable = false)
     private Bookclub bookclub;
 
     public Meeting() {};
 
-    public Meeting(Date createDate, Where where, String address, String city, String zipPlusFour, Bookclub bookclub) {
-        this.when = createDate;
-        this.where = where;
+    public Meeting(Date createDate, Date when, String address, String city, String zipPlusFour, Bookclub bookclub) {
+        this.timedate = createDate;
+        this.location = location;
         this.address = address;
         this.city = city;
         this.zipPlusFour = zipPlusFour;
         this.bookclub = bookclub;
     }
 
+    public Meeting(long id, Date timedate, Location location, String address, String city, String zipPlusFour, Bookclub bookclub) {
+        this.id = id;
+        this.timedate = timedate;
+        this.location = location;
+        this.address = address;
+        this.city = city;
+        this.zipPlusFour = zipPlusFour;
+        this.bookclub = bookclub;
+    }
     public long getId() {
         return id;
     }
@@ -49,20 +62,20 @@ public class Meeting {
         this.id = id;
     }
 
-    public Date getCreateDate() {
-        return when;
+    public Date getTimedate() {
+        return timedate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.when = createDate;
+    public void setTimedate(Date timedate) {
+        this.timedate = timedate;
     }
 
-    public Where getWhere() {
-        return where;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setWhere(Where where) {
-        this.where = where;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getAddress() {
@@ -96,4 +109,6 @@ public class Meeting {
     public void setBookclub(Bookclub bookclub) {
         this.bookclub = bookclub;
     }
+
+
 }

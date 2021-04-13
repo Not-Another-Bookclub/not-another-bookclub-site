@@ -1,7 +1,7 @@
 package com.codeup.springboot_blog.models;
 
-public enum Where {
-    Bar,
+public enum Location {
+    BAR,
     Restaurant,
     House,
     Public,

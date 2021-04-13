@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "bookclubs")
 public class Bookclub {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +39,12 @@ public class Bookclub {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
     private List<BookclubBook> books;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookclub")
+    private List<Post> posts;
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "meeting")
+//    private List<Meeting> meetings;
 
     public Bookclub() {};
 
