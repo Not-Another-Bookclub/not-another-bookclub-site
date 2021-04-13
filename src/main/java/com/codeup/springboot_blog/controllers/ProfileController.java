@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ProfileController {
     @GetMapping("/pro/{id}")
     public String showUserProfile(@PathVariable long id, Model model){
+
         model.addAttribute("id", id);
         return "profile";
     }
