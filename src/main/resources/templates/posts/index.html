@@ -1,54 +1,191 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head th:include="partials.html::head('All current posts')" >
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Books Search Software</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+<!--    <link rel="stylesheet" href="static/css/main.css"/>-->
+
+
 </head>
-<body>
-<div th:replace="partials.html::navbar">You shouldn't see this.</div>
-<main class="flex-shrinkg-0">
-<div class="container">
-<div th:if="${user != null}">
 
-    <div class="card col-12 col-sm-8 col-md-6">
-        <img th:src="${user.avatar_path}" class="card-img-top" height="250px" width="250px">
-<!--        th:alt="${user.username}'s Avatar">-->
-        <div class="card-body">
-            <h5 class="card-title"><span th:text="${user.username}"></span></h5>
-            <p class="card-text"><span th:text="${user.bio}"></span></p>
-            <a th:if="${owner}" th:href="@{/profile/__${user.username}__/edit}"><button class="btn btn-primary">Edit Profile</button></a>
-        </div>
+
+
+<!--<body class="#212121 grey lighten-4">-->
+
+<!--&lt;!&ndash; Load the Google Books API [DON'T FORGET TO USE A KEY] &ndash;&gt;-->
+
+<!--<script src="https://maps.googleapis.com/books/api/js?key=booksToken"></script>-->
+
+
+
+
+
+
+
+<!--        <div th:replace="partials.html::navbar">You shouldn't see this.</div>-->
+<!--&lt;!&ndash;    <main class="flex-shrink-0">&ndash;&gt;-->
+<!--        <div class="container">-->
+<!--            <div id="search" class="#f5f5f5 grey lighten-4 z-depth-5">-->
+<!--                <form id="myform">-->
+<!--                    <div class="input-field">-->
+<!--                        <input type="search" id="books">-->
+<!--                        <label for="search">Search Books</label>-->
+<!--                    </div>-->
+<!--                    <button class="btn red">Search Books</button>-->
+<!--                </form>-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+<!--    <div id="result"></div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!--<!DOCTYPE! -->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<html xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<html lang="en">-->
+<!--<head th:include="partials.html::head('A detailed view of this post')">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Google Books embedded API example</title>-->
+
+
+    <body class = "bg-light">
+
+
+    <div th:replace="partials.html::navbar"></div>
+
+    <div class="container">
+        <h1 class="display-4 align-middle mt-5 text-dark">Google API App</h1>
     </div>
 
-</div>
+    Version 2
 
-    <div th:if="${search != null}">
-        <h1>Here's all titles and posts that contained: "<span th:text="${search}"></span>"</h1>
-    </div>
-    <div th:if="${user != null}"}>
-        <h1>Here's all the posts for username "<span th:text="${user.username}"></span>"</h1>
-    </div>
+    <h1>Book finder</h1>
+    <label for="search Title"></label>
+    <input type="text" id="search title" placeholder="Title">
+    <label for="search Author"></label>
+    <input type="text" id="search Author" placeholder="Author">
+    <button id = "button" type="button">click bait</button>
+    <div id="results"></div>
 
-    <div th:if="${user == null && username != null}"}>
-        <h1>No posts by user with a username "<span th:text="${username}"></span>"</h1>
-    </div>
+<!--    <div class="container mt-5 p-3 border-0">-->
+<!--        <div class="card text-white bg-dark mb-3 float-left shadow-lg" style="max-width:20rem;">-->
+<!--            <div class="card-header">Google Books API App</div>-->
+<!--            <div id ="results1" class="card-body">-->
+<!--                <h4 class="card-title">Type your ISBN below</h4>-->
+<!--                <input type="text" class="form-control isbn" placeholder="Enter your isbn">-->
+<!--                <button id="Start" class="btn btn-primary mt-2 mb-2">Start Reading</button>-->
+<!--&lt;!&ndash;                <button onclick='www.google.com'>Start reading 2</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button onclick="https://www.google.com">HTML Tutorial</button>&ndash;&gt;-->
+<!--                <button class="btn btn-light auto">Auto-turn</button>-->
+<!--                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea eum ex explicabo incidunt laborum maiores odio quam quas ut.</p>-->
+<!--            </div>-->
 
-    <div th:if="${search == null && user == null}">
-<h1>Here's a list of all posts</h1>
-    </div>
+<!--        </div>-->
+<!--    </div>-->
 
-<div th:each="post,iterStat : ${posts}" th:class="${iterStat.count}" class="text-center">
+<!--    <div id="viewerCanvas" style="width: 800px; height: 800px" class="mr-3 float-right"></div>-->
 
-    <a th:href="@{/posts/__${post.id}__}"><h2><span th:text="${post.title}"></span> - Post #<span th:text="${post.id}"></span> </h2></a>
-    <div class="text-start"><p th:text="${post.getBody()}"></p>
-        <p>Posted by: <span th:text="${post.author.username}"></span></p>
-        <p>There are <span th:text="${post.getComments().size()}"></span> comments.</p>
-<!--        <p>Posted: <span th:text="${post.created_on_string}"> </span> </div>-->
-</div>
-</div>
-</div>
-</main>
-    <footer th:replace="partials.html::footer"></footer>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+<!--    <script src="/static/js/keys.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://www.googleapis.com/books/v1/volumes?q=search+terms"></script>
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+
+
+
+    <script>
+
+        function bookSearch(){
+            var searchTitle = document.getElementById('search title').value
+            document.getElementById('results').innerHTML =""
+
+
+            var searchAuthor = document.getElementById('search Author').value
+            document.getElementById('results').innerHTML =""
+
+
+
+            $.ajax({
+                url: "https://www.googleapis.com/books/v1/volumes?q=" + searchTitle + "+inauthor:" + searchAuthor,
+                dataType:"json",
+
+                success: function (data){
+                    for(i = 0; i < data.items.length; i++){
+                        var html = "<div><img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' height='300px' >"  + "<h2>" + data.items[i].volumeInfo.title + " - " + data.items[i].volumeInfo.authors[0] + "</h2><p>"+ data.items[i].volumeInfo.description +" </p></div>"
+                    results.innerHTML+=html;
+                    }
+
+                    // console.log(data);
+                },
+                type: 'GET'
+            })
+
+        }
+
+        document.getElementById('button').addEventListener('click', bookSearch, false);
+    //
+    //     const button = document.querySelector("#start");
+    //     const isbn = document.querySelector(".isbn");
+    //     const auto = document.querySelector(".auto");
+    //
+    // button.addEventListener("click", initialize);
+    //
+    //
+    // google.books.load({"language": "en"});
+    //
+    // function nextStep(viewer){
+    //     window.setTimeout(function (){
+    //         viewer.nextPage()
+    //         nextStep(viewer);
+    //
+    //     })
+    // }
+    // function alertNotFound(){
+    //     alert("Book not found!");
+    // }
+    //
+    // function initialize(){
+    //     var viewer = new google.books.DefaultViewer(document.getElementById("viewerCanvas"));
+    //     viewer.load("ISBN" + isbn.value, alertNotFound);
+    //     auto.addEventListener("click", nextStep(viewer));
+    //     nextStep(viewer);
+    // }
+    //
+    //     google.books.setOnLoadCallback(initialize);
+
+
+
+
+
+        // https://www.googleapis.com/books/v1/volumes?q=search+terms
+
+
+
+
+
+
+    </script>
+
+
+
+
+
 </body>
+
+
 </html>
+
+
+
+
+
+
+
