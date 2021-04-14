@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head th:include="partials.html::head('All current posts')" >
     <title>Books Search Software</title>
@@ -19,8 +19,7 @@
 
 
 
-<!--&lt;!&ndash;GET https://www.googleapis.com/books/v1/mylibrary/bookshelves?key=AIzaSyChxQmAq5xeCpMDMDm5O7R8FWW50Hi9K38&ndash;&gt;-->
-<!--&lt;!&ndash;Authorization: /* auth token here */&ndash;&gt;-->
+
 
 
 
@@ -40,12 +39,6 @@
 <!--        </div>-->
 
 <!--    <div id="result"></div>-->
-
-
-
-
-
-
 
 <!--</body>-->
 <!--</html>-->
@@ -69,66 +62,91 @@
         <h1 class="display-4 align-middle mt-5 text-dark">Google API App</h1>
     </div>
 
-    <div class="container mt-5 p-3 border-0">
-        <div class="card text-white bg-dark mb-3 float-left shadow-lg" style="max-width:20rem;">
-            <div class="card-header">Google Books API App</div>
-            <div class="card-body">
-                <h4 class="card-title">Type your ISBN below</h4>
-                <input type="text" class="form-control isbn" placeholder="Enter your isbn">
-                <button id="Start" class="btn btn-primary mt-2 mb-2">Start Reading</button>
-<!--                <button onclick='www.google.com'>Start reading 2</button>-->
-                <button onclick="https://www.google.com">HTML Tutorial</button>
-                <button class="btn btn-light auto">Auto-turn</button>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea eum ex explicabo incidunt laborum maiores odio quam quas ut.</p>
-            </div>
+    Version 2
 
-        </div>
-    </div>
+    <h1>Book finder</h1>
+    <input type="text" id="search" placeholder="Title or author">
+    <button id = "button" type="button">click bait</button>
+    <div id="results"></div>
 
-    <div id="viewerCanvas" style="width: 800px; height: 800px" class="mr-3 float-right"></div>
+<!--    <div class="container mt-5 p-3 border-0">-->
+<!--        <div class="card text-white bg-dark mb-3 float-left shadow-lg" style="max-width:20rem;">-->
+<!--            <div class="card-header">Google Books API App</div>-->
+<!--            <div id ="results1" class="card-body">-->
+<!--                <h4 class="card-title">Type your ISBN below</h4>-->
+<!--                <input type="text" class="form-control isbn" placeholder="Enter your isbn">-->
+<!--                <button id="Start" class="btn btn-primary mt-2 mb-2">Start Reading</button>-->
+<!--&lt;!&ndash;                <button onclick='www.google.com'>Start reading 2</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button onclick="https://www.google.com">HTML Tutorial</button>&ndash;&gt;-->
+<!--                <button class="btn btn-light auto">Auto-turn</button>-->
+<!--                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea eum ex explicabo incidunt laborum maiores odio quam quas ut.</p>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div id="viewerCanvas" style="width: 800px; height: 800px" class="mr-3 float-right"></div>-->
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
 
-    <script src="/static/js/keys.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.googleapis.com/books/v1/volumes?q=search+terms"></script>-->
+<!--    <script src="/static/js/keys.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://www.googleapis.com/books/v1/volumes?q=search+terms"></script>
     <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
 
 
 
     <script>
 
-        const button = document.querySelector("#start");
-        const isbn = document.querySelector(".isbn");
-        const auto = document.querySelector(".auto");
+        function bookSearch(){
+            var search = document.getElementById('search').value
+            document.getElementById('results').innerHTML =""
+            console.log(search)
 
-    button.addEventListener("click", initialize);
+            $.ajax({
+                url: "https://www.googleapis.com/books/v1/volumes?q=" + search,
+                dataType:"json",
 
+                success: function (data){
+                    console.log(data);
+                },
+                type: 'GET'
+            })
 
-    google.books.load({"language": "en"});
+        }
 
-    function nextStep(viewer){
-        window.setTimeout(function (){
-            viewer.nextPage()
-            nextStep(viewer);
-
-        })
-    }
-    function alertNotFound(){
-        alert("Book not found!");
-    }
-
-    function initialize(){
-        var viewer = new google.books.DefaultViewer(document.getElementById("viewerCanvas"));
-
-        viewer.load("ISBN" + isbn.value, alertNotFound);
-        auto.addEventListener("click", nextStep(viewer));
-        nextStep(viewer);
-    }
-
-
+        document.getElementById('button').addEventListener('click', bookSearch, false);
+    //
+    //     const button = document.querySelector("#start");
+    //     const isbn = document.querySelector(".isbn");
+    //     const auto = document.querySelector(".auto");
+    //
+    // button.addEventListener("click", initialize);
+    //
+    //
+    // google.books.load({"language": "en"});
+    //
+    // function nextStep(viewer){
+    //     window.setTimeout(function (){
+    //         viewer.nextPage()
+    //         nextStep(viewer);
+    //
+    //     })
+    // }
+    // function alertNotFound(){
+    //     alert("Book not found!");
+    // }
+    //
+    // function initialize(){
+    //     var viewer = new google.books.DefaultViewer(document.getElementById("viewerCanvas"));
+    //     viewer.load("ISBN" + isbn.value, alertNotFound);
+    //     auto.addEventListener("click", nextStep(viewer));
+    //     nextStep(viewer);
+    // }
+    //
+    //     google.books.setOnLoadCallback(initialize);
 
 
 
@@ -136,7 +154,7 @@
 
         // https://www.googleapis.com/books/v1/volumes?q=search+terms
 
-    google.books.setOnLoadCallback(initialize);
+
 
 
 
