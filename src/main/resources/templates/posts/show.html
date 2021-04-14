@@ -49,7 +49,7 @@
         </div>
     </div>
     <div class="card">
-        <div class="card-body">
+        <div th:if="${loggedin != null}"  class="card-body">
 <!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
             <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" method="post" >
             <div class="input-group mb-3">
@@ -59,6 +59,8 @@
 
             </form>
         </div>
+
+
     </div>
 </div>
 

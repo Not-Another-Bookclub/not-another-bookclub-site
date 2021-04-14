@@ -54,9 +54,12 @@ public class PostController {
     Post post = postDao.getOne(id);
     if (post.getComments().size() > 0) {Collections.sort(post.getComments());};
     model.addAttribute("post", post);
+
     if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("loggedin",loggedin);
     if (loggedin.getId() == post.getAuthor().getId()) {
         model.addAttribute("owner", true);
+
 //        Comment comment = new Comment();
 //        comment.setComment("Type a comment to join the conversation.");
 //        model.addAttribute("comment", comment);
