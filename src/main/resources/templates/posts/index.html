@@ -119,7 +119,9 @@
 
                 success: function (data){
                     for(i = 0; i < data.items.length; i++){
-                        var html = "<div><img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' height='300px' >"  + "<h2>" + data.items[i].volumeInfo.title + " - " + data.items[i].volumeInfo.authors[0] + "</h2><p>"+ data.items[i].volumeInfo.description +" </p></div>"
+                        var html = "<div>" +
+                            "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' height='300px' >"  + "<h2>" + data.items[i].volumeInfo.title + " - " + data.items[i].volumeInfo.authors[0] + "</h2><p>"+ data.items[i].volumeInfo.description +" </p>" +
+                            "</div>"
                     results.innerHTML+=html;
                     }
 
