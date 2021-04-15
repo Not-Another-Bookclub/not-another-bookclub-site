@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head th:include="partials.html::head('All current posts')" >
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Books Search Software</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
 </head>
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
@@ -47,12 +47,24 @@
                 </p>
                 <p>There are
                     <span th:text="${post.getComments().size()}"></span> comments.
-                </p>
+                </p>       
+              <div th:replace="partials.html :: booksearch"></div>
 <!--        <p>Posted: <span th:text="${post.created_on_string}"> </span> </div>-->
             </div>
         </div>
     </div>
 </main>
     <footer th:replace="partials.html::footer"></footer>
-</body>
+        <script th:replace="partials.html :: booksearchscript"></script>
+
+    </body>
+
+
 </html>
+
+
+
+
+
+
+
