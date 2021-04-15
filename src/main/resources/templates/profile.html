@@ -44,12 +44,22 @@
 
         </div>
 
-
-
-
     </section>
     <section>
         <h2>And then here display links to bookclubs you are a member of.</h2>
+        <div th:each="bookclub : ${memberClubs}" class="text-center">
+
+            <div class="container">
+                <h1 th:text="${bookclub.name}"></h1>
+
+                <p th:text="${bookclub.description}"></p>
+
+                <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>
+
+                <!--                @{/bookclubs/(bookclub.id)}-->
+            </div>
+
+        </div>
     </section>
     <p>Pending invites? included?</p>
     <p>If you are viewing someone else's page, a button to invite to a club of yours?</p>
