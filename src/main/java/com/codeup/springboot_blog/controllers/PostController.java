@@ -68,7 +68,7 @@ public class PostController {
     return "posts/show";
 }
 
-@PostMapping("posts/delete")
+@PostMapping("/posts/delete")
     public String deleteIndividualPost(@RequestParam(name = "id") long id, Model model) {
     postDao.deleteById(id);
     System.out.println("id = " + id);
