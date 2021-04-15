@@ -37,6 +37,9 @@
 
                 <p th:text="${bookclub.description}"></p>
 
+                <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>
+
+                <!--                @{/bookclubs/(bookclub.id)}-->
             </div>
 
         </div>
