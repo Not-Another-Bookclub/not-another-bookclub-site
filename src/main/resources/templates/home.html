@@ -6,8 +6,15 @@
     <title>Home</title>
 </head>
 <body>
+<div class="container">
 <nav th:replace="partials.html :: navbar"></nav>
 <h1>This is the home page</h1>
+
+<div th:replace="partials.html :: booksearch">
+
+</div>
+</div>
 <footer th:replace="partials.html::footer"></footer>
+<script th:replace="partials.html :: booksearchscript"></script>
 </body>
 </html>

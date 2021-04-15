@@ -125,6 +125,72 @@
 </nav>
 
 
+<div th:fragment="booksearch">
+    Version 3
+
+    <h1>Book finder</h1>
+    <label for="search Title"></label>
+    <input type="text" id="search title" placeholder="Title">
+    <label for="search Author"></label>
+    <input type="text" id="search Author" placeholder="Author">
+    <button id = "button" type="button">click bait</button>
+    <div id="results" class="row"></div>
+</div>
+
+
+<script th:fragment="booksearchscript">
+
+    function bookSearch(){
+        var searchTitle = document.getElementById('search title').value
+        document.getElementById('results').innerHTML =""
+
+
+        var searchAuthor = document.getElementById('search Author').value
+        document.getElementById('results').innerHTML =""
+
+
+
+        $.ajax({
+            url: "https://www.googleapis.com/books/v1/volumes?q=" + searchTitle,
+            // + "+inauthor:" + searchAuthor + "&printType=books",
+            dataType:"json",
+
+            success: function (data){
+                for(i = 0; i < data.items.length; i++){
+                    let thumbnail
+                    let author
+                    if (!data.items[i].volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "img/logo.png"}
+                    else {thumbnail = data.items[i].volumeInfo.imageLinks.thumbnail}
+                    console.log(thumbnail);
+                    if (!data.items[i].volumeInfo.hasOwnProperty('authors')) {author = "Unknown or Undefined"}
+                    else {author = data.items[i].volumeInfo.authors[0]}
+                    console.log(thumbnail);
+
+                    var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'
+                    // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
+                    html +=  "<img src='" + thumbnail + "' alt='Book Cover'>"
+                    html += "<div class='card-body'>"
+                    html += "<h5 class='card-title'>" + data.items[i].volumeInfo.title + " - " + author + "</h5>"
+                    // html += "<p class='card-text'>" + data.items[i].volumeInfo.description + "</p>"
+                    html += '<a href="#" class="btn btn-primary">Add to reading list</a></div></div>'
+
+                    results.innerHTML+=html;
+                }
+
+                console.log(data);
+            },
+            type: 'GET'
+        })
+
+    }
+
+    document.getElementById('button').addEventListener('click', bookSearch, false);
+
+
+
+</script>
+</div>
+
 <footer th:fragment="footer" class="text-muted footer mt-auto py-3" style="background-color: #B4B8C5">
     <div class="container-fluid">
         <p class="float-right">
@@ -148,7 +214,9 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <!--    <script src="/js/main.js"></script>-->
 </footer>
 </body>
