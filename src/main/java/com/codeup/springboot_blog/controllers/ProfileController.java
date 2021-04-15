@@ -47,7 +47,7 @@ public class ProfileController {
 
         model.addAttribute("name", userInQuestion.getUsername());
 
-        model.addAttribute("ownedClubs", message);
+        model.addAttribute("ownedClubs", bookclubsOwned);
 
         model.addAttribute("id", id);
         return "profile";
