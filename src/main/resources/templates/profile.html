@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <head th:replace="partials.html :: head('Your Profile Page')">
+        <title>Title</title>
+    </head>
+<body>
+<nav th:replace="partials.html :: navbar"></nav>
+<h2>THIS IS YOUR PROFILE PAGE!!!</h2>
+
+<div >
+    <p>The id is: <span th:text="${id}"></span></p>
+</div>
+<div style="border: 2px solid black">
+
+</div>
+<div>
+    <p>This will be the area where the details are displayed.</p>
+    <section>
+        <h2>Maybe here we can have links you Bookclubs you own</h2>
+    </section>
+    <section>
+        <h2>And then here display links to bookclubs you are a member of.</h2>
+    </section>
+    <p>Pending invites? included?</p>
+    <p>If you are viewing someone else's page, a button to invite to a club of yours?</p>
+</div>
+
+<footer th:replace="partials.html::footer"></footer>
+</body>
+</html>
