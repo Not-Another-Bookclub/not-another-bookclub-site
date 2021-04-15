@@ -29,4 +29,46 @@ public class UserBook {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "finished")
     private Date finished;
+
+    public UserBook () {};
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Date getStarted() {
+        return started;
+    }
+
+    public void setStarted(Date started) {
+        this.started = started;
+    }
+
+    public Date getFinished() {
+        return finished;
+    }
+
+    public void setFinished(Date finished) {
+        this.finished = finished;
+    }
 }
