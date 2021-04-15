@@ -4,6 +4,7 @@ import com.codeup.springboot_blog.daos.BookclubMembershipRepository;
 import com.codeup.springboot_blog.daos.BookclubRepository;
 import com.codeup.springboot_blog.models.Bookclub;
 import com.codeup.springboot_blog.models.BookclubMembership;
+import com.codeup.springboot_blog.models.BookclubMembershipStatus;
 import com.codeup.springboot_blog.models.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,9 +39,14 @@ public class ProfileController {
 
         ArrayList<Bookclub> holder = new ArrayList<>();
 
+        BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
+
         for (BookclubMembership membership : bookClubMemberships) {
             if(!holder.contains(membership.getBookclub())){
-                holder.add(membership.getBookclub());
+                if(membership.getStatus() == active){
+                    holder.add(membership.getBookclub());
+                }
+//                holder.add(membership.getBookclub());
             }
         }
 
