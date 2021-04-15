@@ -1,54 +1,98 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head th:include="partials.html::head('All current posts')" >
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Books Search Software</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
 </head>
-<body>
-<div th:replace="partials.html::navbar">You shouldn't see this.</div>
-<main class="flex-shrinkg-0">
-<div class="container">
-<div th:if="${user != null}">
 
-    <div class="card col-12 col-sm-8 col-md-6">
-        <img th:src="${user.avatar_path}" class="card-img-top" height="250px" width="250px">
-<!--        th:alt="${user.username}'s Avatar">-->
-        <div class="card-body">
-            <h5 class="card-title"><span th:text="${user.username}"></span></h5>
-            <p class="card-text"><span th:text="${user.bio}"></span></p>
-            <a th:if="${owner}" th:href="@{/profile/__${user.username}__/edit}"><button class="btn btn-primary">Edit Profile</button></a>
-        </div>
+
+    <body class = "bg-light">
+
+
+    <div th:replace="partials.html::navbar"></div>
+
+    <div class="container">
+        <h1 class="display-4 align-middle mt-5 text-dark">Google API App</h1>
+
+        <div th:replace="partials.html :: booksearch"></div>
+
+<!--    Version 3-->
+
+<!--    <h1>Book finder</h1>-->
+<!--    <label for="search Title"></label>-->
+<!--    <input type="text" id="search title" placeholder="Title">-->
+<!--    <label for="search Author"></label>-->
+<!--    <input type="text" id="search Author" placeholder="Author">-->
+<!--    <button id = "button" type="button">click bait</button>-->
+<!--    <div id="results" class="row"></div>-->
+<!--    </div>-->
+
+
+<!--    <script>-->
+
+<!--        function bookSearch(){-->
+<!--            var searchTitle = document.getElementById('search title').value-->
+<!--            document.getElementById('results').innerHTML =""-->
+
+
+<!--            var searchAuthor = document.getElementById('search Author').value-->
+<!--            document.getElementById('results').innerHTML =""-->
+
+
+
+<!--            $.ajax({-->
+<!--                url: "https://www.googleapis.com/books/v1/volumes?q=" + searchTitle,-->
+<!--                    // + "+inauthor:" + searchAuthor + "&printType=books",-->
+<!--                dataType:"json",-->
+
+<!--                success: function (data){-->
+<!--                    for(i = 0; i < data.items.length; i++){-->
+<!--                    let thumbnail-->
+<!--                    let author-->
+<!--                    if (!data.items[i].volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "img/logo.png"}-->
+<!--                    else {thumbnail = data.items[i].volumeInfo.imageLinks.thumbnail}-->
+<!--console.log(thumbnail);-->
+<!--                        if (!data.items[i].volumeInfo.hasOwnProperty('authors')) {author = "Unknown or Undefined"}-->
+<!--                        else {author = data.items[i].volumeInfo.authors[0]}-->
+<!--                        console.log(thumbnail);-->
+
+<!--             var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'-->
+<!--                 // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"-->
+<!--                html +=  "<img src='" + thumbnail + "' alt='Book Cover'>"-->
+<!--                html += "<div class='card-body'>"-->
+<!--                html += "<h5 class='card-title'>" + data.items[i].volumeInfo.title + " - " + author + "</h5>"-->
+<!--                 // html += "<p class='card-text'>" + data.items[i].volumeInfo.description + "</p>"-->
+<!--                 html += '<a href="#" class="btn btn-primary">Add to reading list</a></div></div>'-->
+
+<!--                        results.innerHTML+=html;-->
+<!--                    }-->
+
+<!--                    console.log(data);-->
+<!--                },-->
+<!--                type: 'GET'-->
+<!--            })-->
+
+<!--        }-->
+
+<!--        document.getElementById('button').addEventListener('click', bookSearch, false);-->
+
+
+
+<!--    </script>-->
     </div>
 
-</div>
-
-    <div th:if="${search != null}">
-        <h1>Here's all titles and posts that contained: "<span th:text="${search}"></span>"</h1>
-    </div>
-    <div th:if="${user != null}"}>
-        <h1>Here's all the posts for username "<span th:text="${user.username}"></span>"</h1>
-    </div>
-
-    <div th:if="${user == null && username != null}"}>
-        <h1>No posts by user with a username "<span th:text="${username}"></span>"</h1>
-    </div>
-
-    <div th:if="${search == null && user == null}">
-<h1>Here's a list of all posts</h1>
-    </div>
-
-<div th:each="post,iterStat : ${posts}" th:class="${iterStat.count}" class="text-center">
-
-    <a th:href="@{/posts/__${post.id}__}"><h2><span th:text="${post.title}"></span> - Post #<span th:text="${post.id}"></span> </h2></a>
-    <div class="text-start"><p th:text="${post.getBody()}"></p>
-        <p>Posted by: <span th:text="${post.author.username}"></span></p>
-        <p>There are <span th:text="${post.getComments().size()}"></span> comments.</p>
-<!--        <p>Posted: <span th:text="${post.created_on_string}"> </span> </div>-->
-</div>
-</div>
-</div>
-</main>
     <footer th:replace="partials.html::footer"></footer>
-</body>
+        <script th:replace="partials.html :: booksearchscript"></script>
+
+    </body>
+
+
 </html>
+
+
+
+
+
+
+
