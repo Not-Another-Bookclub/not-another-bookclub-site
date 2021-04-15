@@ -1,11 +1,7 @@
 package com.codeup.springboot_blog.controllers;
 
-import com.codeup.springboot_blog.daos.CommentRepository;
-import com.codeup.springboot_blog.daos.UserRepository;
-import com.codeup.springboot_blog.models.Comment;
-import com.codeup.springboot_blog.models.Post;
-import com.codeup.springboot_blog.daos.PostRepository;
-import com.codeup.springboot_blog.models.User;
+import com.codeup.springboot_blog.daos.*;
+import com.codeup.springboot_blog.models.*;
 import com.codeup.springboot_blog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,14 +17,27 @@ public class PostController {
     private final UserRepository userDao;
     private final EmailService emailService;
     private final CommentRepository commentDao;
+    private final BookclubRepository bookclubDao;
+    private final BookRepository bookDao;
 
 
-    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao){
+//    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao){
+//
+//        this.postDao = postDao;
+//        this.userDao = userDao;
+//        this.emailService = emailService;
+//        this.commentDao = commentDao;
+//
+//    }
+
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao,  BookclubRepository bookclubDao, BookRepository bookDao){
 
         this.postDao = postDao;
         this.userDao = userDao;
         this.emailService = emailService;
         this.commentDao = commentDao;
+        this.bookclubDao = bookclubDao;
+        this.bookDao = bookDao;
     }
 
 @GetMapping("/posts")
@@ -83,11 +92,16 @@ public class PostController {
     return "posts/create";
 }
 
+
 @PostMapping("/posts/create")
 //    public String createToDatabase(@RequestParam("title") String title, @RequestParam("body") String body, Model model) {
     public String createToDatabase(@ModelAttribute Post post, Model model) {
     User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     post.setAuthor(author);
+    Book book = bookDao.getOne(1L);
+    post.setBook(book);
+    Bookclub bookclub = bookclubDao.getOne(1L);
+    post.setBookclub(bookclub);
     postDao.save(post);
     emailService.prepareAndSend(post, "Your post was successfully posted!", "You can view it at http://localhost:8080/posts/" + post.getId());
     model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +

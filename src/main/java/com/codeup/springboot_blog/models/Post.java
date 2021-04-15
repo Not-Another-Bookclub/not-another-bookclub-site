@@ -90,6 +90,7 @@ public class Post {
         this.modifyDate = modifyDate;
     }
 
+
     public List<Comment> getComments() {
         return comments;
     }
