@@ -26,6 +26,13 @@ public class CommentController {
         this.postDao = postDao;
     }
 
+    @GetMapping("/posts/{id}/comment")
+    @ResponseBody
+    public String redirectToLogin(@PathVariable long id){
+
+        return "You must be logged in to comment on a post!";
+    }
+
     @PostMapping("/posts/{id}/comment")
 //    public String editSaveIndividualPost(@RequestParam(name = "id") long id, @RequestParam(name = "title") String title,
 //                                         @RequestParam(name = "body") String body, Model model) {
@@ -35,21 +42,30 @@ public class CommentController {
 //            return "redirect:/posts/" + id;
 //        }
 //        else {
+
             System.out.println("At least it started the comment process");
             Comment addComment = new Comment();
             System.out.println("comment = " + comment);
 //            Comment addComment = comment;
             addComment.setComment(comment);
+
         User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        addComment.setAuthor(author);
-            System.out.println("author.getUsername() = " + author.getUsername());
-            addComment.setPost(postDao.getOne(id));
-            System.out.println("postDao.getOne(id).getTitle() = " + postDao.getOne(id).getTitle());
-            commentDao.save(addComment);
+           if( author.getUsername().equals("anonymousUser")  || author.getUsername().equals("") ){
+
+               return "redirect:/users/sign-up";
+           }
+
+              addComment.setAuthor(author);
+              System.out.println("author.getUsername() = " + author.getUsername());
+              addComment.setPost(postDao.getOne(id));
+              System.out.println("postDao.getOne(id).getTitle() = " + postDao.getOne(id).getTitle());
+              commentDao.save(addComment);
 //        model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
 //                "  The post was successfully updated. </div>");
-        return "redirect:/posts/" + id;
-    }
+              return "redirect:/posts/" + id;
+          }
+
 //}
 
-}
+    }
+

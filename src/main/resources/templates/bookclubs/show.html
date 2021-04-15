@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:include="partials.html::head('A detailed view of this bookclub')">
+    <meta charset="UTF-8">
+    <title>Detailed view of this post</title>
+</head>
+<body>
+<div th:replace="partials.html::navbar"></div>
+<div class="container">
+<h1 th:text="${bookclub.name}"></h1>
+
+<p th:text="${bookclub.description}"></p>
+
+    <div th:each="post,iterStat : ${posts}" th:class="${iterStat.count}" class="text-center">
+
+<ul>
+    <li th:each="user : ${bookclub.users}"><span th:text="${user.getUser().username}"></span></li>
+</ul>
+
+<div th:if="${user != null}"> <div th:if="${bookclub.accepting_members}"><form th:action="@{'/bookclubs/' + ${bookclub.id} +'/join'}" method="post"><input hidden name="id" th:value="${user.id}"><button type="submit" class="btn btn-success">Ask to Join this Bookclub!</button></form></div>
+</div>
+</div>
+<footer th:replace="partials.html::footer"></footer>
+
+</body>
+</html>

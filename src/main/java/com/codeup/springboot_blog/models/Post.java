@@ -1,6 +1,8 @@
 package com.codeup.springboot_blog.models;
 
 import com.mysql.cj.protocol.ColumnDefinition;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.xml.crypto.Data;
@@ -9,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "posts")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,28 +30,23 @@ public class Post {
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
 
-    public User getAuthor() {
-        return author;
-    }
+    @ManyToOne
+    @JoinColumn (name = "book_id", referencedColumnName = "id", nullable = false)
+    private Book book;
 
-    public void setAuthor(User author) {
-        this.author = author;
-    }
+    @ManyToOne
+    @JoinColumn (name = "bookclub_id", referencedColumnName = "id", nullable = false)
+    private Bookclub bookclub;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date")
+    private Date createDate;
 
-
-
-
-//    @Column (columnDefinition="created_time datetime default CURRENT_TIMESTAMP null")
-//    @Column
-    private Date created_on;
-//    private String created_on_string;
-//
-////    @Column (columnDefinition = "modified_time datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP")
-    private Date modified_on;
-//    private String modified_on_string;
-////
-//    private SimpleDateFormat sdf = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss");
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modify_date")
+    private Date modifyDate;
 
     public Post(){};
 
@@ -72,26 +70,25 @@ public class Post {
         this.body = body;
     }
 
-    public Post(long id, String title, String body, User author, List<Comment> comments, Date created_on, Date modified_on) {
+    public Post(long id, String title, String body, User author, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.author = author;
         this.comments = comments;
-        this.created_on = created_on;
-        this.modified_on = modified_on;
     }
 
-    //    public Post(long id, String title, String body, Date created_on, Date modified_on) {
-//        this.id = id;
-//        this.title = title;
-//        this.body = body;
-//        this.created_on = created_on;
-////        this.created_on_string = sdf.format(created_on);
-//        this.modified_on = modified_on;
-////        this.modified_on_string = sdf.format(modified_on);
-//    }
-
+    public Post(long id, String title, String body, User author, List<Comment> comments, Book book, Bookclub bookclub, Date createDate, Date modifyDate) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.author = author;
+        this.comments = comments;
+        this.book = book;
+        this.bookclub = bookclub;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+    }
 
     public List<Comment> getComments() {
         return comments;
@@ -125,38 +122,44 @@ public class Post {
         this.body = body;
     }
 
-    public Date getCreated_on() {
-        return created_on;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setCreated_on(Date created_on) {
-        this.created_on = created_on;
-//        this.created_on_string = sdf.format(created_on);
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
-    public Date getModified_on() {
-        return modified_on;
+
+    public Book getBook() {
+        return book;
     }
 
-    public void setModified_on(Date modified_on) {
-        this.modified_on = modified_on;
-//        this.modified_on_string = sdf.format(modified_on);
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-//    public String getCreated_on_string() {
-//        return created_on_string;
-//    }
-//
-//
-//    public String getModified_on_string() {
-//        return modified_on_string;
-//    }
+    public Bookclub getBookclub() {
+        return bookclub;
+    }
 
+    public void setBookclub(Bookclub bookclub) {
+        this.bookclub = bookclub;
+    }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-//    public SimpleDateFormat getSdf() {
-//        return sdf;
-//    }
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
+    public Date getModifyDate() {
+        return modifyDate;
+    }
 
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
+    }
 }
