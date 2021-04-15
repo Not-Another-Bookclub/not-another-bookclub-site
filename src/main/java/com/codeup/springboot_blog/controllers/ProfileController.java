@@ -43,10 +43,11 @@ public class ProfileController {
 
         for (BookclubMembership membership : bookClubMemberships) {
             if(!holder.contains(membership.getBookclub())){
+
                 if(membership.getStatus() == active){
                     holder.add(membership.getBookclub());
                 }
-//                holder.add(membership.getBookclub());
+
             }
         }
 

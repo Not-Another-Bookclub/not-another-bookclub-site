@@ -72,4 +72,21 @@ public class BookclubController {
 
         return "bookclubs/show";
     }
+
+    @PostMapping("bookclub/invite/{id}")
+    public String requestToJoinBookclub(@PathVariable long id, Model model){
+//        GOT USER
+        User user = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+
+//        MAKE THE MEMBER_USER
+
+//        SEND EM BACK TO THE CLUB
+        Bookclub bookclub = bookclubDao.getOne(id);
+        model.addAttribute("bookclub", bookclub);
+        return "bookclubs/show";
+    }
 }
