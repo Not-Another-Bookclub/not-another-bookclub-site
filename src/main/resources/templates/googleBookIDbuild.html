@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head th:include="partials.html::head('search by google book id')" >
+    <title>Google book id search</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+</head>
+
+
+<body class = "bg-light">
+
+    <div th:replace="partials.html::navbar"></div>
+
+        <div class="container">
+            <h1 class="display-4 align-middle mt-5 text-dark">Google API App Get Book by google id</h1>
+
+
+                <h1>Find book by Google ID</h1>
+                <label for="search google_id"></label>
+                <input type="search" id="search google_id" placeholder="google_id">
+                <button id="button1">Click to retrieve book by ID</button>
+                <div id="results1"></div>
+        </div>
+
+    <div>
+        <footer th:replace="partials.html::footer"></footer>
+    </div>
+
+
+<!--<script th:replace="partials.html :: booksearchscript"></script>-->
+
+<script>
+    let results = document.getElementById("results1")
+    function googleIdSearch(idSearch){
+        console.log("This function runs");
+        // let idSearch = document.getElementById('search google_id').value
+        document.getElementById('results1').innerHTML = ""
+        console.log("search google_id")
+
+        $.ajax({
+            url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+            dataType: "json",
+
+            success: function (data) {
+                let thumbnail;
+
+                var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'
+                // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
+                html += "<img src='" + data.volumeInfo.imageLinks.large + "' alt='Book Cover'>"
+                html += "<div class='card-body'>"
+                html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5>"
+                // html += "<p class='card-text'>" + data.id.volumeInfo.description + "</p>"
+                html += '<a href="#" class="btn btn-primary">Remove from reading list</a></div></div>'
+
+                results.innerHTML += html;
+            },
+
+
+            type: 'Get',
+            }
+        )
+    }
+    document.getElementById("button1").addEventListener('click', googleIdSearch(document.getElementById('search google_id').value));
+
+
+
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+
+
+</body>
+
+
+</html>
