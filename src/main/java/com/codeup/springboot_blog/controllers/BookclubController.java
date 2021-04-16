@@ -131,7 +131,7 @@ public class BookclubController {
         model.addAttribute("isOwner", isOwner);
         model.addAttribute("pendingUsers", pendingHolder);
         model.addAttribute("members", members);
-        model.addAttribute("books", books)
+        model.addAttribute("books", books);
           
         return "bookclubs/show";
     }

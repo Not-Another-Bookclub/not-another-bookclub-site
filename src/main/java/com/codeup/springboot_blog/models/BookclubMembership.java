@@ -23,7 +23,7 @@ public class BookclubMembership {
     @JsonManagedReference
     private User user;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private BookclubMembershipStatus status;
 //    private long status;
