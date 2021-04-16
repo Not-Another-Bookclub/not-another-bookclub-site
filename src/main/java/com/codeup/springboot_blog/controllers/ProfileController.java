@@ -2,10 +2,8 @@ package com.codeup.springboot_blog.controllers;
 
 import com.codeup.springboot_blog.daos.BookclubMembershipRepository;
 import com.codeup.springboot_blog.daos.BookclubRepository;
-import com.codeup.springboot_blog.models.Bookclub;
-import com.codeup.springboot_blog.models.BookclubMembership;
-import com.codeup.springboot_blog.models.BookclubMembershipStatus;
-import com.codeup.springboot_blog.models.User;
+import com.codeup.springboot_blog.daos.UserBookRepository;
+import com.codeup.springboot_blog.models.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +20,13 @@ public class ProfileController {
     private UserRepository userDao;
     private BookclubRepository bookclubDao;
     private BookclubMembershipRepository bookclubMembershipDao;
+    private UserBookRepository userbookDao;
 
-    public ProfileController(UserRepository userDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubMembershipDao){
+    public ProfileController(UserRepository userDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubMembershipDao, UserBookRepository userbookDao){
         this.userDao = userDao;
         this.bookclubDao = bookclubDao;
         this.bookclubMembershipDao = bookclubMembershipDao;
+        this.userbookDao = userbookDao;
     }
 
     @GetMapping("/pro/{id}")
@@ -41,6 +41,10 @@ public class ProfileController {
 
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
 
+        User loggedin = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();}
+        if (loggedin.getId() == userInQuestion.getId()) {model.addAttribute("isowner", true);}
+
         for (BookclubMembership membership : bookClubMemberships) {
             if(!holder.contains(membership.getBookclub())){
                 if(membership.getStatus() == active){
@@ -50,10 +54,19 @@ public class ProfileController {
             }
         }
 
+        List<UserBook> userbooks = userbookDao.findAllByUser(userInQuestion);
+        List<String> books = new ArrayList<>();
+        for(UserBook userbook : userbooks) {
+            books.add(userbook.getBook().getGoogleID());
+        }
+
         model.addAttribute("name", userInQuestion.getUsername());
         model.addAttribute("ownedClubs", bookclubsOwned);
         model.addAttribute("memberClubs", holder);
         model.addAttribute("id", id);
+        model.addAttribute("books", books);
+        model.addAttribute("userbooks", userbooks);
+
 
         return "profile";
     }

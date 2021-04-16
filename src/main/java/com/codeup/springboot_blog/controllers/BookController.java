@@ -86,9 +86,9 @@ public class BookController {
                 members.add(membership.getUser());
             }
             List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
-            List<Book> books = new ArrayList<>();
+            List<String> books = new ArrayList<>();
             for (BookclubBook clubbook : clubbooks) {
-                books.add(clubbook.getBook());
+                books.add(clubbook.getBook().getGoogleID());
             }
             model.addAttribute("bookclub", bookclub);
             model.addAttribute("members", members);

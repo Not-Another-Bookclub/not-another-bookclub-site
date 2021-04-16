@@ -182,7 +182,7 @@
                 let csrf = [[${_csrf.token}]]
                 let csrfname = [[${_csrf.parameterName}]]
                 let bookclubid = [[${bookclubid}]]
-                if (!data.items[i].volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "img/logo.png"}
+                if (!data.items[i].volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo.png"}
                 else {thumbnail = data.items[i].volumeInfo.imageLinks.thumbnail}
                 console.log(thumbnail);
                 if (!data.items[i].volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
@@ -246,6 +246,53 @@
 
 
 
+</script>
+<script th:fragment="bookdisplay(arrayofbooks)" th:inline="javascript">
+    let idsearch = [[${arrayofbooks}]]
+    let adjustment = [[${adjustment}]]
+function googleIdSearch(idSearch){
+// console.log("This function runs");
+// let idSearch = document.getElementById('search google_id').value
+let results = document.getElementById('results1')
+// console.log("search google_id")
+
+$.ajax({
+url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+dataType: "json",
+
+success: function (data) {
+
+    let thumbnail
+    let author
+
+    if (!data.volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo.png"}
+    else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {thumbnail = "http://localhost:8080/img/logo.png"}
+    else {thumbnail = data.volumeInfo.imageLinks.thumbnail}
+    console.log(thumbnail);
+    if (!data.volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
+    else {author = data.volumeInfo.authors[0]}
+
+var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'
+    // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
+    html += "<img src='" + thumbnail + "' alt='Book Cover'>"
+    html += "<div class='card-body'>"
+        html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5>"
+        // html += "<p class='card-text'>" + data.id.volumeInfo.description + "</p>"
+        html += '<a href="#" class="btn btn-primary" id="'+ idsearch +'">Remove from reading list</a></div></div>'
+
+results.innerHTML += html;
+},
+
+
+type: 'Get',
+}
+)
+}
+if (typeof idsearch == "string") {googleIdSearch(idsearch)}
+else {
+for(let i = 0; i < idsearch.length; i++) {
+    googleIdSearch(idsearch[i]);}
+}
 </script>
 </div>
 

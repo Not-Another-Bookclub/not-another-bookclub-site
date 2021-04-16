@@ -25,13 +25,12 @@
     </ul>
 
 
-    <h1>Here's the books from a separate list:</h1>
-    <ul>
-        <li th:each="book : ${books}"><span th:text="${book.googleID}"></span> </li>
-    </ul>
+
+<h1>Here's the books on the <span th:text="${bookclub.name}"></span> reading list.</h1>
+    <div id="results1" class="row"></div>
 
 
-<div th:if="${user != null && !isowner}"> <div th:if="${bookclub.accepting_members}"><form th:action="@{'/bookclubs/' + ${bookclub.id} +'/join'}" method="post"><input hidden name="id" th:value="${user.id}"><button type="submit" class="btn btn-success">Ask to Join this Bookclub!</button></form></div>
+<div th:if="${user != null}"> <div th:if="${bookclub.accepting_members}"><form th:action="@{'/bookclubs/' + ${bookclub.id} +'/join'}" method="post"><input hidden name="id" th:value="${user.id}"><button type="submit" class="btn btn-success">Ask to Join this Bookclub!</button></form></div>
 </div>
 
 <div th:if="${isowner}"><div th:replace="partials.html :: booksearch"></div></div>
@@ -40,5 +39,6 @@
 </div>
 <footer th:replace="partials.html::footer"></footer>
 <div th:if="${isowner}"><script th:replace="partials.html::booksearchscript('bookclub',${bookclub.id})"></script></div>
+<script th:replace="partials.html::bookdisplay(${books})"></script>
 </body>
 </html>
