@@ -25,14 +25,18 @@ public class BookclubController {
     private final CommentRepository commentDao;
     private final BookclubRepository bookclubDao;
     private final BookclubMembershipRepository bookclubmembershipDao;
+    private final BookRepository bookDao;
+    private final BookclubBookRepository bookclubBookDao;
 
-    public BookclubController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubmembershipDao) {
+    public BookclubController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubmembershipDao, BookRepository bookDao, BookclubBookRepository bookclubBookDao) {
         this.postDao = postDao;
         this.userDao = userDao;
         this.emailService = emailService;
         this.commentDao = commentDao;
         this.bookclubDao = bookclubDao;
         this.bookclubmembershipDao = bookclubmembershipDao;
+        this.bookDao = bookDao;
+        this.bookclubBookDao = bookclubBookDao;
     }
 
     @GetMapping("/bookclubs")
@@ -110,12 +114,25 @@ public class BookclubController {
         if(!holder.isEmpty()){
             isNotMember = false;
         }
+      
+              List <BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
+              List <User> members = new ArrayList<User>();
+               for (BookclubMembership membership : memberships) {
+               members.add(membership.getUser());
+    }
+              List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
+              List<Book> books = new ArrayList<>();
+             for (BookclubBook clubbook : clubbooks) {
+               books.add(clubbook.getBook());
+        }
 
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isNotMember", isNotMember);
         model.addAttribute("isOwner", isOwner);
         model.addAttribute("pendingUsers", pendingHolder);
-
+        model.addAttribute("members", members);
+        model.addAttribute("books", books)
+          
         return "bookclubs/show";
     }
 

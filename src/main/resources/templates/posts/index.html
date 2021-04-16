@@ -48,14 +48,16 @@
                 <p>There are
                     <span th:text="${post.getComments().size()}"></span> comments.
                 </p>       
-              <div th:replace="partials.html :: booksearch"></div>
+
 <!--        <p>Posted: <span th:text="${post.created_on_string}"> </span> </div>-->
             </div>
         </div>
+
+        <div th:replace="partials.html :: booksearch"></div>
     </div>
 </main>
     <footer th:replace="partials.html::footer"></footer>
-        <script th:replace="partials.html :: booksearchscript('user')"></script>
+        <script th:replace="partials.html :: booksearchscript('user',1)"></script>
 
     </body>
 

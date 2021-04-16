@@ -36,16 +36,33 @@
     </div>
 
 
-    <div th:each="post,iterStat : ${posts}" th:class="${iterStat.count}" class="text-center">
+<p>This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}">profile</a> </p>
 
-<ul>
-    <li th:each="user : ${bookclub.users}"><span th:text="${user.getUser().username}"></span></li>
-</ul>
 
-<div th:if="${user != null}"> <div th:if="${bookclub.accepting_members}"><form th:action="@{'/bookclubs/' + ${bookclub.id} +'/join'}" method="post"><input hidden name="id" th:value="${user.id}"><button type="submit" class="btn btn-success">Ask to Join this Bookclub!</button></form></div>
+    <h1>This is a list passed from the controller</h1>
+    <ul>
+<!--    <li th:each="member : ${members}"><span th:text="${member.user.username}"></span> joined <span th:text="${#dates.format(member.changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>. Current status is :<span th:text="${member.getStatus()}"></span></li>-->
+    <li th:each="member : ${members}"><span th:text="${member.username}"></span> joined
+<!--&lt;!&ndash;        <span th:text="${#dates.format(member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>.-->
+<!-- Current status is :<span th:text="${member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).status}"></span>-->
+    </li>
+    </ul>
+
+
+    <h1>Here's the books from a separate list:</h1>
+    <ul>
+        <li th:each="book : ${books}"><span th:text="${book.googleID}"></span> </li>
+    </ul>
+
+
+<div th:if="${user != null && !isowner}"> <div th:if="${bookclub.accepting_members}"><form th:action="@{'/bookclubs/' + ${bookclub.id} +'/join'}" method="post"><input hidden name="id" th:value="${user.id}"><button type="submit" class="btn btn-success">Ask to Join this Bookclub!</button></form></div>
 </div>
+
+<div th:if="${isowner}"><div th:replace="partials.html :: booksearch"></div></div>
+    <br>
+    <br>
 </div>
 <footer th:replace="partials.html::footer"></footer>
-
+<div th:if="${isowner}"><script th:replace="partials.html::booksearchscript('bookclub',${bookclub.id})"></script></div>
 </body>
 </html>
