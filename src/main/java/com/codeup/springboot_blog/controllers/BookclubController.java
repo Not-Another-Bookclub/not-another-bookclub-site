@@ -4,6 +4,7 @@ import com.codeup.springboot_blog.daos.*;
 import com.codeup.springboot_blog.models.*;
 import com.codeup.springboot_blog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,6 +73,7 @@ public class BookclubController {
         Bookclub bookclub = bookclubDao.getOne(id);
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
+//        BookclubMembershipStatus decline = BookclubMembershipStatus.valueOf("DECLINE");
 
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -80,7 +82,7 @@ public class BookclubController {
             ArrayList<BookclubMembership> bookClubMemberships =  bookclubmembershipDao.findBookclubMembershipsByUser(user);
 
             if(bookclub.getOwner().getId() == user.getId()){
-//                isOwner = false;
+
                 isOwner = true;
                 ArrayList<BookclubMembership> forFiltereing = bookclubmembershipDao.findBookclubMembershipsByBookclub(bookclub);
 
@@ -95,9 +97,11 @@ public class BookclubController {
             for (BookclubMembership membership : bookClubMemberships) {
 
 //                BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
-                if(membership.getUser() == user && membership.getStatus() == active || membership.getStatus() == pending){
+                if(membership.getUser() == user && membership.getStatus() == active){
+
                     holder.add(user);
                 }
+
             }
         }
 
@@ -108,7 +112,6 @@ public class BookclubController {
         }
 
         model.addAttribute("bookclub", bookclub);
-
         model.addAttribute("isNotMember", isNotMember);
         model.addAttribute("isOwner", isOwner);
         model.addAttribute("pendingUsers", pendingHolder);
@@ -144,4 +147,36 @@ public class BookclubController {
         model.addAttribute("bookclub", bookclub);
         return "bookclubs/show";
     }
+
+    @PostMapping("bookclubs/invite/accept/{id}/prospectiveUserId")
+    public String acceptRequestToJoinBookclub(@PathVariable long id, @PathVariable long prospectiveUserId, Model model){
+
+        BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
+        User userToAccept = userDao.getOne(prospectiveUserId);
+        Bookclub bookclub = bookclubDao.getOne(id);
+
+        ArrayList<BookclubMembership> forFiltereing = bookclubmembershipDao.findBookclubMembershipsByBookclub(bookclub);
+
+        BookclubMembership bookclubMembershipInQuestion = new BookclubMembership();
+
+        for(BookclubMembership membership : forFiltereing){
+            if(membership.getBookclub() == bookclub && membership.getUser().getId() == userToAccept.getId()){
+                bookclubMembershipInQuestion = membership;
+            }
+        }
+
+        bookclubMembershipInQuestion.setStatus(active);
+
+        bookclubmembershipDao.save(bookclubMembershipInQuestion);
+
+
+//        model.addAttribute("bookclub", bookclub);
+
+        return "redirect:/bookclubs/" + id;
+    }
+
+
 }
+
+
+

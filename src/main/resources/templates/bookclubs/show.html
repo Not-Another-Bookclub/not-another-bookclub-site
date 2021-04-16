@@ -18,13 +18,16 @@
     </div>
 
     <div th:if="${isOwner}">
-        <h2>You own this</h2>
+        <h2>You own this Bookclub</h2>
         <div th:each="user : ${pendingUsers}" class="text-center">
-
             <div class="container">
                 <h1 th:text="${user.username}"></h1>
-
                 <p>Wants to join</p>
+
+<!--                <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">-->
+<!--                    <input type="submit" class="btn btn-success" value="Accept">-->
+<!--                </form>-->
+
 <!--                <a th:href=""></a>-->
 
             </div>
