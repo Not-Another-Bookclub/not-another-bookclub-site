@@ -7,6 +7,7 @@
     </head>
 <body>
 <nav th:replace="partials.html :: navbar"></nav>
+<div class="container">
 <h2>THIS IS YOUR PROFILE PAGE!!!</h2>
 
 <div >
@@ -72,8 +73,18 @@
     </section>
     <p>Pending invites? included?</p>
     <p>If you are viewing someone else's page, a button to invite to a club of yours?</p>
+    <h3>Here are the books currently on your reading list: </h3>
+    <div id="results1" class="row"></div>
+    <br>
+    <br>
+    <div th:if="${isowner}"> <h4>Add more books to your personal reading list here: </h4>
+<div th:replace="partials.html::booksearch"></div></div>
+    <br>
+    <br>
 </div>
-
+</div>
 <footer th:replace="partials.html::footer"></footer>
+<script th:replace="partials.html::bookdisplay(${books})"></script>
+<div th:if="${isowner}"> <script th:replace="partials.html::booksearchscript(user,1)"></script></div>
 </body>
 </html>

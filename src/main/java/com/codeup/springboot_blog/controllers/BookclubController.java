@@ -27,8 +27,9 @@ public class BookclubController {
     private final BookclubMembershipRepository bookclubmembershipDao;
     private final BookRepository bookDao;
     private final BookclubBookRepository bookclubBookDao;
+    private final MeetingRepository meetingDao;
 
-    public BookclubController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubmembershipDao, BookRepository bookDao, BookclubBookRepository bookclubBookDao) {
+    public BookclubController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubmembershipDao, BookRepository bookDao, BookclubBookRepository bookclubBookDao, MeetingRepository meetingDao) {
         this.postDao = postDao;
         this.userDao = userDao;
         this.emailService = emailService;
@@ -37,6 +38,7 @@ public class BookclubController {
         this.bookclubmembershipDao = bookclubmembershipDao;
         this.bookDao = bookDao;
         this.bookclubBookDao = bookclubBookDao;
+        this.meetingDao = meetingDao;
     }
 
     @GetMapping("/bookclubs")
@@ -120,11 +122,20 @@ public class BookclubController {
                for (BookclubMembership membership : memberships) {
                members.add(membership.getUser());
     }
-              List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
-              List<Book> books = new ArrayList<>();
-             for (BookclubBook clubbook : clubbooks) {
-               books.add(clubbook.getBook());
+
+        List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
+        List<String> books = new ArrayList<>();
+        for (BookclubBook clubbook : clubbooks) {
+            books.add(clubbook.getBook().getGoogleID());
         }
+//        List<User> members = new ArrayList<>();
+//        List<BookclubMembership> bookclubMemberships = bookclub.getUsers();
+//        for (BookclubMembership membership : bookclubMemberships){
+//            members.add(membership.getUser());
+//        }
+
+        List<Meeting> meetings = meetingDao.findAllByBookclubEquals(bookclub);
+
 
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isNotMember", isNotMember);

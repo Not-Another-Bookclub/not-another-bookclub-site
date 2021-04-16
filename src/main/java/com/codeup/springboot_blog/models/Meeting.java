@@ -34,6 +34,9 @@ public class Meeting {
     @JoinColumn (name = "bookclub_id", referencedColumnName = "id", nullable = false)
     private Bookclub bookclub;
 
+    @OneToOne
+    private Book book;
+
     public Meeting() {};
 
     public Meeting(Date createDate, Date when, String address, String city, String zipPlusFour, Bookclub bookclub) {
@@ -110,5 +113,11 @@ public class Meeting {
         this.bookclub = bookclub;
     }
 
+    public Book getBook() {
+        return book;
+    }
 
+    public void setBook(Book book) {
+        this.book = book;
+    }
 }
