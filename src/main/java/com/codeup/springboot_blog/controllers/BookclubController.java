@@ -66,8 +66,12 @@ public class BookclubController {
     public String viewSpecificBookclub(@PathVariable long id, Model model) {
         User user = new User();
         Boolean isNotMember = true;
+        Boolean isOwner = false;
         ArrayList<User> holder = new ArrayList<>();
+        ArrayList<User> pendingHolder = new ArrayList<>();
         Bookclub bookclub = bookclubDao.getOne(id);
+        BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
+        BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
 
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -75,11 +79,23 @@ public class BookclubController {
 
             ArrayList<BookclubMembership> bookClubMemberships =  bookclubmembershipDao.findBookclubMembershipsByUser(user);
 
+            if(bookclub.getOwner().getId() == user.getId()){
+//                isOwner = false;
+                isOwner = true;
+                ArrayList<BookclubMembership> forFiltereing = bookclubmembershipDao.findBookclubMembershipsByBookclub(bookclub);
+
+                for(BookclubMembership membership : forFiltereing){
+                    if(membership.getStatus() == pending){
+                        User pendingUser = membership.getUser();
+                        pendingHolder.add(pendingUser);
+                    }
+                }
+            }
 
             for (BookclubMembership membership : bookClubMemberships) {
 
-                BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
-                if(membership.getUser() == user && membership.getStatus() == active){
+//                BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
+                if(membership.getUser() == user && membership.getStatus() == active || membership.getStatus() == pending){
                     holder.add(user);
                 }
             }
@@ -94,6 +110,8 @@ public class BookclubController {
         model.addAttribute("bookclub", bookclub);
 
         model.addAttribute("isNotMember", isNotMember);
+        model.addAttribute("isOwner", isOwner);
+        model.addAttribute("pendingUsers", pendingHolder);
 
         return "bookclubs/show";
     }

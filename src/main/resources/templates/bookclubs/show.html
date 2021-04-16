@@ -17,6 +17,21 @@
         </form>
     </div>
 
+    <div th:if="${isOwner}">
+        <h2>You own this</h2>
+        <div th:each="user : ${pendingUsers}" class="text-center">
+
+            <div class="container">
+                <h1 th:text="${user.username}"></h1>
+
+                <p>Wants to join</p>
+<!--                <a th:href=""></a>-->
+
+            </div>
+
+        </div>
+    </div>
+
 
     <div th:each="post,iterStat : ${posts}" th:class="${iterStat.count}" class="text-center">
 

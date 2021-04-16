@@ -1,5 +1,6 @@
 package com.codeup.springboot_blog.daos;
 
+import com.codeup.springboot_blog.models.Bookclub;
 import com.codeup.springboot_blog.models.BookclubMembership;
 import com.codeup.springboot_blog.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,5 @@ public interface BookclubMembershipRepository extends JpaRepository<BookclubMemb
     BookclubMembership findByUserIs(User user);
 
     ArrayList<BookclubMembership> findBookclubMembershipsByUser(User user);
+    ArrayList<BookclubMembership> findBookclubMembershipsByBookclub(Bookclub bookclub);
 }
