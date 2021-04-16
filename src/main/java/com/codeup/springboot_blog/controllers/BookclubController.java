@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -64,11 +65,35 @@ public class BookclubController {
     @GetMapping("bookclubs/{id}")
     public String viewSpecificBookclub(@PathVariable long id, Model model) {
         User user = new User();
-        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser")
-        {user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", user); }
+        Boolean isNotMember = true;
+        ArrayList<User> holder = new ArrayList<>();
         Bookclub bookclub = bookclubDao.getOne(id);
+
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+
+            ArrayList<BookclubMembership> bookClubMemberships =  bookclubmembershipDao.findBookclubMembershipsByUser(user);
+
+
+            for (BookclubMembership membership : bookClubMemberships) {
+
+                BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
+                if(membership.getUser() == user && membership.getStatus() == active){
+                    holder.add(user);
+                }
+            }
+        }
+
+//        CHECK IF LOGGED USER IS MEMBER
+
+        if(!holder.isEmpty()){
+            isNotMember = false;
+        }
+
         model.addAttribute("bookclub", bookclub);
+
+        model.addAttribute("isNotMember", isNotMember);
 
         return "bookclubs/show";
     }
