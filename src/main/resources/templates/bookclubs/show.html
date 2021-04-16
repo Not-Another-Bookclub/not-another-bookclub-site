@@ -55,8 +55,14 @@
     </ul>
 
 
-<div th:if="${user != null && !isowner}"> <div th:if="${bookclub.accepting_members}"><form th:action="@{'/bookclubs/' + ${bookclub.id} +'/join'}" method="post"><input hidden name="id" th:value="${user.id}"><button type="submit" class="btn btn-success">Ask to Join this Bookclub!</button></form></div>
-</div>
+<!--<div th:if="${user != null && !isOwner}">-->
+<!--    <div th:if="${bookclub.accepting_members}">-->
+<!--        <form th:action="@{'/bookclubs/' + ${bookclub.id} +'/join'}" method="post">-->
+<!--            <input hidden name="id" th:value="${user.id}">-->
+<!--            <button type="submit" class="btn btn-success">Ask to Join this Bookclub!</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div th:if="${isowner}"><div th:replace="partials.html :: booksearch"></div></div>
     <br>
