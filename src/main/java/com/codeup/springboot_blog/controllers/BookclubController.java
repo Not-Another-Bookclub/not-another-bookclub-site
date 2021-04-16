@@ -73,7 +73,7 @@ public class BookclubController {
         return "bookclubs/show";
     }
 
-    @PostMapping("bookclub/invite/{id}")
+    @PostMapping("bookclubs/invite/{id}")
     public String requestToJoinBookclub(@PathVariable long id, Model model){
 //        GOT USER
         User user = new User();
@@ -84,6 +84,7 @@ public class BookclubController {
 
 //        MAKE THE MEMBER_USER
 
+        System.out.println("Button works");
 //        SEND EM BACK TO THE CLUB
         Bookclub bookclub = bookclubDao.getOne(id);
         model.addAttribute("bookclub", bookclub);
