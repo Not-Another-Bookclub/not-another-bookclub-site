@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BookclubRepository extends JpaRepository<Bookclub, Long> {
-
 //    @Query("from Bookclub b where b.owner.id like id")
     List<Bookclub> findBookclubsByOwnerId(@Param("id") long id);
 

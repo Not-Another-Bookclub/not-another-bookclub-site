@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Post, Long>  {
 //    @Modifying
 //    @Query(value="SELECT p FROM Post p WHERE p.title LIKE ?1")
     List<Post> findPostByTitleIsContainingOrBodyContaining(String term1, String term2);

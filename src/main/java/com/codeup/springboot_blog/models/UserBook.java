@@ -13,7 +13,7 @@ public class UserBook {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "book_id", nullable = false,   referencedColumnName = "id")
     @JsonManagedReference
     private Book book;
 
