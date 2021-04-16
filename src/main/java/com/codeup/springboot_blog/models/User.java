@@ -47,7 +47,7 @@ public class User {
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookclub")
-    private List<BookclubMembership> bookclubs;
+    private List<BookclubMembership> bookclubMemberships;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
     private List<UserBook> books;
@@ -151,11 +151,11 @@ public class User {
     }
 
     public List<BookclubMembership> getBookclubs() {
-        return bookclubs;
+        return bookclubMemberships;
     }
 
-    public void setBookclubs(List<BookclubMembership> bookclubs) {
-        this.bookclubs = bookclubs;
+    public void setBookclubMemberships(List<BookclubMembership> bookclubMemberships) {
+        this.bookclubMemberships = bookclubMemberships;
     }
 
     public List<UserBook> getBooks() {

@@ -16,12 +16,50 @@
 
 </div>
 <div>
+<!--    <h1 th:if="${isYou}">Hello! This is YOUR page!!</h1>-->
+    Hello <span th:text="${name}"></span>
+<!--    <h2 th:text="${ownedClubs}"></h2>-->
+
+
+
+
+
     <p>This will be the area where the details are displayed.</p>
     <section>
         <h2>Maybe here we can have links you Bookclubs you own</h2>
+
+
+
+        <div th:each="bookclub : ${ownedClubs}" class="text-center">
+
+            <div class="container">
+                <h1 th:text="${bookclub.name}"></h1>
+
+                <p th:text="${bookclub.description}"></p>
+
+                <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>
+
+                <!--                @{/bookclubs/(bookclub.id)}-->
+            </div>
+
+        </div>
+
     </section>
     <section>
         <h2>And then here display links to bookclubs you are a member of.</h2>
+        <div th:each="bookclub : ${memberClubs}" class="text-center">
+
+            <div class="container">
+                <h1 th:text="${bookclub.name}"></h1>
+
+                <p th:text="${bookclub.description}"></p>
+
+                <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>
+
+                <!--                @{/bookclubs/(bookclub.id)}-->
+            </div>
+
+        </div>
     </section>
     <p>Pending invites? included?</p>
     <p>If you are viewing someone else's page, a button to invite to a club of yours?</p>
