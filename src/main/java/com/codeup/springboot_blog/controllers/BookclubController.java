@@ -1,9 +1,7 @@
 package com.codeup.springboot_blog.controllers;
 
 import com.codeup.springboot_blog.daos.*;
-import com.codeup.springboot_blog.models.Bookclub;
-import com.codeup.springboot_blog.models.Post;
-import com.codeup.springboot_blog.models.User;
+import com.codeup.springboot_blog.models.*;
 import com.codeup.springboot_blog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -83,6 +82,17 @@ public class BookclubController {
         }
 
 //        MAKE THE MEMBER_USER
+        BookclubMembership newBookclubUser = new BookclubMembership();
+        BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
+
+
+        newBookclubUser.setBookclub(bookclubDao.getOne(id));
+        newBookclubUser.setUser(user);
+        newBookclubUser.setStatus(pending);
+        newBookclubUser.setChangedDate(null);
+        newBookclubUser.setLastChangedBy(user);
+
+        bookclubmembershipDao.save(newBookclubUser);
 
         System.out.println("Button works");
 //        SEND EM BACK TO THE CLUB
