@@ -38,6 +38,10 @@
                 <p th:text="${bookclub.description}"></p>
 
                 <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>
+<!--                <form th:if="${user}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">-->
+<!--                    <input type="submit" class="btn btn-danger" value="Join">-->
+<!--                </form>-->
+
 
                 <!--                @{/bookclubs/(bookclub.id)}-->
             </div>
@@ -53,8 +57,13 @@
                 <h1 th:text="${bookclub.name}"></h1>
 
                 <p th:text="${bookclub.description}"></p>
+                
+
 
                 <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>
+<!--                <form th:if="${user}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">-->
+<!--                    <input type="submit" class="btn btn-danger" value="Invite">-->
+<!--                </form>-->
 
                 <!--                @{/bookclubs/(bookclub.id)}-->
             </div>

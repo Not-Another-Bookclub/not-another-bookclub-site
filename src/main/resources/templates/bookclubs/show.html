@@ -11,6 +11,30 @@
 <h1 th:text="${bookclub.name}"></h1>
 
 <p th:text="${bookclub.description}"></p>
+    <div th:if="${user}">
+        <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
+            <input type="submit" class="btn btn-danger" value="Join">
+        </form>
+    </div>
+
+    <div th:if="${isOwner}">
+        <h2>You own this Bookclub</h2>
+        <div th:each="user : ${pendingUsers}" class="text-center">
+            <div class="container">
+                <h1 th:text="${user.username}"></h1>
+                <p>Wants to join</p>
+
+<!--                <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">-->
+<!--                    <input type="submit" class="btn btn-success" value="Accept">-->
+<!--                </form>-->
+
+<!--                <a th:href=""></a>-->
+
+            </div>
+
+        </div>
+    </div>
+
 
 <p>This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}">profile</a> </p>
 

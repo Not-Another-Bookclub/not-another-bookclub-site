@@ -12,4 +12,5 @@ public interface BookclubMembershipRepository extends JpaRepository<BookclubMemb
 
     List<BookclubMembership> findAllByBookclub(Bookclub bookclub);
     ArrayList<BookclubMembership> findBookclubMembershipsByUser(User user);
+    ArrayList<BookclubMembership> findBookclubMembershipsByBookclub(Bookclub bookclub);
 }
