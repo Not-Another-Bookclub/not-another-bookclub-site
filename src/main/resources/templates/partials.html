@@ -171,7 +171,7 @@
 </div>
 
 
-<script th:fragment="booksearchscript(path)" th:inline="javascript">
+<script th:fragment="booksearchscript(path,bookclubid)" th:inline="javascript">
 
 
     function bookRender(data){
@@ -181,6 +181,7 @@
                 let path = [[${path}]]
                 let csrf = [[${_csrf.token}]]
                 let csrfname = [[${_csrf.parameterName}]]
+                let bookclubid = [[${bookclubid}]]
                 if (!data.items[i].volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "img/logo.png"}
                 else {thumbnail = data.items[i].volumeInfo.imageLinks.thumbnail}
                 console.log(thumbnail);
@@ -195,7 +196,7 @@
                 html += "<h5 class='card-title'>" + data.items[i].volumeInfo.title + " - " + author + "</h5>"
                 // html += "<p class='card-text'>" + data.items[i].volumeInfo.description + "</p>"
                 html += "<form action='/book/add' method='post'> <input hidden value=" + data.items[i].id +" name='book'><input hidden value='" + path + "' name='path'>"
-                html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <button class="btn btn-primary">Add to reading list</button></<form></form></div></div>'
+                html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <input hidden value="'+ bookclubid + '" name="bookclubid"><button class="btn btn-primary">Add to reading list</button></<form></form></div></div>'
 
                 results.innerHTML+=html;
             }

@@ -1,9 +1,7 @@
 package com.codeup.springboot_blog.controllers;
 
 import com.codeup.springboot_blog.daos.*;
-import com.codeup.springboot_blog.models.Bookclub;
-import com.codeup.springboot_blog.models.Post;
-import com.codeup.springboot_blog.models.User;
+import com.codeup.springboot_blog.models.*;
 import com.codeup.springboot_blog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,14 +22,18 @@ public class BookclubController {
     private final CommentRepository commentDao;
     private final BookclubRepository bookclubDao;
     private final BookclubMembershipRepository bookclubmembershipDao;
+    private final BookRepository bookDao;
+    private final BookclubBookRepository bookclubBookDao;
 
-    public BookclubController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubmembershipDao) {
+    public BookclubController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubmembershipDao, BookRepository bookDao, BookclubBookRepository bookclubBookDao) {
         this.postDao = postDao;
         this.userDao = userDao;
         this.emailService = emailService;
         this.commentDao = commentDao;
         this.bookclubDao = bookclubDao;
         this.bookclubmembershipDao = bookclubmembershipDao;
+        this.bookDao = bookDao;
+        this.bookclubBookDao = bookclubBookDao;
     }
 
     @GetMapping("/bookclubs")
@@ -64,12 +67,36 @@ public class BookclubController {
     @GetMapping("bookclubs/{id}")
     public String viewSpecificBookclub(@PathVariable long id, Model model) {
         User user = new User();
-        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser")
-        {user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", user); }
-        Bookclub bookclub = bookclubDao.getOne(id);
-        model.addAttribute("bookclub", bookclub);
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+        ;
 
+        Bookclub bookclub = bookclubDao.getOne(id);
+        if (user.getId() == bookclub.getOwner().getId()) {
+            model.addAttribute("isowner", true);
+        }
+//        List <User> members = userDao.findAllByBookclubsIs(bookclub.getUsers());
+//        List <Book> books = bookDao.findAllByBookclubsIs(bookclub.getUsers().get(1));
+        List <BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
+        List <User> members = new ArrayList<User>();
+        for (BookclubMembership membership : memberships) {
+            members.add(membership.getUser());
+    }
+        List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
+        List<Book> books = new ArrayList<>();
+        for (BookclubBook clubbook : clubbooks) {
+            books.add(clubbook.getBook());
+        }
+//        List<User> members = new ArrayList<>();
+//        List<BookclubMembership> bookclubMemberships = bookclub.getUsers();
+//        for (BookclubMembership membership : bookclubMemberships){
+//            members.add(membership.getUser());
+//        }
+        model.addAttribute("bookclub", bookclub);
+        model.addAttribute("members", members);
+        model.addAttribute("books", books);
         return "bookclubs/show";
     }
 }

@@ -23,9 +23,10 @@ public class BookclubMembership {
     @JsonManagedReference
     private User user;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private BookclubMembershipStatus status;
+//    private long status;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -76,9 +77,15 @@ public class BookclubMembership {
         return status;
     }
 
+
+//    public long getStatus() {return status;}
+
     public void setStatus(BookclubMembershipStatus status) {
         this.status = status;
     }
+
+
+//    public void setStatus(long status) {this.status = status;}
 
     public Date getChangedDate() {
         return changedDate;

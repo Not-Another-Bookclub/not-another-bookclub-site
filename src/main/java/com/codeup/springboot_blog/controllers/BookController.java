@@ -1,10 +1,7 @@
 package com.codeup.springboot_blog.controllers;
 
 import com.codeup.springboot_blog.daos.*;
-import com.codeup.springboot_blog.models.Book;
-import com.codeup.springboot_blog.models.BookclubBook;
-import com.codeup.springboot_blog.models.User;
-import com.codeup.springboot_blog.models.UserBook;
+import com.codeup.springboot_blog.models.*;
 import com.codeup.springboot_blog.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @Controller
 public class BookController {
@@ -26,9 +25,10 @@ public class BookController {
     private final UserBookRepository userbookDao;
     private final BookclubBookRepository bookclubBookDao;
     private final BookclubRepository bookclubDao;
+    private final BookclubMembershipRepository bookclubmembershipDao;
 
 
-    public BookController(PostRepository postDao, UserRepository userDao, BookRepository bookDao, UserBookRepository userbookDao, BookclubBookRepository bookclubBookDao, BookclubRepository bookclubDao){
+    public BookController(PostRepository postDao, UserRepository userDao, BookRepository bookDao, UserBookRepository userbookDao, BookclubBookRepository bookclubBookDao, BookclubRepository bookclubDao, BookclubMembershipRepository bookclubmembershipDao){
 
         this.postDao = postDao;
         this.userDao = userDao;
@@ -36,6 +36,7 @@ public class BookController {
         this.userbookDao = userbookDao;
         this.bookclubBookDao = bookclubBookDao;
         this.bookclubDao = bookclubDao;
+        this.bookclubmembershipDao = bookclubmembershipDao;
     }
 
     @GetMapping("book/add")
@@ -61,7 +62,7 @@ public class BookController {
             userbookDao.save(userbook);
             model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
                     "  Book successfully added to your reading list.</div>");
-                return "posts/index";}
+                return "redirect:/pro/" + loggedin.getId();}
             else {model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
                     "  <strong>Warning!</strong> Book not saved, you must be logged in to add books to your profile.</div>");
             return "users/login";}
@@ -70,12 +71,29 @@ public class BookController {
         if (path.equalsIgnoreCase("bookclub")) {
             BookclubBook bookclubbook = new BookclubBook();
             bookclubbook.setBook(book);
-            bookclubbook.setBookclub(bookclubDao.getOne(bookclubid));
+            Bookclub bookclub = bookclubDao.getOne(bookclubid);
+            bookclubbook.setBookclub(bookclub);
             bookclubbook.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
             bookclubBookDao.save(bookclubbook);
-            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
-                    "  <strong>Warning!</strong> Book not saved, you must be logged in to add books to your bookclub (not really this isn't implemented yet).</div>");
-                return "users/login";}
+            model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
+                    "  Book saved to your bookclub's reading list.</div>");
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+            model.addAttribute("isowner", true);
+            List<BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
+            List <User> members = new ArrayList<User>();
+            for (BookclubMembership membership : memberships) {
+                members.add(membership.getUser());
+            }
+            List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
+            List<Book> books = new ArrayList<>();
+            for (BookclubBook clubbook : clubbooks) {
+                books.add(clubbook.getBook());
+            }
+            model.addAttribute("bookclub", bookclub);
+            model.addAttribute("members", members);
+            model.addAttribute("books", books);
+            return "bookclubs/show";}
 
         else {model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
                 "  <strong>Warning!</strong> Encountered an unexpected situation - book not saved. Please contact the dev team. (not really this isn't implemented yet).</div>");
