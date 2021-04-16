@@ -33,6 +33,12 @@ public class ProfileController {
     public String showUserProfile(@PathVariable long id, Model model){
         User userInQuestion = userDao.getOne(id);
 
+        User user = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+
         List<Bookclub> bookclubsOwned = bookclubDao.findBookclubsByOwnerId(id);
 
         ArrayList<BookclubMembership> bookClubMemberships =  bookclubMembershipDao.findBookclubMembershipsByUser(userInQuestion);

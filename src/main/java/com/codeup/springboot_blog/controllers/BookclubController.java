@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -89,7 +90,7 @@ public class BookclubController {
         newBookclubUser.setBookclub(bookclubDao.getOne(id));
         newBookclubUser.setUser(user);
         newBookclubUser.setStatus(pending);
-        newBookclubUser.setChangedDate(null);
+        newBookclubUser.setChangedDate(new Date(Calendar.getInstance().getTime().getTime()));
         newBookclubUser.setLastChangedBy(user);
 
         bookclubmembershipDao.save(newBookclubUser);
