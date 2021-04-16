@@ -10,4 +10,8 @@ public class HomeController {
     public String hello() {
         return "home";
     }
+
+    @GetMapping("/google")
+    public String google() {return "googleBookIDBuild";}
 }
+
