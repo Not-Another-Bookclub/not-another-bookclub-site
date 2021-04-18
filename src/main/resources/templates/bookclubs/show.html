@@ -24,9 +24,9 @@
                 <h1 th:text="${user.username}"></h1>
                 <p>Wants to join</p>
 
-<!--                <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">-->
-<!--                    <input type="submit" class="btn btn-success" value="Accept">-->
-<!--                </form>-->
+                <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
+                    <input type="submit" class="btn btn-success" value="Accept">
+                </form>
 
 <!--                <a th:href=""></a>-->
 

@@ -74,7 +74,7 @@ public class BookclubController {
         User user = new User();
         Boolean isNotMember = true;
         Boolean isOwner = false;
-        ArrayList<User> holder = new ArrayList<>();
+        ArrayList<Bookclub> holder = new ArrayList<>();
         ArrayList<User> pendingHolder = new ArrayList<>();
         Bookclub bookclub = bookclubDao.getOne(id);
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
@@ -103,19 +103,15 @@ public class BookclubController {
             for (BookclubMembership membership : bookClubMemberships) {
 
 //                BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
-                if(membership.getUser() == user && membership.getStatus() == active){
-
-                    holder.add(user);
+                if(membership.getBookclub() == bookclub){
+//&& membership.getStatus() == active
+                    holder.add(bookclub);
                 }
 
             }
         }
 
 //        CHECK IF LOGGED USER IS MEMBER
-
-        if(!holder.isEmpty()){
-            isNotMember = false;
-        }
       
               List <BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
               List <User> members = new ArrayList<User>();
@@ -135,7 +131,10 @@ public class BookclubController {
 //        }
 
         List<Meeting> meetings = meetingDao.findAllByBookclubEquals(bookclub);
-
+        System.out.println(holder);
+        if(!holder.isEmpty()){
+            isNotMember = false;
+        }
 
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isNotMember", isNotMember);
@@ -176,7 +175,7 @@ public class BookclubController {
         return "bookclubs/show";
     }
 
-    @PostMapping("bookclubs/invite/accept/{id}/prospectiveUserId")
+    @PostMapping("bookclubs/invite/accept/{id}/{prospectiveUserId}")
     public String acceptRequestToJoinBookclub(@PathVariable long id, @PathVariable long prospectiveUserId, Model model){
 
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
