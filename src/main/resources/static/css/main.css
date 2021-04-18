@@ -28,20 +28,6 @@ body {
     text-align: center;
 }
 
-.btn {
-    background-color: var(--taupe);
-    border-color: var(--white);
-}
-
-.btn-outline-success{
-    color: var(--white);
-}
-
-.btn:hover, .btn:active, .btn:focus, .btn:visited {
-    background-color: var(--quicksilver);
-    border-color: var(--taupe);
-}
-
 #logoutmenu {
     background-color: var(--white);
     color: var(--cadetblue);
