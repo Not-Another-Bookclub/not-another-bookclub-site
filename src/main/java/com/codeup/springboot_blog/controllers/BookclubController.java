@@ -116,8 +116,10 @@ public class BookclubController {
               List <BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
               List <User> members = new ArrayList<User>();
                for (BookclubMembership membership : memberships) {
-               members.add(membership.getUser());
-    }
+                   if(membership.getStatus() == active){
+                       members.add(membership.getUser());
+                   }
+                }
 
         List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
