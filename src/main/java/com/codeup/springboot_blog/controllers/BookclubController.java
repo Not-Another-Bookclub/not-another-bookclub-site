@@ -196,8 +196,30 @@ public class BookclubController {
 
         bookclubmembershipDao.save(bookclubMembershipInQuestion);
 
+        return "redirect:/bookclubs/" + id;
+    }
 
-//        model.addAttribute("bookclub", bookclub);
+
+    @PostMapping("bookclubs/invite/decline/{id}/{prospectiveUserId}")
+    public String declineRequestToJoinBookclub(@PathVariable long id, @PathVariable long prospectiveUserId, Model model){
+
+        BookclubMembershipStatus decline = BookclubMembershipStatus.valueOf("DECLINED");
+        User userToAccept = userDao.getOne(prospectiveUserId);
+        Bookclub bookclub = bookclubDao.getOne(id);
+
+        ArrayList<BookclubMembership> forFiltereing = bookclubmembershipDao.findBookclubMembershipsByBookclub(bookclub);
+
+        BookclubMembership bookclubMembershipInQuestion = new BookclubMembership();
+
+        for(BookclubMembership membership : forFiltereing){
+            if(membership.getBookclub() == bookclub && membership.getUser().getId() == userToAccept.getId()){
+                bookclubMembershipInQuestion = membership;
+            }
+        }
+
+        bookclubMembershipInQuestion.setStatus(decline);
+
+        bookclubmembershipDao.save(bookclubMembershipInQuestion);
 
         return "redirect:/bookclubs/" + id;
     }
