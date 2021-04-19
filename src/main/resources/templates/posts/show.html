@@ -40,6 +40,8 @@
         </div>
     </div>
    </div>
+
+
     <div th:each="comment,iterStat : ${post.getComments()}" th:class="${iterStat.count}">
         <div class="card">
             <div class="card-body">

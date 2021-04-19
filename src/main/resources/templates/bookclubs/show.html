@@ -24,9 +24,12 @@
                 <h1 th:text="${user.username}"></h1>
                 <p>Wants to join</p>
 
-<!--                <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">-->
-<!--                    <input type="submit" class="btn btn-success" value="Accept">-->
-<!--                </form>-->
+                <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
+                    <input type="submit" class="btn btn-success" value="Accept">
+                </form>
+                <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
+                    <input type="submit" class="btn btn-danger" value="Decline">
+                </form>
 
 <!--                <a th:href=""></a>-->
 
@@ -42,7 +45,9 @@
     <h1>This is a list passed from the controller</h1>
     <ul>
 <!--    <li th:each="member : ${members}"><span th:text="${member.user.username}"></span> joined <span th:text="${#dates.format(member.changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>. Current status is :<span th:text="${member.getStatus()}"></span></li>-->
-    <li th:each="member : ${members}"><span th:text="${member.username}"></span> joined
+    <li th:each="member : ${members}">
+
+        <span th:text="${member.username}"></span> joined
 <!--&lt;!&ndash;        <span th:text="${#dates.format(member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>.-->
 <!-- Current status is :<span th:text="${member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).status}"></span>-->
     </li>

@@ -73,6 +73,51 @@
     </section>
     <p>Pending invites? included?</p>
     <p>If you are viewing someone else's page, a button to invite to a club of yours?</p>
+
+
+    <div th:if="${canInvite}">
+        <h3>You can invite this person</h3>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Invite
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form th:action="@{'/bookclubs/inviteMany/' + ${id} + '/' + ${user.id}}" th:method="post">
+                            <div th:each="bookclub : ${loggedUserBookclubs}" class="">
+<!--                                <h2 th:text="${bookclub.name}">test</h2>-->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" th:value="${bookclub.id}" name="bookclubs" th:id="${bookclub.id}">
+                                    <label class="form-check-label" th:for="${bookclub.id}">
+                                        <span th:text="${bookclub.name}"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <input type="submit" class="btn btn-secondary">
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<!--                        <button type="button" class="btn btn-primary">Understood</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <h3>Here are the books currently on your reading list: </h3>
     <div id="results1" class="row"></div>
     <br>
