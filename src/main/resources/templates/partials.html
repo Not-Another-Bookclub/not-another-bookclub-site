@@ -128,6 +128,51 @@
     <span th:utext="${alert}"></span>
 </nav>
 
+
+<!--                            DATETIMEPICKER MODAL START-->
+
+<!-- Button to trigger modal -->
+
+<div id="dateTimePicker" th:fragment="dateTimePickermodal">
+
+
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <div id="datetimepicker1" class="input-append date">
+            <input data-format="dd/MM/yyyy hh:mm:ss" type="datetime-local">
+            <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+
+<script>
+
+    $(function() {
+        $('#datetimepicker1').datetimepicker({
+            language: 'pt-BR'
+        });
+    });
+
+</script>
+
+</div>
+
+
+
+
+<!--                                DATETIMEPICKER MODAL END-->
+
+
 <!--NOT LOGGED IN-->
 <!--<nav th:fragment="navbar">-->
 <!--    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #B4B8C5">-->
@@ -155,7 +200,7 @@
 <!--</nav>-->
 
 
-
+                        // BOOKSEARCH GOOGLE BOOK API BEGIN
 
 
 <div th:fragment="booksearch">
@@ -210,6 +255,8 @@
             $(".card-bottom").not(thisCardBottom).slideUp(500)
             $(this).next().next().slideToggle(1000)})
     }
+
+
 
     function bookSearch(){
         var searchTitle = document.getElementById('search title').value
@@ -324,6 +371,8 @@ $('.card-top1').click(function() {
 </script>
 </div>
 
+<!--                                    FOOTER PARTIAL START-->
+
 <footer th:fragment="footer" class="text-muted footer mt-auto py-3" style="background-color: #B4B8C5">
     <div class="container-fluid">
         <p class="float-right">
@@ -344,6 +393,10 @@ $('.card-top1').click(function() {
             <img src="/img/thymeleaf.png" height="50px">
             <img src="/img/mysql-horizontal.svg" height="50px">
         </div></div>
+
+<!--                                FOOTER PARTIAL END-->
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
