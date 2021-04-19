@@ -122,7 +122,11 @@ public class PostController {
 public String editSaveIndividualPost(@ModelAttribute Post post, @PathVariable long id, Model model) {
         User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setAuthor(author);
-        post.setId(id);
+        Book book = bookDao.getOne(1L);
+        post.setBook(book);
+        Bookclub bookclub = bookclubDao.getOne(1L);
+        post.setBookclub(bookclub);
+//        post.setId(id);
         postDao.save(post);
         model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
             "  The post was successfully updated. </div>");
