@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "posts")
-public class Post {
+public class Post implements Comparable<Post> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -90,6 +90,9 @@ public class Post {
         this.modifyDate = modifyDate;
     }
 
+    public int compareTo(Post post) {
+        return this.createDate.compareTo(post.createDate);
+    }
 
     public List<Comment> getComments() {
         return comments;

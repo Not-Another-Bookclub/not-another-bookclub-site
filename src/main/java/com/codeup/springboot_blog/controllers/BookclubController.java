@@ -134,8 +134,10 @@ public class BookclubController {
         List<Meeting> meetings = meetingDao.findAllByBookclubEquals(bookclub);
         Collections.sort(meetings);
 
+        List<Post> posts = postDao.findAllByBookclubEquals(bookclub);
+        Collections.sort(posts);
 
-
+        model.addAttribute("posts", posts);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isNotMember", isNotMember);
         model.addAttribute("isOwner", isOwner);

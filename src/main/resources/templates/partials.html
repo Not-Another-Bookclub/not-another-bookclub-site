@@ -258,7 +258,7 @@
 </script>
 <script th:fragment="bookdisplay(arrayofbooks)" th:inline="javascript">
     let idsearch = [[${arrayofbooks}]]
-    let adjustment = [[${adjustment}]]
+    let findreplace = {}
 function googleIdSearch(idSearch){
 // console.log("This function runs");
 // let idSearch = document.getElementById('search google_id').value
@@ -286,10 +286,12 @@ var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'
     html += "<div class='card-top1'><img src='" + thumbnail + "' alt='Book Cover'>"
     html += "<div class='card-body'>"
     html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5></div></div"
-    html += '<div><a href="#" class="btn btn-primary" id="'+ idsearch +'">Remove from reading list</a></div></div>'
+    html += '<div><a href="#" class="btn btn-primary" id="'+ idSearch +'">Remove from reading list</a>'
+    html += '<a href="" class="btn book-selector btn-primary" id="'+ idSearch + '">Select this book</a></div></div>'
     // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
 results.innerHTML += html;
+    findreplace[idSearch] = data.volumeInfo.title;
 },
 
 
@@ -297,30 +299,50 @@ type: 'Get',
 }
 )
 }
-if (typeof idsearch == "string") {googleIdSearch(idsearch);
-    console.log("This book is a string!")
-    $(".card-bottom1").hide()
-    console.log("Firing after the hide from string!")
-    $('.card-top1').click(function() {
-    console.log("I'm firing from the click listener!")
-    let thisCardBottom = $(this).next()
-    // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
-    $(".card-bottom1").not(thisCardBottom).slideUp(500)
-    $(this).next().slideToggle(1000)})}
+if (typeof idsearch == "string") {googleIdSearch(idsearch);}
+    // console.log("This book is a string!")
+    // $(".card-bottom1").hide()
+    // console.log("Firing after the hide from string!")
+    // $('.card-top1').click(function() {
+    // console.log("I'm firing from the click listener!")
+    // let thisCardBottom = $(this).next()
+    // // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
+    // $(".card-bottom1").not(thisCardBottom).slideUp(500)
+    // $(this).next().slideToggle(1000)})}
 else {
 for(let i = 0; i < idsearch.length; i++) {
-    googleIdSearch(idsearch[i]);}
-console.log("These books are a list!")
-$(".card-bottom1").hide()
-    console.log("Firing after the hide from list!")
-$('.card-top1').click(function() {
-    console.log("I'm firing from the click listener!")
-    let thisCardBottom = $(this).next()
-    // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
-    $(".card-bottom1").not(thisCardBottom).slideUp(500)
-    $(this).next().next().slideToggle(1000)})
-
+    googleIdSearch(idsearch[i]);
 }
+}
+// console.log("These books are a list!")
+// $(".card-bottom1").hide()
+//     console.log("Firing after the hide from list!")
+// $('.card-top1').click(function() {
+//     console.log("I'm firing from the click listener!")
+//     let thisCardBottom = $(this).next()
+//     // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
+//     $(".card-bottom1").not(thisCardBottom).slideUp(500)
+//     $(this).next().next().slideToggle(1000)}
+
+setTimeout(function() {
+        for (let i = 0; i < idsearch.length; i++) {
+            $('body :not(script)').contents().filter(function () {
+                return this.nodeType === 3;
+            }).replaceWith(function () {
+                return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
+            })
+
+            // $("* :contains(idsearch[i])").each(function() {
+            //     var replaced = $(this).html().replace(/idsearch[i]/g, findreplace[idsearch[i]])
+            //     $(this).html(replaced);
+            // })
+        }
+        document.getElementsByClassName('book-selector').click(function (e){
+            e.preventDefault()
+            document.getElementById('book').value = this.id;
+        })
+        }
+, 500)
 </script>
 </div>
 
