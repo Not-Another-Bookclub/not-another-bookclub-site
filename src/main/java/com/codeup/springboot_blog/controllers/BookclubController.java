@@ -68,6 +68,7 @@ public class BookclubController {
 
     @GetMapping("bookclubs/{id}")
     public String viewSpecificBookclub(@PathVariable long id, Model model) {
+//        GLOBAL VARIABLES - ACCESSIBLE ANYWHERE IN ROUTE
         User user = new User();
         Boolean isNotMember = true;
         Boolean isOwner = false;
@@ -76,19 +77,23 @@ public class BookclubController {
         Bookclub bookclub = bookclubDao.getOne(id);
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
-//        BookclubMembershipStatus decline = BookclubMembershipStatus.valueOf("DECLINE");
 
+//        THIS BLOCK HANDLES IF USER IS LOGGED IN - BIG SECTION
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
 
+//            ALL MEMBERSHIPS LOGGED IN USER HAS
             ArrayList<BookclubMembership> bookClubMemberships =  bookclubmembershipDao.findBookclubMembershipsByUser(user);
 
+//            IF LOGGED IN USER OWNS THE BOOKCLUB WE ARE VIEWING
             if(bookclub.getOwner().getId() == user.getId()){
-
                 isOwner = true;
+
+//                ALL MEMBERSHIPS ASSOCIATED WITH A BOOKCLUB
                 ArrayList<BookclubMembership> forFiltereing = bookclubmembershipDao.findBookclubMembershipsByBookclub(bookclub);
 
+//                pendingHOLDER GETS ALL USERS WHO ARE PENDING
                 for(BookclubMembership membership : forFiltereing){
                     if(membership.getStatus() == pending){
                         User pendingUser = membership.getUser();
@@ -99,45 +104,41 @@ public class BookclubController {
 
             for (BookclubMembership membership : bookClubMemberships) {
 
-//                BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
+//                CHECKING IF LOGGED IN USER IS A MEMBER OF THE BOOKCLUB WE ARE VIEWING
                 if(membership.getBookclub() == bookclub){
-//&& membership.getStatus() == active
                     holder.add(bookclub);
                 }
 
             }
         }
+//        END OF LOGGED IN USER LOGIC
 
-//        CHECK IF LOGGED USER IS MEMBER
-      
-              List <BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
-              List <User> members = new ArrayList<User>();
-               for (BookclubMembership membership : memberships) {
-                   if(membership.getStatus() == active){
-                       members.add(membership.getUser());
-                   }
-                }
+//        GET ACTIVE MEMBERS ONLY
+        List <BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
+        List <User> members = new ArrayList<User>();
+        for (BookclubMembership membership : memberships) {
+            if(membership.getStatus() == active){
+                members.add(membership.getUser());
+            }
+        }
 
+        //        TED CAN YOU EXPLAIN THIS PART?
         List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
         for (BookclubBook clubbook : clubbooks) {
             books.add(clubbook.getBook().getGoogleID());
         }
-//        List<User> members = new ArrayList<>();
-//        List<BookclubMembership> bookclubMemberships = bookclub.getUsers();
-//        for (BookclubMembership membership : bookclubMemberships){
-//            members.add(membership.getUser());
-//        }
 
+//        GET ALL MEETINGS ASSOCIATED WITH THIS CLUB
         List<Meeting> meetings = meetingDao.findAllByBookclubEquals(bookclub);
         Collections.sort(meetings);
 
-
-        System.out.println(holder);
+//        CHECK IF LOGGED IN USER IS MEMBER OF CLUB
         if(!holder.isEmpty()){
             isNotMember = false;
         }
 
+//        PASS INFO INTO THYMELEAF
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isNotMember", isNotMember);
         model.addAttribute("isOwner", isOwner);
