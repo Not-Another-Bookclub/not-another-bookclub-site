@@ -33,6 +33,7 @@ public class ProfileController {
     public String showUserProfile(@PathVariable long id, Model model){
         User userInQuestion = userDao.getOne(id);
         List<Bookclub> bookclubsOwned = bookclubDao.findBookclubsByOwnerId(id);
+        List<Bookclub> loggedUsersBookclubs = new ArrayList<>();
         ArrayList<BookclubMembership> bookClubMemberships =  bookclubMembershipDao.findBookclubMembershipsByUser(userInQuestion);
         ArrayList<Bookclub> holder = new ArrayList<>();
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
@@ -50,6 +51,9 @@ public class ProfileController {
                 System.out.println("TEST");
                 model.addAttribute("canInvite", true);
             }
+
+            loggedUsersBookclubs =  bookclubDao.findBookclubsByOwnerId(user.getId());
+            model.addAttribute("loggedUserBookclubs", loggedUsersBookclubs);
         }
 
         for (BookclubMembership membership : bookClubMemberships) {
