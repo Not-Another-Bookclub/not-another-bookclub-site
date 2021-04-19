@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.codeup.springboot_blog.daos.UserRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ProfileController {
@@ -44,16 +43,35 @@ public class ProfileController {
             user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
 
+            loggedUsersBookclubs =  bookclubDao.findBookclubsByOwnerId(user.getId());
 //            IS LOGGED IN USER THE OWNER OF PROFILE
             if (user.getId() == userInQuestion.getId()) {
                 model.addAttribute("isowner", true);
+
+                model.addAttribute("loggedUserBookclubs", loggedUsersBookclubs);
             } else {
                 System.out.println("TEST");
                 model.addAttribute("canInvite", true);
+
+                List<Bookclub> filtered = new ArrayList<>();
+                for(Bookclub bookclub : loggedUsersBookclubs){
+                    Boolean failTest = false;
+                    List<BookclubMembership> singleClubMembership = bookclubMembershipDao.findBookclubMembershipsByBookclub(bookclub);
+
+                    for(BookclubMembership member : singleClubMembership){
+                        if(member.getUser() == userInQuestion){
+                            failTest = true;
+                        }
+                    }
+
+                    if(!failTest){
+                        filtered.add(bookclub);
+                    }
+                }
+
+                model.addAttribute("loggedUserBookclubs", filtered);
             }
 
-            loggedUsersBookclubs =  bookclubDao.findBookclubsByOwnerId(user.getId());
-            model.addAttribute("loggedUserBookclubs", loggedUsersBookclubs);
         }
 
         for (BookclubMembership membership : bookClubMemberships) {
