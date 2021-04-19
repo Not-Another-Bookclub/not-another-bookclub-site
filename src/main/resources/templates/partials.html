@@ -286,8 +286,8 @@ var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'
     html += "<div class='card-top1'><img src='" + thumbnail + "' alt='Book Cover'>"
     html += "<div class='card-body'>"
     html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5></div></div"
-    html += '<div><a href="#" class="btn btn-primary" id="'+ idsearch +'">Remove from reading list</a></div>'
-    html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
+    html += '<div><a href="#" class="btn btn-primary" id="'+ idsearch +'">Remove from reading list</a></div></div>'
+    // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
 results.innerHTML += html;
 },
