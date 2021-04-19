@@ -6,7 +6,22 @@
 
 </head>
 <body>
-<div th:replace="partials.html::navbar">You shouldn't see this.</div>
+
+    <div th:if="${user == null}">
+
+<nav th:replace="partials.html::visitor-navbar"></nav>
+
+    </div>
+
+    <div th:if="${user != null}">
+
+        <nav th:replace="partials.html :: navbar"></nav>
+
+
+
+
+    </div>
+
 <main class="flex-shrinkg-0">
     <div class="container">
         <div th:if="${user != null}">
