@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.codeup.springboot_blog.daos.UserRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ProfileController {
@@ -32,48 +31,72 @@ public class ProfileController {
     @GetMapping("/pro/{id}")
     public String showUserProfile(@PathVariable long id, Model model){
         User userInQuestion = userDao.getOne(id);
-
+        List<Bookclub> bookclubsOwned = bookclubDao.findBookclubsByOwnerId(id);
+        List<Bookclub> loggedUsersBookclubs = new ArrayList<>();
+        ArrayList<BookclubMembership> bookClubMemberships =  bookclubMembershipDao.findBookclubMembershipsByUser(userInQuestion);
+        ArrayList<Bookclub> holder = new ArrayList<>();
+        BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         User user = new User();
+
+//        LOGGED IN USER
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
+
+            loggedUsersBookclubs =  bookclubDao.findBookclubsByOwnerId(user.getId());
+//            IS LOGGED IN USER THE OWNER OF PROFILE
+            if (user.getId() == userInQuestion.getId()) {
+                model.addAttribute("isowner", true);
+
+                model.addAttribute("loggedUserBookclubs", loggedUsersBookclubs);
+            } else {
+                System.out.println("TEST");
+                model.addAttribute("canInvite", true);
+
+                List<Bookclub> filtered = new ArrayList<>();
+                for(Bookclub bookclub : loggedUsersBookclubs){
+                    Boolean failTest = false;
+                    List<BookclubMembership> singleClubMembership = bookclubMembershipDao.findBookclubMembershipsByBookclub(bookclub);
+
+                    for(BookclubMembership member : singleClubMembership){
+                        if(member.getUser() == userInQuestion){
+                            failTest = true;
+                        }
+                    }
+
+                    if(!failTest){
+                        filtered.add(bookclub);
+                    }
+                }
+
+                model.addAttribute("loggedUserBookclubs", filtered);
+            }
+
         }
-
-        List<Bookclub> bookclubsOwned = bookclubDao.findBookclubsByOwnerId(id);
-
-        ArrayList<BookclubMembership> bookClubMemberships =  bookclubMembershipDao.findBookclubMembershipsByUser(userInQuestion);
-
-        ArrayList<Bookclub> holder = new ArrayList<>();
-
-        BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
-
-        User loggedin = new User();
-        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();}
-        if (loggedin.getId() == userInQuestion.getId()) {model.addAttribute("isowner", true);}
 
         for (BookclubMembership membership : bookClubMemberships) {
             if(!holder.contains(membership.getBookclub())){
-
+//                GET PROFILE'S ACTIVE MEMBERSHIPS
                 if(membership.getStatus() == active){
                     holder.add(membership.getBookclub());
                 }
-
             }
         }
 
+//        ALL BOOKS USER ADDED?
         List<UserBook> userbooks = userbookDao.findAllByUser(userInQuestion);
         List<String> books = new ArrayList<>();
         for(UserBook userbook : userbooks) {
             books.add(userbook.getBook().getGoogleID());
         }
 
+//        PASS IN INFO
         model.addAttribute("name", userInQuestion.getUsername());
         model.addAttribute("ownedClubs", bookclubsOwned);
         model.addAttribute("memberClubs", holder);
         model.addAttribute("id", id);
         model.addAttribute("books", books);
         model.addAttribute("userbooks", userbooks);
-
 
         return "profile";
     }
