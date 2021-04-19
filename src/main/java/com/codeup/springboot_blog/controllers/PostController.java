@@ -50,6 +50,10 @@ public class PostController {
 //        model.addAttribute("posts", posts);
 //    }
     List<Post> posts = postDao.findAll();
+//    User loggedIn = new User();
+//    loggedIn.setUsername(null);
+    if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user",loggedIn);}
     Collections.reverse(posts);
     model.addAttribute("posts", posts);
     return "posts/index";
