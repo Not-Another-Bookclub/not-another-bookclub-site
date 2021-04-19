@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "meetings")
-public class Meeting {
+public class Meeting implements Comparable<Meeting>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -57,6 +57,11 @@ public class Meeting {
         this.zipPlusFour = zipPlusFour;
         this.bookclub = bookclub;
     }
+
+    public int compareTo(Meeting meeting) {
+        return meeting.timedate.compareTo(this.timedate);
+    }
+
     public long getId() {
         return id;
     }

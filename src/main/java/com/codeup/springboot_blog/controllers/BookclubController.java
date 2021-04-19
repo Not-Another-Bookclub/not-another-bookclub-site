@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class BookclubController {
@@ -133,6 +130,9 @@ public class BookclubController {
 //        }
 
         List<Meeting> meetings = meetingDao.findAllByBookclubEquals(bookclub);
+        Collections.sort(meetings);
+
+
         System.out.println(holder);
         if(!holder.isEmpty()){
             isNotMember = false;
@@ -144,6 +144,7 @@ public class BookclubController {
         model.addAttribute("pendingUsers", pendingHolder);
         model.addAttribute("members", members);
         model.addAttribute("books", books);
+        model.addAttribute("meetings", meetings);
           
         return "bookclubs/show";
     }
