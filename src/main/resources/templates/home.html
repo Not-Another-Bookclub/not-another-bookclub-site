@@ -6,8 +6,12 @@
     <title>Home</title>
 </head>
 <body>
-<div th:if="${user} != null" class="container">
+<div th:if="${user.username != null}" class="container">
+
+    <div th:if="${user != null}" >
 <nav th:replace="partials.html :: navbar"></nav>
+
+    </div>
 
 <h1>Eventually there will be other stuff here</h1>
 
@@ -20,7 +24,18 @@
 </div>
 
 
+<div th:if="${user.username == null}" class="container">
+    <nav th:replace="partials.html :: visitor-navbar"></nav>
 
+    <h1>Hello Visitor!</h1>
+
+<!--    <div th:if="${user.username == null}">Maybe you'd like to view <a th:href="@{/pro/__${user.id}__}">your profile?</a></div>-->
+
+
+    <div th:replace="partials.html :: booksearch">
+
+    </div>
+</div>
 
 
 <footer th:replace="partials.html::footer"></footer>

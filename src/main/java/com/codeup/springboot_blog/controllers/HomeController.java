@@ -15,7 +15,14 @@ public class HomeController {
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();}
         model.addAttribute("user", user);
         return "home";
+
+
+
+
     }
+
+
+
 
     @GetMapping("/google")
     public String google() {return "googleBookIDBuild";}
