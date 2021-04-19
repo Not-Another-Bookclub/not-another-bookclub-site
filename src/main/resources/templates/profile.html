@@ -73,6 +73,13 @@
     </section>
     <p>Pending invites? included?</p>
     <p>If you are viewing someone else's page, a button to invite to a club of yours?</p>
+
+
+    <div th:if="${canInvite}">
+        <h3>You can invite this person</h3>
+        <button class="btn btn -info">Invite</button>
+    </div>
+
     <h3>Here are the books currently on your reading list: </h3>
     <div id="results1" class="row"></div>
     <br>
