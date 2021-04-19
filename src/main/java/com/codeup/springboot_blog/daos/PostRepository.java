@@ -1,5 +1,6 @@
 package com.codeup.springboot_blog.daos;
 
+import com.codeup.springboot_blog.models.Bookclub;
 import com.codeup.springboot_blog.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,6 +15,7 @@ public interface PostRepository extends JpaRepository<Post, Long>  {
     List<Post> findPostByTitleIsContaining(String term);
     List<Post> findPostByAuthor_Username(String username);
     List<Post> findPostsByTitle(String title);
+    List<Post> findAllByBookclubEquals(Bookclub bookclub);
 
 //    Post deletePostById(long id);
 //@Query("from Posts p where p.")

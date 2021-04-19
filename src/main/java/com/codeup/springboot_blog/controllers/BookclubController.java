@@ -119,7 +119,7 @@ public class BookclubController {
             }
         }
 
-        //        TED CAN YOU EXPLAIN THIS PART?
+        //        This creates a list of googleIDs for the books
         List<BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
         for (BookclubBook clubbook : clubbooks) {
@@ -130,12 +130,18 @@ public class BookclubController {
         List<Meeting> meetings = meetingDao.findAllByBookclubEquals(bookclub);
         Collections.sort(meetings);
 
+//       This creates and sorts (by date) a list of posts for this particular bookclub
+        List<Post> posts = postDao.findAllByBookclubEquals(bookclub);
+        Collections.sort(posts);
+
+        
 //        CHECK IF LOGGED IN USER IS MEMBER OF CLUB
         if (!holder.isEmpty()) {
             isNotMember = false;
         }
 
 //        PASS INFO INTO THYMELEAF
+        model.addAttribute("posts", posts);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isNotMember", isNotMember);
         model.addAttribute("isOwner", isOwner);

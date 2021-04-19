@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class PostController {
     private final CommentRepository commentDao;
     private final BookclubRepository bookclubDao;
     private final BookRepository bookDao;
+    private final BookclubBookRepository bookclubbookDao;
 
 
 //    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao){
@@ -30,7 +32,7 @@ public class PostController {
 //
 //    }
 
-    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao,  BookclubRepository bookclubDao, BookRepository bookDao){
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao,  BookclubRepository bookclubDao, BookRepository bookDao, BookclubBookRepository bookclubbookDao){
 
         this.postDao = postDao;
         this.userDao = userDao;
@@ -38,6 +40,7 @@ public class PostController {
         this.commentDao = commentDao;
         this.bookclubDao = bookclubDao;
         this.bookDao = bookDao;
+        this.bookclubbookDao = bookclubbookDao;
     }
 
 @GetMapping("/posts")
@@ -59,8 +62,8 @@ public class PostController {
     return "posts/index";
 }
 
-@GetMapping("posts/{id}")
-    public String individualPost(@PathVariable long id, Model model) {
+@GetMapping("bookclubs/{bookclubid}/posts/{id}")
+    public String individualPost(@PathVariable long bookclubid, @PathVariable long id, Model model) {
 //    Post post = new Post(id, "Here's a title for this detailed view", "Here's a bunch of text for it as well!");
 //    model.addAttribute("post", post);
 //    model.addAttribute("post", postDao.findAllById(id);
@@ -81,8 +84,8 @@ public class PostController {
     return "posts/show";
 }
 
-@PostMapping("/posts/delete")
-    public String deleteIndividualPost(@RequestParam(name = "id") long id, Model model) {
+@PostMapping("/bookclubs/{bookclubid}/posts/delete")
+    public String deleteIndividualPost(@RequestParam(name = "id") long id, @PathVariable long bookclubid, Model model) {
     postDao.deleteById(id);
     System.out.println("id = " + id);
     model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
@@ -90,27 +93,34 @@ public class PostController {
     return "redirect:/posts";
     }
 
-@GetMapping("/posts/create")
-    public String createRender(Model model) {
+@GetMapping("/bookclubs/{id}/posts/create")
+    public String createRender(@PathVariable long id, Model model) {
+        Post post = new Post();
+        Bookclub bookclub = bookclubDao.getOne(id);
+        List<BookclubBook> bookclubBooks = bookclubbookDao.getAllByBookclub(bookclub);
+        List<String> books = new ArrayList<>();
+        for (BookclubBook bookclubook: bookclubBooks) {
+            books.add(bookclubook.getBook().getGoogleID());
+        }
+        post.setBookclub(bookclub);
+        model.addAttribute("bookclub", bookclub);
+        model.addAttribute("books", books);
         model.addAttribute("post", new Post());
     return "posts/create";
 }
 
 
-@PostMapping("/posts/create")
+@PostMapping("/bookclubs/{id}/posts/create")
 //    public String createToDatabase(@RequestParam("title") String title, @RequestParam("body") String body, Model model) {
-    public String createToDatabase(@ModelAttribute Post post, Model model) {
+    public String createToDatabase(@ModelAttribute Post post, @PathVariable long id,@RequestParam(name = "book") String book, Model model) {
     User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     post.setAuthor(author);
-    Book book = bookDao.getOne(1L);
-    post.setBook(book);
-    Bookclub bookclub = bookclubDao.getOne(1L);
-    post.setBookclub(bookclub);
+    post.setBook(bookDao.findBookByGoogleIDEquals(book));
     postDao.save(post);
     emailService.prepareAndSend(post, "Your post was successfully posted!", "You can view it at http://localhost:8080/posts/" + post.getId());
     model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
             "  The post was added successfully.</div>");
-    return "redirect:/posts/" + post.getId();
+    return "redirect:/bookclub/" + id +"/posts/" + post.getId();
 }
 
 

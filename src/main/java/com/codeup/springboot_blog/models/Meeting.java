@@ -59,7 +59,7 @@ public class Meeting implements Comparable<Meeting>{
     }
 
     public int compareTo(Meeting meeting) {
-        return meeting.timedate.compareTo(this.timedate);
+        return this.timedate.compareTo(meeting.timedate);
     }
 
     public long getId() {
