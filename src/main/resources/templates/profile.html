@@ -21,7 +21,14 @@
     Hello <span th:text="${name}"></span>
 <!--    <h2 th:text="${ownedClubs}"></h2>-->
 
-
+    <div th:if="${invites}">
+        <h2>Invites</h2>
+        <div th:each="invite : ${invites}">
+            <span class="card">
+                <span th:text="${invite.name}"></span> wants you
+            </span>
+        </div>
+    </div>
 
 
 

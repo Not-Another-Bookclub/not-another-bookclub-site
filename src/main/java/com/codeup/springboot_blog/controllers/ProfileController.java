@@ -36,6 +36,7 @@ public class ProfileController {
         ArrayList<BookclubMembership> bookClubMemberships =  bookclubMembershipDao.findBookclubMembershipsByUser(userInQuestion);
         ArrayList<Bookclub> holder = new ArrayList<>();
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
+        BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
         User user = new User();
 
 //        LOGGED IN USER
@@ -49,6 +50,30 @@ public class ProfileController {
                 model.addAttribute("isowner", true);
 
                 model.addAttribute("loggedUserBookclubs", loggedUsersBookclubs);
+
+                List<BookclubMembership> yourMemberships = bookclubMembershipDao.findBookclubMembershipsByUser(user);
+                List<BookclubMembership> pendingMemberships = new ArrayList<>();
+                List<BookclubMembership> inviteMemberships = new ArrayList<>();
+                List<Bookclub> bookclubsThatWantYou = new ArrayList<>();
+                for(BookclubMembership membership : yourMemberships){
+                    if(membership.getStatus() == pending){
+                        pendingMemberships.add(membership);
+                    }
+                }
+
+                for(BookclubMembership membership : pendingMemberships){
+                    if(membership.getLastChangedBy() != user){
+                        inviteMemberships.add(membership);
+                    }
+                }
+
+                for(BookclubMembership membership : inviteMemberships){
+                    Bookclub clubToAdd = membership.getBookclub();
+                    bookclubsThatWantYou.add(clubToAdd);
+                }
+
+                model.addAttribute("invites", bookclubsThatWantYou);
+
             } else {
                 System.out.println("TEST");
                 model.addAttribute("canInvite", true);
@@ -70,6 +95,7 @@ public class ProfileController {
                 }
 
                 model.addAttribute("loggedUserBookclubs", filtered);
+//                model.addAttribute("invites", false);
             }
 
         }
