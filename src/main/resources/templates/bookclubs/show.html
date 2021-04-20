@@ -63,25 +63,18 @@
     <h1>Here's a list of posts for <span th:text="${bookclub.name}"></span>:</h1>
 
     <ul>
-        <li th:each="post : ${posts}"> <a th:href="@{__${bookclub.id}__/posts/__${post.id}__}">
+        <li th:each="post : ${posts}"> <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}">
             <span th:text="${post.title}"></span></a> about the book: <span th:text="${post.book.googleID}"></span> - <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)</li>
     </ul>
+    <p>Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</p>
 
 <h1>Here's the books on the <span th:text="${bookclub.name}"></span> reading list.</h1>
     <div id="results1" class="row"></div>
 
 
 
-<!--<div th:if="${user != null && !isOwner}">-->
-<!--    <div th:if="${bookclub.accepting_members}">-->
-<!--        <form th:action="@{'/bookclubs/' + ${bookclub.id} +'/join'}" method="post">-->
-<!--            <input hidden name="id" th:value="${user.id}">-->
-<!--            <button type="submit" class="btn btn-success">Ask to Join this Bookclub!</button>-->
-<!--        </form>-->
-<!--    </div>-->
-<!--</div>-->
 
-<div th:if="${isowner}"><div th:replace="partials.html :: booksearch"></div></div>
+<div th:if="${isOwner}"><div th:replace="partials.html :: booksearch"></div></div>
 
     <br>
     <br>

@@ -10,7 +10,7 @@
 
 <div class="container">
     <h1>Use the form below to edit an existing post!</h1>
-    <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">
+    <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">
         <div class="mb-3">
             <label for="title" class="form-label">Title of the post</label>
             <input class="form-control" type="text" th:field="*{title}">
@@ -20,9 +20,19 @@
             <textarea class="form-control" rows="6" th:field="*{body}"></textarea>
 <!--            <input hidden id="id" name="id" th:value="${post.id}">-->
         </div>
+
+            <div class="mb-3">
+                <label for="book" class="form-label">What book is this about?</label>
+                <select class="form-control" name="book" id="book">
+                    <option value="0">select book</option>
+                    <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
+                </select>
+            </div>
+        <div id="results1" class="d-none"></div>
         <button class="btn btn-secondary text-center">Submit Post</button>
     </form>
 </div>
 <footer th:replace="partials.html::footer"></footer>
+<script th:replace="partials.html::bookdisplay(${books})"></script>
 </body>
 </html>

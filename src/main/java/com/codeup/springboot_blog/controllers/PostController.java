@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -95,14 +97,12 @@ public class PostController {
 
 @GetMapping("/bookclubs/{id}/posts/create")
     public String createRender(@PathVariable long id, Model model) {
-        Post post = new Post();
         Bookclub bookclub = bookclubDao.getOne(id);
         List<BookclubBook> bookclubBooks = bookclubbookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
         for (BookclubBook bookclubook: bookclubBooks) {
             books.add(bookclubook.getBook().getGoogleID());
         }
-        post.setBookclub(bookclub);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("books", books);
         model.addAttribute("post", new Post());
@@ -116,35 +116,48 @@ public class PostController {
     User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     post.setAuthor(author);
     post.setBook(bookDao.findBookByGoogleIDEquals(book));
+    post.setBookclub(bookclubDao.getOne(id));
+    post.setCreateDate(new Date(Calendar.getInstance().getTime().getTime()));
+    post.setModifyDate(new Date(Calendar.getInstance().getTime().getTime()));
     postDao.save(post);
     emailService.prepareAndSend(post, "Your post was successfully posted!", "You can view it at http://localhost:8080/posts/" + post.getId());
     model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
             "  The post was added successfully.</div>");
-    return "redirect:/bookclub/" + id +"/posts/" + post.getId();
+    return "redirect:/bookclubs/" + id +"/posts/" + post.getId();
 }
 
 
-@GetMapping("/posts/{id}/edit")
-    public String editIndividualPost (@PathVariable long id, Model model){
+@GetMapping("/bookclubs/{bookclubid}/posts/{id}/edit")
+    public String editIndividualPost (@PathVariable long bookclubid, @PathVariable long id, Model model){
+
+    Bookclub bookclub = bookclubDao.getOne(bookclubid);
+    List<BookclubBook> bookclubBooks = bookclubbookDao.getAllByBookclub(bookclub);
+    List<String> books = new ArrayList<>();
+    for (BookclubBook bookclubook: bookclubBooks) {
+        books.add(bookclubook.getBook().getGoogleID());
+    }
+    model.addAttribute("bookclub", bookclub);
+    model.addAttribute("books", books);
     model.addAttribute("post", postDao.getOne(id));
-    return "posts/create";
+
+    return "posts/edit";
     }
 
-@PostMapping("/posts/{id}/edit")
+@PostMapping("/bookclubs/{bookclubid}/posts/{id}/edit")
 //    public String editSaveIndividualPost(@RequestParam(name = "id") long id, @RequestParam(name = "title") String title,
 //                                         @RequestParam(name = "body") String body, Model model) {
-public String editSaveIndividualPost(@ModelAttribute Post post, @PathVariable long id, Model model) {
+public String editSaveIndividualPost(@ModelAttribute Post post, @PathVariable long id, @PathVariable long bookclubid, Model model) {
         User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setAuthor(author);
-        Book book = bookDao.getOne(1L);
-        post.setBook(book);
-        Bookclub bookclub = bookclubDao.getOne(1L);
-        post.setBookclub(bookclub);
+//        Book book = bookDao.getOne(1L);
+//        post.setBook(book);
+        Bookclub bookclub = bookclubDao.getOne(bookclubid);
+//        post.setBookclub(bookclub);
 //        post.setId(id);
         postDao.save(post);
         model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
             "  The post was successfully updated. </div>");
-        return "redirect:/posts";
+        return "redirect:/bookclubs/" + bookclub.getId() + "/posts/" + post.getId();
 }
 
 @GetMapping("/search")
@@ -155,24 +168,24 @@ public String editSaveIndividualPost(@ModelAttribute Post post, @PathVariable lo
     return "posts/index";
 }
 
-@GetMapping("/profile/{username}")
-    public String userPosts(@PathVariable String username, Model model) {
-    User loggedin = new User();
-    if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
-        loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-        List <Post> posts = postDao.findPostByAuthor_Username(username);
-        model.addAttribute("user", userDao.findByUsername(username));
-        model.addAttribute("posts", posts);
-        model.addAttribute("username", username);
-        if (username.equalsIgnoreCase(loggedin.getUsername())) {
-            model.addAttribute("owner", true);
-        }
-        if (posts.isEmpty()) {
-            model.addAttribute("posts", postDao.findAll());
-        }
-        return "posts/index";
-}
+//@GetMapping("/profile/{username}")
+//    public String userPosts(@PathVariable String username, Model model) {
+//    User loggedin = new User();
+//    if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+//        loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    }
+//        List <Post> posts = postDao.findPostByAuthor_Username(username);
+//        model.addAttribute("user", userDao.findByUsername(username));
+//        model.addAttribute("posts", posts);
+//        model.addAttribute("username", username);
+//        if (username.equalsIgnoreCase(loggedin.getUsername())) {
+//            model.addAttribute("owner", true);
+//        }
+//        if (posts.isEmpty()) {
+//            model.addAttribute("posts", postDao.findAll());
+//        }
+//        return "posts/index";
+//}
 
 
 }
