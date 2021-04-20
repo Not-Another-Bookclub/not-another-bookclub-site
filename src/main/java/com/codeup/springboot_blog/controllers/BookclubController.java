@@ -69,11 +69,16 @@ public class BookclubController {
         User user = new User();
         Boolean isNotMember = true;
         Boolean isOwner = false;
+        Boolean isAccepting = true;
         ArrayList<Bookclub> holder = new ArrayList<>();
         ArrayList<User> pendingHolder = new ArrayList<>();
         Bookclub bookclub = bookclubDao.getOne(id);
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
+
+        if(bookclub.isAccepting_members() == false){
+            isAccepting = false;
+        }
 
 //        THIS BLOCK HANDLES IF USER IS LOGGED IN - BIG SECTION
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
@@ -149,6 +154,7 @@ public class BookclubController {
         model.addAttribute("members", members);
         model.addAttribute("books", books);
         model.addAttribute("meetings", meetings);
+        model.addAttribute("isAccepting", isAccepting);
 
         return "bookclubs/show";
     }
