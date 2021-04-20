@@ -12,9 +12,11 @@
 
 <p th:text="${bookclub.description}"></p>
     <div th:if="${user}">
-        <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
-            <input type="submit" class="btn btn-danger" value="Join">
-        </form>
+        <div th:if="${isAccepting}">
+            <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
+                <input type="submit" class="btn btn-danger" value="Join">
+            </form>
+        </div>
     </div>
 
     <div th:if="${isOwner}">
