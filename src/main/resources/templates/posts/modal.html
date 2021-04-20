@@ -12,89 +12,107 @@
 </head>
     <body>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" id="12e8PJ2T7sQC" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
             Launch demo modal
         </button>
 
 <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+                        <br>
+                        <img src="/img/logo.png" id="modalImage">
+
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        ...
+                    <div class="modal-body" id="modalBody">
+
+
                     </div>
+
+                        <form action="/book/add" method="Post">
+                        <input type="date" id="startDate" name="startDate">
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
+                        </form>
                 </div>
             </div>
         </div>
 
         <script>
-            $.ajax({
-                url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
-                dataType: "json",
-
-                success: function (data) {
-
-                let thumbnail
-                let author
-
-                if (!data.volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo.png"}
-                else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {thumbnail = "http://localhost:8080/img/logo.png"}
-                else {thumbnail = data.volumeInfo.imageLinks.thumbnail}
-                console.log(thumbnail);
-                if (!data.volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
-                else {author = data.volumeInfo.authors[0]}
-
-                var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'
-                // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
-                html += "<div class='card-top1'><img src='" + thumbnail + "' alt='Book Cover'>"
-                html += "<div class='card-body'>"
-                html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5></div></div"
-                html += '<div><a href="#" class="btn btn-primary" id="'+ idsearch +'">Remove from reading list</a></div></div>'
-                // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
-
-                results.innerHTML += html;
-            },
+            const title = $('myModalLabel');
+            const modalImage = $('modalImage');
+            const body = $('modalBody');
 
 
-                type: 'Get',
-            })
 
+            function modalPopulate(idSearch){
+                $.ajax({
+                    url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+                    dataType: 'json',
+                    success: function (data) {
+                        let thumbnail
+                        let author
+
+                        if (!data.volumeInfo.hasOwnProperty('imageLinks')) {
+                            thumbnail = "http://localhost:8080/img/logo.png"
+                        } else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {
+                            thumbnail = "http://localhost:8080/img/logo.png"
+                        } else {
+                            thumbnail = data.volumeInfo.imageLinks.thumbnail
+                        }
+                        console.log(thumbnail);
+                        if (!data.volumeInfo.hasOwnProperty('authors')) {
+                            author = "Unknown or not listed"
+                        } else {
+                            author = data.volumeInfo.authors[0]
+                        }
+
+                        title.innerText = data.volumeInfo.title + " - " + author;
+                        modalImage.outerHTML = '<img src="' + thumbnail + '"  id="modalImage">'
+                        body.innerText = data.volumeInfo.description;
+                    },
+
+                    type: 'Get'
+
+                });
             }
-                if (typeof idsearch == "string") {googleIdSearch(idsearch);
-                console.log("This book is a string!")
-                $(".card-bottom1").hide()
-                console.log("Firing after the hide from string!")
-                $('.card-top1').click(function() {
-                console.log("I'm firing from the click listener!")
-                let thisCardBottom = $(this).next()
-                // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
-                $(".card-bottom1").not(thisCardBottom).slideUp(500)
-                $(this).next().slideToggle(1000)})}
-                else {
-                for(let i = 0; i < idsearch.length; i++) {
-                googleIdSearch(idsearch[i]);}
-                console.log("These books are a list!")
-                $(".card-bottom1").hide()
-                console.log("Firing after the hide from list!")
-                $('.card-top1').click(function() {
-                console.log("I'm firing from the click listener!")
-                let thisCardBottom = $(this).next()
-                // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
-                $(".card-bottom1").not(thisCardBottom).slideUp(500)
-                $(this).next().next().slideToggle(1000)})
-
-            }
-
-
+            $('.btn').click(modalPopulate(this.id))
         </script>
+
+
+        <!--        if (typeof idsearch == "string") {googleIdSearch(idsearch);-->
+        <!--        console.log("This book is a string!")-->
+        <!--        $(".card-bottom1").hide()-->
+        <!--        console.log("Firing after the hide from string!")-->
+        <!--        $('.card-top1').click(function() {-->
+        <!--        console.log("I'm firing from the click listener!")-->
+        <!--        let thisCardBottom = $(this).next()-->
+        <!--        // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");-->
+        <!--        $(".card-bottom1").not(thisCardBottom).slideUp(500)-->
+        <!--        $(this).next().slideToggle(1000)})}-->
+        <!--        else {-->
+        <!--        for(let i = 0; i < idsearch.length; i++) {-->
+        <!--        googleIdSearch(idsearch[i]);}-->
+        <!--        console.log("These books are a list!")-->
+        <!--        $(".card-bottom1").hide()-->
+        <!--        console.log("Firing after the hide from list!")-->
+        <!--        $('.card-top1').click(function() {-->
+        <!--        console.log("I'm firing from the click listener!")-->
+        <!--        let thisCardBottom = $(this).next()-->
+        <!--        // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");-->
+        <!--        $(".card-bottom1").not(thisCardBottom).slideUp(500)-->
+        <!--        $(this).next().next().slideToggle(1000)})-->
+
+        <!--        }-->
+
+
+
 
 
 

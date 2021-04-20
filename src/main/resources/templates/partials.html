@@ -321,6 +321,8 @@ success: function (data) {
     let thumbnail
     let author
 
+    // use dom to display ajax rtn
+
     if (!data.volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo.png"}
     else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {thumbnail = "http://localhost:8080/img/logo.png"}
     else {thumbnail = data.volumeInfo.imageLinks.thumbnail}
