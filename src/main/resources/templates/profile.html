@@ -6,7 +6,15 @@
         <title>Title</title>
     </head>
 <body>
-<nav th:replace="partials.html :: navbar"></nav>
+
+<!--        IF USER IS LOGGED IN THEN THIS NAVBAR WILL BE VISIBLE-->
+        <div th:if="${user.username != null}">
+            <nav th:replace="partials.html :: navbar"></nav>
+
+        </div>
+
+
+
 <div class="container">
 <h2>THIS IS YOUR PROFILE PAGE!!!</h2>
 
