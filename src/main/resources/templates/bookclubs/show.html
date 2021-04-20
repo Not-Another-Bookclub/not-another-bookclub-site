@@ -6,81 +6,87 @@
     <title>Detailed view of this post</title>
 </head>
 <body>
-<div th:replace="partials.html::navbar"></div>
-<div class="container">
-<h1 th:text="${bookclub.name}"></h1>
+    <div th:replace="partials.html::navbar"></div>
+    <div class="container">
+        <h1 th:text="${bookclub.name}"></h1>
+        <p th:text="${bookclub.description}"></p>
 
-<p th:text="${bookclub.description}"></p>
-    <div th:if="${user}">
-        <div th:if="${isAccepting}">
-            <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
-                <input type="submit" class="btn btn-danger" value="Join">
-            </form>
-        </div>
-    </div>
-
-    <div th:if="${isOwner}">
-        <h2>You own this Bookclub</h2>
-        <div th:each="user : ${pendingUsers}" class="text-center">
-            <div class="container">
-                <h1 th:text="${user.username}"></h1>
-                <p>Wants to join</p>
-
-                <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                    <input type="submit" class="btn btn-success" value="Accept">
+        <div th:if="${user}">
+            <div th:if="${isAccepting}">
+                <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
+                    <input type="submit" class="btn btn-danger" value="Join">
                 </form>
-                <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                    <input type="submit" class="btn btn-danger" value="Decline">
-                </form>
-
-<!--                <a th:href=""></a>-->
-
             </div>
-
         </div>
-    </div>
+
+        <div th:if="${isOwner}">
+            <h2>You own this Bookclub</h2>
+            <div th:each="user : ${pendingUsers}" class="text-center">
+                <div class="container">
+                    <h1 th:text="${user.username}"></h1>
+                    <p>Wants to join</p>
+
+                    <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
+                        <input type="submit" class="btn btn-success" value="Accept">
+                    </form>
+                    <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
+                        <input type="submit" class="btn btn-danger" value="Decline">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}">profile</a>
+        </p>
 
 
-<p>This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}">profile</a> </p>
-
-
-    <h1>This is a list passed from the controller</h1>
-    <ul>
+<!--    START THE PUBLIC/PRIVATE CONTINGENCY-->
+        <h1>This is a list passed from the controller</h1>
+        <ul>
 <!--    <li th:each="member : ${members}"><span th:text="${member.user.username}"></span> joined <span th:text="${#dates.format(member.changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>. Current status is :<span th:text="${member.getStatus()}"></span></li>-->
-    <li th:each="member : ${members}">
-
-        <span th:text="${member.username}"></span> joined
+            <li th:each="member : ${members}">
+                <span th:text="${member.username}"></span> joined
 <!--&lt;!&ndash;        <span th:text="${#dates.format(member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>.-->
 <!-- Current status is :<span th:text="${member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).status}"></span>-->
-    </li>
-    </ul>
+            </li>
+        </ul>
 
-    <h1>Here's a lit of meetings, some of which are in the past, but Ted hasn't figured out the logic to call that out yet.</h1>
+        <h1>Here's a lit of meetings, some of which are in the past, but Ted hasn't figured out the logic to call that out yet.</h1>
 
-    <ul>
-        <li th:each="meeting : ${meetings}"><span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span> at a
-            <span th:text="${meeting.location}"></span> to discuss <span th:text="${meeting.book.googleID}"></span> </li>
-    </ul>
+        <ul>
+            <li th:each="meeting : ${meetings}"><span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span> at a
+                <span th:text="${meeting.location}"></span> to discuss <span th:text="${meeting.book.googleID}"></span>
+            </li>
+        </ul>
 
-    <h1>Here's a list of posts for <span th:text="${bookclub.name}"></span>:</h1>
+        <h1>
+            Here's a list of posts for <span th:text="${bookclub.name}"></span>:
+        </h1>
 
-    <ul>
-        <li th:each="post : ${posts}"> <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}">
-            <span th:text="${post.title}"></span></a> about the book: <span th:text="${post.book.googleID}"></span> - <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)</li>
-    </ul>
-    <p>Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</p>
+        <ul>
+            <li th:each="post : ${posts}"> <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}">
+                <span th:text="${post.title}"></span></a> about the book: <span th:text="${post.book.googleID}"></span> - <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)</li>
+        </ul>
+        <p>
+            Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</a>
+        </p>
 
-<h1>Here's the books on the <span th:text="${bookclub.name}"></span> reading list.</h1>
-    <div id="results1" class="row"></div>
+        <h1>
+            Here's the books on the <span th:text="${bookclub.name}"></span> reading list.
+        </h1>
+        <div id="results1" class="row"></div>
 
 
+        <div th:if="${isOwner}">
+            <div th:replace="partials.html :: booksearch"></div>
+        </div>
 
+        <br>
+        <br>
+    </div>
 
-<div th:if="${isOwner}"><div th:replace="partials.html :: booksearch"></div></div>
-
-    <br>
-    <br>
-</div>
+<!--    END OF PUBLIC/PRIVATE CONTINGENCY-->
 <footer th:replace="partials.html::footer"></footer>
 <div th:if="${isowner}"><script th:replace="partials.html::booksearchscript('bookclub',${bookclub.id})"></script></div>
 <script th:replace="partials.html::bookdisplay(${books})"></script>

@@ -132,5 +132,16 @@ public class ProfileController {
 
         return "profile";
     }
+
+
+    @GetMapping("/profile")
+    public String showUserProfile(Model model){
+        User user = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+        return "redirect:/pro/" + user.getId();
+    }
 }
 
