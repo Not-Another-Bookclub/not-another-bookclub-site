@@ -36,6 +36,7 @@ public class ProfileController {
         ArrayList<BookclubMembership> bookClubMemberships =  bookclubMembershipDao.findBookclubMembershipsByUser(userInQuestion);
         ArrayList<Bookclub> holder = new ArrayList<>();
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
+        BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
         User user = new User();
 
 //        LOGGED IN USER
@@ -49,15 +50,45 @@ public class ProfileController {
                 model.addAttribute("isowner", true);
 
                 model.addAttribute("loggedUserBookclubs", loggedUsersBookclubs);
+
+//                INVITES LOGIC
+                List<BookclubMembership> yourMemberships = bookclubMembershipDao.findBookclubMembershipsByUser(user);
+                List<BookclubMembership> pendingMemberships = new ArrayList<>();
+                List<BookclubMembership> inviteMemberships = new ArrayList<>();
+                List<Bookclub> bookclubsThatWantYou = new ArrayList<>();
+                for(BookclubMembership membership : yourMemberships){
+                    if(membership.getStatus() == pending){
+                        pendingMemberships.add(membership);
+                    }
+                }
+
+                for(BookclubMembership membership : pendingMemberships){
+                    if(membership.getLastChangedBy() != user){
+                        inviteMemberships.add(membership);
+                    }
+                }
+
+                for(BookclubMembership membership : inviteMemberships){
+                    Bookclub clubToAdd = membership.getBookclub();
+                    bookclubsThatWantYou.add(clubToAdd);
+                }
+
+                model.addAttribute("invites", bookclubsThatWantYou);
+//                END INVITES LOGIC
+
             } else {
-                System.out.println("TEST");
+//                START LOGIC FOR GETTING CLUBS THAT YOU CAN INVITE OTHER USER TO
                 model.addAttribute("canInvite", true);
 
                 List<Bookclub> filtered = new ArrayList<>();
+
+//                LOOP THOUGH THE LOGGED USERS BOOKCLUBS
                 for(Bookclub bookclub : loggedUsersBookclubs){
                     Boolean failTest = false;
+
                     List<BookclubMembership> singleClubMembership = bookclubMembershipDao.findBookclubMembershipsByBookclub(bookclub);
 
+//                    LOOP THROUGH ALL MEMBERSHIPS IN LOGGED USERS BOOKCLUB
                     for(BookclubMembership member : singleClubMembership){
                         if(member.getUser() == userInQuestion){
                             failTest = true;
@@ -70,6 +101,7 @@ public class ProfileController {
                 }
 
                 model.addAttribute("loggedUserBookclubs", filtered);
+//                END LOGIC OF GETTING VALID BOOKCLUBS FOR INVITING
             }
 
         }
