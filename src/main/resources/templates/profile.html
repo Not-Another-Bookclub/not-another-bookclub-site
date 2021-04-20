@@ -8,8 +8,14 @@
 <body>
 
 <!--        IF USER IS LOGGED IN THEN THIS NAVBAR WILL BE VISIBLE-->
-        <div th:if="${user.username != null}">
+        <div th:if="${user != null}">
             <nav th:replace="partials.html :: navbar"></nav>
+
+        </div>
+
+
+        <div th:if="${user == null}">
+            <nav th:replace="partials.html :: visitor-navbar"></nav>
 
         </div>
 
