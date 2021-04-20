@@ -27,6 +27,12 @@
             <span class="card">
                 <span th:text="${invite.name}"></span> wants you
             </span>
+            <form th:action="@{'/bookclubs/invite/accept/' + ${invite.id} + '/' + ${user.id}}" th:method="post">
+                <input type="submit" class="btn btn-success" value="Accept">
+            </form>
+            <form th:action="@{'/bookclubs/invite/decline/' + ${invite.id} + '/' + ${user.id}}" th:method="post">
+                <input type="submit" class="btn btn-danger" value="Decline">
+            </form>
         </div>
     </div>
 
