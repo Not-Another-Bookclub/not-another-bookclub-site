@@ -7,10 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -59,11 +56,11 @@ public class BookclubController {
     }
 
     @PostMapping("bookclubs/create")
-    public String createNewBookclubSave(@ModelAttribute Bookclub bookclub, Model model){
+    public String createNewBookclubSave(@ModelAttribute Bookclub bookclub, Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         bookclub.setOwner(user);
         bookclubDao.save(bookclub);
-       return "redirect:/bookclubs/" + bookclub.getId();
+        return "redirect:/bookclubs/" + bookclub.getId();
     }
 
     @GetMapping("bookclubs/{id}")
@@ -80,22 +77,22 @@ public class BookclubController {
 
 //        THIS BLOCK HANDLES IF USER IS LOGGED IN - BIG SECTION
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
-            user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
 
 //            ALL MEMBERSHIPS LOGGED IN USER HAS
-            ArrayList<BookclubMembership> bookClubMemberships =  bookclubmembershipDao.findBookclubMembershipsByUser(user);
+            ArrayList<BookclubMembership> bookClubMemberships = bookclubmembershipDao.findBookclubMembershipsByUser(user);
 
 //            IF LOGGED IN USER OWNS THE BOOKCLUB WE ARE VIEWING
-            if(bookclub.getOwner().getId() == user.getId()){
+            if (bookclub.getOwner().getId() == user.getId()) {
                 isOwner = true;
 
 //                ALL MEMBERSHIPS ASSOCIATED WITH A BOOKCLUB
                 ArrayList<BookclubMembership> forFiltereing = bookclubmembershipDao.findBookclubMembershipsByBookclub(bookclub);
 
 //                pendingHOLDER GETS ALL USERS WHO ARE PENDING
-                for(BookclubMembership membership : forFiltereing){
-                    if(membership.getStatus() == pending){
+                for (BookclubMembership membership : forFiltereing) {
+                    if (membership.getStatus() == pending) {
                         User pendingUser = membership.getUser();
                         pendingHolder.add(pendingUser);
                     }
@@ -105,7 +102,7 @@ public class BookclubController {
             for (BookclubMembership membership : bookClubMemberships) {
 
 //                CHECKING IF LOGGED IN USER IS A MEMBER OF THE BOOKCLUB WE ARE VIEWING
-                if(membership.getBookclub() == bookclub){
+                if (membership.getBookclub() == bookclub) {
                     holder.add(bookclub);
                 }
 
@@ -114,16 +111,16 @@ public class BookclubController {
 //        END OF LOGGED IN USER LOGIC
 
 //        GET ACTIVE MEMBERS ONLY
-        List <BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
-        List <User> members = new ArrayList<User>();
+        List<BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
+        List<User> members = new ArrayList<User>();
         for (BookclubMembership membership : memberships) {
-            if(membership.getStatus() == active){
+            if (membership.getStatus() == active) {
                 members.add(membership.getUser());
             }
         }
 
-        //        TED CAN YOU EXPLAIN THIS PART?
-        List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
+        //        This creates a list of googleIDs for the books
+        List<BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
         for (BookclubBook clubbook : clubbooks) {
             books.add(clubbook.getBook().getGoogleID());
@@ -133,12 +130,18 @@ public class BookclubController {
         List<Meeting> meetings = meetingDao.findAllByBookclubEquals(bookclub);
         Collections.sort(meetings);
 
+//       This creates and sorts (by date) a list of posts for this particular bookclub
+        List<Post> posts = postDao.findAllByBookclubEquals(bookclub);
+        Collections.sort(posts);
+
+        
 //        CHECK IF LOGGED IN USER IS MEMBER OF CLUB
-        if(!holder.isEmpty()){
+        if (!holder.isEmpty()) {
             isNotMember = false;
         }
 
 //        PASS INFO INTO THYMELEAF
+        model.addAttribute("posts", posts);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isNotMember", isNotMember);
         model.addAttribute("isOwner", isOwner);
@@ -146,16 +149,16 @@ public class BookclubController {
         model.addAttribute("members", members);
         model.addAttribute("books", books);
         model.addAttribute("meetings", meetings);
-          
+
         return "bookclubs/show";
     }
 
     @PostMapping("bookclubs/invite/{id}")
-    public String requestToJoinBookclub(@PathVariable long id, Model model){
+    public String requestToJoinBookclub(@PathVariable long id, Model model) {
 //        GOT USER
         User user = new User();
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
-            user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
         }
 
@@ -180,7 +183,7 @@ public class BookclubController {
     }
 
     @PostMapping("bookclubs/invite/accept/{id}/{prospectiveUserId}")
-    public String acceptRequestToJoinBookclub(@PathVariable long id, @PathVariable long prospectiveUserId, Model model){
+    public String acceptRequestToJoinBookclub(@PathVariable long id, @PathVariable long prospectiveUserId, Model model) {
 
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         User userToAccept = userDao.getOne(prospectiveUserId);
@@ -190,8 +193,8 @@ public class BookclubController {
 
         BookclubMembership bookclubMembershipInQuestion = new BookclubMembership();
 
-        for(BookclubMembership membership : forFiltereing){
-            if(membership.getBookclub() == bookclub && membership.getUser().getId() == userToAccept.getId()){
+        for (BookclubMembership membership : forFiltereing) {
+            if (membership.getBookclub() == bookclub && membership.getUser().getId() == userToAccept.getId()) {
                 bookclubMembershipInQuestion = membership;
             }
         }
@@ -205,7 +208,7 @@ public class BookclubController {
 
 
     @PostMapping("bookclubs/invite/decline/{id}/{prospectiveUserId}")
-    public String declineRequestToJoinBookclub(@PathVariable long id, @PathVariable long prospectiveUserId, Model model){
+    public String declineRequestToJoinBookclub(@PathVariable long id, @PathVariable long prospectiveUserId, Model model) {
 
         BookclubMembershipStatus decline = BookclubMembershipStatus.valueOf("DECLINED");
         User userToAccept = userDao.getOne(prospectiveUserId);
@@ -215,8 +218,8 @@ public class BookclubController {
 
         BookclubMembership bookclubMembershipInQuestion = new BookclubMembership();
 
-        for(BookclubMembership membership : forFiltereing){
-            if(membership.getBookclub() == bookclub && membership.getUser().getId() == userToAccept.getId()){
+        for (BookclubMembership membership : forFiltereing) {
+            if (membership.getBookclub() == bookclub && membership.getUser().getId() == userToAccept.getId()) {
                 bookclubMembershipInQuestion = membership;
             }
         }
@@ -227,6 +230,33 @@ public class BookclubController {
 
         return "redirect:/bookclubs/" + id;
     }
+
+    @PostMapping("bookclubs/inviteMany/{idOfTarget}/{inviterId}")
+    public String inviteManyToJoinBookclub(@PathVariable long idOfTarget, @PathVariable long inviterId, @RequestParam (name="bookclubs") List<Long> bookclubs) {
+        User targetUser = userDao.getOne(idOfTarget);
+        User inviterUser = userDao.getOne(inviterId);
+        BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
+
+//        Make a loop to make a membership from each id provided.
+        for(Long bookclubId : bookclubs){
+            System.out.println(bookclubId);
+            //        LOGIC TO MAKE A MEMBERSHIP
+            Bookclub bookclub = bookclubDao.getOne(bookclubId);
+            BookclubMembership newBookclubUser = new BookclubMembership();
+
+            newBookclubUser.setBookclub(bookclub);
+            newBookclubUser.setUser(targetUser);
+            newBookclubUser.setStatus(pending);
+            newBookclubUser.setChangedDate(new Date(Calendar.getInstance().getTime().getTime()));
+            newBookclubUser.setLastChangedBy(inviterUser);
+
+            bookclubmembershipDao.save(newBookclubUser);
+            //        STOP LOGIC TO MAKE A MEMBERSHIP
+        }
+
+        return "redirect:/pro/" + idOfTarget;
+    }
+
 
 
 }

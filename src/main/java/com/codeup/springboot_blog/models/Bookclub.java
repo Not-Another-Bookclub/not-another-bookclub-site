@@ -48,6 +48,7 @@ public class Bookclub {
 
     public Bookclub() {};
 
+
     public Bookclub(String name, String description, boolean is_private, boolean accepting_members, User owner, List<BookclubMembership> users, List<Meeting> meetings) {
         this.name = name;
         this.description = description;

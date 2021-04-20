@@ -11,7 +11,7 @@
 <div class="container">
 <div th:if="${post.id == 0}">
     <h1>Use the form below to create a new post!</h1>
-    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+    <form th:action="@{/bookclubs/__${bookclub.id}__/posts/create}" th:method="post" th:object="${post}">
         <div class="mb-3">
             <label for="title" class="form-label">Title of the post</label>
             <input class="form-control" th:field="*{title}" type="text">
@@ -20,6 +20,16 @@
             <label for="body" class="form-label">Body of the blog post</label>
             <textarea class="form-control" rows="6" th:field="*{body}">All text goes here. At this time no formatting is allowed besides line breaks.</textarea>
         </div>
+<!--        <input hidden th:field="*{book}">-->
+        <div class="mb-3">
+            <label for="book" class="form-label">What book is this about?</label>
+            <select class="form-control" name="book" id="book">
+                <option value="0">select book</option>
+                <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
+            </select>
+        </div>
+<!--        <h4>Here are books you can write about:</h4>-->
+        <div id="results1" class="row d-none"></div>
 
 <!--    Added code here -->
 <!--        <div class="mb-3">-->
@@ -30,24 +40,28 @@
         <button class="btn btn-secondary text-center">Submit Post</button>
     </form></div>
 
-<div th:if="${post.id != 0}">
-    <h1>Use the form below to edit an existing post!</h1>
-    <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">
-        <div class="mb-3">
-            <label for="title" class="form-label">Title of the post</label>
-            <input class="form-control" type="text" th:field="*{title}">
-        </div>
-        <div class="mb-3">
-            <label for="body" class="form-label">Body of the blog post</label>
-            <textarea class="form-control" rows="6" th:field="*{body}"></textarea>
-            <!--            <input hidden id="id" name="id" th:value="${post.id}">-->
-        </div>
-        <button class="btn btn-secondary text-center">Submit Post</button>
-    </form>
-</div>
+<!--<div th:if="${post.id != 0}">-->
+<!--    <h1>Use the form below to edit an existing post!</h1>-->
+<!--    <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">-->
+<!--        <div class="mb-3">-->
+<!--            <label for="title" class="form-label">Title of the post</label>-->
+<!--            <input class="form-control" type="text" th:field="*{title}">-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <label for="body" class="form-label">Body of the blog post</label>-->
+<!--            <textarea class="form-control" rows="6" th:field="*{body}"></textarea>-->
+<!--            &lt;!&ndash;            <input hidden id="id" name="id" th:value="${post.id}">&ndash;&gt;-->
+<!--        </div>-->
+<!--        <button class="btn btn-secondary text-center">Submit Post</button>-->
+<!--    </form>-->
+<!--</div>-->
 
 
 </div>
+
+
 <footer th:replace="partials.html::footer"></footer>
+
+<script th:replace="partials.html::bookdisplay(${books})"></script>
 </body>
 </html>
