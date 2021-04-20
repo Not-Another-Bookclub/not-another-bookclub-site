@@ -26,7 +26,7 @@
                         <a class="nav-link active" href="/posts">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/posts/create">Create</a>
+                        <a class="nav-link" href="/bookclubs/create">Create</a>
                     </li>
 <!--                    <li class="nav-item dropdown">-->
 <!--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
@@ -285,7 +285,7 @@
     <input type="text" id="search title" placeholder="Title">
     <label for="search Author"></label>
     <input type="text" id="search Author" placeholder="Author">
-    <button id = "button" type="button">Search for books!</button>
+    <button id = "button" type="button" class="btn btn-primary">Search for books!</button>
     <div id="results" class="row"></div>
 </div>
 
@@ -444,22 +444,29 @@ for(let i = 0; i < idsearch.length; i++) {
 //     $(this).next().next().slideToggle(1000)}
 
 setTimeout(function() {
+        if (typeof idsearch == "string")
+        {$('body :not(script)').contents().filter(function () {
+            return this.nodeType === 3;
+        }).replaceWith(function () {
+            return this.nodeValue.replace(idsearch, findreplace[idsearch])})
+        }
+        else {
         for (let i = 0; i < idsearch.length; i++) {
             $('body :not(script)').contents().filter(function () {
                 return this.nodeType === 3;
             }).replaceWith(function () {
                 return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
             })
-
+        }
             // $("* :contains(idsearch[i])").each(function() {
             //     var replaced = $(this).html().replace(/idsearch[i]/g, findreplace[idsearch[i]])
             //     $(this).html(replaced);
             // })
         }
-        document.getElementsByClassName('book-selector').click(function (e){
-            e.preventDefault()
-            document.getElementById('book').value = this.id;
-        })
+        // document.getElementsByClassName('book-selector').click(function (e){
+        //     e.preventDefault()
+        //     document.getElementById('book').value = this.id;
+        // })
         }
 , 500)
 </script>
