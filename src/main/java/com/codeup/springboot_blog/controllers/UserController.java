@@ -72,4 +72,10 @@ public class UserController {
         userDao.save(user);
         return "redirect:/profile/" + user.getUsername();
     }
+
+    @GetMapping("/forgot-username")
+    public String forgotUsername(){
+
+        return "users/forgot-username";
+    }
 }
