@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+
+    <title th:text="${title}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="keys.js"></script>
+
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 75%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        let map;
+
+
+        function initMap() {
+            // map options
+            map = new google.maps.Map(document.getElementById("map"), {
+                // key: mapsJSKey,
+
+                center: {lat: 29.424349, lng: -98.491142},
+                zoom: 10,
+            });
+
+            // add marker
+            var marker = new  google.maps.Marker({
+                position:{lat: 29.4268, lng: -98.4896}
+            })
+
+        }
+    </script>
+<!--    <iframe-->
+<!--            width="600"-->
+<!--            height="450"-->
+<!--            style="border:0"-->
+<!--            loading="lazy"-->
+<!--            allowfullscreen-->
+<!--            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBGKjDmn5N9eX-j8StrKhxGHLcMEFOWrzw-->
+<!--    &q=Space+Needle,Seattle+WA">-->
+<!--    </iframe>-->
+
+
+</head>
+<body>
+  <div>
+      <h1>Map</h1>
+  </div>
+
+  <div class="main-container" id="map"></div>
+
+
+
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_&callback=initMap&libraries=&v=weekly">
+      async
+  </script>
+
+
+
+
+<!--  <script src="https://maps.googleapis.com/maps/api/js?key=" + mapsJSKey + "&callback=initMap&libraries=&v=weekly"></script>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
