@@ -17,19 +17,19 @@
 
 <div class="d-flex justify-content-center">
     <div class="col-sm-8 col-md-6 p-3">
-        <form th:action="@{/sign-up}" method="POST" th:object="${user}">
-            <label class="form-label mt-3" for="username">Username</label>
-            <input class="form-control mb-3" th:field="*{username}" />
+        <form th:action="@{/forgot-username.html}" method="POST" th:object="${user}">
+<!--            <label class="form-label mt-3" for="username">Username</label>-->
+<!--            <input class="form-control mb-3" th:field="*{username}" />-->
 
             <label class="form-label mt-3" for="email">Email</label>
             <input class="form-control mb-3" th:field="*{email}" />
 
-            <label class="form-label mt-3" for="password">Password</label>
-            <input class="form-control mb-3" type="password" th:field="*{password}" />
+<!--            <label class="form-label mt-3" for="password">Password</label>-->
+<!--            <input class="form-control mb-3" type="password" th:field="*{password}" />-->
 
 
 
-            <button class="btn" type="submit">Sign me up!</button>
+            <button class="btn" type="submit">Submit!</button>
         </form>
 
     </div>
