@@ -3,25 +3,28 @@ package com.codeup.springboot_blog.controllers;
 import com.codeup.springboot_blog.daos.CommentRepository;
 import com.codeup.springboot_blog.daos.UserRepository;
 import com.codeup.springboot_blog.models.User;
+import com.codeup.springboot_blog.services.EmailService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.security.auth.callback.ConfirmationCallback;
 
 @Controller
 public class UserController {
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
     private CommentRepository commentDao;
+    private EmailService emailService;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, CommentRepository commentDao) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, CommentRepository commentDao, EmailService emailService) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.commentDao = commentDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/sign-up")
@@ -77,5 +80,19 @@ public class UserController {
     public String forgotUsername(){
 
         return "users/forgot-username";
+    }
+
+    @PostMapping("/forgot-username")
+    public String retrieveUsername(@RequestParam(name ="email") String email, Model model, User user){
+        User user1 = userDao.findByEmail(email);
+        if (user1 != null){
+            EmailService emailService = new EmailService();
+            emailService.prepareAndSend(email,"Here's your username",user1.getUsername());
+
+            model.addAttribute("email", user);
+
+        }
+
+        return "redirect:/login" ;
     }
 }
