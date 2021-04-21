@@ -8,23 +8,33 @@
 <body>
     <div th:replace="partials.html::navbar"></div>
     <div class="container">
-        <h1 th:text="${bookclub.name}"></h1>
-        <p th:text="${bookclub.description}"></p>
+        <div class="card card-body">
 
-        <div th:if="${user}">
-            <div th:if="${isAccepting}">
-                <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
-                    <input type="submit" class="btn btn-danger" value="Join">
-                </form>
+            <h1 th:text="${bookclub.name}"></h1>
+            <p th:text="${bookclub.description}"></p>
+            <p>
+                This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}" class="btn btn-info text-dark">View Profile</a>
+            </p>
+
+            <div th:if="${user}">
+                <hr>
+                <div th:if="${isAccepting}">
+                    <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
+                        <label for="join-club">Want to join?</label>
+                        <input type="submit" id="join-club" class="btn btn-danger" value="Join">
+                    </form>
+                </div>
             </div>
         </div>
 
-        <div th:if="${isOwner}">
+
+        <div th:if="${isOwner}" class="mt-3">
             <h2>You own this Bookclub</h2>
             <div th:each="user : ${pendingUsers}" class="text-center">
-                <div class="container">
-                    <h1 th:text="${user.username}"></h1>
-                    <p>Wants to join</p>
+                <div class="container card">
+                    <span>
+                        <h1 th:text="${user.username}"></h1>Wants to join
+                    </span>
 
                     <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
                         <input type="submit" class="btn btn-success" value="Accept">
@@ -35,10 +45,6 @@
                 </div>
             </div>
         </div>
-
-        <p>
-            This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}">profile</a>
-        </p>
 
 
 <!--    START THE PUBLIC/PRIVATE CONTINGENCY-->
@@ -150,11 +156,9 @@
                 <br>
             </div>
         </div>
-
+        <!--    END OF PUBLIC/PRIVATE CONTINGENCY-->
     </div>
 
-
-<!--    END OF PUBLIC/PRIVATE CONTINGENCY-->
 <footer th:replace="partials.html::footer"></footer>
 <div th:if="${isowner}"><script th:replace="partials.html::booksearchscript('bookclub',${bookclub.id})"></script></div>
 <script th:replace="partials.html::bookdisplay(${books})"></script>
