@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.codeup.springboot_blog.daos.UserRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -117,12 +118,25 @@ public class ProfileController {
 
 //        ALL BOOKS USER ADDED?
         List<UserBook> userbooks = userbookDao.findAllByUser(userInQuestion);
+        Collections.sort(userbooks);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
         List<String> books = new ArrayList<>();
+        List<String> startdates = new ArrayList<>();
+        List<String> finishdates = new ArrayList<>();
         for(UserBook userbook : userbooks) {
             books.add(userbook.getBook().getGoogleID());
+            if (userbook.getStarted() != null) {
+                startdates.add(sdf.format(userbook.getStarted()));
+            }
+            else {startdates.add("Not started yet");}
+            if (userbook.getFinished() != null) {
+            finishdates.add(sdf.format(userbook.getFinished()));}
+            else {finishdates.add("Not finished yet");}
         }
 
 //        PASS IN INFO
+        model.addAttribute("startdates",startdates);
+        model.addAttribute("finishdates",finishdates);
         model.addAttribute("name", userInQuestion.getUsername());
         model.addAttribute("ownedClubs", bookclubsOwned);
         model.addAttribute("memberClubs", holder);

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MeetingRepository extends JpaRepository<Meeting, Long> {
     List<Meeting> findAllByBookclubEquals(Bookclub bookclub);
+    Meeting findMeetingByBookclubEqualsAndBook_GoogleID(Bookclub bookclub, String googleID);
 }

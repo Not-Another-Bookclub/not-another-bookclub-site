@@ -12,7 +12,13 @@
 </head>
     <body>
         <!-- Button trigger modal -->
-        <button type="button" id="12e8PJ2T7sQC" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        <button type="button" id="target1" data-google-i-d="12e8PJ2T7sQC" class="btn bookbtn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+            Launch demo modal
+        </button>
+        <button type="button" id="target2" data-google-i-d="SOg0DAAAQBAJ" class="btn bookbtn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+            Launch demo modal
+        </button>
+        <button type="button" id="target3" data-google-i-d="OlCHcjX0RT4C" class="btn bookbtn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
             Launch demo modal
         </button>
 
@@ -23,7 +29,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="myModalLabel">Modal title</h5>
                         <br>
-                        <img src="/img/logo.png" id="modalImage">
+                        <div id="modalImage"><img src="/img/logo.png"></div>
 
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -45,9 +51,9 @@
         </div>
 
         <script>
-            const title = $('myModalLabel');
-            const modalImage = $('modalImage');
-            const body = $('modalBody');
+            const title = document.getElementById('myModalLabel');
+            const modalImage = document.getElementById('modalImage');
+            const body = document.getElementById('modalBody');
 
 
 
@@ -74,15 +80,19 @@
                         }
 
                         title.innerText = data.volumeInfo.title + " - " + author;
-                        modalImage.outerHTML = '<img src="' + thumbnail + '"  id="modalImage">'
+                        modalImage.innerHTML = '<img src="' + thumbnail + '">'
                         body.innerText = data.volumeInfo.description;
+                    //    "<img src=\"/img/logo.png\" id=\"modalImage\">"
                     },
 
                     type: 'Get'
 
                 });
             }
-            $('.btn').click(modalPopulate(this.id))
+            $('.bookbtn').click(function() {
+                modalPopulate(this.dataset.googleID);
+                console.log(this);
+            })
         </script>
 
 

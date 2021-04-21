@@ -136,13 +136,13 @@
 <div id="dateTimePicker" th:fragment="dateTimePickermodal">
 
 
-<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+<a href="#datetimeModal" role="button" class="btn" data-bs-toggle="modal">Launch demo modal</a>
 
 <!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="datetimeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="datetimeModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Modal header</h3>
+        <h3 id="datetimeModalLabel">Modal header</h3>
     </div>
     <div class="modal-body">
         <div id="datetimepicker1" class="input-append date">
@@ -333,6 +333,35 @@
     <div id="results" class="row"></div>
 </div>
 
+<!-- Modal -->
+<div th:fragment="modal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+                <br>
+                <div id="modalImage"><img src="/img/logo.png"></div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+
+
+            </div>
+
+            <form action="/book/add" method="Post">
+                <label for="startDate" id="startDateText">Currently set to: </label> <label for="finishDate" id="finishDateText">Currently set to: </label>
+                <input type="date" id="startDate" name="startDate"><input type="date" id="finishDate" name="finishDate">
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <script th:fragment="booksearchscript(path,bookclubid)" th:inline="javascript">
 
@@ -423,8 +452,10 @@
 </script>
 <script th:fragment="bookdisplay(arrayofbooks)" th:inline="javascript">
     let idsearch = [[${arrayofbooks}]]
+    let startdates = [[${startdates}]]
+    let finishdates = [[${finishdates}]]
     let findreplace = {}
-function googleIdSearch(idSearch){
+function googleIdSearch(idSearch,startDate,finishDate){
 // console.log("This function runs");
 // let idSearch = document.getElementById('search google_id').value
 let results = document.getElementById('results1')
@@ -447,14 +478,18 @@ success: function (data) {
     console.log(thumbnail);
     if (!data.volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
     else {author = data.volumeInfo.authors[0]}
+    if (startDate === null) {startDate = "Not yet started."};
+    if (finishDate === null) {finishDate = "Not finished yet."}
 
 var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'
     // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
-    html += "<div class='card-top1'><img src='" + thumbnail + "' alt='Book Cover'>"
+    html += "<img src='" + thumbnail + "' alt='Book Cover'>"
     html += "<div class='card-body'>"
-    html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5></div></div"
+    html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5><br>"
+    html += "<h6> Started reading: "+ startDate +"</h6>"
+    html += "<h6> Finished reading: "+ finishDate +"</h6></div>"
     html += '<div><a href="#" class="btn btn-primary" id="'+ idSearch +'">Remove from reading list</a>'
-    html += '<a href="" class="btn book-selector btn-primary" id="'+ idSearch + '">Select this book</a></div></div>'
+    html += '<button href="" class="btn book-selector btn-primary" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-finishdate="'+ finishDate +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div>'
     // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
 results.innerHTML += html;
@@ -466,7 +501,7 @@ type: 'Get',
 }
 )
 }
-if (typeof idsearch == "string") {googleIdSearch(idsearch);}
+if (typeof idsearch == "string") {googleIdSearch(idsearch,startdates,finishdates);}
     // console.log("This book is a string!")
     // $(".card-bottom1").hide()
     // console.log("Firing after the hide from string!")
@@ -478,7 +513,7 @@ if (typeof idsearch == "string") {googleIdSearch(idsearch);}
     // $(this).next().slideToggle(1000)})}
 else {
 for(let i = 0; i < idsearch.length; i++) {
-    googleIdSearch(idsearch[i]);
+    googleIdSearch(idsearch[i],startdates[i],finishdates[i]);
 }
 }
 // console.log("These books are a list!")
@@ -491,12 +526,55 @@ for(let i = 0; i < idsearch.length; i++) {
 //     $(".card-bottom1").not(thisCardBottom).slideUp(500)
 //     $(this).next().next().slideToggle(1000)}
 
+    const title = document.getElementById('myModalLabel');
+    const modalImage = document.getElementById('modalImage');
+    const body = document.getElementById('modalBody');
+    const startdatetext = document.getElementById('startDateText');
+    const finishdatetext = document.getElementById('finishDateText');
+
+
+
+    function modalPopulate(idSearch,start,finish){
+        $.ajax({
+            url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+            dataType: 'json',
+            success: function (data) {
+                let thumbnail
+                let author
+
+                if (!data.volumeInfo.hasOwnProperty('imageLinks')) {
+                    thumbnail = "http://localhost:8080/img/logo.png"
+                } else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {
+                    thumbnail = "http://localhost:8080/img/logo.png"
+                } else {
+                    thumbnail = data.volumeInfo.imageLinks.thumbnail
+                }
+                console.log(thumbnail);
+                if (!data.volumeInfo.hasOwnProperty('authors')) {
+                    author = "Unknown or not listed"
+                } else {
+                    author = data.volumeInfo.authors[0]
+                }
+
+                title.innerText = data.volumeInfo.title + " - " + author;
+                modalImage.innerHTML = '<img src="' + thumbnail + '">'
+                body.innerHTML = data.volumeInfo.description;
+                startdatetext.innerText = "Currently set to: " + start;
+                finishdatetext.innerText = "Currently set to: " + finish;
+            },
+
+            type: 'Get'
+
+        });
+    }
+
 setTimeout(function() {
         if (typeof idsearch == "string")
         {$('body :not(script)').contents().filter(function () {
             return this.nodeType === 3;
         }).replaceWith(function () {
             return this.nodeValue.replace(idsearch, findreplace[idsearch])})
+
         }
         else {
         for (let i = 0; i < idsearch.length; i++) {
@@ -506,6 +584,7 @@ setTimeout(function() {
                 return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
             })
         }
+
             // $("* :contains(idsearch[i])").each(function() {
             //     var replaced = $(this).html().replace(/idsearch[i]/g, findreplace[idsearch[i]])
             //     $(this).html(replaced);
@@ -515,7 +594,11 @@ setTimeout(function() {
         //     e.preventDefault()
         //     document.getElementById('book').value = this.id;
         // })
-        }
+        $('.book-selector').click(function() {
+            // console.log(this);
+            modalPopulate(this.dataset.googleID, this.dataset.startdate, this.dataset.finishdate)
+})
+    }
 , 500)
 </script>
 </div>

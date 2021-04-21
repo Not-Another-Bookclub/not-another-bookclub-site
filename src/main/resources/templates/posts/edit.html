@@ -32,6 +32,8 @@
         <button class="btn btn-secondary text-center">Submit Post</button>
     </form>
 </div>
+<div th:replace="partials.html::modal"></div>
+
 <footer th:replace="partials.html::footer"></footer>
 <script th:replace="partials.html::bookdisplay(${books})"></script>
 </body>
