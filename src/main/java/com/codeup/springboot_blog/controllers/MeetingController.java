@@ -49,6 +49,7 @@ public class MeetingController {
     public String showOneMeeting(@PathVariable long bookclubid, @PathVariable long meetingid, Model model){
         Meeting meeting = meetingDao.getOne(meetingid);
         Bookclub bookclub = bookclubDao.getOne(bookclubid);
+        Boolean isOwner = false;
         if(meeting.getBookclub().getId() != bookclub.getId()) {
             model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
                     "  That meeting and bookclub do not match, please check your link or try again.</div>");
@@ -56,9 +57,15 @@ public class MeetingController {
             return "bookclubs/index";
         }
         User user = new User();
+//        IF YOU ARE LOGGED IN
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
+
+            if(bookclub.getOwner().getId() == user.getId()){
+                isOwner = true;
+            }
+
             List<BookclubMembership> memberships = bookclubmembershipDao.findBookclubMembershipsByUser(user);
             ArrayList<Bookclub> holder = new ArrayList<>();
             BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
@@ -83,6 +90,7 @@ public class MeetingController {
 
         model.addAttribute("meeting", meeting);
         model.addAttribute("bookclub", bookclub);
+        model.addAttribute("isOwner", isOwner);
         return "meeting";
     }
 
