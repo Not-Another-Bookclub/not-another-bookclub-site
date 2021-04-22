@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Add a geocoder</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+    <script src="keys.js"></script>
+
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        .marker{
+            /*background-image: url('mapbox-icon.png');*/
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .mapboxgl-popup{
+            max-width: 200px;
+        }
+        .mapboxgl-popup-content{
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+
+</head>
+<body>
+<!-- Load the `mapbox-gl-geocoder` plugin. -->
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+
+<!-- Promise polyfill script is required -->
+<!-- to use Mapbox GL Geocoder in IE 11. -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+    <div>
+        <h1>Mapbox Map</h1>
+    </div>
+
+<br>
+
+<br>
+    <div id='map' style='width: 100%; height: 600px;'></div>
+
+<script>
+    mapboxgl.accessToken = mapboxToken;
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-98.4916, 29.4252],
+        zoom: 13
+    });
+
+    // Add the control to the map.
+    map.addControl(
+        new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+        })
+    );
+
+    var geojson = {
+        type: 'FeatureCollection',
+        features: [{
+            type: 'Feature',
+            geometry:{
+                type: 'Point',
+                coordinates: [-98.4896 , 29.4268 ]
+            },
+            properties:{
+                title: 'Mapbox',
+                description: 'CodeUp'
+            }
+        }]
+    }
+
+        // add markers to map
+    geojson.features.forEach(function (marker){
+
+        // create a HTML element for each feature
+        var el = document.createElement('div');
+        el.className = 'marker';
+
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+        .setlngLat(marker.geometry.coordinates)
+            .setPopup(new mapboxgl.Popup({offset:25})
+            .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description +'</p>'))
+        .addTo(map);
+
+
+
+    });
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+
+
+<!--    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>-->
+<!--    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />-->
+
+<!--</head>-->
+<!--<style>-->
+<!--    body { margin: 0; padding: 0; }-->
+<!--    #map { position: absolute; top: 0; bottom: 0; width: 100%; }-->
+<!--</style>-->
+
+
+<!--<body>-->
+
+
+
+
+
+
+<!--    <div>-->
+<!--        <h1>Mapbox test page</h1>-->
+<!--    </div>-->
+
+
+
+
+
+<!--    <script>-->
+
+
+<!--        var map = new mapboxgl.Map({-->
+<!--            container: 'map',-->
+<!--            style: 'mapbox://styles/mapbox/streets-v11',-->
+<!--            center: [-74.5, 40], // starting position-->
+<!--            zoom: 9 // starting zoom-->
+<!--        });-->
+
+<!--        / Add the control to the map.-->
+<!--        map.addControl(-->
+<!--            new MapboxGeocoder({-->
+<!--                accessToken: mapboxgl.accessToken,-->
+<!--                mapboxgl: mapboxgl-->
+<!--            })-->
+<!--        );-->
+
+
+<!--        // Add zoom and rotation controls to the map.-->
+<!--        map.addControl(new mapboxgl.NavigationControl());-->
+
+<!--        // Change the cursor to a pointer when the mouse is over the places layer.-->
+<!--        map.on('mouseenter', 'places', function () {-->
+<!--            map.getCanvas().style.cursor = 'pointer';-->
+<!--        });-->
+
+<!--        // Change it back to a pointer when it leaves.-->
+<!--        map.on('mouseleave', 'places', function () {-->
+<!--            map.getCanvas().style.cursor = '';-->
+<!--        });-->
+
+
+
+
+<!--    </script>-->
+
+<!--        </body>-->
+<!--</html>-->
