@@ -120,21 +120,31 @@ public class ProfileController {
         List<UserBook> userbooks = userbookDao.findAllByUser(userInQuestion);
         Collections.sort(userbooks);
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
+        SimpleDateFormat html = new SimpleDateFormat("yyyy-MM-dd");
         List<String> books = new ArrayList<>();
         List<String> startdates = new ArrayList<>();
+        List<String> startdateshtml = new ArrayList<>();
         List<String> finishdates = new ArrayList<>();
+        List <String> finishdateshtml = new ArrayList<>();
+        Date date = new Date();
         for(UserBook userbook : userbooks) {
             books.add(userbook.getBook().getGoogleID());
             if (userbook.getStarted() != null) {
                 startdates.add(sdf.format(userbook.getStarted()));
+                startdateshtml.add(html.format(userbook.getStarted()));
             }
-            else {startdates.add("Not started yet");}
+            else {startdates.add("Not started yet");
+            startdateshtml.add(html.format(date));}
             if (userbook.getFinished() != null) {
-            finishdates.add(sdf.format(userbook.getFinished()));}
-            else {finishdates.add("Not finished yet");}
+            finishdates.add(sdf.format(userbook.getFinished()));
+            finishdateshtml.add(html.format(userbook.getFinished()));}
+            else {finishdates.add("Not finished yet");
+            finishdateshtml.add(html.format(date));}
         }
 
 //        PASS IN INFO
+        model.addAttribute("startdateshtml",startdateshtml);
+        model.addAttribute("finishdateshtml", finishdateshtml);
         model.addAttribute("startdates",startdates);
         model.addAttribute("finishdates",finishdates);
         model.addAttribute("name", userInQuestion.getUsername());

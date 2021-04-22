@@ -124,17 +124,25 @@ public class BookclubController {
         List<BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
         Collections.sort(clubbooks);
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
+        SimpleDateFormat html = new SimpleDateFormat("yyyy-MM-dd");
         List<String> books = new ArrayList<>();
         List<String> startdates = new ArrayList<>();
+        List<String> startdateshtml = new ArrayList<>();
         List<String> finishdates = new ArrayList<>();
+        List <String> finishdateshtml = new ArrayList<>();
+        Date date = new Date();
         for (BookclubBook clubbook : clubbooks) {
             books.add(clubbook.getBook().getGoogleID());
             if (clubbook.getStartDate() != null) {
-            startdates.add(sdf.format(clubbook.getStartDate()));}
-            else {startdates.add("Not started yet");}
-            if(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub, clubbook.getBook().getGoogleID()).getTimedate() != null)
-            {finishdates.add(sdf.format(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub,clubbook.getBook().getGoogleID()).getTimedate()));}
-            else {finishdates.add("Not finished yet");}
+            startdates.add(sdf.format(clubbook.getStartDate()));
+            startdateshtml.add(html.format(clubbook.getStartDate()));}
+            else {startdates.add("Not started yet");
+            startdateshtml.add(html.format(date));}
+            if(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub, clubbook.getBook().getGoogleID()) != null)
+            {finishdates.add(sdf.format(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub,clubbook.getBook().getGoogleID()).getTimedate()));
+            finishdateshtml.add(html.format(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub,clubbook.getBook().getGoogleID()).getTimedate()));}
+            else {finishdates.add("Not finished yet");
+            finishdateshtml.add(html.format(date));}
         }
 
 //        GET ALL MEETINGS ASSOCIATED WITH THIS CLUB
@@ -152,6 +160,8 @@ public class BookclubController {
         }
 
 //        PASS INFO INTO THYMELEAF
+        model.addAttribute("startdateshtml", startdateshtml);
+        model.addAttribute("finishdateshtml", finishdateshtml);
         model.addAttribute("startdates", startdates);
         model.addAttribute("finishdates", finishdates);
         model.addAttribute("posts", posts);
