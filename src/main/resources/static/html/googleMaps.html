@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
 
@@ -29,7 +27,12 @@
     </style>
     <script>
         let map;
-
+        google.maps.Map(document.getElementById('map'), options);
+        // listen for click on map
+        google.maps.event.addListener(map, 'click',
+        function (event){
+            addMarker({coords: event.latLng});
+        });
 
         function initMap() {
             // map options
@@ -40,11 +43,56 @@
                 zoom: 10,
             });
 
-            // add marker
-            var marker = new  google.maps.Marker({
-                position:{lat: 29.4268, lng: -98.4896}
-            })
+            // array of markers
 
+            var markers =[
+                {
+                    coords: {lat: 29.4268, lng: -98.4896},
+                    iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                    content:'<h1>CodeUp</h1>'
+                },
+                {
+                    coords: {lat: 29.4260, lng: -98.4861},
+                    content:'<h1>Alamo</h1>'
+
+                },
+
+            ];
+
+            // Loop through markers
+            for(var i = 0; i< markers.length; i++) {
+                addMarker(markers[i]);
+            }
+
+
+
+            addMarker({
+                coords: {lat: 29.4260, lng: -98.4861},
+                content:'<h1>Alamo</h1>'
+            });
+
+
+            // add marker
+            function addMarker(props ) {
+                var marker = new google.maps.Marker({
+                    position: props.coords,
+                    map: map,
+                });
+                if(props.iconImage){
+                    // set icon image
+                    marker.setIcon(props.iconImage);
+                }
+
+                if(props.content){
+                    var infoWindow = new google.maps.InfoWindow({
+                        content:props.content
+                    });
+
+                    marker.addListener('click', function(){
+                        infoWindow.open(map, marker);
+                    })
+                }
+            }
         }
     </script>
 <!--    <iframe-->
@@ -69,7 +117,7 @@
 
 
   <script
-      src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_&callback=initMap&libraries=&v=weekly">
+      src="https://maps.googleapis.com/maps/api/js?key=Your_API_Key_here_&callback=initMap&libraries=&v=weekly">
       async
   </script>
 
