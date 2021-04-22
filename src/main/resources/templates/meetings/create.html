@@ -16,7 +16,7 @@
             <div class="card-header">
                 <h3>Fill out the details</h3>
             </div>
-            <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" th:object="${meeting}" class="card-body">
+            <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" th:object="${meeting}" th:method="post"  class="card-body">
 
                 <div class="mb-3">
                     <label for="location" class="form-label">Location:</label>
@@ -36,12 +36,22 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="address" class="form-label">City:</label>
+                    <label for="city" class="form-label">City:</label>
                     <input type="text" th:field="*{city}" class="form-control">
                 </div>
 
                 <div class="mb-3">
-                    <label for="address" class="form-label">Zip Code:</label>
+                    <label for="day" class="form-label">Date:</label>
+                    <input type="date" name="day" id="day" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="time" class="form-label">Date:</label>
+                    <input type="time" name="time" id="time" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="zipPlusFour" class="form-label">Zip Code:</label>
                     <input type="text" th:field="*{zipPlusFour}" class="form-control">
                 </div>
 
@@ -59,7 +69,7 @@
 
     </div>
 
-    <footer th:replace="partials.html::footer"></footer>
-    <script th:replace="partials.html::bookdisplay(${books})"></script>
+<!--    <footer th:replace="partials.html::footer"></footer>-->
+<!--    <script th:replace="partials.html::bookdisplay(${books})"></script>-->
 </body>
 </html>

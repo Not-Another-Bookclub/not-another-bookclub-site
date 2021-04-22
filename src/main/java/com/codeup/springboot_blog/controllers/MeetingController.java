@@ -9,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -91,6 +95,7 @@ public class MeetingController {
             books.add(bookclubook.getBook().getGoogleID());
         }
 
+
         Meeting meeting = new Meeting();
         meeting.setTimedate(new Date(Calendar.getInstance().getTime().getTime()));
         meeting.setBookclub(bookclub);
@@ -108,11 +113,31 @@ public class MeetingController {
             @PathVariable long bookclubId,
             @RequestParam (name="location") String location,
             @RequestParam (name="book") String book,
-            Model model){
+            @RequestParam (name="day") String day,
+            @RequestParam (name="time") String time,
+            Model model) throws ParseException {
+
 
         Location newLocation = Location.valueOf(location);
+        Bookclub bookclub = bookclubDao.getOne(bookclubId);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        String convertCurrentDate = day;
+        String convertTime = time;
+        Date date = new Date();
+        date = df.parse(convertCurrentDate + " " + convertTime);
+
+        System.out.println(time);
+
+        meeting.setLocation(newLocation);
+        meeting.setBookclub(bookclub);
+        meeting.setTimedate(date);
+
+        System.out.println(book);
+
         meeting.setLocation(newLocation);
 
+        System.out.println(bookDao.findBookByGoogleIDEquals(book));
         meeting.setBook(bookDao.findBookByGoogleIDEquals(book));
 
 
