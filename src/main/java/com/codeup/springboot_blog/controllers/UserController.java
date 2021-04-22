@@ -88,8 +88,9 @@ public class UserController {
 //        ModelAndView modelAndView1 = new ModelAndView("viewPage");
         User user1 = userDao.findByEmail(email);
         if (user1 != null){
-            EmailService emailService = new EmailService();
-            emailService.prepareAndSend(email,"Here's your username",user1.getUsername());
+            System.out.println(email);
+            System.out.println(user1.getUsername());
+            emailService.prepareAndSend(email,user1.getUsername(),user1.getUsername());
 
             model.addAttribute("email", user1.getUsername());
 
