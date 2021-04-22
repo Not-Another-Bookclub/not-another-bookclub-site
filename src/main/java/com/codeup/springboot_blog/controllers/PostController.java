@@ -120,7 +120,7 @@ public class PostController {
     post.setCreateDate(new Date(Calendar.getInstance().getTime().getTime()));
     post.setModifyDate(new Date(Calendar.getInstance().getTime().getTime()));
     postDao.save(post);
-    emailService.prepareAndSend(post, "Your post was successfully posted!", "You can view it at http://localhost:8080/posts/" + post.getId());
+//    emailService.prepareAndSend(post, "Your post was successfully posted!", "You can view it at http://localhost:8080/posts/" + post.getId());
     model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
             "  The post was added successfully.</div>");
     return "redirect:/bookclubs/" + id +"/posts/" + post.getId();

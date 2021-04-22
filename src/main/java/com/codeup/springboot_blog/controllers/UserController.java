@@ -3,25 +3,29 @@ package com.codeup.springboot_blog.controllers;
 import com.codeup.springboot_blog.daos.CommentRepository;
 import com.codeup.springboot_blog.daos.UserRepository;
 import com.codeup.springboot_blog.models.User;
+import com.codeup.springboot_blog.services.EmailService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.security.auth.callback.ConfirmationCallback;
 
 @Controller
 public class UserController {
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
     private CommentRepository commentDao;
+    private EmailService emailService;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, CommentRepository commentDao) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, CommentRepository commentDao, EmailService emailService) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.commentDao = commentDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/sign-up")
@@ -71,5 +75,31 @@ public class UserController {
         user.setId(loggedin.getId());
         userDao.save(user);
         return "redirect:/profile/" + user.getUsername();
+    }
+
+    @GetMapping("/forgot-username")
+    public String forgotUsername(){
+
+        return "users/forgot-username";
+    }
+
+    @PostMapping("/forgot-username")
+    public String retrieveUsername(@RequestParam(name ="email") String email, Model model, User user){
+//        ModelAndView modelAndView1 = new ModelAndView("viewPage");
+        User user1 = userDao.findByEmail(email);
+        if (user1 != null){
+            System.out.println(email);
+            System.out.println(user1.getUsername());
+            emailService.prepareAndSend(email,user1.getUsername(),user1.getUsername());
+
+            model.addAttribute("email", user1.getUsername());
+            model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
+                    "  The email was successfully sent. </div>");
+
+        }
+//        modelAndView1.addObject("message",);
+//        model.addAttribute("email", email);
+
+        return "users/forgot-username";
     }
 }
