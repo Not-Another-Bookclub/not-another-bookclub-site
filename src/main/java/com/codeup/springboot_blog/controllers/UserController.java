@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.security.auth.callback.ConfirmationCallback;
 
@@ -84,6 +85,7 @@ public class UserController {
 
     @PostMapping("/forgot-username")
     public String retrieveUsername(@RequestParam(name ="email") String email, Model model, User user){
+//        ModelAndView modelAndView1 = new ModelAndView("viewPage");
         User user1 = userDao.findByEmail(email);
         if (user1 != null){
             EmailService emailService = new EmailService();
@@ -92,7 +94,8 @@ public class UserController {
             model.addAttribute("email", user);
 
         }
+//        modelAndView1.addObject("message",);
 
-        return "redirect:/login" ;
+        return "users/forgot-username";
     }
 }
