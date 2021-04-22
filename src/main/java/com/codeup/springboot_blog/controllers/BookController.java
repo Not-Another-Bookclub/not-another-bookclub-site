@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -39,12 +40,12 @@ public class BookController {
         this.bookclubmembershipDao = bookclubmembershipDao;
     }
 
-    @GetMapping("book/add")
+    @GetMapping("/book/add")
     public String addBookRender(Model model) {
         return "posts/index";
     }
 
-    @PostMapping("book/add")
+    @PostMapping("/book/add")
     public String addBook(@RequestParam(name = "path") String path, @RequestParam(name = "book") String google_id, @RequestParam(name = "bookclubid") Long bookclubid, Model model) {
         User loggedin;
         Book book;
@@ -99,4 +100,37 @@ public class BookController {
                 "  <strong>Warning!</strong> Encountered an unexpected situation - book not saved. Please contact the dev team. (not really this isn't implemented yet).</div>");
             return "users/login";}
     }
+
+    @PostMapping("/bookclubs/{id}/book/edit")
+    public String bookEditBookclub(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "book") String googleID, @PathVariable long id,  Model model) {
+        try{BookclubBook bookclubBook = new BookclubBook();
+        bookclubBook = bookclubBookDao.getBookclubBookByBook_GoogleIDAndBookclub(googleID, bookclubDao.getOne(id));
+        bookclubBook.setBook(bookDao.findBookByGoogleIDEquals(googleID));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+//        DateTimeFormatter dtf = new DateTimeFormatter("yyyy-MM-dd HH:mm");
+        bookclubBook.setStartDate(sdf.parse(startDate + " 12:01"));
+        bookclubBook.setBookclub(bookclubDao.getOne(id));
+        bookclubBookDao.save(bookclubBook);
+        return "redirect:/bookclubs/"+id;}
+        catch (ParseException e) {
+        throw new RuntimeException("Error parsing date input");
+        }
+    }
+
+    @PostMapping("/pro/{id}/book/edit")
+    public String addBookRender(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "finishDate") String finishDate, @RequestParam(name = "book") String googleID, @PathVariable long id,  Model model) {
+        try{UserBook bookclubBook = new UserBook();
+            bookclubBook = userbookDao.findUserBookByBook_GoogleIDAndUserIs(googleID, userDao.getOne(id));
+            bookclubBook.setBook(bookDao.findBookByGoogleIDEquals(googleID));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+//        DateTimeFormatter dtf = new DateTimeFormatter("yyyy-MM-dd HH:mm");
+            bookclubBook.setStarted(sdf.parse(startDate + " 12:01"));
+            bookclubBook.setFinished(sdf.parse(finishDate + " 12:01"));
+            userbookDao.save(bookclubBook);
+            return "redirect:/pro/"+id;}
+        catch (ParseException e) {
+            throw new RuntimeException("Error parsing date input");
+        }
+    }
+
 }

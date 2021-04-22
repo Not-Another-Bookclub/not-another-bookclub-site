@@ -141,6 +141,7 @@
     <br>
 </div>
 </div>
+<div th:replace="partials.html::usermodal"></div>
 <footer th:replace="partials.html::footer"></footer>
 <script th:replace="partials.html::bookdisplay(${books})"></script>
 <div th:if="${isowner}"> <script th:replace="partials.html::booksearchscript(user,1)"></script></div>

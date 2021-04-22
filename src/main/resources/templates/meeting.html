@@ -26,6 +26,8 @@
             <button class="btn btn-danger">Delete?</button>
         </div>
     </div>
+    <div th:replace="partials.html::bookclubmodal"></div>
+
     <footer th:replace="partials.html::footer"></footer>
 <script th:replace="partials.html::bookdisplay(${meeting.book.googleID})"></script>
 </body>

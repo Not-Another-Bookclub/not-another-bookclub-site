@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "users_books")
-public class UserBook {
+public class UserBook implements Comparable<UserBook>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -31,6 +31,10 @@ public class UserBook {
     private Date finished;
 
     public UserBook () {};
+
+    public int compareTo(UserBook userbook) {
+        return userbook.started.compareTo(this.started);
+    }
 
     public long getId() {
         return id;

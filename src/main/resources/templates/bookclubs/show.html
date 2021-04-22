@@ -56,8 +56,8 @@
     <h1>Here's a lit of meetings, some of which are in the past, but Ted hasn't figured out the logic to call that out yet.</h1>
 
     <ul>
-        <li th:each="meeting : ${meetings}"><span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span> at a
-            <span th:text="${meeting.location}"></span> to discuss <span th:text="${meeting.book.googleID}"></span> </li>
+        <li th:each="meeting : ${meetings}"><a th:href="@{/bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__}"> <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span> at a
+            <span th:text="${meeting.location}"></span> to discuss <span th:text="${meeting.book.googleID}"></span></a> </li>
     </ul>
 
     <h1>Here's a list of posts for <span th:text="${bookclub.name}"></span>:</h1>
@@ -66,7 +66,7 @@
         <li th:each="post : ${posts}"> <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}">
             <span th:text="${post.title}"></span></a> about the book: <span th:text="${post.book.googleID}"></span> - <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)</li>
     </ul>
-    <p>Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</p>
+    <p>Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</a></p>
 
 <h1>Here's the books on the <span th:text="${bookclub.name}"></span> reading list.</h1>
     <div id="results1" class="row"></div>
@@ -75,6 +75,8 @@
 
 
 <div th:if="${isOwner}"><div th:replace="partials.html :: booksearch"></div></div>
+
+<div th:replace="partials.html::bookclubmodal"></div>
 
     <br>
     <br>
