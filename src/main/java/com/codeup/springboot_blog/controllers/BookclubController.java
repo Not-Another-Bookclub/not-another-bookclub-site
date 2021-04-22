@@ -70,11 +70,23 @@ public class BookclubController {
         User user = new User();
         Boolean isNotMember = true;
         Boolean isOwner = false;
+        Boolean isAccepting = true;
+        Boolean isPrivate = false;
+        Boolean isActiveUser = false;
+        Boolean isNotActiveUser = true;
         ArrayList<Bookclub> holder = new ArrayList<>();
         ArrayList<User> pendingHolder = new ArrayList<>();
         Bookclub bookclub = bookclubDao.getOne(id);
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         BookclubMembershipStatus pending = BookclubMembershipStatus.valueOf("PENDING");
+
+        if(bookclub.isAccepting_members() == false){
+            isAccepting = false;
+        }
+        if(bookclub.isIs_private() == true){
+            isPrivate = true;
+        }
+
 
 //        THIS BLOCK HANDLES IF USER IS LOGGED IN - BIG SECTION
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
@@ -83,6 +95,14 @@ public class BookclubController {
 
 //            ALL MEMBERSHIPS LOGGED IN USER HAS
             ArrayList<BookclubMembership> bookClubMemberships = bookclubmembershipDao.findBookclubMembershipsByUser(user);
+            ArrayList<Bookclub> checking = new ArrayList<>();
+            for(BookclubMembership membership : bookClubMemberships){
+                if(membership.getBookclub() == bookclub){
+                    if(membership.getStatus() == active){
+                        isActiveUser = true;
+                    }
+                }
+            }
 
 //            IF LOGGED IN USER OWNS THE BOOKCLUB WE ARE VIEWING
             if (bookclub.getOwner().getId() == user.getId()) {
@@ -172,6 +192,10 @@ public class BookclubController {
         model.addAttribute("members", members);
         model.addAttribute("books", books);
         model.addAttribute("meetings", meetings);
+        model.addAttribute("isAccepting", isAccepting);
+        model.addAttribute("isPrivate", isPrivate);
+        model.addAttribute("isActiveUser", isActiveUser);
+        model.addAttribute("isNotActiveUser", isNotActiveUser);
 
         return "bookclubs/show";
     }
@@ -202,7 +226,7 @@ public class BookclubController {
 //        SEND EM BACK TO THE CLUB
         Bookclub bookclub = bookclubDao.getOne(id);
         model.addAttribute("bookclub", bookclub);
-        return "bookclubs/show";
+        return "redirect:/bookclubs/" + id;
     }
 
     @PostMapping("bookclubs/invite/accept/{id}/{prospectiveUserId}")

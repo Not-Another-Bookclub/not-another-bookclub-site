@@ -8,6 +8,10 @@
 <body>
     <nav th:replace="partials.html :: navbar"></nav>
     <div class="container">
+        <div th:if="${isOwner}">
+            you own this. Wanna edit it?
+            <a class="btn btn-warning" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit</a>
+        </div>
     <h2>Detailed information about this meeting for the <span th:text="${bookclub.name}"></span> </h2>
 
     <h4>The book to be discussed:</h4>
@@ -20,11 +24,11 @@
         <p th:if="${ismemberactive}">This meeting is being held at: <span th:text="${meeting.getAddress()}"></span>,
         <span th:text="${meeting.getCity()}"></span>, <span th:text="${meeting.zipPlusFour}"></span></p>
     </div>
-        <div th:if="${isowner}" style="border: 2px solid black">
-            <span>These will only show if you own the club.</span>
-            <button class="btn btn-warning">Edit?</button>
-            <button class="btn btn-danger">Delete?</button>
-        </div>
+<!--        <div th:if="${isowner}" style="border: 2px solid black">-->
+<!--            <span>These will only show if you own the club.</span>-->
+<!--            <button class="btn btn-warning">Edit?</button>-->
+<!--            <button class="btn btn-danger">Delete?</button>-->
+<!--        </div>-->
     </div>
     <div th:replace="partials.html::bookclubmodal"></div>
 
