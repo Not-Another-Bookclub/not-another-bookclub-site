@@ -7,12 +7,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -81,6 +80,44 @@ public class MeetingController {
         model.addAttribute("meeting", meeting);
         model.addAttribute("bookclub", bookclub);
         return "meeting";
+    }
+
+    @GetMapping("/bookclubs/{bookclubId}/meeting/create")
+    public String createNewBookclubRender(@PathVariable long bookclubId ,Model model) {
+        Bookclub bookclub = bookclubDao.getOne(bookclubId);
+        List<BookclubBook> bookclubBooks = bookclubBookDao.getAllByBookclub(bookclub);
+        List<String> books = new ArrayList<>();
+        for (BookclubBook bookclubook: bookclubBooks) {
+            books.add(bookclubook.getBook().getGoogleID());
+        }
+
+        Meeting meeting = new Meeting();
+        meeting.setTimedate(new Date(Calendar.getInstance().getTime().getTime()));
+        meeting.setBookclub(bookclub);
+
+        model.addAttribute("bookclub", bookclub);
+        model.addAttribute("books", books);
+        model.addAttribute("meeting", meeting);
+
+        return "meetings/create";
+    }
+
+    @PostMapping("/bookclubs/{bookclubId}/meeting/create")
+    public String createNewBookclubPost(
+            @ModelAttribute Meeting meeting,
+            @PathVariable long bookclubId,
+            @RequestParam (name="location") String location,
+            @RequestParam (name="book") String book,
+            Model model){
+
+        Location newLocation = Location.valueOf(location);
+        meeting.setLocation(newLocation);
+
+        meeting.setBook(bookDao.findBookByGoogleIDEquals(book));
+
+
+        meetingDao.save(meeting);
+        return "redirect:/bookclubs/" + bookclubId +"/meeting/" + meeting.getId();
     }
 }
 
