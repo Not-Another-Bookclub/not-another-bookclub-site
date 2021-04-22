@@ -86,10 +86,10 @@
     <p>Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</a></p>
 
 
-<!--            <h1>-->
-<!--                Here's the books on the <span th:text="${bookclub.name}"></span> reading list.-->
-<!--            </h1>-->
-<!--            <div id="results1" class="row"></div> -->
+            <h1>
+                Here's the books on the <span th:text="${bookclub.name}"></span> reading list.
+            </h1>
+            <div id="results1" class="row"></div>
 
 
             <div th:if="${isOwner}">
@@ -128,7 +128,7 @@
                     </li>
                 </ul>
 
-                <h1>Here's a lit of meetings, some of which are in the past, but Ted hasn't figured out the logic to call that out yet.</h1>
+                <h1>Here's a list of meetings, some of which are in the past, but Ted hasn't figured out the logic to call that out yet.</h1>
 
                 <ul>
                     <li th:each="meeting : ${meetings}"><span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span> at a
@@ -161,6 +161,7 @@
                 <br>
                 <br>
             </div>
+
         </div>
         <!--    END OF PUBLIC/PRIVATE CONTINGENCY-->
     </div>
