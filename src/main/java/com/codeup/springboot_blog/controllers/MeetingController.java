@@ -174,16 +174,20 @@ public class MeetingController {
 //    public String editSaveIndividualPost(@RequestParam(name = "id") long id, @RequestParam(name = "title") String title,
 //                                         @RequestParam(name = "body") String body, Model model) {
     public String editSaveIndividualMeeting(
-            @ModelAttribute Post post,
-            @PathVariable long id,
             @PathVariable long bookclubid,
             @PathVariable long meetingId,
+            @RequestParam (name="location") String location,
+            @RequestParam (name = "address") String address,
+            @RequestParam (name = "city") String city,
             @RequestParam (name="day") String day,
+            @RequestParam (name="zipPlusFour") String zip,
             @RequestParam (name="time") String time,
+            @RequestParam (name="book") String book,
             Model model) throws ParseException {
 
         Bookclub bookclub = bookclubDao.getOne(bookclubid);
         Meeting meeting = meetingDao.getOne(meetingId);
+        Location newLocation = Location.valueOf(location);
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
         String convertCurrentDate = day;
@@ -191,11 +195,15 @@ public class MeetingController {
         Date date = new Date();
         date = df.parse(convertCurrentDate + " " + convertTime);
 
+        meeting.setLocation(newLocation);
+        meeting.setAddress(address);
+        meeting.setCity(city);
         meeting.setTimedate(date);
+        meeting.setZipPlusFour(zip);
+        meeting.setBook(bookDao.findBookByGoogleIDEquals(book));
 
         meetingDao.save(meeting);
-//        model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
-//                "  The post was successfully updated. </div>");
+
         return "redirect:/bookclubs/" + bookclub.getId() + "/meeting/" + meetingId;
     }
 }
