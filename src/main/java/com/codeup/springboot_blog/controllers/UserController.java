@@ -91,11 +91,12 @@ public class UserController {
             EmailService emailService = new EmailService();
             emailService.prepareAndSend(email,"Here's your username",user1.getUsername());
 
-            model.addAttribute("email", user);
+            model.addAttribute("email", user1.getUsername());
 
         }
 //        modelAndView1.addObject("message",);
+//        model.addAttribute("email", email);
 
-        return "users/forgot-username";
+        return "redirect:/forgot-username";
     }
 }
