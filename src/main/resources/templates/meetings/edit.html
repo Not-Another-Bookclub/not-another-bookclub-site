@@ -42,12 +42,12 @@
 
             <div class="mb-3">
                 <label for="day" class="form-label">Date:</label>
-                <input type="date" name="day" id="day" class="form-control">
+                <input type="date" name="day" id="day" required class="form-control">
             </div>
 
             <div class="mb-3">
-                <label for="time" class="form-label">Date:</label>
-                <input type="time" name="time" id="time" class="form-control">
+                <label for="time" class="form-label">Time:</label>
+                <input type="time" name="time" id="time" required class="form-control">
             </div>
 
             <div class="mb-3">
@@ -57,7 +57,7 @@
 
             <div class="mb-3">
                 <label for="book" class="form-label">What book will be discussed?</label>
-                <select class="form-control" name="book" id="book">
+                <select class="form-control" name="book" id="book" required >
                     <option value="0">select book</option>
                     <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
                 </select>
