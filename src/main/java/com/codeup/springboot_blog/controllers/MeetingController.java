@@ -7,12 +7,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -81,6 +84,65 @@ public class MeetingController {
         model.addAttribute("meeting", meeting);
         model.addAttribute("bookclub", bookclub);
         return "meeting";
+    }
+
+    @GetMapping("/bookclubs/{bookclubId}/meeting/create")
+    public String createNewBookclubRender(@PathVariable long bookclubId ,Model model) {
+        Bookclub bookclub = bookclubDao.getOne(bookclubId);
+        List<BookclubBook> bookclubBooks = bookclubBookDao.getAllByBookclub(bookclub);
+        List<String> books = new ArrayList<>();
+        for (BookclubBook bookclubook: bookclubBooks) {
+            books.add(bookclubook.getBook().getGoogleID());
+        }
+
+
+        Meeting meeting = new Meeting();
+        meeting.setTimedate(new Date(Calendar.getInstance().getTime().getTime()));
+        meeting.setBookclub(bookclub);
+
+        model.addAttribute("bookclub", bookclub);
+        model.addAttribute("books", books);
+        model.addAttribute("meeting", meeting);
+
+        return "meetings/create";
+    }
+
+    @PostMapping("/bookclubs/{bookclubId}/meeting/create")
+    public String createNewBookclubPost(
+            @ModelAttribute Meeting meeting,
+            @PathVariable long bookclubId,
+            @RequestParam (name="location") String location,
+            @RequestParam (name="book") String book,
+            @RequestParam (name="day") String day,
+            @RequestParam (name="time") String time,
+            Model model) throws ParseException {
+
+
+        Location newLocation = Location.valueOf(location);
+        Bookclub bookclub = bookclubDao.getOne(bookclubId);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        String convertCurrentDate = day;
+        String convertTime = time;
+        Date date = new Date();
+        date = df.parse(convertCurrentDate + " " + convertTime);
+
+        System.out.println(time);
+
+        meeting.setLocation(newLocation);
+        meeting.setBookclub(bookclub);
+        meeting.setTimedate(date);
+
+        System.out.println(book);
+
+        meeting.setLocation(newLocation);
+
+        System.out.println(bookDao.findBookByGoogleIDEquals(book));
+        meeting.setBook(bookDao.findBookByGoogleIDEquals(book));
+
+
+        meetingDao.save(meeting);
+        return "redirect:/bookclubs/" + bookclubId +"/meeting/" + meeting.getId();
     }
 }
 
