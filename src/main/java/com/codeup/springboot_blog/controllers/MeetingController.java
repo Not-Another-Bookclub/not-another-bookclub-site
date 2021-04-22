@@ -4,7 +4,6 @@ import com.codeup.springboot_blog.daos.*;
 import com.codeup.springboot_blog.models.*;
 import com.codeup.springboot_blog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -91,7 +89,7 @@ public class MeetingController {
         model.addAttribute("meeting", meeting);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isOwner", isOwner);
-        return "meeting";
+        return "meetings/meeting";
     }
 
     @GetMapping("/bookclubs/{bookclubId}/meeting/create")

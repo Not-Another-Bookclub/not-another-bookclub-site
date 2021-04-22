@@ -58,7 +58,6 @@
             <div class="mb-3">
                 <label for="book" class="form-label">What book will be discussed?</label>
                 <select class="form-control" name="book" id="book" required >
-                    <option value="0">select book</option>
                     <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
                 </select>
             </div>
