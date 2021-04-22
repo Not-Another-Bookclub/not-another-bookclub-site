@@ -20,7 +20,7 @@
 
             <div class="mb-3">
                 <label for="location" class="form-label">Location:</label>
-                <select class="form-control" id="location" name="location" aria-label="Default select example">
+                <select class="form-control" th:field="*{location}" aria-label="Default select example">
                     <option value="BAR">Bar</option>
                     <option value="RESTAURANT">Restaurant</option>
                     <option value="HOUSE">House</option>

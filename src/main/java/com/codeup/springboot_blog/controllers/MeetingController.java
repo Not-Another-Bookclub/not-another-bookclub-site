@@ -173,18 +173,30 @@ public class MeetingController {
     @PostMapping("/bookclubs/{bookclubid}/meeting/{meetingId}/edit")
 //    public String editSaveIndividualPost(@RequestParam(name = "id") long id, @RequestParam(name = "title") String title,
 //                                         @RequestParam(name = "body") String body, Model model) {
-    public String editSaveIndividualPost(@ModelAttribute Post post, @PathVariable long id, @PathVariable long bookclubid, Model model) {
-        User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        post.setAuthor(author);
-//        Book book = bookDao.getOne(1L);
-//        post.setBook(book);
+    public String editSaveIndividualMeeting(
+            @ModelAttribute Post post,
+            @PathVariable long id,
+            @PathVariable long bookclubid,
+            @PathVariable long meetingId,
+            @RequestParam (name="day") String day,
+            @RequestParam (name="time") String time,
+            Model model) throws ParseException {
+
         Bookclub bookclub = bookclubDao.getOne(bookclubid);
-//        post.setBookclub(bookclub);
-//        post.setId(id);
-        postDao.save(post);
-        model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
-                "  The post was successfully updated. </div>");
-        return "redirect:/bookclubs/" + bookclub.getId() + "/posts/" + post.getId();
+        Meeting meeting = meetingDao.getOne(meetingId);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        String convertCurrentDate = day;
+        String convertTime = time;
+        Date date = new Date();
+        date = df.parse(convertCurrentDate + " " + convertTime);
+
+        meeting.setTimedate(date);
+
+        meetingDao.save(meeting);
+//        model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
+//                "  The post was successfully updated. </div>");
+        return "redirect:/bookclubs/" + bookclub.getId() + "/meeting/" + meetingId;
     }
 }
 
