@@ -4,7 +4,6 @@ import com.codeup.springboot_blog.daos.*;
 import com.codeup.springboot_blog.models.*;
 import com.codeup.springboot_blog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,6 +47,7 @@ public class MeetingController {
     public String showOneMeeting(@PathVariable long bookclubid, @PathVariable long meetingid, Model model){
         Meeting meeting = meetingDao.getOne(meetingid);
         Bookclub bookclub = bookclubDao.getOne(bookclubid);
+        Boolean isOwner = false;
         if(meeting.getBookclub().getId() != bookclub.getId()) {
             model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
                     "  That meeting and bookclub do not match, please check your link or try again.</div>");
@@ -56,9 +55,15 @@ public class MeetingController {
             return "bookclubs/index";
         }
         User user = new User();
+//        IF YOU ARE LOGGED IN
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
+
+            if(bookclub.getOwner().getId() == user.getId()){
+                isOwner = true;
+            }
+
             List<BookclubMembership> memberships = bookclubmembershipDao.findBookclubMembershipsByUser(user);
             ArrayList<Bookclub> holder = new ArrayList<>();
             BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
@@ -83,7 +88,8 @@ public class MeetingController {
 
         model.addAttribute("meeting", meeting);
         model.addAttribute("bookclub", bookclub);
-        return "meeting";
+        model.addAttribute("isOwner", isOwner);
+        return "meetings/meeting";
     }
 
     @GetMapping("/bookclubs/{bookclubId}/meeting/create")
@@ -143,6 +149,68 @@ public class MeetingController {
 
         meetingDao.save(meeting);
         return "redirect:/bookclubs/" + bookclubId +"/meeting/" + meeting.getId();
+    }
+
+//    EDITING MEETINGS
+
+    @GetMapping("/bookclubs/{bookclubid}/meeting/{meetingId}/edit")
+    public String editIndividualMeeting (
+            @PathVariable long bookclubid,
+            @PathVariable long meetingId,
+            Model model){
+
+        Bookclub bookclub = bookclubDao.getOne(bookclubid);
+        List<BookclubBook> bookclubBooks = bookclubBookDao.getAllByBookclub(bookclub);
+        List<String> books = new ArrayList<>();
+        for (BookclubBook bookclubook: bookclubBooks) {
+            books.add(bookclubook.getBook().getGoogleID());
+        }
+
+        Meeting meeting = meetingDao.getOne(meetingId);
+
+        model.addAttribute("bookclub", bookclub);
+        model.addAttribute("books", books);
+        model.addAttribute("meeting", meeting);
+
+        return "meetings/edit";
+
+    }
+
+    @PostMapping("/bookclubs/{bookclubid}/meeting/{meetingId}/edit")
+//    public String editSaveIndividualPost(@RequestParam(name = "id") long id, @RequestParam(name = "title") String title,
+//                                         @RequestParam(name = "body") String body, Model model) {
+    public String editSaveIndividualMeeting(
+            @PathVariable long bookclubid,
+            @PathVariable long meetingId,
+            @RequestParam (name="location") String location,
+            @RequestParam (name = "address") String address,
+            @RequestParam (name = "city") String city,
+            @RequestParam (name="day") String day,
+            @RequestParam (name="zipPlusFour") String zip,
+            @RequestParam (name="time") String time,
+            @RequestParam (name="book") String book,
+            Model model) throws ParseException {
+
+        Bookclub bookclub = bookclubDao.getOne(bookclubid);
+        Meeting meeting = meetingDao.getOne(meetingId);
+        Location newLocation = Location.valueOf(location);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        String convertCurrentDate = day;
+        String convertTime = time;
+        Date date = new Date();
+        date = df.parse(convertCurrentDate + " " + convertTime);
+
+        meeting.setLocation(newLocation);
+        meeting.setAddress(address);
+        meeting.setCity(city);
+        meeting.setTimedate(date);
+        meeting.setZipPlusFour(zip);
+        meeting.setBook(bookDao.findBookByGoogleIDEquals(book));
+
+        meetingDao.save(meeting);
+
+        return "redirect:/bookclubs/" + bookclub.getId() + "/meeting/" + meetingId;
     }
 }
 

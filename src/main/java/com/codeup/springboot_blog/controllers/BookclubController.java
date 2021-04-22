@@ -86,6 +86,7 @@ public class BookclubController {
             isPrivate = true;
         }
 
+
 //        THIS BLOCK HANDLES IF USER IS LOGGED IN - BIG SECTION
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
