@@ -144,5 +144,47 @@ public class MeetingController {
         meetingDao.save(meeting);
         return "redirect:/bookclubs/" + bookclubId +"/meeting/" + meeting.getId();
     }
+
+//    EDITING MEETINGS
+
+    @GetMapping("/bookclubs/{bookclubid}/meeting/{meetingId}/edit")
+    public String editIndividualMeeting (
+            @PathVariable long bookclubid,
+            @PathVariable long meetingId,
+            Model model){
+
+        Bookclub bookclub = bookclubDao.getOne(bookclubid);
+        List<BookclubBook> bookclubBooks = bookclubBookDao.getAllByBookclub(bookclub);
+        List<String> books = new ArrayList<>();
+        for (BookclubBook bookclubook: bookclubBooks) {
+            books.add(bookclubook.getBook().getGoogleID());
+        }
+
+        Meeting meeting = meetingDao.getOne(meetingId);
+
+        model.addAttribute("bookclub", bookclub);
+        model.addAttribute("books", books);
+        model.addAttribute("meeting", meeting);
+
+        return "meetings/edit";
+
+    }
+
+    @PostMapping("/bookclubs/{bookclubid}/meeting/{meetingId}/edit")
+//    public String editSaveIndividualPost(@RequestParam(name = "id") long id, @RequestParam(name = "title") String title,
+//                                         @RequestParam(name = "body") String body, Model model) {
+    public String editSaveIndividualPost(@ModelAttribute Post post, @PathVariable long id, @PathVariable long bookclubid, Model model) {
+        User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setAuthor(author);
+//        Book book = bookDao.getOne(1L);
+//        post.setBook(book);
+        Bookclub bookclub = bookclubDao.getOne(bookclubid);
+//        post.setBookclub(bookclub);
+//        post.setId(id);
+        postDao.save(post);
+        model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
+                "  The post was successfully updated. </div>");
+        return "redirect:/bookclubs/" + bookclub.getId() + "/posts/" + post.getId();
+    }
 }
 
