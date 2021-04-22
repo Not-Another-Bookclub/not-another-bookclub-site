@@ -333,8 +333,8 @@
     <div id="results" class="row"></div>
 </div>
 
-<!-- Modal -->
-<div th:fragment="modal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Modal that updates User-Books i.e. if it is on a User related page, it must use this modal -->
+<div th:fragment="usermodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -349,13 +349,44 @@
 
             </div>
 
-            <form action="/book/add" method="Post">
+            <form th:action="@{/pro/__${id}__/book/edit}" method="Post">
                 <label for="startDate" id="startDateText">Currently set to: </label> <label for="finishDate" id="finishDateText">Currently set to: </label>
-                <input type="date" id="startDate" name="startDate"><input type="date" id="finishDate" name="finishDate">
-
+                <input type="date" id="startDate" name="startDate">
+                <input type="date" id="finishDate" name="finishDate">
+                <input type="hidden" id="modalbookid" name="book" value="">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal that updates Bookclub-Books i.e. if it is on a Bookclub related page, it must use this modal -->
+<div th:fragment="bookclubmodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+                <br>
+                <div id="modalImage"><img src="/img/logo.png"></div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+
+
+            </div>
+
+            <form th:action="@{/bookclubs/__${bookclub.id}__/book/edit}" method="Post">
+                <label for="startDate" id="startDateText">Currently set to: </label> <label for="finishDate" id="finishDateText">Currently set to: </label>
+                <input type="date" id="startDate" name="startDate">
+                <div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div>
+                <input type="hidden" id="modalbookid" name="book" value="">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
         </div>
@@ -458,7 +489,14 @@
     let finishdateshtml = [[${finishdateshtml}]]
 
     let findreplace = {}
-function googleIdSearch(idSearch,startDate,finishDate,startDateHTML,finishDateHTML){
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+
+
+    function googleIdSearch(idSearch,startDate,finishDate,startDateHTML,finishDateHTML){
 // console.log("This function runs");
 // let idSearch = document.getElementById('search google_id').value
 let results = document.getElementById('results1')
@@ -536,6 +574,7 @@ for(let i = 0; i < idsearch.length; i++) {
     const finishdatetext = document.getElementById('finishDateText');
     const startdatecalendar = document.getElementById('startDate');
     const finishdatecalendar = document.getElementById('finishDate');
+    const modalbookid = document.getElementById('modalbookid');
 
 
 
@@ -568,6 +607,7 @@ for(let i = 0; i < idsearch.length; i++) {
                 finishdatetext.innerText = "Currently set to: " + finish;
                 startdatecalendar.value = startHTML;
                 finishdatecalendar.value = finishHTML;
+                modalbookid.value = idSearch;
             },
 
             type: 'Get'
@@ -649,7 +689,8 @@ setTimeout(function() {
 
         }
 
-    })
+    }
+        , 500)
 
 
 
