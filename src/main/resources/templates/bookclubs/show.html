@@ -94,10 +94,14 @@
 
         <div th:if="${isOwner}">
             <div th:replace="partials.html :: booksearch"></div>
+            <br>
+            <br>
+<!--            <div id="results"></div>-->
         </div>
 
         <br>
         <br>
+
     </div>
 
     <div th:if="${isPrivate}">
@@ -153,7 +157,7 @@
 
                         <br>
                         <br>
-                        <div id="results"></div>
+<!--                        <div id="results"></div>-->
                     </div>
                 </div>
                 <div th:if="${!isActiveUser}">
