@@ -78,23 +78,8 @@ public class BookController {
             bookclubBookDao.save(bookclubbook);
             model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
                     "  Book saved to your bookclub's reading list.</div>");
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            model.addAttribute("user", user);
-            model.addAttribute("isowner", true);
-            List<BookclubMembership> memberships = bookclubmembershipDao.findAllByBookclub(bookclub);
-            List <User> members = new ArrayList<User>();
-            for (BookclubMembership membership : memberships) {
-                members.add(membership.getUser());
-            }
-            List <BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
-            List<String> books = new ArrayList<>();
-            for (BookclubBook clubbook : clubbooks) {
-                books.add(clubbook.getBook().getGoogleID());
-            }
-            model.addAttribute("bookclub", bookclub);
-            model.addAttribute("members", members);
-            model.addAttribute("books", books);
-            return "bookclubs/show";}
+
+            return "redirect:/bookclubs/" +bookclub.getId() ;}
 
         else {model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
                 "  <strong>Warning!</strong> Encountered an unexpected situation - book not saved. Please contact the dev team. (not really this isn't implemented yet).</div>");

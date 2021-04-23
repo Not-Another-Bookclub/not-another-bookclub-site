@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -86,6 +83,36 @@ public class MeetingController {
             if (bookclub.getOwner().getId() == user.getId()) {model.addAttribute("isowner", true);}
         }
 
+        //get the books, and dates (in both human readable and HTML friendly formats)
+        List<BookclubBook> clubbooks = bookclubBookDao.getAllByBookclub(bookclub);
+        Collections.sort(clubbooks);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
+        SimpleDateFormat html = new SimpleDateFormat("yyyy-MM-dd");
+        List<String> books = new ArrayList<>();
+        List<String> startdates = new ArrayList<>();
+        List<String> startdateshtml = new ArrayList<>();
+        List<String> finishdates = new ArrayList<>();
+        List <String> finishdateshtml = new ArrayList<>();
+        Date date = new Date();
+        for (BookclubBook clubbook : clubbooks) {
+            if (clubbook.getBook().getGoogleID() == meeting.getBook().getGoogleID()) {
+            books.add(clubbook.getBook().getGoogleID());
+            if (clubbook.getStartDate() != null) {
+                startdates.add(sdf.format(clubbook.getStartDate()));
+                startdateshtml.add(html.format(clubbook.getStartDate()));}
+            else {startdates.add("Not started yet");
+                startdateshtml.add(html.format(date));}
+            if(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub, clubbook.getBook().getGoogleID()) != null)
+            {finishdates.add(sdf.format(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub,clubbook.getBook().getGoogleID()).getTimedate()));
+                finishdateshtml.add(html.format(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub,clubbook.getBook().getGoogleID()).getTimedate()));}
+            else {finishdates.add("Not finished yet");
+                finishdateshtml.add(html.format(date));}}
+        }
+        //Everything gets passed down to Thymeleaf
+        model.addAttribute("startdateshtml", startdateshtml);
+        model.addAttribute("finishdateshtml", finishdateshtml);
+        model.addAttribute("startdates", startdates);
+        model.addAttribute("finishdates", finishdates);
         model.addAttribute("meeting", meeting);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isOwner", isOwner);
@@ -159,18 +186,21 @@ public class MeetingController {
             @PathVariable long meetingId,
             Model model){
 
+//        Get the bookclub
         Bookclub bookclub = bookclubDao.getOne(bookclubid);
+//get the meeting
+        Meeting meeting = meetingDao.getOne(meetingId);
+//get the books
         List<BookclubBook> bookclubBooks = bookclubBookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
         for (BookclubBook bookclubook: bookclubBooks) {
             books.add(bookclubook.getBook().getGoogleID());
         }
 
-        Meeting meeting = meetingDao.getOne(meetingId);
-
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("books", books);
         model.addAttribute("meeting", meeting);
+
 
         return "meetings/edit";
 

@@ -156,10 +156,11 @@
 
                 <div th:if="${isOwner}">
                     <div th:replace="partials.html :: booksearch"></div>
-                </div>
+
 
                 <br>
                 <br>
+                <div id="results"></div></div>
             </div>
 
         </div>
@@ -174,7 +175,8 @@
 </div>
 
 <footer th:replace="partials.html::footer"></footer>
-<div th:if="${isowner}"><script th:replace="partials.html::booksearchscript('bookclub',${bookclub.id})"></script></div>
+<div th:if="${isOwner}">
+    <script th:replace="partials.html::booksearchscript('bookclub',${bookclub.id})"></script></div>
 <script th:replace="partials.html::bookdisplay(${books})"></script>
 </body>
 </html>
