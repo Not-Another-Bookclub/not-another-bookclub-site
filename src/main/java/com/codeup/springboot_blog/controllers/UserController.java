@@ -93,6 +93,7 @@ public class UserController {
             emailService.prepareAndSend(email,user1.getUsername(),user1.getUsername());
 
             model.addAttribute("email", user1.getUsername());
+
             model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
                     "  The email was successfully sent. </div>");
 
