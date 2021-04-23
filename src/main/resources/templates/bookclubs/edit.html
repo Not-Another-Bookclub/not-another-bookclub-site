@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:include="partials.html::head('Create a new Bookclub!')" >
+    <meta charset="UTF-8">
+    <title>You shouldn't see this title!</title>
+</head>
+<body>
+<div th:replace="partials.html::navbar">You shouldn't see this.</div>
+
+<div class="container">
+
+    <h1>Thanks for starting a new bookclub, here's what we need to know....</h1>
+
+    <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/edit'}" th:method="post" th:object="${bookclub}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name of Your Bookclub</label>
+            <input class="form-control" th:field="*{name}" type="text">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Describe your Bookclub</label>
+            <textarea class="form-control" rows="6" th:field="*{description}">Who are your ideal members? What types of books do you want to read? Where and how often would you like to meet?</textarea>
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" th:field="*{accepting_members}" checked>
+                <label class="form-check-label" for="accepting_members">
+                    Are you accepting new members? <span class="text-muted">If you uncheck this box, other users will not be able to ask to join your bookclub. We set this to yes by default, because we want you to meet new book-friends.</span>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" th:field="*{is_private}" checked>
+                <label class="form-check-label" for="is_private">
+                    Would you like to list your bookclub to be private? <span class="text-muted">If you check this box, other users won't be able to see your bookclub to ask to join it. We set this to no by default, because we want you to meet new book-friends.</span>
+                </label>
+            </div>
+        </div>
+
+
+        <button class="btn btn-secondary text-center">Submit Post</button>
+    </form></div>
+<footer th:replace="partials.html::footer"></footer>
+</body>
+</html>
