@@ -125,7 +125,7 @@ public class PostController {
     post.setBookclub(bookclubDao.getOne(id));
     post.setCreateDate(new Date(Calendar.getInstance().getTime().getTime()));
     post.setModifyDate(new Date(Calendar.getInstance().getTime().getTime()));
-//    post.setId(0);
+    post.setId(0);
     postDao.save(post);
 //    emailService.prepareAndSend(post, "Your post was successfully posted!", "You can view it at http://localhost:8080/posts/" + post.getId());
     model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
