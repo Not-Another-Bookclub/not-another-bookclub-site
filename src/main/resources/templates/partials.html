@@ -358,7 +358,7 @@
             </div>
 
             <form th:action="@{/pro/__${id}__/book/edit}" method="Post">
-                <label for="startDate" id="startDateText">Currently set to: </label> <label for="finishDate" id="finishDateText">Currently set to: </label>
+                <label for="startDate" id="startDateText">Start on: </label> <label for="finishDate" id="finishDateText">Finish on: </label>
                 <input type="date" id="startDate" name="startDate">
                 <input type="date" id="finishDate" name="finishDate">
                 <input type="hidden" id="modalbookid" name="book" value="">
@@ -388,13 +388,12 @@
             </div>
 
             <form th:action="@{/bookclubs/__${bookclub.id}__/book/edit}" method="Post">
-                <label for="startDate" id="startDateText">Currently set to: </label> <label for="finishDate" id="finishDateText">Currently set to: </label>
-                <input type="date" id="startDate" name="startDate">
-                <div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div>
+                <label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label>
+                <input type="date" id="startDate" name="startDate"><div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div>
                 <input type="hidden" id="modalbookid" name="book" value="">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <div th:if="${isOwner}"> <button type="submit" class="btn btn-primary">Save changes</button></div>
                 </div>
             </form>
         </div>
@@ -428,18 +427,13 @@
 
                 html += "<div><form action='/book/add' method='post'> <input hidden value=" + data.items[i].id +" name='book'><input hidden value='" + path + "' name='path'>"
                 html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <input hidden value="'+ bookclubid + '" name="bookclubid"><button class="btn btn-primary">Add to reading list</button></form></div>'
-                html += "<div class='card-bottom'><p class='card-text'>" + data.items[i].volumeInfo.description + "</p></div>"
+
 
                 results.innerHTML+=html;
 
 
             }
-        $(".card-bottom").hide()
-        $('.card-top').click(function() {
-            let thisCardBottom = $(this).next().next()
-            // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
-            $(".card-bottom").not(thisCardBottom).slideUp(500)
-            $(this).next().next().slideToggle(1000)})
+
     }
 
 
@@ -537,12 +531,18 @@ var html = '<div class="card col-lg-2 col-md-3 col-sm-6 text-center">'
     html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5><br>"
     html += "<h6> Started reading: "+ startDate +"</h6>"
     html += "<h6> Finished reading: "+ finishDate +"</h6></div>"
-    html += '<div><a href="#" class="btn btn-primary" id="'+ idSearch +'">Remove from reading list</a>'
+    // html += '<div><a href="#" class="btn btn-primary" id="'+ idSearch +'">Remove from reading list</a>'
     html += '<button href="" class="btn book-selector btn-primary" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div>'
     // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
 results.innerHTML += html;
     findreplace[idSearch] = data.volumeInfo.title;
+
+    $('body :not(script)').contents().filter(function () {
+        return this.nodeType === 3;
+    }).replaceWith(function () {
+            return this.nodeValue.replace(idSearch, data.volumeInfo.title)})
+
 },
 
 
@@ -624,27 +624,28 @@ for(let i = 0; i < idsearch.length; i++) {
     }
 
 setTimeout(function() {
-        if (typeof idsearch == "string")
-        {$('body :not(script)').contents().filter(function () {
-            return this.nodeType === 3;
-        }).replaceWith(function () {
-            return this.nodeValue.replace(idsearch, findreplace[idsearch])})
-
-        }
-        else {
-        for (let i = 0; i < idsearch.length; i++) {
-            $('body :not(script)').contents().filter(function () {
-                return this.nodeType === 3;
-            }).replaceWith(function () {
-                return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
-            })
-        }
+        //This was the original version set to run on a timeout, instead of set to run on the success.
+        // if (typeof idsearch == "string")
+        // {$('body :not(script)').contents().filter(function () {
+        //     return this.nodeType === 3;
+        // }).replaceWith(function () {
+        //     return this.nodeValue.replace(idsearch, findreplace[idsearch])})
+        //
+        // }
+        // else {
+        // for (let i = 0; i < idsearch.length; i++) {
+        //     $('body :not(script)').contents().filter(function () {
+        //         return this.nodeType === 3;
+        //     }).replaceWith(function () {
+        //         return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
+        //     })
+        // }
 
             // $("* :contains(idsearch[i])").each(function() {
             //     var replaced = $(this).html().replace(/idsearch[i]/g, findreplace[idsearch[i]])
             //     $(this).html(replaced);
             // })
-        }
+        // }
         // document.getElementsByClassName('book-selector').click(function (e){
         //     e.preventDefault()
         //     document.getElementById('book').value = this.id;
@@ -668,7 +669,14 @@ setTimeout(function() {
             url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
             dataType: 'json',
             success: function (data) {
-                findreplace[idSearch] = data.volumeInfo.title;
+                // findreplace[idSearch] = data.volumeInfo.title;
+
+                $('body :not(script)').contents().filter(function () {
+                    return this.nodeType === 3;
+                }).replaceWith(function () {
+                    return this.nodeValue.replace(idSearch, data.volumeInfo.title)})
+
+
             }, type: 'Get',
         })
     }
@@ -678,27 +686,27 @@ setTimeout(function() {
         findandreplacepopulate(idsearch[i])
     }
 
-    setTimeout(function() {
-        if (typeof idsearch == "string") {
-            $('body :not(script)').contents().filter(function () {
-                return this.nodeType === 3;
-            }).replaceWith(function () {
-                return this.nodeValue.replace(idsearch, findreplace[idsearch])
-            })
-
-        } else {
-            for (let i = 0; i < idsearch.length; i++) {
-                $('body :not(script)').contents().filter(function () {
-                    return this.nodeType === 3;
-                }).replaceWith(function () {
-                    return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
-                })
-            }
-
-        }
-
-    }
-        , 500)
+    // setTimeout(function() {
+    //     if (typeof idsearch == "string") {
+    //         $('body :not(script)').contents().filter(function () {
+    //             return this.nodeType === 3;
+    //         }).replaceWith(function () {
+    //             return this.nodeValue.replace(idsearch, findreplace[idsearch])
+    //         })
+    //
+    //     } else {
+    //         for (let i = 0; i < idsearch.length; i++) {
+    //             $('body :not(script)').contents().filter(function () {
+    //                 return this.nodeType === 3;
+    //             }).replaceWith(function () {
+    //                 return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
+    //             })
+    //         }
+    //
+    //     }
+    //
+    // }
+    //     , 500)
 
 
 

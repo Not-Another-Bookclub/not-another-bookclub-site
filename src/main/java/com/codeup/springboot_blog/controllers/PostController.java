@@ -76,7 +76,11 @@ public class PostController {
     if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("loggedin",loggedin);
     if (loggedin.getId() == post.getAuthor().getId()) {
-        model.addAttribute("owner", true);
+        model.addAttribute("isOwner", true);
+
+    Bookclub bookclub = bookclubDao.getOne(bookclubid);
+    model.addAttribute("bookclub", bookclub);
+
 
 //        Comment comment = new Comment();
 //        comment.setComment("Type a comment to join the conversation.");
@@ -103,9 +107,11 @@ public class PostController {
         for (BookclubBook bookclubook: bookclubBooks) {
             books.add(bookclubook.getBook().getGoogleID());
         }
+        Post post = new Post();
+    System.out.println("post.getId() = " + post.getId());
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("books", books);
-        model.addAttribute("post", new Post());
+        model.addAttribute("post", post);
     return "posts/create";
 }
 
@@ -119,6 +125,7 @@ public class PostController {
     post.setBookclub(bookclubDao.getOne(id));
     post.setCreateDate(new Date(Calendar.getInstance().getTime().getTime()));
     post.setModifyDate(new Date(Calendar.getInstance().getTime().getTime()));
+//    post.setId(0);
     postDao.save(post);
 //    emailService.prepareAndSend(post, "Your post was successfully posted!", "You can view it at http://localhost:8080/posts/" + post.getId());
     model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
