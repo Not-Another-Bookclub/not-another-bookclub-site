@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns: th="http//:www.thymeleaf.org">
-<head>
+<head >
     <meta charset="UTF-8">
     <title th:text=" 'Ooops, ' + ${error}" ></title>
+
+
 </head>
 
 <body>
+
+    <nav th:replace="partials.html::visitor-navbar"></nav>
+
+
+
+
+
     <th:block th:switch="${error}">
         <div th:case="'Not Found'">
             <h1>Page not Found!!</h1>
@@ -19,6 +28,7 @@
             width="420"
             height="315"
             src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
+<!--            src="https://www.youtube.com/watch?v=oZK_JPSRvw0"-->
             frameborder="0">
             allowfullscreen="allowfullscreen"
         >
