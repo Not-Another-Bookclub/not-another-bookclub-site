@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http//:www.thymeleaf.org">
+<header th:replace="partials.html::head(${error})"></header>
+    <meta charset="UTF-8">
+<title th:text=" 'Ooops, ' + ${error}" ></title>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text=" 'Ooops, ' + ${error}" ></title>
+</head>
+<body>
+    <h1>500 error page</h1>
+    <h3>Sorry, there was an error occurred!</h3>
+
+
+</body>
+</html>
