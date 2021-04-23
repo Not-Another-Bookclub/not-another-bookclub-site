@@ -88,11 +88,13 @@ public class UserController {
 //        ModelAndView modelAndView1 = new ModelAndView("viewPage");
         User user1 = userDao.findByEmail(email);
         if (user1 != null){
-            System.out.println(email);
-            System.out.println(user1.getUsername());
+//            System.out.println(email);
+//            System.out.println(user1.getUsername());
             emailService.prepareAndSend(email,user1.getUsername(),user1.getUsername());
 
             model.addAttribute("email", user1.getUsername());
+
+
             model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
                     "  The email was successfully sent. </div>");
 
