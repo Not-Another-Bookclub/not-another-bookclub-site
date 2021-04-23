@@ -53,7 +53,7 @@
     <div class="card">
         <div th:if="${loggedin != null}"  class="card-body">
 <!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
-            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" method="post" >
+            <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
             <div class="input-group mb-3">
                 <input class="form-control" name="comment" id="comment" type="text">
 <!--                    <input class="form-control" th:field="*{comment}" type="text">-->
