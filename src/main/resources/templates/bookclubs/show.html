@@ -83,7 +83,10 @@
             <li th:each="post : ${posts}"> <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}">
                 <span th:text="${post.title}"></span></a> about the book: <span th:text="${post.book.googleID}"></span> - <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)</li>
         </ul>
-        <p>Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</a></p>
+
+        <p th:if="${isActiveUser}">
+            Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</a>
+        </p>
 
 
         <h1>
