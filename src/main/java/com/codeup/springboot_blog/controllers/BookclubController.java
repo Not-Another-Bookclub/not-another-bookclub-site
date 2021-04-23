@@ -281,6 +281,38 @@ public class BookclubController {
         return "redirect:/pro/" + idOfTarget;
     }
 
+    @GetMapping("bookclubs/{id}/edit")
+    public String updateSpecificBookclub(@PathVariable long id, Model model) {
+        User user = new User();
+        Bookclub bookclub = bookclubDao.getOne(id);
+
+        model.addAttribute("bookclub", bookclub);
+
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            model.addAttribute("user", user);
+
+            return "bookclubs/edit";
+        } else {
+            return "redirect:/bookclubs/" + id;
+        }
+
+    }
+
+    @PostMapping("bookclubs/{id}/edit")
+    public String saveSpecificBookclubUpdate(
+            @PathVariable long id,
+            @ModelAttribute Bookclub bookclub,
+            Model model){
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        bookclub.setOwner(user);
+
+        bookclubDao.save(bookclub);
+
+        return "redirect:/bookclubs/" + id;
+    }
 
 
 }
