@@ -33,10 +33,10 @@ public class CommentController {
         return "You must be logged in to comment on a post!";
     }
 
-    @PostMapping("/posts/{id}/comment")
+    @PostMapping("/bookclubs/{bookclubid}/posts/{id}/comment")
 //    public String editSaveIndividualPost(@RequestParam(name = "id") long id, @RequestParam(name = "title") String title,
 //                                         @RequestParam(name = "body") String body, Model model) {
-    public String editSaveComment(@RequestParam("comment") String comment, @PathVariable long id, Model model) {
+    public String editSaveComment(@RequestParam("comment") String comment,@PathVariable long bookclubid ,@PathVariable long id, Model model) {
 //    public String editSaveComment(@ModelAttribute Comment comment, @PathVariable long id, Model model) {
 //        if (newComment == null) {
 //            return "redirect:/posts/" + id;
@@ -62,7 +62,7 @@ public class CommentController {
               commentDao.save(addComment);
 //        model.addAttribute("alert", "<div class=\"alert alert-success\" role=\"alert\">\n" +
 //                "  The post was successfully updated. </div>");
-              return "redirect:/posts/" + id;
+              return "redirect:/bookclubs/" + bookclubid +"/posts/" + id;
           }
 
 //}

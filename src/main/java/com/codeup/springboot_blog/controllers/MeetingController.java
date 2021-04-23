@@ -102,7 +102,7 @@ public class MeetingController {
                 startdateshtml.add(html.format(clubbook.getStartDate()));}
             else {startdates.add("Not started yet");
                 startdateshtml.add(html.format(date));}
-            if(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub, clubbook.getBook().getGoogleID()) != null)
+            if(meetingDao.findAllByBookclubEqualsAndBook_GoogleIDOrderByTimedate(bookclub, clubbook.getBook().getGoogleID()) != null)
             {finishdates.add(sdf.format(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub,clubbook.getBook().getGoogleID()).getTimedate()));
                 finishdateshtml.add(html.format(meetingDao.findMeetingByBookclubEqualsAndBook_GoogleID(bookclub,clubbook.getBook().getGoogleID()).getTimedate()));}
             else {finishdates.add("Not finished yet");
