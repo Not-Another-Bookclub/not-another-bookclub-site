@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -23,6 +24,7 @@ public class PostController {
     private final BookclubRepository bookclubDao;
     private final BookRepository bookDao;
     private final BookclubBookRepository bookclubbookDao;
+    private final MeetingRepository meetingDao;
 
 
 //    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao){
@@ -34,7 +36,7 @@ public class PostController {
 //
 //    }
 
-    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao,  BookclubRepository bookclubDao, BookRepository bookDao, BookclubBookRepository bookclubbookDao){
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao,  BookclubRepository bookclubDao, BookRepository bookDao, BookclubBookRepository bookclubbookDao, MeetingRepository meetingDao){
 
         this.postDao = postDao;
         this.userDao = userDao;
@@ -43,6 +45,8 @@ public class PostController {
         this.bookclubDao = bookclubDao;
         this.bookDao = bookDao;
         this.bookclubbookDao = bookclubbookDao;
+        this.meetingDao = meetingDao;
+
     }
 
 @GetMapping("/posts")
@@ -65,27 +69,66 @@ public class PostController {
 }
 
 @GetMapping("bookclubs/{bookclubid}/posts/{id}")
-    public String individualPost(@PathVariable long bookclubid, @PathVariable long id, Model model) {
+    public String renderIndividualPost(@PathVariable long bookclubid, @PathVariable long id, Model model) {
 //    Post post = new Post(id, "Here's a title for this detailed view", "Here's a bunch of text for it as well!");
 //    model.addAttribute("post", post);
 //    model.addAttribute("post", postDao.findAllById(id);
     Post post = postDao.getOne(id);
     if (post.getComments().size() > 0) {Collections.sort(post.getComments());};
     model.addAttribute("post", post);
+    Bookclub bookclub = bookclubDao.getOne(bookclubid);
 
     if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("loggedin",loggedin);
     if (loggedin.getId() == post.getAuthor().getId()) {
-        model.addAttribute("isOwner", true);
+        model.addAttribute("isAuthor", true);
+        if (loggedin.getId() == bookclub.getOwner().getId()) {
+            model.addAttribute("isOwner", true);
+        }}}
 
-    Bookclub bookclub = bookclubDao.getOne(bookclubid);
-    model.addAttribute("bookclub", bookclub);
+        //        This creates a list of googleIDs for the books and dates the bookclub will start reading them
+        List<BookclubBook> clubbooks = bookclubbookDao.getAllByBookclub(bookclub);
+        Collections.sort(clubbooks);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
+        SimpleDateFormat html = new SimpleDateFormat("yyyy-MM-dd");
+        List<String> books = new ArrayList<>();
+        List<String> startdates = new ArrayList<>();
+        List<String> startdateshtml = new ArrayList<>();
+        List<String> finishdates = new ArrayList<>();
+        List <String> finishdateshtml = new ArrayList<>();
+        java.util.Date date = new java.util.Date();
+        for (BookclubBook clubbook : clubbooks) {
+            if (clubbook.getBook().getGoogleID() == post.getBook().getGoogleID()) {
+            books.add(clubbook.getBook().getGoogleID());
+            if (clubbook.getStartDate() != null) {
+                startdates.add(sdf.format(clubbook.getStartDate()));
+                startdateshtml.add(html.format(clubbook.getStartDate()));}
+            else {startdates.add("Not started yet");
+                startdateshtml.add(html.format(date));}
+            if(meetingDao.findAllByBookclubEqualsAndBook_GoogleIDOrderByTimedate(bookclub, clubbook.getBook().getGoogleID()).size() > 0)
+            {finishdates.add(sdf.format(meetingDao.findAllByBookclubEqualsAndBook_GoogleIDOrderByTimedate(bookclub,clubbook.getBook().getGoogleID()).get(meetingDao.findAllByBookclubEqualsAndBook_GoogleIDOrderByTimedate(bookclub,clubbook.getBook().getGoogleID()).size() -1).getTimedate()));
+                finishdateshtml.add(html.format(meetingDao.findAllByBookclubEqualsAndBook_GoogleIDOrderByTimedate(bookclub,clubbook.getBook().getGoogleID()).get(meetingDao.findAllByBookclubEqualsAndBook_GoogleIDOrderByTimedate(bookclub,clubbook.getBook().getGoogleID()).size()-1).getTimedate()));}
+            else {finishdates.add("Not finished yet");
+                finishdateshtml.add(html.format(date));}
+        }
+    }
 
+        System.out.println("bookclub.getId() = " + bookclub.getId());
+        System.out.println("This is from the Post Controller");
+        System.out.println("startdateshtml = " + startdateshtml);
+
+
+        model.addAttribute("books", post.getBook());
+        model.addAttribute("bookclub", bookclub);
+        model.addAttribute("startdateshtml", startdateshtml);
+        model.addAttribute("finishdateshtml", finishdateshtml);
+        model.addAttribute("startdates", startdates);
+        model.addAttribute("finishdates", finishdates);
 
 //        Comment comment = new Comment();
 //        comment.setComment("Type a comment to join the conversation.");
 //        model.addAttribute("comment", comment);
-    }}
+
 
     return "posts/show";
 }

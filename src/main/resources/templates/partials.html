@@ -23,10 +23,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/posts">Home</a>
+                        <a class="nav-link active" href="/bookclubs">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active"  th:href="@{'/profile'}">Profile</a>
+                        <a class="nav-link active"  th:href="@{'/profile/'}">Profile</a>
                     </li>
 
                     <li class="nav-item">
@@ -43,9 +43,9 @@
 <!--                            <li><a class="dropdown-item" href="#">Something else here</a></li>-->
 <!--                        </ul>-->
 <!--                    </li>-->
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/bookclubs">All Bookclubs</a>-->
+<!--                    </li>-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sign In
@@ -105,7 +105,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password1">Password</label>
-                            <<div class="input-group"><input type="password" class="form-control" id="password1" name="password" placeholder="Password">
+                            <div class="input-group"><input type="password" class="form-control" id="password1" name="password" placeholder="Password">
                             <!--                                                            <i class="far fa-eye input-group-text" id="togglePassword"></i>-->
                         </div>
 
@@ -190,7 +190,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/posts">Home</a>
+                        <a class="nav-link active" href="/bookclubs">Home</a>
                     </li>
 <!--                    <li class="nav-item">-->
 <!--                        <a class="nav-link" href="/posts/create">Create</a>-->
@@ -371,7 +371,35 @@
     </div>
 </div>
 
-<!-- Modal that updates Bookclub-Books i.e. if it is on a Bookclub related page, it must use this modal -->
+<!-- Modal that updates Bookclub-Books from posts page, because of weird bugs with our posts i.e. if it is on a post related page, it must use this modal -->
+<div th:fragment="postmodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+                <br>
+                <div id="modalImage"><img src="/img/logo.png"></div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+
+
+            </div>
+
+            <form th:action="@{'/bookclubs/' + ${post.bookclub.id} + '/book/edit'}" method="Post">
+                <label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label>
+                <input type="date" id="startDate" name="startDate"><div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div>
+                <input type="hidden" id="modalbookid" name="book" value="">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div th:if="${isOwner}"> <button type="submit" class="btn btn-primary">Save changes</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div th:fragment="bookclubmodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -387,7 +415,7 @@
 
             </div>
 
-            <form th:action="@{/bookclubs/__${bookclub.id}__/book/edit}" method="Post">
+            <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/edit'}" method="Post">
                 <label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label>
                 <input type="date" id="startDate" name="startDate"><div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div>
                 <input type="hidden" id="modalbookid" name="book" value="">
