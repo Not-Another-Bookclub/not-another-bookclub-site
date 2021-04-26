@@ -10,21 +10,39 @@
 <div class="container">
     <div class="card card-body">
 
-        <h1 th:text="${bookclub.name}"></h1>
-        <p th:text="${bookclub.description}"></p>
-        <p>
-            This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}" class="btn btn-info text-dark">View Profile</a>
-        </p>
+        <div class="row">
+            <div class="col-6">
+                <h1 th:text="${bookclub.name}"></h1>
+                <p th:text="${bookclub.description}"></p>
+                <p>
+                    This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}" class="btn btn-info text-dark">View Profile</a>
+                </p>
+            </div>
+            <div class="col-6 p-3">
+                <div th:if="${isOwner}">
+                    <h2>You own this Bookclub</h2>
+
+                    <div th:if="${books.size() > 0}">
+                        <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" class="btn btn-secondary">Make a meeting?</a>
+                    </div>
+                    <div th:if="${books.size() < 1}">
+                        <p>Add Books to this club's reading list to make meetings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div th:if="${user}">
-            <hr>
             <div th:if="${isAccepting}">
+                <hr>
                 <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
                     <label for="join-club">Want to join?</label>
                     <input type="submit" id="join-club" class="btn btn-danger" value="Join">
                 </form>
             </div>
             <div th:if="${!isAccepting}">
+                <hr>
                 <div th:if="${isOwner}">
                     <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
                         <label for="join-club">Want to join?</label>
@@ -38,12 +56,6 @@
 
 
     <div th:if="${isOwner}" class="mt-3">
-        <h2>You own this Bookclub</h2>
-
-        <div th:if="${books.size() > 0}">
-            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" class="btn btn-secondary">Make a meeting?</a>
-        </div>
-
 
         <div th:each="user : ${pendingUsers}" class="text-center">
             <div class="container card">
@@ -64,16 +76,13 @@
 
     <!--    START THE PUBLIC/PRIVATE CONTINGENCY-->
     <div th:if="${!isPrivate}">
-
         <h1>This is a list passed from the controller</h1>
-        <ul>
             <!--    <li th:each="member : ${members}"><span th:text="${member.user.username}"></span> joined <span th:text="${#dates.format(member.changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>. Current status is :<span th:text="${member.getStatus()}"></span></li>-->
-            <li th:each="member : ${members}">
-                <span th:text="${member.username}"></span> joined
+            <a th:each="member : ${members}" th:href="@{'/pro/' + ${member.id}}" class="btn btn-info">
+                <span th:text="${member.username}"></span>
                 <!--&lt;!&ndash;        <span th:text="${#dates.format(member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>.-->
                 <!-- Current status is :<span th:text="${member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).status}"></span>-->
-            </li>
-        </ul>
+            </a>
 
         <h1>Here's a list of meetings, some of which are in the past, but Ted hasn't figured out the logic to call that out yet.</h1>
 
@@ -128,14 +137,11 @@
                 <div th:if="${isActiveUser}">
                     <h2>All the goodies</h2>
                     <h1>This is a list passed from the controller</h1>
-                    <ul>
-                        <!--    <li th:each="member : ${members}"><span th:text="${member.user.username}"></span> joined <span th:text="${#dates.format(member.changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>. Current status is :<span th:text="${member.getStatus()}"></span></li>-->
-                        <li th:each="member : ${members}">
-                            <span th:text="${member.username}"></span> joined
-                            <!--&lt;!&ndash;        <span th:text="${#dates.format(member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>.-->
-                            <!-- Current status is :<span th:text="${member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).status}"></span>-->
-                        </li>
-                    </ul>
+                    <a th:each="member : ${members}" th:href="@{'/pro/' + ${member.id}}" class="btn btn-info">
+                        <span th:text="${member.username}"></span>
+                        <!--&lt;!&ndash;        <span th:text="${#dates.format(member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).changedDate,'E, MMM dd yyyy HH:mm:ss')}"></span>.-->
+                        <!-- Current status is :<span th:text="${member.getBookclubs().get(member.getBookclubs().indexOf(bookclub.id)).status}"></span>-->
+                    </a>
 
                     <h1>Here's a list of meetings, some of which are in the past, but Ted hasn't figured out the logic to call that out yet.</h1>
 
