@@ -39,7 +39,7 @@
                 <div class="card p-3">
                     <div th:each="invite : ${invites}" class="d-flex flex-row p-3" style="width: 350px; border: 2px solid">
                         <div class="card p-2 m-1">
-                            <a th:text="${invite.name}" class="btn btn-primary"></a>
+                            <a th:text="${invite.name}" th:href="@{'/bookclubs/' + ${invite.id}}" class="btn btn-primary"></a>
                             <p>Wants you to join their Club</p>
                         </div>
                         <div class="card p-2 m-1">
