@@ -11,24 +11,26 @@
 
     <nav th:replace="partials.html::visitor-navbar"></nav>
 
+    <div class="container">
+
     <th:block th:switch="${error}">
         <div th:case="'Not Found'">
-            <h1>Page not Found!!</h1>
+            <h1>Well, this is embarassing (404ed!)</h1>
+            <p>Our favorite book...it was just...right....here.</p>
+            <img src="/img/binoculars.jpg" width="500px">
+            <p>We'll be on the lookout for it. But if you came here following a link: <a href="mailto:ted.mccormick@gmail.com">let us know.</a></p>
         </div>
         <div th:case="Forbidden">
-            <h1>You don't have permission to view this page.</h1>
+            <h1>Oh dear! It looks like you don't have permission to view this page (403ed!).</h1>
+            <p>Were you supposed to? Hmmmm: <a href="mailto:ted.mccormick@gmail.com">let us know.</a></p>
+            <p class="text-muted">And if you <strong>weren't</strong> supposed to be here - well, why don't you go read a book?</p>
+            <img src="/img/lockedbook.jpg" width="500px">
+
         </div>
     </th:block>
-        <p>Watch a video instead</p>
-    <iframe
-            width="420"
-            height="315"
-            src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
+        <h4>Sorry about that - but besides going back the way you came, you can also check out <a href="/bookclubs">all the current bookclubs</a> to find a place to hang out.</h4>
 
-            frameborder="0">
-            allowfullscreen="allowfullscreen"
-        >
-    </iframe>
+    </div></body>
 
     <footer th:replace="partials.html::footer"></footer>
 

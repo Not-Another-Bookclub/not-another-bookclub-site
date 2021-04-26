@@ -25,6 +25,8 @@ public class PostController {
     private final BookRepository bookDao;
     private final BookclubBookRepository bookclubbookDao;
     private final MeetingRepository meetingDao;
+    private final BookclubMembershipRepository bookclubMembershipDao;
+
 
 
 //    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao){
@@ -36,7 +38,15 @@ public class PostController {
 //
 //    }
 
-    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService, CommentRepository commentDao,  BookclubRepository bookclubDao, BookRepository bookDao, BookclubBookRepository bookclubbookDao, MeetingRepository meetingDao){
+    public PostController(PostRepository postDao,
+                          UserRepository userDao,
+                          EmailService emailService,
+                          CommentRepository commentDao,
+                          BookclubRepository bookclubDao,
+                          BookRepository bookDao,
+                          BookclubBookRepository bookclubbookDao,
+                          MeetingRepository meetingDao,
+                          BookclubMembershipRepository bookclubMembershipDao){
 
         this.postDao = postDao;
         this.userDao = userDao;
@@ -46,6 +56,7 @@ public class PostController {
         this.bookDao = bookDao;
         this.bookclubbookDao = bookclubbookDao;
         this.meetingDao = meetingDao;
+        this.bookclubMembershipDao = bookclubMembershipDao;
 
     }
 
@@ -144,12 +155,40 @@ public class PostController {
 
 @GetMapping("/bookclubs/{id}/posts/create")
     public String createRender(@PathVariable long id, Model model) {
+        BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         Bookclub bookclub = bookclubDao.getOne(id);
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("loggedin",loggedin);
+
+            List<BookclubMembership> memberships = bookclubMembershipDao.findAllByBookclub(bookclub);
+            List<User> members = new ArrayList<User>();
+            for (BookclubMembership membership : memberships) {
+                if (membership.getStatus() == active && membership.getUser().getId() == loggedin.getId()) {
+                    members.add(membership.getUser()); model.addAttribute("isMember", true);
+                }
+            }
+            if (members.isEmpty()){
+                model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                        "  You must be an active member of this bookclub to create a post. </div>");
+            }
+        }
+        else {
+            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                    "  You must be logged in to post create a post. </div>");
+            return "users/login";
+        }
+
+
         List<BookclubBook> bookclubBooks = bookclubbookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
         for (BookclubBook bookclubook: bookclubBooks) {
             books.add(bookclubook.getBook().getGoogleID());
         }
+
+
+
+
+
         Post post = new Post();
     System.out.println("post.getId() = " + post.getId());
         model.addAttribute("bookclub", bookclub);
@@ -180,8 +219,38 @@ public class PostController {
 
     @GetMapping("/bookclubs/{bookclubid}/posts/{id}/edit")
     public String editIndividualPost (@PathVariable long bookclubid, @PathVariable long id, Model model){
-
+        BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         Bookclub bookclub = bookclubDao.getOne(bookclubid);
+        Post post = postDao.getOne(id);
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("loggedin",loggedin);
+
+            List<BookclubMembership> memberships = bookclubMembershipDao.findAllByBookclub(bookclub);
+            List<User> members = new ArrayList<User>();
+            for (BookclubMembership membership : memberships) {
+                if (membership.getStatus() == active && membership.getUser().getId() == loggedin.getId()) {
+                    members.add(membership.getUser()); model.addAttribute("isMember", true);
+                }
+            }
+            if (members.isEmpty()){
+                model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                        "  You must be an active member of this bookclub to edit a post. </div>");
+            }
+            if(loggedin.getId() == post.getAuthor().getId()) {model.addAttribute("isAuthor", true);}
+            else {
+                model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                        "  You cannot edit a post that doesn't belong to you. </div>");
+            }
+        }
+        else {
+            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                    "  You must be logged in to edit a post. </div>");
+            return "users/login";
+        }
+
+
+
+//        Bookclub bookclub = bookclubDao.getOne(bookclubid);
         List<BookclubBook> bookclubBooks = bookclubbookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
         for (BookclubBook bookclubook: bookclubBooks) {
