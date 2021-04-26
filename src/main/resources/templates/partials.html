@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                    <div>
+                    <div th:if="${user.username != null}" >
                             <li class="nav-item">
                                 <a class="nav-link active" href="/bookclubs">Home</a>
                             </li>
@@ -55,9 +55,11 @@
                                 </form>
                             </li>
                     </div>
+<!--                </ul>-->
 
+<!--                <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
 
-                    <div>
+                    <div th:if="${user.username == null}" >
 
                             <li class="nav-item">
                                 <a class="nav-link active" href="/bookclubs">Home</a>
@@ -101,7 +103,7 @@
 
                             </li>
                     </div>
-
+                </ul>
 
 <!--                    <li>-->
 <!--                        <form th:action="@{/logout}" th:method="post">-->
