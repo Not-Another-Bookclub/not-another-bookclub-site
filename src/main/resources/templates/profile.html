@@ -55,13 +55,16 @@
             </div>
         </div>
 
-        <div th:if="${canInvite}">
-            <h3>You can invite this person</h3>
+        <div th:if="${canInvite}" class="my-1">
+            <div class="d-flex">
+                <h2 class="mx-3">You can invite this person</h2>
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Invite
-            </button>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Invite
+                </button>
+            </div>
+
 
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
