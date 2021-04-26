@@ -60,30 +60,31 @@ public class PostController {
 
     }
 
-@GetMapping("/posts")
-    public String index(Model model) {
-//    List<Post> posts = new ArrayList<>();
-//    for (int i = 1; i<5; i++) {
-//        posts.add(new Post(i, "Here's a title for this one", "Here's a bunch of text for it"
-//
-//        ));
-//        model.addAttribute("posts", posts);
-//    }
-    List<Post> posts = postDao.findAll();
-//    User loggedIn = new User();
-//    loggedIn.setUsername(null);
-    if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user",loggedIn);}
-    Collections.reverse(posts);
-    model.addAttribute("posts", posts);
-    return "posts/index";
-}
+//@GetMapping("/posts")
+//    public String index(Model model) {
+////    List<Post> posts = new ArrayList<>();
+////    for (int i = 1; i<5; i++) {
+////        posts.add(new Post(i, "Here's a title for this one", "Here's a bunch of text for it"
+////
+////        ));
+////        model.addAttribute("posts", posts);
+////    }
+//    List<Post> posts = postDao.findAll();
+////    User loggedIn = new User();
+////    loggedIn.setUsername(null);
+//    if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("user",loggedIn);}
+//    Collections.reverse(posts);
+//    model.addAttribute("posts", posts);
+//    return "posts/index";
+//}
 
 @GetMapping("bookclubs/{bookclubid}/posts/{id}")
     public String renderIndividualPost(@PathVariable long bookclubid, @PathVariable long id, Model model) {
 //    Post post = new Post(id, "Here's a title for this detailed view", "Here's a bunch of text for it as well!");
 //    model.addAttribute("post", post);
 //    model.addAttribute("post", postDao.findAllById(id);
+    User user = new User();
     Post post = postDao.getOne(id);
     if (post.getComments().size() > 0) {Collections.sort(post.getComments());};
     model.addAttribute("post", post);
@@ -91,6 +92,8 @@ public class PostController {
 
     if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("loggedin",loggedin);
+        user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
     if (loggedin.getId() == post.getAuthor().getId()) {
         model.addAttribute("isAuthor", true);
         if (loggedin.getId() == bookclub.getOwner().getId()) {
@@ -128,7 +131,7 @@ public class PostController {
         System.out.println("This is from the Post Controller");
         System.out.println("startdateshtml = " + startdateshtml);
 
-
+        model.addAttribute("user", user);
         model.addAttribute("books", post.getBook());
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("startdateshtml", startdateshtml);
@@ -157,8 +160,11 @@ public class PostController {
     public String createRender(@PathVariable long id, Model model) {
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         Bookclub bookclub = bookclubDao.getOne(id);
+        User user = new User();
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("loggedin",loggedin);
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
 
             List<BookclubMembership> memberships = bookclubMembershipDao.findAllByBookclub(bookclub);
             List<User> members = new ArrayList<User>();
@@ -175,6 +181,7 @@ public class PostController {
         else {
             model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
                     "  You must be logged in to post create a post. </div>");
+            model.addAttribute("user", user);
             return "users/login";
         }
 
@@ -190,7 +197,7 @@ public class PostController {
 
 
         Post post = new Post();
-    System.out.println("post.getId() = " + post.getId());
+        model.addAttribute("user", user);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("books", books);
         model.addAttribute("post", post);
@@ -222,8 +229,11 @@ public class PostController {
         BookclubMembershipStatus active = BookclubMembershipStatus.valueOf("ACTIVE");
         Bookclub bookclub = bookclubDao.getOne(bookclubid);
         Post post = postDao.getOne(id);
+        User user = new User();
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("loggedin",loggedin);
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
 
             List<BookclubMembership> memberships = bookclubMembershipDao.findAllByBookclub(bookclub);
             List<User> members = new ArrayList<User>();
@@ -245,6 +255,7 @@ public class PostController {
         else {
             model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
                     "  You must be logged in to edit a post. </div>");
+            model.addAttribute("user", user);
             return "users/login";
         }
 
@@ -256,6 +267,7 @@ public class PostController {
         for (BookclubBook bookclubook: bookclubBooks) {
             books.add(bookclubook.getBook().getGoogleID());
         }
+        model.addAttribute("user", user);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("books", books);
         model.addAttribute("post", postDao.getOne(id));
@@ -280,13 +292,13 @@ public class PostController {
         return "redirect:/bookclubs/" + bookclub.getId() + "/posts/" + post.getId();
     }
 
-@GetMapping("/search")
-    public String searchPosts (@RequestParam(name = "search") String terms, Model model) {
-//    model.addAttribute("posts", postDao.findPostByTitleIsContaining(terms));
-    model.addAttribute("posts", postDao.findPostByTitleIsContainingOrBodyContaining(terms, terms));
-    model.addAttribute("search", terms);
-    return "posts/index";
-}
+//@GetMapping("/search")
+//    public String searchPosts (@RequestParam(name = "search") String terms, Model model) {
+////    model.addAttribute("posts", postDao.findPostByTitleIsContaining(terms));
+//    model.addAttribute("posts", postDao.findPostByTitleIsContainingOrBodyContaining(terms, terms));
+//    model.addAttribute("search", terms);
+//    return "posts/index";
+//}
 
 //@GetMapping("/profile/{username}")
 //    public String userPosts(@PathVariable String username, Model model) {

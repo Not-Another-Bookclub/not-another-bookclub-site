@@ -26,19 +26,8 @@ public class HomeController {
         User user = new User();
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//            model.addAttribute("user", user
-//            );
-
-//            return "redirect:profile";
         }
         model.addAttribute("user", user);
-
-//        User userInQuestion = userDao.getOne(id);
-//
-//        User loggedin = new User();
-//        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();}
-//        if (loggedin.getId() == userInQuestion.getId()) {model.addAttribute("isowner", true);}
-
 
         return "home";
 
