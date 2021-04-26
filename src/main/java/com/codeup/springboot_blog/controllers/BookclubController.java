@@ -60,9 +60,18 @@ public class BookclubController {
     public String createNewBookclubSave(@ModelAttribute Bookclub bookclub, Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         bookclub.setOwner(user);
+
+
+        System.out.println(bookclub.getId());
+
+
         bookclubDao.save(bookclub);
+
+
         return "redirect:/bookclubs/" + bookclub.getId();
+
     }
+
 
     @GetMapping("bookclubs/{id}")
     public String viewSpecificBookclub(@PathVariable long id, Model model) {
