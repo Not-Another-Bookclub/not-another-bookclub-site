@@ -53,48 +53,51 @@
                         </form>
                     </li>
 
+                    <div>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/bookclubs">Home</a>
-                    </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/bookclubs">Home</a>
+                            </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sign In
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="loginDropdown">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sign In
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="loginDropdown">
 
-<!--                            <form method="POST" action="https://request-inspector.glitch.me/" class="px-4 py-3">-->
-                            <form th:action="@{/login}" method="post" class="px-4 py-3">
-                                <div class="form-group">
+        <!--                            <form method="POST" action="https://request-inspector.glitch.me/" class="px-4 py-3">-->
+                                    <form th:action="@{/login}" method="post" class="px-4 py-3">
+                                        <div class="form-group">
 
-                                        <label class="form-label mt-3" for="username1">Username</label>
-                                        <input class="form-control mb-3" id="username1" name="username" type="text" />
+                                                <label class="form-label mt-3" for="username1">Username</label>
+                                                <input class="form-control mb-3" id="username1" name="username" type="text" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password1">Password</label>
+                                            <div class="input-group"><input type="password" class="form-control" id="password1" name="password" placeholder="Password">
+        <!--                                                            <i class="far fa-eye input-group-text" id="togglePassword"></i>-->
+                                        </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="stayloggedin" id="dropdownCheck">
+                                                <label class="form-check-label" for="dropdownCheck">
+                                                    Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                    </form>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/sign-up">New around here? Sign up</a>
+
+                                    <a class="dropdown-item" href="#">Forgot password?</a>
                                 </div>
-                                <div class="form-group">
-                                    <label for="password1">Password</label>
-                                    <div class="input-group"><input type="password" class="form-control" id="password1" name="password" placeholder="Password">
-<!--                                                            <i class="far fa-eye input-group-text" id="togglePassword"></i>-->
-                                </div>
 
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" name="stayloggedin" id="dropdownCheck">
-                                        <label class="form-check-label" for="dropdownCheck">
-                                            Remember me
-                                        </label>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Sign in</button>
-                            </form>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/sign-up">New around here? Sign up</a>
+                            </li>
+                    </div>
 
-                            <a class="dropdown-item" href="#">Forgot password?</a>
-                        </div>
-
-                    </li>
 
 <!--                    <li>-->
 <!--                        <form th:action="@{/logout}" th:method="post">-->
