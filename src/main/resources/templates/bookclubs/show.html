@@ -24,6 +24,15 @@
                     <input type="submit" id="join-club" class="btn btn-danger" value="Join">
                 </form>
             </div>
+            <div th:if="${!isAccepting}">
+                <div th:if="${isOwner}">
+                    <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
+                        <label for="join-club">Want to join?</label>
+                        <input type="submit" id="join-club" class="btn btn-danger" value="Join">
+                    </form>
+                </div>
+
+            </div>
         </div>
     </div>
 
