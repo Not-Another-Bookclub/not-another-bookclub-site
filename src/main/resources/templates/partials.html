@@ -46,6 +46,16 @@
 <!--                    <li class="nav-item">-->
 <!--                        <a class="nav-link" href="/bookclubs">All Bookclubs</a>-->
 <!--                    </li>-->
+
+                    <li>
+                        <form th:action="@{/logout}" th:method="post">
+                            <button class="btn-link btn" id="logoutmenu">Logout</button>
+                        </form>
+                    </li>
+
+
+
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sign In
@@ -83,11 +93,12 @@
                         </div>
 
                     </li>
-                    <li>
-                        <form th:action="@{/logout}" th:method="post">
-                            <button class="btn-link btn" id="logoutmenu">Logout</button>
-                        </form>
-                    </li>
+
+<!--                    <li>-->
+<!--                        <form th:action="@{/logout}" th:method="post">-->
+<!--                            <button class="btn-link btn" id="logoutmenu">Logout</button>-->
+<!--                        </form>-->
+<!--                    </li>-->
 
                 </ul>
                 <div class="d-flex justify-content-between">
