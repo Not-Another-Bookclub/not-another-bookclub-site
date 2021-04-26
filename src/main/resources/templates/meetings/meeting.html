@@ -8,15 +8,17 @@
 <body>
     <nav th:replace="partials.html :: navbar"></nav>
 
-    <div id="breadcrumbMeetings">
+    <div id="breadcrumbMeeting">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Bookclub</a></li>
+                <li class="breadcrumb-item"><a href="/bookclubs">Bookclub</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Meeting</li>
                 <li class="breadcrumb-item"><a href="#">Edit</a></li>
             </ol>
         </nav>
     </div>
+
+
 
     <div class="container">
         <div th:if="${isOwner}">
