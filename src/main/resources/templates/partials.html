@@ -330,13 +330,11 @@
 
 
 <div th:fragment="booksearch">
-    Version 3
-
     <h1>Book finder</h1>
-    <label for="search Title"></label>
-    <input type="text" id="search title" placeholder="Title">
-    <label for="search Author"></label>
-    <input type="text" id="search Author" placeholder="Author">
+
+    <div class="row g-2 my-2 py-2"> <div class="col-5"> <label for="search Title">Title or Other Keywords</label> <input type="text" class="form-control" id="search title" placeholder="Title"></div>
+
+        <div class="col-auto"> <label for="search Author">Author (not required)</label><input type="text" class="form-control" id="search Author" placeholder="Author"></div></div>
     <button id = "button" type="button" class="btn btn-primary">Search for books!</button>
     <div id="results" class="row"></div>
 </div>
@@ -348,7 +346,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">Modal title</h5>
                 <br>
-                <div id="modalImage"><img src="/img/logo.png"></div>
+                <div id="modalImage"><img src="/img/logo-small.png"></div>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -372,41 +370,13 @@
 </div>
 
 <!-- Modal that updates Bookclub-Books from posts page, because of weird bugs with our posts i.e. if it is on a post related page, it must use this modal -->
-<div th:fragment="postmodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Modal title</h5>
-                <br>
-                <div id="modalImage"><img src="/img/logo.png"></div>
-
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="modalBody">
-
-
-            </div>
-
-            <form th:action="@{'/bookclubs/' + ${post.bookclub.id} + '/book/edit'}" method="Post">
-                <label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label>
-                <input type="date" id="startDate" name="startDate"><div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div>
-                <input type="hidden" id="modalbookid" name="book" value="">
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <div th:if="${isOwner}"> <button type="submit" class="btn btn-primary">Save changes</button></div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <div th:fragment="bookclubmodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">Modal title</h5>
                 <br>
-                <div id="modalImage"><img src="/img/logo.png"></div>
+                <div id="modalImage"><img src="/img/logo-small.png"></div>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -440,7 +410,7 @@
                 let csrf = [[${_csrf.token}]]
                 let csrfname = [[${_csrf.parameterName}]]
                 let bookclubid = [[${bookclubid}]]
-                if (!data.items[i].volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo.png"}
+                if (!data.items[i].volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
                 else {thumbnail = data.items[i].volumeInfo.imageLinks.thumbnail}
                 console.log(thumbnail);
                 if (!data.items[i].volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
@@ -543,8 +513,8 @@ success: function (data) {
 
     // use dom to display ajax rtn
 
-    if (!data.volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo.png"}
-    else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {thumbnail = "http://localhost:8080/img/logo.png"}
+    if (!data.volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
+    else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
     else {thumbnail = data.volumeInfo.imageLinks.thumbnail}
     console.log(thumbnail);
     if (!data.volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
@@ -623,9 +593,9 @@ for(let i = 0; i < idsearch.length; i++) {
                 let author
 
                 if (!data.volumeInfo.hasOwnProperty('imageLinks')) {
-                    thumbnail = "http://localhost:8080/img/logo.png"
+                    thumbnail = "http://localhost:8080/img/logo-small.png"
                 } else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {
-                    thumbnail = "http://localhost:8080/img/logo.png"
+                    thumbnail = "http://localhost:8080/img/logo-small.png"
                 } else {
                     thumbnail = data.volumeInfo.imageLinks.thumbnail
                 }
