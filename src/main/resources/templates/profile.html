@@ -100,11 +100,11 @@
 
         <section th:if="${ownedClubs.size() > 0}">
             <h2>These are the Bookclubs you own</h2>
-            <div  class="d-flex flex-column flex-md-row">
+            <div  class="d-flex flex-column flex-sm-row">
                 <div th:each="bookclub : ${ownedClubs}" class="card" style="width: 230px; height: 230px; padding: 15px; border: none">
                     <a class="p-2" th:href="@{'/bookclubs/' + ${bookclub.id}}" style="text-decoration: none; width: 200px; height: 200px; border: 2px solid black">
                         <div >
-                            <h1 th:text="${bookclub.name}"></h1>
+                            <h3 th:text="${bookclub.name}"></h3>
                             <p th:text="${bookclub.description}"></p>
 <!--                            <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>-->
                         </div>
@@ -120,10 +120,10 @@
         </section>
         <section th:if="${memberClubs.size() > 0}">
             <h2>These are the Bookclubs you are a member of.</h2>
-            <div  class="d-flex flex-column flex-md-row">
+            <div  class="d-flex flex-column flex-sm-row">
                 <div th:each="bookclub : ${memberClubs}" class="card" style="width: 230px; height: 230px; padding: 15px; border: none">
                     <a class="p-2" th:href="@{'/bookclubs/' + ${bookclub.id}}" style="text-decoration: none; width: 200px; height: 200px; border: 2px solid black">
-                        <h1 th:text="${bookclub.name}"></h1>
+                        <h3 th:text="${bookclub.name}"></h3>
                         <p th:text="${bookclub.description}"></p>
 <!--                        <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>-->
                         <!--                <form th:if="${user}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">-->
