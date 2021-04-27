@@ -8,6 +8,32 @@
 <body>
 <div th:replace="partials.html::navbar"></div>
 
+<div id="breadcrumbPosts">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Post</li>
+        </ol>
+    </nav>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Post</li>
+        </ol>
+    </nav>
+
+
+
+<!--    <nav aria-label="breadcrumb">-->
+<!--        <ol class="breadcrumb">-->
+<!--            <li class="breadcrumb-item active" aria-current="page">Post</li>-->
+<!--            <li class="breadcrumb-item"><a href="#">Meeting</a></li>-->
+<!--&lt;!&ndash;            <li class="breadcrumb-item"><a href="#">Bookclub</a></li>&ndash;&gt;-->
+<!--            <li class="breadcrumb-item"><a href="#">Profile</a></li>-->
+<!--        </ol>-->
+<!--    </nav>-->
+</div>
+
 <div class="container">
 <div class="text-center p-2 m-2"><h1>Here is post: Post #<span th:text="${post.id}"></span> <span th:text="${post.title}"></span></h1></div>
 <div id="results1"></div>
