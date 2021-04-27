@@ -38,9 +38,16 @@ public class BookclubController {
 
     @GetMapping("/bookclubs")
     public String showAllBookclubs(Model model) {
-        List<Bookclub> bookclubs = bookclubDao.findAll();
-        model.addAttribute("bookclubs", bookclubs);
+        User user = new User();
 
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+
+        List<Bookclub> bookclubs = bookclubDao.findAll();
+
+        model.addAttribute("bookclubs", bookclubs);
+        model.addAttribute("user", user);
         return "bookclubs/index";
     }
 
@@ -189,6 +196,7 @@ public class BookclubController {
         }
 
 //        PASS INFO INTO THYMELEAF
+        model.addAttribute("user", user);
         model.addAttribute("startdateshtml", startdateshtml);
         model.addAttribute("finishdateshtml", finishdateshtml);
         model.addAttribute("startdates", startdates);
@@ -330,6 +338,9 @@ public class BookclubController {
             }
 
             return "redirect:/bookclubs/" + id;
+
+           
+
         } else {
             return "redirect:/bookclubs/" + id;
         }

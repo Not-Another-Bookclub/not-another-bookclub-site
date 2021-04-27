@@ -144,6 +144,7 @@ public class ProfileController {
         }
 
 //        PASS IN INFO
+        model.addAttribute("user", user);
         model.addAttribute("startdateshtml",startdateshtml);
         model.addAttribute("finishdateshtml", finishdateshtml);
         model.addAttribute("startdates",startdates);
