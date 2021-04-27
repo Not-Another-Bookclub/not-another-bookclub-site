@@ -89,6 +89,7 @@ public class BookclubController {
         Boolean isAccepting = true;
         Boolean isPrivate = false;
         Boolean isActiveUser = false;
+        Boolean isLoggedIn = false;
         Boolean isNotActiveUser = true;
         ArrayList<Bookclub> holder = new ArrayList<>();
         ArrayList<User> pendingHolder = new ArrayList<>();
@@ -108,6 +109,7 @@ public class BookclubController {
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
+            isLoggedIn = true;
 
 //            ALL MEMBERSHIPS LOGGED IN USER HAS
             ArrayList<BookclubMembership> bookClubMemberships = bookclubmembershipDao.findBookclubMembershipsByUser(user);
@@ -213,6 +215,7 @@ public class BookclubController {
         model.addAttribute("isPrivate", isPrivate);
         model.addAttribute("isActiveUser", isActiveUser);
         model.addAttribute("isNotActiveUser", isNotActiveUser);
+        model.addAttribute("isLoggedIn", isLoggedIn);
 
         return "bookclubs/show";
     }

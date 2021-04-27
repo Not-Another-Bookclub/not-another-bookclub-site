@@ -8,9 +8,11 @@
 <body>
 <div th:replace="partials.html::navbar"></div>
 <div class="container">
+
+<!--    INFO / OWNER SECTION-->
     <div class="card card-body">
 
-        <div class="row">
+        <div class="row d-flex flex-column flex-md-row">
             <div class="col-6">
                 <h1 th:text="${bookclub.name}"></h1>
                 <p th:text="${bookclub.description}"></p>
@@ -18,8 +20,8 @@
                     This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}" class="btn btn-info text-dark">View Profile</a>
                 </p>
             </div>
-            <div class="col-6 p-3">
-                <div th:if="${isOwner}">
+            <div  th:if="${isOwner}" class="col-6 p-3">
+<!--                <div class="col-6 p-3">-->
                     <h2>You own this Bookclub</h2>
 
                     <div class="d-flex">
@@ -34,12 +36,17 @@
                         </div>
                     </div>
 
-                </div>
+<!--                </div>-->
+            </div>
+            <div th:if="${!isOwner}" class="col-6 p-3">
+<!--                <div class="col-6 p-3">-->
+
+<!--                </div>-->
             </div>
         </div>
 
 
-        <div th:if="${user}">
+        <div th:if="${user.username != null}">
             <div th:if="${isAccepting}">
                 <hr>
                 <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
@@ -59,24 +66,27 @@
             </div>
         </div>
     </div>
+<!--    END OF INFO / OWNER -->
 
-
+<!--    PEOPLE WHO WANT TO JOIN-->
     <div th:if="${isOwner}" class="mt-3">
-
-        <div th:each="user : ${pendingUsers}" class="text-center">
-            <div class="container card">
-                    <span>
-                        <h1 th:text="${user.username}"></h1>Wants to join
-                    </span>
-
-                <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                    <input type="submit" class="btn btn-success" value="Accept">
-                </form>
-                <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                    <input type="submit" class="btn btn-danger" value="Decline">
-                </form>
+        <div class="card p-3 d-flex flex-column flex-sm-row">
+            <div th:each="user : ${pendingUsers}" class="d-flex flex-row p-3" style="width: 300px; border: 2px solid">
+                <div class="card p-2 m-1">
+                    <a class="btn btn-primary" th:text="${user.username}"></a>
+                    <span> Wants to join</span>
+                </div>
+                <div class="card p-2 m-1">
+                    <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
+                        <input type="submit" class="btn btn-success" value="Accept">
+                    </form>
+                    <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
+                        <input type="submit" class="btn btn-danger" value="Decline">
+                    </form>
+                </div>
             </div>
         </div>
+
     </div>
 
 
@@ -128,21 +138,18 @@
             <div th:replace="partials.html :: booksearch"></div>
             <br>
             <br>
-<<<<<<< HEAD
-=======
 
->>>>>>> f6a00dc776b76afcec223f9acf098fc487036593
         </div>
 
-        <div>
+        <div th:if="${books.size() > 0}">
             <h1>
                 Here's the books on the <span th:text="${bookclub.name}"></span> reading list.
             </h1>
+            <div id="results1" class="row"></div>
+            <br>
+            <br>
         </div>
 
-        <div id="results1" class="row"></div>
-        <br>
-        <br>
 
     </div>
 
@@ -207,20 +214,19 @@
 
                         <br>
                         <br>
-<<<<<<< HEAD
-                        <!--                        <div id="results"></div>-->
-=======
 
->>>>>>> f6a00dc776b76afcec223f9acf098fc487036593
                     </div>
 
 <!--                    BOOKLIST-->
-                    <h1>
-                        Here's the books on the <span th:text="${bookclub.name}"></span> reading list.
-                    </h1>
-                    <div id="results1" class="row"></div>
-                    <br>
-                    <br>
+                    <div th:if="${books.size() > 0}">
+                        <h1>
+                            Here's the books on the <span th:text="${bookclub.name}"></span> reading list.
+                        </h1>
+                        <div id="results1" class="row"></div>
+                        <br>
+                        <br>
+                    </div>
+
 
                 </div>
                 <div th:if="${!isActiveUser}">
