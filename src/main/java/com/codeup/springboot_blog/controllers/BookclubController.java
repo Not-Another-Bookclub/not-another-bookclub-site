@@ -45,7 +45,32 @@ public class BookclubController {
         }
 
         List<Bookclub> bookclubs = bookclubDao.findAll();
+        Date date = new Date();
+        List<Meeting> nextmeeting = new ArrayList<>();
+        List<String> currentbook = new ArrayList<>();
+        List<Integer> numberbooks = new ArrayList<>();
+        for (Bookclub bookclub : bookclubs) {
+            List<Meeting> allmeetings = meetingDao.findAllByBookclubEquals(bookclub);
+            numberbooks.add(bookclubBookDao.getAllByBookclub(bookclub).size());
+            Collections.sort(allmeetings);
+            int count = 0;
+            for (Meeting meeting : allmeetings) {
+                if (meeting.getTimedate().after(date)) {
+                    count++;
+                    nextmeeting.add(meeting);
+                    currentbook.add(meeting.getBook().getGoogleID());
+                    break;
+                }
+            }
+            if (count == 0) {
+                nextmeeting.add(new Meeting());
+                currentbook.add("No book being read currently");
+            }
+        }
 
+        model.addAttribute("numberbooks", numberbooks);
+        model.addAttribute("books", currentbook);
+        model.addAttribute("meetings", nextmeeting);
         model.addAttribute("bookclubs", bookclubs);
         model.addAttribute("user", user);
         return "bookclubs/index";
@@ -56,8 +81,17 @@ public class BookclubController {
         Bookclub bookclub = new Bookclub();
         bookclub.setIs_private(false);
         bookclub.setAccepting_members(true);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            ;}
+        else {model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                "  You must be logged in to create a bookclub.. </div>");
+            return "user/login";
+        }
+
         bookclub.setOwner(user);
+        model.addAttribute("user", user);
         model.addAttribute("bookclub", bookclub);
 
         return "bookclubs/create";
@@ -89,6 +123,7 @@ public class BookclubController {
         Boolean isAccepting = true;
         Boolean isPrivate = false;
         Boolean isActiveUser = false;
+        Boolean isLoggedIn = false;
         Boolean isNotActiveUser = true;
         ArrayList<Bookclub> holder = new ArrayList<>();
         ArrayList<User> pendingHolder = new ArrayList<>();
@@ -108,6 +143,7 @@ public class BookclubController {
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("user", user);
+            isLoggedIn = true;
 
 //            ALL MEMBERSHIPS LOGGED IN USER HAS
             ArrayList<BookclubMembership> bookClubMemberships = bookclubmembershipDao.findBookclubMembershipsByUser(user);
@@ -213,6 +249,7 @@ public class BookclubController {
         model.addAttribute("isPrivate", isPrivate);
         model.addAttribute("isActiveUser", isActiveUser);
         model.addAttribute("isNotActiveUser", isNotActiveUser);
+        model.addAttribute("isLoggedIn", isLoggedIn);
 
         return "bookclubs/show";
     }
@@ -339,7 +376,6 @@ public class BookclubController {
             }
 
             return "redirect:/bookclubs/" + id;
-
         } else {
             return "redirect:/bookclubs/" + id;
         }

@@ -7,6 +7,38 @@
 </head>
 <body>
     <nav th:replace="partials.html :: navbar"></nav>
+
+    <div class="breadcrumbMeeting">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Meeting</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="breadcrumbMeeting">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Meeting</li>
+            </ol>
+        </nav>
+    </div>
+
+
+
+<!--    <div class="breadcrumbMeeting">-->
+<!--        <nav aria-label="breadcrumb">-->
+<!--            <ol class="breadcrumb">-->
+<!--                <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>-->
+<!--                <li class="breadcrumb-item active" aria-current="page">Meeting</li>-->
+<!--                <li class="breadcrumb-item"><a href="#">Edit</a></li>-->
+<!--            </ol>-->
+<!--        </nav>-->
+<!--    </div>-->
+
+
+
     <div class="container">
         <div th:if="${isOwner}">
             you own this. Wanna edit it?
@@ -19,7 +51,7 @@
 
 
     <div>
-        <p>The meeting is schedule for <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span></p>
+        <p>The meeting is scheduled for <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span></p>
         <p>This meeting is being held at: <span th:text="${meeting.location}"></span></p>
         <p th:if="${ismemberactive}">This meeting is being held at: <span th:text="${meeting.getAddress()}"></span>,
         <span th:text="${meeting.getCity()}"></span>, <span th:text="${meeting.zipPlusFour}"></span></p>
