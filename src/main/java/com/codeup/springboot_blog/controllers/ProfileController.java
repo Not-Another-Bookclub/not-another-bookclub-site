@@ -32,6 +32,7 @@ public class ProfileController {
     @GetMapping("/pro/{id}")
     public String showUserProfile(@PathVariable long id, Model model){
         User userInQuestion = userDao.getOne(id);
+        Boolean isOwner = false;
         List<Bookclub> bookclubsOwned = bookclubDao.findBookclubsByOwnerId(id);
         List<Bookclub> loggedUsersBookclubs = new ArrayList<>();
         ArrayList<BookclubMembership> bookClubMemberships =  bookclubMembershipDao.findBookclubMembershipsByUser(userInQuestion);
@@ -48,7 +49,7 @@ public class ProfileController {
             loggedUsersBookclubs =  bookclubDao.findBookclubsByOwnerId(user.getId());
 //            IS LOGGED IN USER THE OWNER OF PROFILE
             if (user.getId() == userInQuestion.getId()) {
-                model.addAttribute("isowner", true);
+                isOwner = true;
 
                 model.addAttribute("loggedUserBookclubs", loggedUsersBookclubs);
 
@@ -148,6 +149,7 @@ public class ProfileController {
         model.addAttribute("finishdateshtml", finishdateshtml);
         model.addAttribute("startdates",startdates);
         model.addAttribute("finishdates",finishdates);
+        model.addAttribute("isOwner", isOwner);
         model.addAttribute("name", userInQuestion.getUsername());
         model.addAttribute("ownedClubs", bookclubsOwned);
         model.addAttribute("memberClubs", holder);

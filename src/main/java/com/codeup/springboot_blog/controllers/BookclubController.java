@@ -331,8 +331,15 @@ public class BookclubController {
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            model.addAttribute("user", user);
-            return "bookclubs/edit";
+
+            if(bookclub.getOwner().getId() == user.getId()){
+                model.addAttribute("user", user);
+
+                return "bookclubs/edit";
+            }
+
+            return "redirect:/bookclubs/" + id;
+
         } else {
             return "redirect:/bookclubs/" + id;
         }
