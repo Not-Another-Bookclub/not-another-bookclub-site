@@ -8,20 +8,102 @@
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
-<div class="container">
-    <h1>Here's a list of bookclubs. Eventually this should be searchable/filterable.</h1>
+<!--<nav aria-label="breadcrumb">-->
+<!--    <ol class="breadcrumb">-->
+<!--        <li class="breadcrumb-item active" aria-current="BookClubs"></li>-->
+<!--    </ol>-->
+<!--</nav>-->
 
-    <div th:each="bookclub : ${bookclubs}" class="row text-center">
-        <div class="col-12 col-md-6">
-            <a th:href="@{/bookclubs/__${bookclub.id}__/}"> <h4 th:text="${bookclub.name}"></h4></a>
-            <p th:text="${bookclub.description}"></p>
+<div class="container">
+    <h1 class="py-2 my-2">Here's all the current bookclubs in Not Another Bookclub:</h1>
+
+   <div class="row"><div th:each="bookclub, istat : ${bookclubs}" class="text-center col-12 col-md-6 row">
+<!--    <div th:each="book : ${books}"><div th:each="meeting : ${meetings}"-->
+            <div  class="col-4" th:text="${books.get(__${istat.index}__)}"></div>
+            <div class="col-8"> <a th:href="@{/bookclubs/__${bookclub.id}__/}"> <h4 th:text="${bookclub.name}"></h4></a>
+            <div class="text-start"><p th:text="${bookclub.description}"></p>
             <div th:if="${bookclub.accepting_members}"><p>Currently accepting new members.</p></div>
-            <p>There are currently <span th:text="${bookclub.users.size()}"></span> members. They have a reading list of
-<!--                <span th:text="${bookclub.books.size}"></span> -->
-            </p>
+                <div><p>There are currently <span th:text="${bookclub.users.size()}"></span> members.</p>
+                    <p>They have a reading list of <span th:text="${numberbooks.get(__${istat.index}__)}"></span> books.</p></div>
+             <div th:if="${meetings.get(__${istat.index}__).timedate} != null">They'll be finished with this book and meet: <br><span th:text="${#dates.format(meetings.get(__${istat.index}__).timedate,'E, MMM dd yyyy hh:mm:ss a')}"></span></div>
+              <div th:if="${meetings.get(__${istat.index}__).timedate} == null">No meetings scheduled at this time.</div>
+                </div>
         </div>
-    </div>
+   </div></div>
 </div>
 <footer th:replace="partials.html::footer"></footer>
+<script th:inline="javascript">
+    let idsearch = [[${books}]]
+    let findreplace = {}
+
+    function findandreplacepopulate(idSearch) {
+        $.ajax({
+            url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+            dataType: 'json',
+            success: function (data) {
+                // findreplace[idSearch] = data.volumeInfo.title;
+
+                $('body :not(script)').contents().filter(function () {
+                    return this.nodeType === 3;
+                }).replaceWith(function () {
+
+                    let thumbnail
+                    let author
+
+                    // use dom to display ajax rtn
+
+                    if (!data.volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
+                    else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
+                    else {thumbnail = data.volumeInfo.imageLinks.thumbnail}
+                    console.log(thumbnail);
+                    if (!data.volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
+                    else {author = data.volumeInfo.authors[0]}
+
+                    var html = '<div class=" text-center">'
+                    html += '<h5>Currently reading:</h5>'
+                    // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
+                    html += "<img src='" + thumbnail + "' alt='Book Cover'>"
+                    html += "<div class='card-body'>"
+                    html += "<h6 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h6><br>"
+
+                    return this.nodeValue.replace(idSearch, html)})
+
+
+            }, type: 'Get',
+        })
+    }
+
+    if (typeof idsearch == "string") {findandreplacepopulate(idsearch);}
+    else for (let i = 0; i < idsearch.length; i++) {
+        findandreplacepopulate(idsearch[i])
+    }
+
+    // setTimeout(function() {
+    //     if (typeof idsearch == "string") {
+    //         $('body :not(script)').contents().filter(function () {
+    //             return this.nodeType === 3;
+    //         }).replaceWith(function () {
+    //             return this.nodeValue.replace(idsearch, findreplace[idsearch])
+    //         })
+    //
+    //     } else {
+    //         for (let i = 0; i < idsearch.length; i++) {
+    //             $('body :not(script)').contents().filter(function () {
+    //                 return this.nodeType === 3;
+    //             }).replaceWith(function () {
+    //                 return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
+    //             })
+    //         }
+    //
+    //     }
+    //
+    // }
+    //     , 500)
+
+
+
+
+</script>
+
 </body>
 </html>

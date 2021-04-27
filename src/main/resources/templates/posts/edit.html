@@ -8,6 +8,26 @@
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
+<div id="breadcrumbPosts">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        </ol>
+    </nav>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+
+<!--            <li class="breadcrumb-item active" aria-current="page">Bookclub</li>-->
+            <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>
+            <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/posts/' + ${post.id}}">Post</a></li>
+<!--            <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>-->
+
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+
+        </ol>
+    </nav>
+
 <div class="container">
     <div th:unless="${isAuthor}"><h1>Sorry, you can't edit a post that isn't yours. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and email the author or Bookclub owner.</h1></div>
     <div th:if="${isAuthor}">
