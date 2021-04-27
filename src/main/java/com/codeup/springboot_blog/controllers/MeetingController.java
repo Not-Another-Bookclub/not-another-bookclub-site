@@ -55,7 +55,6 @@ public class MeetingController {
 //        IF YOU ARE LOGGED IN
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            model.addAttribute("user", user);
 
             if(bookclub.getOwner().getId() == user.getId()){
                 isOwner = true;
@@ -109,6 +108,7 @@ public class MeetingController {
                 finishdateshtml.add(html.format(date));}}
         }
         //Everything gets passed down to Thymeleaf
+        model.addAttribute("user", user);
         model.addAttribute("startdateshtml", startdateshtml);
         model.addAttribute("finishdateshtml", finishdateshtml);
         model.addAttribute("startdates", startdates);
@@ -119,9 +119,29 @@ public class MeetingController {
         return "meetings/meeting";
     }
 
-    @GetMapping("/bookclubs/{bookclubId}/meeting/create")
-    public String createNewBookclubRender(@PathVariable long bookclubId ,Model model) {
-        Bookclub bookclub = bookclubDao.getOne(bookclubId);
+    @GetMapping("/bookclubs/{bookclubid}/meeting/create")
+    public String createNewBookclubRender(@PathVariable long bookclubid ,Model model) {
+        Bookclub bookclub = bookclubDao.getOne(bookclubid);
+        User user = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("loggedin",loggedin);
+
+            if(loggedin.getId() == bookclub.getOwner().getId()) {model.addAttribute("isOwner", true);}
+            else {model.addAttribute("isOwner", false);
+                model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                        "  You cannot create a meeting for a Bookclub that doesn't belong to you. </div>");
+                model.addAttribute("user", user);
+            }
+        }
+        else {
+            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                    "  You must be logged in to create a meeting. </div>");
+            model.addAttribute("user", user);
+            return "users/login";
+        }
+
+
         List<BookclubBook> bookclubBooks = bookclubBookDao.getAllByBookclub(bookclub);
         List<String> books = new ArrayList<>();
         for (BookclubBook bookclubook: bookclubBooks) {
@@ -133,6 +153,7 @@ public class MeetingController {
         meeting.setTimedate(new Date(Calendar.getInstance().getTime().getTime()));
         meeting.setBookclub(bookclub);
 
+        model.addAttribute("user", user);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("books", books);
         model.addAttribute("meeting", meeting);
@@ -185,9 +206,28 @@ public class MeetingController {
             @PathVariable long bookclubid,
             @PathVariable long meetingId,
             Model model){
-
 //        Get the bookclub
         Bookclub bookclub = bookclubDao.getOne(bookclubid);
+        User user = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("loggedin",loggedin);
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+
+            if(loggedin.getId() == bookclub.getOwner().getId()) {model.addAttribute("isOwner", true);}
+            else {model.addAttribute("isOwner", false);
+                model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                        "  You cannot create a meeting for a Bookclub that doesn't belong to you. </div>");
+            }
+        }
+        else {
+            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                    "  You must be logged in to create a meeting. </div>");
+            return "users/login";
+        }
+
+
+
 //get the meeting
         Meeting meeting = meetingDao.getOne(meetingId);
 //get the books
@@ -196,7 +236,7 @@ public class MeetingController {
         for (BookclubBook bookclubook: bookclubBooks) {
             books.add(bookclubook.getBook().getGoogleID());
         }
-
+        model.addAttribute("user", user);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("books", books);
         model.addAttribute("meeting", meeting);

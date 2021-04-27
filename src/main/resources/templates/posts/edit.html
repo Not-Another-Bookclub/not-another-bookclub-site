@@ -9,6 +9,8 @@
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
 <div class="container">
+    <div th:unless="${isAuthor}"><h1>Sorry, you can't edit a post that isn't yours. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and email the author or Bookclub owner.</h1></div>
+    <div th:if="${isAuthor}">
     <h1>Use the form below to edit an existing post!</h1>
     <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">
         <div class="mb-3">
@@ -24,17 +26,17 @@
             <div class="mb-3">
                 <label for="book" class="form-label">What book is this about?</label>
                 <select class="form-control" name="book" id="book">
-                    <option value="0">select book</option>
                     <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
                 </select>
             </div>
         <div id="results1" class="d-none"></div>
         <button class="btn btn-secondary text-center">Submit Post</button>
     </form>
+    </div>
 </div>
-<div th:replace="partials.html::modal"></div>
+<!--<div th:replace="partials.html::bookclubmodal"></div>-->
 
 <footer th:replace="partials.html::footer"></footer>
-<script th:replace="partials.html::findreplace)"></script>
+<script th:replace="partials.html::findreplace"></script>
 </body>
 </html>

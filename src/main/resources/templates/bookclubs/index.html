@@ -13,7 +13,7 @@
 
     <div th:each="bookclub : ${bookclubs}" class="row text-center">
         <div class="col-12 col-md-6">
-        <h4 th:text="${bookclub.name}"></h4>
+            <a th:href="@{/bookclubs/__${bookclub.id}__/}"> <h4 th:text="${bookclub.name}"></h4></a>
             <p th:text="${bookclub.description}"></p>
             <div th:if="${bookclub.accepting_members}"><p>Currently accepting new members.</p></div>
             <p>There are currently <span th:text="${bookclub.users.size()}"></span> members. They have a reading list of

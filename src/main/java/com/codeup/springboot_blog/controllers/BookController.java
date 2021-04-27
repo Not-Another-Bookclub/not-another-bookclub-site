@@ -40,11 +40,6 @@ public class BookController {
         this.bookclubmembershipDao = bookclubmembershipDao;
     }
 
-    @GetMapping("/book/add")
-    public String addBookRender(Model model) {
-        return "posts/index";
-    }
-
     @PostMapping("/book/add")
     public String addBook(@RequestParam(name = "path") String path, @RequestParam(name = "book") String google_id, @RequestParam(name = "bookclubid") Long bookclubid, Model model) {
         User loggedin;

@@ -30,6 +30,12 @@ public class UserController {
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("loggedin", loggedin);
+            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                    "  You are already loggedin as" + loggedin.getUsername() + ". </div>");
+        }
         User user = new User();
         user.setIs_admin(false);
         user.setIs_private(false);
@@ -60,26 +66,30 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @GetMapping("/profile/{username}/edit")
-    public String profileEditRender(@PathVariable String username, Model model) {
-        User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", userDao.findByUsername(loggedin.getUsername()));
-        return "users/edit";
-    }
+//    @GetMapping("/profile/{username}/edit")
+//    public String profileEditRender(@PathVariable String username, Model model) {
+//        User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("user", userDao.findByUsername(loggedin.getUsername()));
+//        return "users/edit";
+//    }
 
-    @PostMapping("profile/{username}/edit")
-    public String profileEditSave(@ModelAttribute User user, @PathVariable String username, Model model) {
-        User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        user.setId(loggedin.getId());
-        userDao.save(user);
-        return "redirect:/profile/" + user.getUsername();
-    }
+//    @PostMapping("profile/{username}/edit")
+//    public String profileEditSave(@ModelAttribute User user, @PathVariable String username, Model model) {
+//        User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+//        user.setId(loggedin.getId());
+//        userDao.save(user);
+//        return "redirect:/profile/" + user.getUsername();
+//    }
 
     @GetMapping("/forgot-username")
-    public String forgotUsername(){
+    public String forgotUsername(Model model){
+        User user = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();}
 
+        model.addAttribute("user", user);
         return "users/forgot-username";
     }
 

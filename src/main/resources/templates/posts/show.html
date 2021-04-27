@@ -14,7 +14,7 @@
 <div class="text-start p-2 m-2"><p th:text="${post.getBody()}">Body will go here.</p>
     <p>Posted by: <span th:text="${post.author.getUsername()}"></span> - <a th:href ="@{/profile/__${post.author.username}__}">profile</a> - <a th:href="'mailto:' + ${post.author.email}">email</a> </p></div>
 <!--    <br><p>Posted: <span th:text="${post.created_on_string}"></span>. Last updated: <span th:text="${post.modified_on_string}"></span> </div>-->
-   <div th:if="${owner}"> <div class="center-text p-2 m-2"><a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}"><button type="button" class="btn btn-primary">Edit</button></a>
+   <div th:if="${isAuthor}"> <div class="center-text p-2 m-2"><a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}"><button type="button" class="btn btn-primary">Edit</button></a>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
         Delete
