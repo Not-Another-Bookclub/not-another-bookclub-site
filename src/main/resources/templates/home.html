@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <title>Home</title>
 </head>
+    <link rel="stylesheet" href="/css/home.css">
 <body>
 
 <nav th:replace="partials.html :: navbar"></nav>
@@ -14,8 +15,9 @@
     <h1>Welcome to Not Another BookClub</h1>
 
     <hr>
-
-    <p>
+    <div class="text-center">
+        <img src="/img/magicallibarary.jpg" height="500px"/>
+        <p>
         Not Another Book Club (N.A.B.) seeks to connect people with each by making new friends or maintaining friendships through books.
 
         <br>
@@ -30,13 +32,12 @@
 
         There’s some days that traveling to the designated venue to enjoy another group book session is not possible.
     </p>
-
-<!--<h1>Eventually there will be other stuff here</h1>-->
+</div>
 
 <div th:if="${user.username != null}">Maybe you'd like to view <a th:href="@{/pro/__${user.id}__}">your profile?</a></div>
 
 
-<div th:replace="partials.html :: booksearch"></div>
+<!--<div th:replace="partials.html :: booksearch"></div>-->
 </div>
 
 

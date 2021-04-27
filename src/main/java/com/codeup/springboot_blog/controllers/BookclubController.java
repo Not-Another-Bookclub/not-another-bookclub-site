@@ -84,13 +84,15 @@ public class BookclubController {
         User user = new User();
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            ;}
-        else {model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
-                "  You must be logged in to create a bookclub.. </div>");
+            ;
+        } else {
+            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                    "  You must be logged in to create a bookclub.. </div>");
             return "user/login";
         }
 
         bookclub.setOwner(user);
+
         model.addAttribute("user", user);
         model.addAttribute("bookclub", bookclub);
 
@@ -103,12 +105,13 @@ public class BookclubController {
         bookclub.setOwner(user);
 
 
+
         System.out.println(bookclub.getId());
 
 
         bookclubDao.save(bookclub);
 
-
+        model.addAttribute("user", user);
         return "redirect:/bookclubs/" + bookclub.getId();
 
     }
