@@ -8,6 +8,26 @@
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
+<div id="breadcrumbPosts">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        </ol>
+    </nav>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+
+<!--            <li class="breadcrumb-item active" aria-current="page">Bookclub</li>-->
+            <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>
+            <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/posts/' + ${post.id}}">Post</a></li>
+<!--            <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>-->
+
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+
+        </ol>
+    </nav>
+
 <div class="container">
     <h1>Use the form below to edit an existing post!</h1>
     <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">

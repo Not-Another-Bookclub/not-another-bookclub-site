@@ -8,13 +8,22 @@
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
+<div class="breadcrumbEditMeeting">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        </ol>
+    </nav>
+</div>
+
+
+
 <div id="breadcrumbEditMeeting">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="">Bookclub</a></li>
-            <li class="breadcrumb-item"><a href="#">Meeting</a></li>
+            <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>
+            <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id}}">Meeting</a></li>
             <li class="breadcrumb-item active" aria-current="page">Edit</li>
-
         </ol>
     </nav>
 </div>

@@ -8,15 +8,34 @@
 <body>
     <nav th:replace="partials.html :: navbar"></nav>
 
-    <div id="breadcrumbMeeting">
+    <div class="breadcrumbMeeting">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Meeting</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="breadcrumbMeeting">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Meeting</li>
-                <li class="breadcrumb-item"><a href="#">Edit</a></li>
             </ol>
         </nav>
     </div>
+
+
+
+<!--    <div class="breadcrumbMeeting">-->
+<!--        <nav aria-label="breadcrumb">-->
+<!--            <ol class="breadcrumb">-->
+<!--                <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>-->
+<!--                <li class="breadcrumb-item active" aria-current="page">Meeting</li>-->
+<!--                <li class="breadcrumb-item"><a href="#">Edit</a></li>-->
+<!--            </ol>-->
+<!--        </nav>-->
+<!--    </div>-->
 
 
 
