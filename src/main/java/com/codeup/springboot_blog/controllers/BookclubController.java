@@ -373,7 +373,6 @@ public class BookclubController {
             }
 
             return "redirect:/bookclubs/" + id;
-
         } else {
             return "redirect:/bookclubs/" + id;
         }
