@@ -11,13 +11,32 @@
 
 <div class="container">
 
-<h1>Eventually there will be other stuff here</h1>
+    <h1>Welcome to Not Another BookClub</h1>
+
+    <hr>
+
+    <p>
+        Not Another Book Club (N.A.B.) seeks to connect people with each by making new friends or maintaining friendships through books.
+
+        <br>
+
+        It is, at its most basic level, a social-network for bibliophiles.
+    </p>
+
+    <p>
+        With N.A.B all the bookworms of the world can enjoy their pastime at any location.
+
+        <br>
+
+        There’s some days that traveling to the designated venue to enjoy another group book session is not possible.
+    </p>
+
+<!--<h1>Eventually there will be other stuff here</h1>-->
 
 <div th:if="${user.username != null}">Maybe you'd like to view <a th:href="@{/pro/__${user.id}__}">your profile?</a></div>
 
 
 <div th:replace="partials.html :: booksearch"></div>
-
 </div>
 
 
