@@ -1,0 +1,10 @@
+.narrow-body {
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 1200px){
+    .narrow-body {
+        max-width: 70%;
+    }
+}
+
