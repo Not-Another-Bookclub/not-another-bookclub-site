@@ -17,9 +17,9 @@ a:visited {
     color: var(--quicksilver)
 }
 
-body {
-    background-color: var(--white);
-}
+/*body {*/
+/*    background-color: var(--white);*/
+/*}*/
 
 #footer{
     position: absolute;
@@ -37,5 +37,18 @@ body {
     background-color: var(--cadetblue);
     color: var(--white)
 }
+
+
+/*WALT'S SUGGESTIONS*/
+
+.navbar {
+    background-color: #087fd5;}
+
+.navbar navbar-expand-lg {background-color: #087fd5;}
+
+body {
+    background-color: #4683b4;}
+
+footer { background-color: #4683b4 }
 
 
