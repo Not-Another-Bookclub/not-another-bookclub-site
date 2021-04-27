@@ -5,6 +5,7 @@
     <head th:replace="partials.html :: head('Your Profile Page')">
         <title>Title</title>
     </head>
+    <link rel="stylesheet" href="/css/profile.css">
 <body>
 
 <!--        IF USER IS LOGGED IN THEN THIS NAVBAR WILL BE VISIBLE-->
@@ -20,7 +21,7 @@
         </div>
 
 
-
+<div id="main">
 <div class="container">
     <div th:if="${isOwner}">
         <h1 >Welcome <span th:text="${name}"></span></h1>
@@ -150,6 +151,7 @@
         <br>
         <br>
     </div>
+</div>
 </div>
 <div th:replace="partials.html::usermodal"></div>
 <footer th:replace="partials.html::footer"></footer>
