@@ -18,19 +18,16 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Bookclub</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Meeting</li>
-            </ol>
-        </nav>
-
-
-
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">BookClub</li>
-                <li class="breadcrumb-item"><a href="#">Meeting</a></li>
-                <li class="breadcrumb-item"><a href="#">Post</a></li>
-                <li class="breadcrumb-item"><a href="#">Profile</a></li>
+                <li class="breadcrumb-item"><a th:href="@{@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id}}}">Meeting</a></li>
+
+
+                /bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__
+
+
+
+
+
             </ol>
         </nav>
     </div>
