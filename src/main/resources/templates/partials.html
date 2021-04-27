@@ -14,7 +14,7 @@
 
 
 
-<nav th:fragment="navbar">
+<nav th:fragment="navbar" style="background-color: #B4B8C5">
     <nav th:if="${user.username != null}" class="navbar navbar-expand-lg navbar-light" style="background-color: #B4B8C5">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/img/logo.png" height="75px"></a>
@@ -209,8 +209,8 @@
         </div>
     </nav>
 
-    <br>
-    <br>
+<!--    <br>-->
+<!--    <br>-->
     <span th:utext="${alert}"></span>
 </nav>
 
@@ -259,7 +259,7 @@
 <!--                                DATETIMEPICKER MODAL END-->
 <!--THIS NAVBAR BELOW DOES NOT CONTAIN A CREATE LINK, THIS NAVBAR WILL BE FOR VISITORS-->
 
-<nav th:fragment="visitor-navbar">
+<nav th:fragment="visitor-navbar" style="background-color: #B4B8C5 ">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #B4B8C5">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/img/logo.png" height="75px"></a>
