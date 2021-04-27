@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/utils.css">
 <html lang="en">
 <head th:include="partials.html::head('Create a new Meeting!')" >
     <meta charset="UTF-8">
@@ -17,24 +18,22 @@
 </div>
 
 
-
-<div id="breadcrumbEditMeeting">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>
-            <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id}}">Meeting</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit</li>
-        </ol>
-    </nav>
-</div>
-
 <div class="container">
+    <div id="breadcrumbEditMeeting" class="narrow-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>
+                <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id}}">Meeting</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit</li>
+            </ol>
+        </nav>
+    </div>
 
     <div th:unless="${isOwner}"><h1>Sorry, you can only create meetings for bookclubs for which you are an owner.</h1>
 
         <p>Check <a th:href="@{'/pro/' + ${loggedin.id}}">your profile page</a> for more information</p></div>
 
-    <div th:if="${isOwner}">
+    <div th:if="${isOwner}" class="narrow-body">
 
     <h2>
         Showing the create meeting form for bookclub <span th:text="${bookclub.name}"></span>
@@ -67,15 +66,26 @@
                 <input type="text" name="city" id="city" th:field="*{city}" class="form-control">
             </div>
 
-            <div class="mb-3">
-                <label for="day" class="form-label">Date:</label>
-                <input type="date" name="day" id="day" required class="form-control">
+            <div class="mb-3 row">
+                <div class="form-group col col-md-6">
+                    <label for="day" class="form-label">Date:</label>
+                    <input type="date" name="day" id="day" class="form-control">
+                </div>
+                <div class="form-group col col-md-6">
+                    <label for="time" class="form-label">Time:</label>
+                    <input type="time" name="time" id="time" class="form-control">
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label for="time" class="form-label">Time:</label>
-                <input type="time" name="time" id="time" required class="form-control">
-            </div>
+<!--            <div class="mb-3">-->
+<!--                <label for="day" class="form-label">Date:</label>-->
+<!--                <input type="date" name="day" id="day" required class="form-control">-->
+<!--            </div>-->
+
+<!--            <div class="mb-3">-->
+<!--                <label for="time" class="form-label">Time:</label>-->
+<!--                <input type="time" name="time" id="time" required class="form-control">-->
+<!--            </div>-->
 
             <div class="mb-3">
                 <label for="zipPlusFour" class="form-label">Zip Code:</label>

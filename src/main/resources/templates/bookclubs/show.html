@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/utils.css">
 <html lang="en">
 <head th:include="partials.html::head('A detailed view of this bookclub')">
     <meta charset="UTF-8">
     <title>Detailed view of this post</title>
+
 </head>
+
 <body>
 <div th:replace="partials.html::navbar"></div>
 
 
-    <div id="breadcrumbBookclubs">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Bookclub</li>
-            </ol>
-        </nav>
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/bookclubs}">Bookclubs</a></li>
-                <li class="breadcrumb-item active" aria-current="page">BookClub</li>
-
-<!--                <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Profile Page</a></li>-->
-
-
-<!--                /bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__-->
-
-
-
-
-
-            </ol>
-        </nav>
-    </div>
 
 <div class="container">
 
 
 <!--    INFO / OWNER SECTION-->
+    <div id="breadcrumbBookclubs" class="narrow-body">
+<!--        <nav aria-label="breadcrumb">-->
+<!--            <ol class="breadcrumb">-->
+<!--                <li class="breadcrumb-item active" aria-current="page">Bookclub</li>-->
+<!--            </ol>-->
+<!--        </nav>-->
 
-    <div class="card card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/bookclubs}">Bookclubs</a></li>
+                <li class="breadcrumb-item active" aria-current="page">BookClub</li>
+                <!--                <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Profile Page</a></li>-->
+
+                <!--                /bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__-->
+
+            </ol>
+        </nav>
+    </div>
+
+    <div class="card card-body narrow-body">
 
         <div class="row d-flex flex-column flex-md-row">
             <div class="col-6">
@@ -98,11 +96,12 @@
 <!--    END OF INFO / OWNER -->
 
 <!--    PEOPLE WHO WANT TO JOIN-->
-    <div th:if="${isOwner}" class="mt-3">
-        <div class="card p-3 d-flex flex-column flex-sm-row">
+    <div th:if="${isOwner}" class="mt-3 narrow-body">
+        <h2 th:if="${pendingUsers.size() > 0}">Pending Requests</h2>
+        <div th:if="${pendingUsers.size() > 0}" class="card p-3 d-flex flex-column flex-sm-row">
             <div th:each="user : ${pendingUsers}" class="d-flex flex-row p-3" style="width: 300px; border: 2px solid">
                 <div class="card p-2 m-1">
-                    <a class="btn btn-primary" th:text="${user.username}"></a>
+                    <a class="btn btn-primary" th:href="@{'/pro/' + ${user.id} }" th:text="${user.username}"></a>
                     <span> Wants to join</span>
                 </div>
                 <div class="card p-2 m-1">
@@ -120,7 +119,7 @@
 
 
     <!--    START THE PUBLIC/PRIVATE CONTINGENCY-->
-    <div th:if="${!isPrivate}">
+    <div th:if="${!isPrivate}" class="narrow-body">
 <!--        MEMBERS-->
         <div>
             <h2>Current Members</h2>
@@ -182,7 +181,7 @@
 
     </div>
 
-    <div th:if="${isPrivate}">
+    <div th:if="${isPrivate}" class="narrow-body">
         <div th:if="${user == null}">
             <h3>I'm sorry this group is Private.</h3>
         </div>
