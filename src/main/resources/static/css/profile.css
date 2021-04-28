@@ -1,3 +1,31 @@
 #main {
     background: steelblue;
 }
+
+details {
+    /*padding: 1rem;*/
+}
+
+details > summary {
+    list-style: none;
+    background: black;
+    color: white;
+}
+.hidden-content {
+    /*background:;*/
+    background: white;
+    color: black;
+}
+
+details > summary i {
+    transition: transform 0.4s ease;
+}
+
+details[open] > summary i {
+    transform: rotate(-180deg);
+}
+
+details > summary::-webkit-details-marker {
+    display: none;
+    cursor: pointer;
+}
