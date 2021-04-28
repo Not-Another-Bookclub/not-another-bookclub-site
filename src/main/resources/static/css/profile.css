@@ -1,5 +1,15 @@
-#main {
-    background: steelblue;
+/*#main {*/
+/*    background: steelblue;*/
+/*}*/
+
+:root {
+    --left: hsla(240, 100%, 27%, 0.65);
+    --right: hsla(195, 53%, 79%, 0.65);
+}
+
+body {
+    background: linear-gradient(135deg, var(--left), var(--right)),
+    url('../img/magicallibarary.jpg') no-repeat center center / cover;
 }
 
 details {
