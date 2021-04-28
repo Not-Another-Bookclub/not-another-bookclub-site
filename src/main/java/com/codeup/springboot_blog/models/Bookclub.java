@@ -13,7 +13,7 @@ public class Bookclub {
     @Column
     private String name;
 
-    @Column
+    @Column (columnDefinition = "TEXT", length = 2000)
     private String description;
 
     @Column

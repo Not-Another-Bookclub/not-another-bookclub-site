@@ -113,6 +113,7 @@ public class MeetingController {
         model.addAttribute("finishdateshtml", finishdateshtml);
         model.addAttribute("startdates", startdates);
         model.addAttribute("finishdates", finishdates);
+        model.addAttribute("books", books);
         model.addAttribute("meeting", meeting);
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("isOwner", isOwner);
