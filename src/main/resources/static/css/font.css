@@ -8,7 +8,7 @@ h1, h2, h3{
 }
 
 body {
-    background-color: red;
+    /*background-color: red;*/
     background-image: linear-gradient(    rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)    ),
 
     /*url("../img/teddy-roosevelt.jpg");*/
