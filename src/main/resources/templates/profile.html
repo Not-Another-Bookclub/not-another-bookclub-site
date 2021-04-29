@@ -49,13 +49,20 @@
 
                     <hr></hr>
 
-                    <div class="hidden-content d-flex flex-column flex-sm-row flex-wrap">
-                        <div th:each="invite : ${invites}" class="invite-unit d-flex flex-row m-3 p-3">
-                            <div class="card p-2 m-1">
+                    <div class="hidden-content
+                            d-flex
+                            align-items-center
+                            align-items-lg-start
+                            flex-column
+                            flex-lg-row
+                            flex-nowrap
+                            flex-lg-wrap">
+                        <div th:each="invite : ${invites}" class="invite-unit d-flex flex-row m-3 p-3 row">
+                            <div class="card p-2 m-1 col-12 col-sm-7">
                                 <a th:text="${invite.name}" th:href="@{'/bookclubs/' + ${invite.id}}" class="btn btn-primary"></a>
                                 <p>Wants you to join their Club</p>
                             </div>
-                            <div class="card p-2 m-1">
+                            <div class="card p-2 m-1 col-12 col-sm-4" >
                                 <form th:action="@{'/bookclubs/invite/accept/' + ${invite.id} + '/' + ${user.id}}" th:method="post">
                                     <input type="submit" class="btn btn-success" value="Accept">
                                 </form>

@@ -6,7 +6,6 @@
 }
 
 body {
-    /*background-attachment: fixed;*/
     /*background: linear-gradient(135deg, var(--left), var(--right)),*/
     background: url('../img/magicallibarary.jpg') no-repeat center center fixed;
     background-color: rgba(0, 0, 0, 0.2);
@@ -17,32 +16,44 @@ body {
     color: white;
 }
 
-details {
-    /*padding: 1rem;*/
-    /*box-shadow: -1px -1px 3px 5px white;*/
+.container {
+    padding-top: 30px;
 }
 
+.modal {
+    color: black;
+}
+
+/*Styling that warps the accordion*/
+.pro-card {
+    background: darkblue;
+    opacity: 0.9;
+    padding: 2rem;
+    margin-bottom: 30px;
+}
+
+/*INVITES*/
+.invite-unit {
+    color: black;
+    background: cornflowerblue;
+}
+
+.invite-unit div {
+    background: black;
+    color: white;
+}
+
+.invite-unit > div:first-child {
+    max-width: 300px;
+}
+
+/*THE ACCORDION STYLING*/
 details > summary {
     list-style: none;
     background: black;
     color: white;
     opacity: 1;
 }
-.hidden-content {
-    /*background:;*/
-    background: black;
-    /*color: ;*/
-}
-
-.acc-bar {
-    border: 2px solid white;
-    color: white;
-    background: white;
-    margin: 0px;
-
-}
-
-
 
 details > summary i {
     transition: transform 0.4s ease;
@@ -57,19 +68,16 @@ details > summary::-webkit-details-marker {
     cursor: pointer;
 }
 
-/*details > div a {*/
-/*    background: cornflowerblue;*/
-/*    color: black;*/
-/*    opacity: 1;*/
-/*}*/
+.acc-bar {
+    border: 2px solid white;
+    color: white;
+    background: white;
+    margin: 0px;
 
-.pro-card {
-    background: darkblue;
-    opacity: 0.9;
-    padding: 2rem;
-    /*margin-top: 30px;*/
-    margin-bottom: 30px;
-    /*position: relative;*/
+}
+
+.hidden-content {
+    background: black;
 }
 
 .book-link {
@@ -86,27 +94,9 @@ details > summary::-webkit-details-marker {
     color: white;
 }
 
-.container {
-    padding-top: 30px;
-}
 
-
-.invite-unit {
-    color: black;
-    background: cornflowerblue;
-    /*width: 350px; */
-    /*border: 2px solid;*/
-}
-
-.invite-unit div {
-    background: black;
-    color: white;
-}
-
-.invite-unit > div:first-child {
-    max-width: 300px;
-}
-
-.modal {
-    color: black;
+@media screen and (max-width: 576px){
+    .narrow-body {
+        max-width: 70%;
+    }
 }
