@@ -39,3 +39,12 @@ details > summary::-webkit-details-marker {
     display: none;
     cursor: pointer;
 }
+
+p, h4, h5, h6{
+    font-family: sans-serif;
+
+}
+
+h1, h2, h3{
+    font-family: "serif";
+}

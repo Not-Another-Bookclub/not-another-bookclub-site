@@ -7,3 +7,12 @@
         max-width: 70%;
     }
 }
+
+p, h4, h5, h6{
+    font-family: sans-serif;
+
+}
+
+h1, h2, h3{
+    font-family: "serif";
+}
