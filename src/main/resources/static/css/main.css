@@ -45,6 +45,18 @@ body {
 
 }
 
+.item-carousel {
+    display: block;
+    text-align: center;
+}
 
+body {
+    background: url('../img/magicallibarary.jpg') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 
+}
 
