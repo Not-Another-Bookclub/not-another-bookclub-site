@@ -72,7 +72,8 @@
         <div class="card">
             <div class="card-body">
                 <span th:text="${comment.author.username}"></span> on <span class="text-muted" th:text="${#dates.format(comment.createDate,'E, MMM dd yyyy HH:mm:ss')}"></span><br>
-                <img th:src="${comment.author.getAvatar_path()}" height="30px" width="30px"> <span th:text="${comment.comment}"></span>
+              <div class="d-flex justify-content-between"><div><img th:src="${comment.author.getAvatar_path()}" height="30px" width="30px"> <span th:text="${comment.comment}"></span></div>
+                  <div><span th:if="${user.id == comment.author.id}"><form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment/delete'}" method="post"><input hidden name="id" th:value="${comment.id}"><button type="submit" class="btn btn-danger">Delete</button></form></span></div></div>
             </div>
         </div>
     </div>

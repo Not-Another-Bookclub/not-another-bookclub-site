@@ -45,6 +45,12 @@ public class BookclubController {
         }
 
         List<Bookclub> bookclubs = bookclubDao.findAll();
+//        List<Bookclub> bookclubs = bookclubDao.findBookclubsByIs_privateIsFalse();
+        for (int i = 0; i<bookclubs.size(); i++){
+            if (bookclubs.get(i).isIs_private() == true) {
+                bookclubs.remove(i);
+            }
+        }
         Date date = new Date();
         List<Meeting> nextmeeting = new ArrayList<>();
         List<String> currentbook = new ArrayList<>();

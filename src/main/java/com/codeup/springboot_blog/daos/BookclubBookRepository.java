@@ -9,4 +9,5 @@ import java.util.List;
 public interface BookclubBookRepository extends JpaRepository <BookclubBook, Long> {
     List<BookclubBook> getAllByBookclub(Bookclub bookclub);
     BookclubBook getBookclubBookByBook_GoogleIDAndBookclub(String googleID, Bookclub bookclub);
+    List<BookclubBook> getAllByBook_GoogleID(String googleid);
 }

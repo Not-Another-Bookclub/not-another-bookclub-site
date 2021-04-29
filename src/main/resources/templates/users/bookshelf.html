@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="partials.html::head('Your bookshelf')" >
+    <meta charset="UTF-8" />
+
+</head>
+<body>
+<div th:replace="partials.html::navbar">You shouldn't see this.</div>
+
+<div class="container">
+    <h2>Here's a look at all of your books, <span th:text="${user.username}"></span></h2>
+    <div>
+<div class="row" id="results1"></div>
+<h2 id="resultsuserheadline" class="d-none">Here are the other users that have read <span id="bookname1">that book</span>:</h2>
+<div class="row" id="resultsuser"></div>
+<h2 id="resultsbookclubheadline" class="d-none">Here are bookclubs that have read or are planning to read <span id="bookname2">that book</span>:</h2>
+<div class="row" id="resultsbookclub"></div>
+
+    </div>
+    <div th:replace="partials.html::usermodal"></div>
+</div>
+<footer th:replace="partials.html::footer"></footer>
+
+<script th:inline="javascript">
+        let idsearch = [[${books}]]
+        let startdates = [[${startdates}]]
+        let startdateshtml = [[${startdateshtml}]]
+        let finishdates = [[${finishdates}]]
+        let finishdateshtml = [[${finishdateshtml}]]
+        let userid = [[${user.id}]]
+
+        let findreplace = {}
+
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+        })
+
+
+        function googleIdSearch(idSearch,startDate,finishDate,startDateHTML,finishDateHTML){
+// console.log("This function runs");
+// let idSearch = document.getElementById('search google_id').value
+let results = document.getElementById('results1')
+// console.log("search google_id")
+
+$.ajax({
+url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+dataType: "json",
+
+success: function (data) {
+
+let thumbnail
+let author
+
+// use dom to display ajax rtn
+
+if (!data.volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
+else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
+else {thumbnail = data.volumeInfo.imageLinks.thumbnail}
+console.log(thumbnail);
+if (!data.volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
+else {author = data.volumeInfo.authors[0]}
+if (startDate === null) {startDate = "Not yet started."};
+if (finishDate === null) {finishDate = "Not finished yet."}
+
+var html = '<div class="card col-lg-2 col-md-3 col-sm-4 col-6 text-center">'
+    // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
+    html += "<img src='" + thumbnail + "' alt='Book Cover'>"
+    html += "<div class='card-body'>"
+        html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5><br>"
+        // html += "<h6> Started reading: "+ startDate +"</h6>"
+        // html += "<h6> Finished reading: "+ finishDate +"</h6></div>"
+    // html += '<div><a href="#" class="btn btn-primary" id="'+ idSearch +'">Remove from reading list</a>'
+        html += '<button href="" class="btn book-selector btn-primary" data-google-i-d="'+ idSearch +'" data-booktitle="' + data.volumeInfo.title + '" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button>'
+        html += '<button class="btn bookclub-search btn-primary" data-google-i-d="'+ idSearch +'" data-booktitle="' + data.volumeInfo.title + '">Find Bookclubs Reading This Book</button></form>'
+        html += '<button class="btn user-search btn-primary" data-google-i-d="'+ idSearch +'" data-booktitle="' + data.volumeInfo.title + '">Find Users Reading This Book</button></form></div></div>'
+
+results.innerHTML += html;
+findreplace[idSearch] = data.volumeInfo.title;
+
+$('body :not(script)').contents().filter(function () {
+return this.nodeType === 3;
+}).replaceWith(function () {
+return this.nodeValue.replace(idSearch, data.volumeInfo.title)})
+
+},
+
+
+type: 'Get',
+}
+)
+}
+if (typeof idsearch == "string") {googleIdSearch(idsearch,startdateshtml,finishdateshtml);}
+// console.log("This book is a string!")
+// $(".card-bottom1").hide()
+// console.log("Firing after the hide from string!")
+// $('.card-top1').click(function() {
+// console.log("I'm firing from the click listener!")
+// let thisCardBottom = $(this).next()
+// // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
+// $(".card-bottom1").not(thisCardBottom).slideUp(500)
+// $(this).next().slideToggle(1000)})}
+else {
+for(let i = 0; i < idsearch.length; i++) {
+googleIdSearch(idsearch[i],startdates[i],finishdates[i],startdateshtml[i], finishdateshtml[i]);
+}
+}
+// console.log("These books are a list!")
+// $(".card-bottom1").hide()
+//     console.log("Firing after the hide from list!")
+// $('.card-top1').click(function() {
+//     console.log("I'm firing from the click listener!")
+//     let thisCardBottom = $(this).next()
+//     // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
+//     $(".card-bottom1").not(thisCardBottom).slideUp(500)
+//     $(this).next().next().slideToggle(1000)}
+
+const title = document.getElementById('myModalLabel');
+const modalImage = document.getElementById('modalImage');
+const body = document.getElementById('modalBody');
+const startdatetext = document.getElementById('startDateText');
+const finishdatetext = document.getElementById('finishDateText');
+const startdatecalendar = document.getElementById('startDate');
+const finishdatecalendar = document.getElementById('finishDate');
+const modalbookid = document.getElementById('modalbookid');
+
+
+function findUsersWithSameBook(googleID, booktitle) {
+    $.ajax({
+        url: "/pro/" + userid + "/bookshelf/user.json?gid=" + googleID,
+        dataType: "json",
+        success: function (data) {
+            let html
+            if (data.length == 0) {
+                html = "<h3>I'm sorry, so far no one else is reading " + booktitle +". Try another?</h3>"
+                document.getElementById('resultsuser').innerHTML = html;
+            }
+            else {html = "<ul>"
+                for (let i = 0; i < data.length; i++){
+                    html += "<li><a href='/pro/" + data[i].id + "'>"+ data[i].username + "</a> has also read " + booktitle;
+                }
+                html += "</ul>"
+
+                document.getElementById('resultsuser').innerHTML = html;
+                document.getElementById('bookname1').innerText = booktitle;
+                $('#resultsuserheadline').removeClass("d-none")
+            }
+        console.log(data)},
+        type: 'Get'
+    })
+}
+
+function findBookclubsWithSameBook(googleID, booktitle) {
+    $.ajax({
+        url: "/pro/" + userid + "/bookshelf/bookclub.json?gid=" + googleID,
+        dataType: "json",
+        success: function (data) {
+            let html
+            if (data.length == 0) {
+                html = "<h3>I'm sorry, so far no other bookclub is reading " + booktitle +". Try another?</h3>"
+                document.getElementById('resultsbookclub').innerHTML = html;
+            }
+            else {html = "<ul>"
+                for (let i = 0; i < data.length; i++){
+                    html += "<li><a href='/bookclubs/" + data[i].id + "'>"+ data[i].name + "</a> has also read " + booktitle;
+                }
+                html += "</ul>"
+
+                document.getElementById('resultsbookclub').innerHTML = html;
+                document.getElementById('bookname2').innerText = booktitle;
+                $('#resultsbookclubheadline').removeClass("d-none")
+            }
+        console.log(data)},
+        type: 'Get'
+    })
+}
+
+
+function modalPopulate(idSearch,start,finish,startHTML,finishHTML){
+$.ajax({
+url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+dataType: 'json',
+success: function (data) {
+let thumbnail
+let author
+
+if (!data.volumeInfo.hasOwnProperty('imageLinks')) {
+thumbnail = "http://localhost:8080/img/logo-small.png"
+} else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {
+thumbnail = "http://localhost:8080/img/logo-small.png"
+} else {
+thumbnail = data.volumeInfo.imageLinks.thumbnail
+}
+console.log(thumbnail);
+if (!data.volumeInfo.hasOwnProperty('authors')) {
+author = "Unknown or not listed"
+} else {
+author = data.volumeInfo.authors[0]
+}
+
+title.innerText = data.volumeInfo.title + " - " + author;
+modalImage.innerHTML = '<img src="' + thumbnail + '">'
+body.innerHTML = data.volumeInfo.description;
+startdatetext.innerText = "Currently set to: " + start;
+finishdatetext.innerText = "Currently set to: " + finish;
+startdatecalendar.value = startHTML;
+finishdatecalendar.value = finishHTML;
+modalbookid.value = idSearch;
+},
+
+type: 'Get'
+
+});
+}
+
+setTimeout(function() {
+//This was the original version set to run on a timeout, instead of set to run on the success.
+// if (typeof idsearch == "string")
+// {$('body :not(script)').contents().filter(function () {
+//     return this.nodeType === 3;
+// }).replaceWith(function () {
+//     return this.nodeValue.replace(idsearch, findreplace[idsearch])})
+//
+// }
+// else {
+// for (let i = 0; i < idsearch.length; i++) {
+//     $('body :not(script)').contents().filter(function () {
+//         return this.nodeType === 3;
+//     }).replaceWith(function () {
+//         return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
+//     })
+// }
+
+// $("* :contains(idsearch[i])").each(function() {
+//     var replaced = $(this).html().replace(/idsearch[i]/g, findreplace[idsearch[i]])
+//     $(this).html(replaced);
+// })
+// }
+// document.getElementsByClassName('book-selector').click(function (e){
+//     e.preventDefault()
+//     document.getElementById('book').value = this.id;
+// })
+$('.book-selector').click(function() {
+// console.log(this);
+modalPopulate(this.dataset.googleID, this.dataset.startdate, this.dataset.finishdate, this.dataset.startdatehtml, this.dataset.finishdatehtml)
+})
+$('.bookclub-search').click(function () {
+findBookclubsWithSameBook(this.dataset.googleID, this.dataset.booktitle)
+})
+$('.user-search').click(function() {
+findUsersWithSameBook(this.dataset.googleID, this.dataset.booktitle)
+})
+}
+, 750) </script>
+</body>
+</html>
