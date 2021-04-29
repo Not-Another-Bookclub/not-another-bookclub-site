@@ -3,13 +3,16 @@
 <head th:include="partials.html::head('Your bookshelf')" >
     <meta charset="UTF-8" />
 
+
 </head>
+<link rel="stylesheet" href="/css/bookshelf.css">
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
-<div class="container">
+<div class="container text-white">
     <h2>Here's a look at all of your books, <span th:text="${user.username}"></span></h2>
     <div>
+        <h4>Click the "User" or "Bookclub" buttons to find other users and bookclubs who have read (or plan to read) the books you like.</h4>
 <div class="row" id="results1"></div>
 <h2 id="resultsuserheadline" class="d-none">Here are the other users that have read <span id="bookname1">that book</span>:</h2>
 <div class="row" id="resultsuser"></div>
@@ -17,7 +20,7 @@
 <div class="row" id="resultsbookclub"></div>
 
     </div>
-    <div th:replace="partials.html::usermodal"></div>
+ <div class="text-body"><div th:replace="partials.html::usermodal"></div></div>
 </div>
 <footer th:replace="partials.html::footer"></footer>
 
@@ -30,6 +33,12 @@
         let userid = [[${user.id}]]
 
         let findreplace = {}
+
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+
 
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
@@ -67,13 +76,13 @@ var html = '<div class="card col-lg-2 col-md-3 col-sm-4 col-6 text-center">'
     // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
     html += "<img src='" + thumbnail + "' alt='Book Cover'>"
     html += "<div class='card-body'>"
-        html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5><br>"
+        html += "<h5 class='card-title text-body'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5><br>"
         // html += "<h6> Started reading: "+ startDate +"</h6>"
         // html += "<h6> Finished reading: "+ finishDate +"</h6></div>"
     // html += '<div><a href="#" class="btn btn-primary" id="'+ idSearch +'">Remove from reading list</a>'
         html += '<button href="" class="btn book-selector btn-primary" data-google-i-d="'+ idSearch +'" data-booktitle="' + data.volumeInfo.title + '" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button>'
-        html += '<button class="btn bookclub-search btn-primary" data-google-i-d="'+ idSearch +'" data-booktitle="' + data.volumeInfo.title + '">Find Bookclubs Reading This Book</button></form>'
-        html += '<button class="btn user-search btn-primary" data-google-i-d="'+ idSearch +'" data-booktitle="' + data.volumeInfo.title + '">Find Users Reading This Book</button></form></div></div>'
+        html += '<button class="btn bookclub-search btn-primary" data-google-i-d="'+ idSearch +'" data-booktitle="' + data.volumeInfo.title + '" data-bs-toggle="popover" title="Find Other Users Reading This Book" data-bs-content="This button allows you to search NAB to find bookclubs that have read (or plan to read) this book.">Bookclubs</button></form>'
+        html += '<button class="btn user-search btn-primary" data-google-i-d="'+ idSearch +'" data-booktitle="' + data.volumeInfo.title + '" data-bs-toggle="popover" title="Find Other Users Reading This Book" data-bs-content="This button allows you to search NAB users to find other people that have read (or plan to read) this book.">Users</button></form></div></div>'
 
 results.innerHTML += html;
 findreplace[idSearch] = data.volumeInfo.title;
@@ -137,7 +146,7 @@ function findUsersWithSameBook(googleID, booktitle) {
             }
             else {html = "<ul>"
                 for (let i = 0; i < data.length; i++){
-                    html += "<li><a href='/pro/" + data[i].id + "'>"+ data[i].username + "</a> has also read " + booktitle;
+                    html += "<li><a href='/pro/" + data[i].id + "'><img src='"+ data[i].avatar_path +"' height='50px'> "+ data[i].username + "</a> has also read " + booktitle;
                 }
                 html += "</ul>"
 
