@@ -1,6 +1,3 @@
-/*#main {*/
-/*    background: steelblue;*/
-/*}*/
 
 :root {
     --left: hsla(240, 100%, 0%, 0.65);
@@ -83,6 +80,10 @@ details > summary::-webkit-details-marker {
     background: cornflowerblue;
     color: black;
     opacity: 1;
+}
+
+.book-link:hover {
+    color: white;
 }
 
 .container {
