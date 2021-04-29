@@ -24,7 +24,7 @@ body {
     color: black;
 }
 
-/*Styling that warps the accordion*/
+/*Styling that wraps the accordion*/
 .pro-card {
     background: darkblue;
     opacity: 0.9;
@@ -45,6 +45,10 @@ body {
 
 .invite-unit > div:first-child {
     max-width: 300px;
+}
+
+.invite-unit form {
+    width: 100%;
 }
 
 /*THE ACCORDION STYLING*/
@@ -95,8 +99,8 @@ details > summary::-webkit-details-marker {
 }
 
 
-@media screen and (max-width: 576px){
-    .narrow-body {
-        max-width: 70%;
-    }
-}
+/*@media screen and (max-width: 576px){*/
+/*    .narrow-body {*/
+/*        max-width: 70%;*/
+/*    }*/
+/*}*/
