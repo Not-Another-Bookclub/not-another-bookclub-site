@@ -1,5 +1,6 @@
 package com.codeup.springboot_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,10 +18,12 @@ public class Comment implements Comparable<Comment>{
     private String comment;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "author_id", referencedColumnName = "id", nullable = false)
     private User author;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "post_id", referencedColumnName = "id", nullable = false)
     private Post post;
 

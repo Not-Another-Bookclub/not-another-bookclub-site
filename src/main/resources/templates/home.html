@@ -4,40 +4,93 @@
     <head th:replace="partials.html :: head('Not Another Bookclub :: Welcome')">
     <meta charset="UTF-8" />
     <title>Home</title>
+    </head>
+
+    <link rel="stylesheet" href="/css/font.css">
 </head>
-    <link rel="stylesheet" href="/css/home.css">
+<!--    <link rel="stylesheet" href="/css/home.css">-->
+
 <body>
 
-<nav th:replace="partials.html :: navbar"></nav>
+<!--                            NAVBAR BEGIN-->
+
+    <nav th:replace="partials.html :: navbar"></nav>
+
+<!--                                NAVBAR END-->
 
 <div class="container">
 
-    <h1>Welcome to Not Another BookClub</h1>
+    <h1 class="text-white">Welcome to Not Another BookClub</h1>
 
+    <br>
+    <br>
     <hr>
-    <div class="text-center">
-        <img src="/img/magicallibarary.jpg" height="500px"/>
+
+<!--                               Code formerly known as JUMBOTRON BEGIN-->
+
+    <div class="p-0 bg-dark Teddy">
+<!--        jumbotron jumbotron-fluid-->
+        <div class="container quote">
+            <h1 class="display-4 text text-white">"It is not the critic who counts...</h1>
+                <p class="lead text text-white">...not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena, whose face is marred by dust and sweat and blood; who strives valiantly; who errs, who comes short again and again, because there is no effort without error and shortcoming; but who does actually strive to do the deeds; who knows great enthusiasms, the great devotions; who spends himself in a worthy cause; who at the best knows in the end the triumph of high achievement, and who at the worst, if he fails, at least fails while daring greatly, so that his place shall never be with those cold and timid souls who neither know victory nor defeat.”</p>
+            <h4 class="text-right text-white">Theodore Roosevelt,<br> April 23, 1910</h4>
+        </div>
+
+        <div class="BC-description text-white" >
+
         <p>
-        Not Another Book Club (N.A.B.) seeks to connect people with each by making new friends or maintaining friendships through books.
+            Not Another Book Club (N.A.B.) seeks to connect people with each by making new friends or maintaining friendships through books.
 
-        <br>
+            <br>
 
-        It is, at its most basic level, a social-network for bibliophiles.
-    </p>
+            It is, at its most basic level, a social-network for bibliophiles.
+        </p>
 
-    <p>
-        With N.A.B all the bookworms of the world can enjoy their pastime at any location.
+        <p>
+            With N.A.B all the bookworms of the world can enjoy their pastime at any location.
 
-        <br>
+            <br>
 
-        There’s some days that traveling to the designated venue to enjoy another group book session is not possible.
-    </p>
-</div>
+            There’s some days that traveling to the designated venue to enjoy another group book session is not possible.
+        </p>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+<!--                               code formerly known as JUMBOTRON END-->
+
+
+
+
+
+
+
+<div class="container">
+
+
+
+
+    <div class="text-center">
+<!--        <img src="/img/magicalLibrary.jpg" height="500px"/>-->
+
 
 <div th:if="${user.username != null}">Maybe you'd like to view <a th:href="@{/pro/__${user.id}__}">your profile?</a></div>
 
 
 <!--<div th:replace="partials.html :: booksearch"></div>-->
+</div>
 </div>
 
 

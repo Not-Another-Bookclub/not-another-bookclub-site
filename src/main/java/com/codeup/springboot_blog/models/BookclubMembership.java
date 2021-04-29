@@ -1,5 +1,6 @@
 package com.codeup.springboot_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,7 +21,7 @@ public class BookclubMembership {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    @JsonManagedReference
+    @JsonIgnore
     private User user;
 
     @Enumerated(EnumType.STRING)
@@ -35,7 +36,7 @@ public class BookclubMembership {
 
     @ManyToOne
     @JoinColumn(name = "last_changed_by")
-    @JsonManagedReference
+    @JsonIgnore
     private User lastChangedBy;
 
     public BookclubMembership() {};

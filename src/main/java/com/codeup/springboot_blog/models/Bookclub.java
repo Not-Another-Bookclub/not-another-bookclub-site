@@ -1,5 +1,9 @@
 package com.codeup.springboot_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,6 +27,7 @@ public class Bookclub {
     private boolean accepting_members;
 
     @OneToOne
+    @JsonIgnore
     private User owner;
 
 //    @ManyToMany(cascade =  CascadeType.ALL)
@@ -32,15 +37,19 @@ public class Bookclub {
 //            inverseJoinColumns = {@JoinColumn(name = "user_id")}
 //    )
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<BookclubMembership> users;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookclub")
+    @JsonBackReference
     private List<Meeting> meetings;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    @JsonBackReference
     private List<BookclubBook> books;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookclub")
+    @JsonBackReference
     private List<Post> posts;
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "meeting")

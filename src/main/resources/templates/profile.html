@@ -175,12 +175,15 @@
             </details>
 
 
+
             <div th:if="${isOwner}">
                 <h4>Add more books to your personal reading list here: </h4>
                 <div th:replace="partials.html::booksearch"></div>
             </div>
             <br>
+  <a th:href="@{'/pro/' + ${id} + '/bookshelf'}"><h3><i class="fas fa-book"></i> Connect with other users through your reading interests on your bookshelf.</h3></a>
             <br>
+
 
             <h3>Here are the books currently on your reading list: </h3>
             <div id="results1" class="row"></div>
