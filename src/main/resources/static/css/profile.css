@@ -5,34 +5,47 @@
 :root {
     --left: hsla(240, 100%, 0%, 0.65);
     /*--right: hsla(195, 53%, 79%, 0.65);*/
-    --right: hsla(240, 100%, 100%, 0.65);
+    --right: hsla(240, 100%, 40%, 0.65);
 }
 
 body {
     /*background-attachment: fixed;*/
-    background: linear-gradient(135deg, var(--left), var(--right)),
-    url('../img/magicallibarary.jpg') no-repeat center center fixed;
+    /*background: linear-gradient(135deg, var(--left), var(--right)),*/
+    background: url('../img/magicallibarary.jpg') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.2);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    color: white;
 }
 
 details {
     /*padding: 1rem;*/
-    box-shadow: -1px -1px 3px 1px white;
+    /*box-shadow: -1px -1px 3px 5px white;*/
 }
 
 details > summary {
     list-style: none;
     background: black;
     color: white;
+    opacity: 1;
 }
 .hidden-content {
     /*background:;*/
-    background: white;
-    color: black;
+    background: black;
+    /*color: ;*/
 }
+
+.acc-bar {
+    border: 2px solid white;
+    color: white;
+    background: white;
+    margin: 0px;
+
+}
+
+
 
 details > summary i {
     transition: transform 0.4s ease;
@@ -45,5 +58,34 @@ details[open] > summary i {
 details > summary::-webkit-details-marker {
     display: none;
     cursor: pointer;
+}
+
+/*details > div a {*/
+/*    background: cornflowerblue;*/
+/*    color: black;*/
+/*    opacity: 1;*/
+/*}*/
+
+.pro-card {
+    background: darkblue;
+    opacity: 0.9;
+    padding: 2rem;
+    /*margin-top: 30px;*/
+    margin-bottom: 30px;
+    /*position: relative;*/
+}
+
+.book-link {
+    text-decoration: none;
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    background: cornflowerblue;
+    color: black;
+    opacity: 1;
+}
+
+.container {
+    padding-top: 30px;
 }
 
