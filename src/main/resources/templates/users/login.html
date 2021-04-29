@@ -7,9 +7,14 @@
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 <body>
 <div class="container-md ">
+
+    <div class="m-5">
 <h1 style="text-align: center" >Log In</h1>
 
-    <hr style="width: 50%; margin: auto">
+    <hr style="width: 70%; margin: auto">
+
+    </div>
+
 
 <div th:if="${param.error}">
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
