@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/show-bookclub.css">
 <link rel="stylesheet" href="/css/utils.css">
 <html lang="en">
 <head th:include="partials.html::head('A detailed view of this bookclub')">
@@ -18,28 +19,17 @@
 
 
 <!--    INFO / OWNER SECTION-->
-    <div id="breadcrumbBookclubs" class="narrow-body">
-<!--        <nav aria-label="breadcrumb">-->
-<!--            <ol class="breadcrumb">-->
-<!--                <li class="breadcrumb-item active" aria-current="page">Bookclub</li>-->
-<!--            </ol>-->
-<!--        </nav>-->
-
+    <div id="breadcrumbBookclubs" class="narrow-body mb-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/bookclubs}">Bookclubs</a></li>
                 <li class="breadcrumb-item active" aria-current="page">BookClub</li>
-                <!--                <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Profile Page</a></li>-->
-
-                <!--                /bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__-->
-
             </ol>
         </nav>
     </div>
 
-    <div class="card card-body narrow-body">
-
-        <div class="row d-flex flex-column flex-md-row">
+    <div class="narrow-body pro-card">
+        <div class="row d-flex flex-column flex-md-row p-2">
             <div class="col-6">
                 <h1 th:text="${bookclub.name}"></h1>
                 <p th:text="${bookclub.description}"></p>
@@ -75,7 +65,7 @@
 
         <div th:if="${user.username != null}">
             <div th:if="${isAccepting}">
-                <hr>
+                <hr class=".acc-bar">
                 <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
                     <label for="join-club">Want to join?</label>
                     <input type="submit" id="join-club" class="btn btn-danger" value="Join">
@@ -121,12 +111,29 @@
     <!--    START THE PUBLIC/PRIVATE CONTINGENCY-->
     <div th:if="${!isPrivate}" class="narrow-body">
 <!--        MEMBERS-->
-        <div>
-            <h2>Current Members</h2>
-            <a th:each="member : ${members}" th:href="@{'/pro/' + ${member.id}}" class="btn btn-info">
-                <span th:text="${member.username}"></span>
-            </a>
-        </div>
+        <details th:if="${members.size() > 0}" class="pro-card my-3">
+            <summary class="d-flex justify-content-between align-items-center p-3">
+                <h2>Current Members</h2>
+                <i class="fas fa-angle-down fa-2x"></i>
+            </summary>
+
+            <hr class="acc-bar">
+
+            <div class="hidden-content
+                    d-flex
+                    align-items-center
+                    align-items-md-start
+                    flex-column
+                    flex-md-row
+                    flex-nowrap
+                    flex-md-wrap
+                    p-3">
+                <a th:each="member : ${members}" th:href="@{'/pro/' + ${member.id}}" class="btn btn-info">
+                    <span th:text="${member.username}"></span>
+                </a>
+            </div>
+
+        </details>
 
 <!--        MEETINGS-->
         <div th:if="${isActiveUser}">
