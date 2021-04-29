@@ -9,6 +9,8 @@
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
 <div class="container">
+    <div class="row"><div class="d-none d-md-block col-md-4 col-lg-6 py-1 my-2"><img class="img-fluid" src="/img/typing.jpg"></div>
+        <div class="col-12 col-md-8 col-lg-6 py-1 my-2">
 <div th:unless="${isMember}"><h1>Sorry, you can't post in a bookclub until you're a member. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and request to join.</h1></div>
 <div th:if="${isMember}">
     <h1>Use the form below to create a new post!</h1>
@@ -36,6 +38,7 @@
 
 
 </div>
+    </div></div>
 
 
 <footer th:replace="partials.html::footer"></footer>
