@@ -6,7 +6,7 @@
 </head>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 <body>
-<div class="container-md text-center">
+<div class="container-md ">
 <h1>Log In</h1>
 <div th:if="${param.error}">
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -23,7 +23,7 @@
     <div class="d-flex justify-content-start">
         <div class="col-sm-8 col-md-4 p-3">
 <form th:action="@{/login}" method="post">
-    <label class="form-label mt-3" for="username">Username</label>
+    <label class="form-label" for="username"  >Username</label>
     <input class="form-control mb-3" id="username" name="username" type="text"  />
 
     <label class="form-label mt-3" for="password">Password</label>
