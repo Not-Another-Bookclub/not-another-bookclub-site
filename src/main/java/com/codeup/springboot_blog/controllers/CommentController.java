@@ -65,7 +65,25 @@ public class CommentController {
               return "redirect:/bookclubs/" + bookclubid +"/posts/" + id;
           }
 
-//}
+
+    @PostMapping("/bookclubs/{bookclubid}/posts/{id}/comment/delete")
+    public String editSaveComment(@RequestParam("id") long commentid,@PathVariable long bookclubid ,@PathVariable long id, Model model) {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Comment comment = commentDao.getOne(commentid);
+          if (user.getId() == comment.getAuthor().getId()) {
+          commentDao.delete(comment);}
+        else {model.addAttribute("alert", "<div class=\"alert alert-danger\" role=\"alert\">\n" +
+                  "  You must be logged in as the author of a comment to delete. </div>");
+              return "users/login";
+        }
+        }
+    else{        model.addAttribute("alert", "<div class=\"alert alert-danger\" role=\"alert\">\n" +
+                "  You must be logged in as the author of a comment to delete. </div>");
+            return "users/login";
+        }
+    return "redirect:/bookclubs/" + bookclubid + "/posts/" + id;
+
+    }
 
     }
 

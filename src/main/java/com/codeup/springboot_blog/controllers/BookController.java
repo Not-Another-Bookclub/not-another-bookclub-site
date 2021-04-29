@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -111,6 +112,78 @@ public class BookController {
         catch (ParseException e) {
             throw new RuntimeException("Error parsing date input");
         }
+    }
+
+    @GetMapping("/pro/{id}/bookshelf")
+    public String bookshelfRender(@PathVariable long id, Model model) {
+        User user = new User();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            List<UserBook> userbooks = userbookDao.findAllByUser(user);
+            Collections.sort(userbooks);
+            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
+            SimpleDateFormat html = new SimpleDateFormat("yyyy-MM-dd");
+            List<String> books = new ArrayList<>();
+            List<String> startdates = new ArrayList<>();
+            List<String> startdateshtml = new ArrayList<>();
+            List<String> finishdates = new ArrayList<>();
+            List<String> finishdateshtml = new ArrayList<>();
+            java.util.Date date = new java.util.Date();
+            for (UserBook userbook : userbooks) {
+                books.add(userbook.getBook().getGoogleID());
+                if (userbook.getStarted() != null) {
+                    startdates.add(sdf.format(userbook.getStarted()));
+                    startdateshtml.add(html.format(userbook.getStarted()));
+                } else {
+                    startdates.add("Not started yet");
+                    startdateshtml.add(html.format(date));
+                }
+                if (userbook.getFinished() != null) {
+                    finishdates.add(sdf.format(userbook.getFinished()));
+                    finishdateshtml.add(html.format(userbook.getFinished()));
+                } else {
+                    finishdates.add("Not finished yet");
+                    finishdateshtml.add(html.format(date));
+                }
+
+                model.addAttribute("books", books);
+                model.addAttribute("startdateshtml",startdateshtml);
+                model.addAttribute("finishdateshtml", finishdateshtml);
+                model.addAttribute("startdates",startdates);
+                model.addAttribute("finishdates",finishdates);}
+
+        } else {model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+                "  <strong>Warning!</strong> You must be logged in to connect with others through your bookshelf.</div>");
+            model.addAttribute("user", user);
+            return "users/login";}
+
+//        PASS IN INFO
+            model.addAttribute("user", user);
+
+
+        return "users/bookshelf";
+    }
+
+    @RequestMapping(value="/pro/{id}/bookshelf/bookclub.json", method=RequestMethod.GET, produces="application/json")
+        public @ResponseBody List<Bookclub> bookclubSearchByBooks(@PathVariable long id, @RequestParam("gid") String googleid) throws Exception {
+            List<BookclubBook> bookclubBooks = bookclubBookDao.getAllByBook_GoogleID(googleid);
+            List<Bookclub> bookclubs = new ArrayList<>();
+            for (BookclubBook bookclubBook : bookclubBooks) {
+                bookclubs.add(bookclubBook.getBookclub());
+            }
+
+            return bookclubs;
+        }
+
+    @RequestMapping(value="/pro/{id}/bookshelf/user.json", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody List<User> userSearchByBooks(@PathVariable long id, @RequestParam("gid") String googleid) throws Exception {
+        List<UserBook> userBooks = userbookDao.findAllByBook_GoogleID(googleid);
+        List<User> users = new ArrayList<>();
+        for (UserBook userBook : userBooks) {
+            users.add(userBook.getUser());
+        }
+
+        return users;
     }
 
 }
