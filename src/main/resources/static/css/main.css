@@ -39,8 +39,12 @@ body {
 }
 
 #nab-carousel {
-
+    height: 150px;
     background-color: #b4b9c5;
+    opacity: 0.5;
+
 }
+
+
 
 
