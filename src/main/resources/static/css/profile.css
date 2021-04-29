@@ -43,13 +43,13 @@ body {
     color: white;
 }
 
-.invite-unit > div:first-child {
+.invite-unit > div {
     max-width: 300px;
 }
 
-.invite-unit form {
-    width: 100%;
-}
+/*.invite-unit form {*/
+/*    max-width: 300px;*/
+/*}*/
 
 /*THE ACCORDION STYLING*/
 details > summary {
