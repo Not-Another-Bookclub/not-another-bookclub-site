@@ -153,7 +153,8 @@ public class BookController {
                 model.addAttribute("finishdates",finishdates);}
 
         } else {model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
-                "  <strong>Warning!</strong> Encountered an unexpected situation - book not saved. Please contact the dev team. (not really this isn't implemented yet).</div>");
+                "  <strong>Warning!</strong> You must be logged in to connect with others through your bookshelf.</div>");
+            model.addAttribute("user", user);
             return "users/login";}
 
 //        PASS IN INFO
