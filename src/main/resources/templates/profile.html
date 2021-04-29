@@ -47,7 +47,8 @@
                     <i class="fas fa-angle-down fa-2x"></i>
                 </summary>
 
-                <hr></hr>
+                <hr class="acc-bar"></hr>
+
 
                 <div class="hidden-content d-flex flex-column flex-sm-row flex-wrap">
                     <div th:each="invite : ${invites}" class="invite-unit d-flex flex-row m-3 p-3">
@@ -68,7 +69,7 @@
             </details>
         </div>
 
-        <div th:if="${canInvite}" class="my-1">
+        <div th:if="${canInvite}" class="my-1 pro-card">
             <div class="d-flex">
                 <h2 class="mx-3">You can invite this person</h2>
 
@@ -77,35 +78,36 @@
                     Invite
                 </button>
             </div>
+            <div style="border: 2px solid black" class="">
 
+        </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form th:action="@{'/bookclubs/inviteMany/' + ${id} + '/' + ${user.id}}" th:method="post">
-                                <div th:each="bookclub : ${loggedUserBookclubs}" class="">
-                                    <!--                                <h2 th:text="${bookclub.name}">test</h2>-->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" th:value="${bookclub.id}" name="bookclubs" th:id="${bookclub.id}">
-                                        <label class="form-check-label" th:for="${bookclub.id}">
-                                            <span th:text="${bookclub.name}"></span>
-                                        </label>
-                                    </div>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{'/bookclubs/inviteMany/' + ${id} + '/' + ${user.id}}" th:method="post">
+                            <div th:each="bookclub : ${loggedUserBookclubs}" class="">
+                                <!--                                <h2 th:text="${bookclub.name}">test</h2>-->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" th:value="${bookclub.id}" name="bookclubs" th:id="${bookclub.id}">
+                                    <label class="form-check-label" th:for="${bookclub.id}">
+                                        <span th:text="${bookclub.name}"></span>
+                                    </label>
                                 </div>
+                            </div>
 
-                                <input type="submit" class="btn btn-secondary">
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <!--                        <button type="button" class="btn btn-primary">Understood</button>-->
-                        </div>
+                            <input type="submit" class="btn btn-secondary">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <!--                        <button type="button" class="btn btn-primary">Understood</button>-->
                     </div>
                 </div>
             </div>
