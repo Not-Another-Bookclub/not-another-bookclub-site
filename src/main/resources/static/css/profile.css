@@ -89,3 +89,19 @@ details > summary::-webkit-details-marker {
     padding-top: 30px;
 }
 
+
+.invite-unit {
+    color: black;
+    background: cornflowerblue;
+    /*width: 350px; */
+    /*border: 2px solid;*/
+}
+
+.invite-unit div {
+    background: black;
+    color: white;
+}
+
+.invite-unit > div:first-child {
+    max-width: 300px;
+}

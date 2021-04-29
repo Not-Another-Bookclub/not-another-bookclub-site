@@ -39,11 +39,18 @@
 
     </div>
     <div class="narrow-body">
+
         <div th:if="${invites}">
-            <div th:if="${invites.size() > 0}">
-                <h2>Here are your Invites</h2>
-                <div class="card p-3 d-flex flex-column flex-md-row">
-                    <div th:each="invite : ${invites}" class="d-flex flex-row m-3 p-3" style="width: 350px; border: 2px solid">
+            <details th:if="${invites.size() > 0}" class="pro-card my-3">
+                <summary class="d-flex justify-content-between align-items-center p-3">
+                    <h2>You have Invites</h2>
+                    <i class="fas fa-angle-down fa-2x"></i>
+                </summary>
+
+                <hr></hr>
+
+                <div class="hidden-content d-flex flex-column flex-sm-row flex-wrap">
+                    <div th:each="invite : ${invites}" class="invite-unit d-flex flex-row m-3 p-3">
                         <div class="card p-2 m-1">
                             <a th:text="${invite.name}" th:href="@{'/bookclubs/' + ${invite.id}}" class="btn btn-primary"></a>
                             <p>Wants you to join their Club</p>
@@ -58,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </details>
         </div>
 
         <div th:if="${canInvite}" class="my-1">
@@ -113,20 +120,6 @@
             </summary>
             <hr class="acc-bar">
             <div  class="hidden-content d-flex flex-column flex-sm-row">
-<!--                <div th:each="bookclub : ${ownedClubs}" class="card" style="width: 230px; height: 230px; padding: 15px; border: none">-->
-<!--                    <a class="p-2" th:href="@{'/bookclubs/' + ${bookclub.id}}" style="text-decoration: none; width: 200px; height: 200px; border: 2px solid black">-->
-<!--                        <div >-->
-<!--                            <h3 th:text="${bookclub.name}"></h3>-->
-<!--                            <p th:text="${bookclub.description}"></p>-->
-<!--&lt;!&ndash;                            <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>&ndash;&gt;-->
-<!--                        </div>-->
-
-<!--                        &lt;!&ndash;                <form th:if="${user}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">&ndash;&gt;-->
-<!--                        &lt;!&ndash;                    <input type="submit" class="btn btn-danger" value="Join">&ndash;&gt;-->
-<!--                        &lt;!&ndash;                </form>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                @{/bookclubs/(bookclub.id)}&ndash;&gt;-->
-<!--                    </a>-->
-<!--                </div>-->
                 <a th:each="bookclub : ${ownedClubs}" class="m-3 p-2 book-link" th:href="@{'/bookclubs/' + ${bookclub.id}}" style="text-decoration: none; width: 200px; height: 200px; border: 2px solid black">
                     <div>
                         <h3 th:text="${bookclub.name}"></h3>
@@ -138,24 +131,22 @@
         </details>
 
 
-        <section th:if="${memberClubs.size() > 0}">
-            <h2>These are the Bookclubs you are a member of.</h2>
-            <div  class="d-flex flex-column flex-sm-row">
-                <div th:each="bookclub : ${memberClubs}" class="card" style="width: 230px; height: 230px; padding: 15px; border: none">
-                    <a class="p-2" th:href="@{'/bookclubs/' + ${bookclub.id}}" style="text-decoration: none; width: 200px; height: 200px; border: 2px solid black">
-                        <h3 th:text="${bookclub.name}"></h3>
-                        <p th:text="${bookclub.description}"></p>
-<!--                        <a th:href="@{'/bookclubs/' + ${bookclub.id}}" class="btn btn-primary">Details</a>-->
-                        <!--                <form th:if="${user}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">-->
-                        <!--                    <input type="submit" class="btn btn-danger" value="Invite">-->
-                        <!--                </form>-->
+        <details th:if="${memberClubs.size() > 0}" class="pro-card my-3">
+            <summary class="d-flex justify-content-between align-items-center p-3">
+                <h2>These are the Bookclubs you are a member of.</h2>
+                <i class="fas fa-angle-down fa-2x"></i>
+            </summary>
 
-                        <!--                @{/bookclubs/(bookclub.id)}-->
-                    </a>
-                </div>
+            <hr class="acc-bar">
+
+            <div  class="hidden-content d-flex flex-column flex-sm-row">
+                <a th:each="bookclub : ${memberClubs}" class="m-3 p-2 book-link" th:href="@{'/bookclubs/' + ${bookclub.id}}" style="text-decoration: none; width: 200px; height: 200px; border: 2px solid black">
+                    <h3 th:text="${bookclub.name}"></h3>
+                    <p th:text="${bookclub.description}"></p>
+                </a>
             </div>
 
-        </section>
+        </details>
 
 
         <div th:if="${isOwner}">
