@@ -101,7 +101,8 @@
             </div>
         </div>
 
-        <details th:if="${ownedClubs.size() > 0}">
+<!--        BOOKCLUBS YOU OWN-->
+        <details th:if="${ownedClubs.size() > 0}" id="acc-cont">
             <summary class="d-flex justify-content-between align-items-center p-1">
                 <h2>These are the Bookclubs you own</h2>
                 <i class="fas fa-angle-down fa-2x"></i>
@@ -125,6 +126,8 @@
             </div>
 
         </details>
+
+
         <section th:if="${memberClubs.size() > 0}">
             <h2>These are the Bookclubs you are a member of.</h2>
             <div  class="d-flex flex-column flex-sm-row">

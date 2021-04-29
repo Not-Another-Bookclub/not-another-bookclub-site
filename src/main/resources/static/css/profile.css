@@ -3,17 +3,24 @@
 /*}*/
 
 :root {
-    --left: hsla(240, 100%, 27%, 0.65);
-    --right: hsla(195, 53%, 79%, 0.65);
+    --left: hsla(240, 100%, 0%, 0.65);
+    /*--right: hsla(195, 53%, 79%, 0.65);*/
+    --right: hsla(240, 100%, 100%, 0.65);
 }
 
 body {
+    /*background-attachment: fixed;*/
     background: linear-gradient(135deg, var(--left), var(--right)),
-    url('../img/magicallibarary.jpg') no-repeat center center / cover;
+    url('../img/magicallibarary.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 }
 
 details {
     /*padding: 1rem;*/
+    box-shadow: -1px -1px 3px 1px white;
 }
 
 details > summary {
@@ -39,3 +46,4 @@ details > summary::-webkit-details-marker {
     display: none;
     cursor: pointer;
 }
+
