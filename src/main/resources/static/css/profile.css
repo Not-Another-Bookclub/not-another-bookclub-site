@@ -94,6 +94,8 @@ details > summary::-webkit-details-marker {
     background: var(--bookclub);
     color: white;
     opacity: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .book-link:hover {
@@ -117,3 +119,22 @@ h1, h2, h3{
     font-family: "serif";
 }
 
+
+.custom-thumb {
+    /*color: black;*/
+    background: var(--bookclub);
+
+}
+
+.custom-thumb div {
+    background: black;
+}
+
+.custom-thumb div img {
+    height: 100px;
+    width: 100px;
+}
+
+.custom-thumb div hr {
+    border: 3px solid white;
+}
