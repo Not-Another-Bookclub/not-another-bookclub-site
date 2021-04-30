@@ -63,12 +63,12 @@
                                 <a th:text="${invite.name}" th:href="@{'/bookclubs/' + ${invite.id}}" class="btn btn-primary"></a>
                                 <p>Wants you to join their Club</p>
                             </div>
-                            <div class="card p-2 m-1 col-12 col-sm-4" >
+                            <div class="card p-2 m-1 col-12 col-sm-4 d-flex flex-column align-items-center justify-content-evenly" >
                                 <form th:action="@{'/bookclubs/invite/accept/' + ${invite.id} + '/' + ${user.id}}" th:method="post">
-                                    <input type="submit" class="btn btn-success" value="Accept">
+                                    <input type="submit" class="util-butn util-butn-accept" value="Accept">
                                 </form>
                                 <form th:action="@{'/bookclubs/invite/decline/' + ${invite.id} + '/' + ${user.id}}" th:method="post">
-                                    <input type="submit" class="btn btn-danger" value="Decline">
+                                    <input type="submit" class="util-butn util-butn-decline" value="Decline">
                                 </form>
                             </div>
                         </div>

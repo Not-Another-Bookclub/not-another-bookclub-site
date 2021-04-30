@@ -155,15 +155,34 @@
 
 <!--        MEETINGS-->
         <div th:if="${isActiveUser}">
-            <div th:if="${meetings.size() > 0}">
-                <h1>Meetings.</h1>
+            <details th:if="${meetings.size() > 0}" class="pro-card my-3">
+                <summary class="d-flex justify-content-between align-items-center p-3">
+                    <h2>Meetings</h2>
+                    <i class="fas fa-angle-down fa-2x"></i>
+                </summary>
 
-                <a th:href="@{/bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__}" th:each="meeting : ${meetings}" class="btn btn-secondary">
-                    <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span>
-                    <!--                <span th:text="${meeting.location}"></span> to discuss-->
-                    <!--                <span th:text="${meeting.book.googleID}"></span>-->
-                </a>
-            </div>
+                <hr class="acc-bar">
+
+                <div class="hidden-content
+                    d-flex
+                    align-items-center
+                    align-items-md-start
+                    flex-column
+                    flex-md-row
+                    flex-nowrap
+                    flex-md-wrap
+                    p-3">
+                    <a
+                            th:href="@{/bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__}"
+                            th:each="meeting : ${meetings}"
+                            class="butn pro-link pro-link-2 m-2">
+                        <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span>
+                        <!--                <span th:text="${meeting.location}"></span> to discuss-->
+                        <!--                <span th:text="${meeting.book.googleID}"></span>-->
+                    </a>
+                </div>
+
+            </details>
 
         </div>
 
