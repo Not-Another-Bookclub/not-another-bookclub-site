@@ -116,6 +116,12 @@ public class BookclubController {
 
 
         bookclubDao.save(bookclub);
+        BookclubMembership bookclubMembership = new BookclubMembership();
+        bookclubMembership.setBookclub(bookclub);
+        bookclubMembership.setUser(user);
+        bookclubMembership.setStatus(BookclubMembershipStatus.ACTIVE);
+        bookclubMembership.setLastChangedBy(user);
+        bookclubmembershipDao.save(bookclubMembership);
 
         model.addAttribute("user", user);
         return "redirect:/bookclubs/" + bookclub.getId();

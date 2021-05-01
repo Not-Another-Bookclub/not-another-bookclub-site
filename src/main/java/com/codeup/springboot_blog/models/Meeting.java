@@ -1,5 +1,6 @@
 package com.codeup.springboot_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Meeting implements Comparable<Meeting>{
     private Location location;
 
     @Column
+    @JsonIgnore
     private String address;
 
     @Column
