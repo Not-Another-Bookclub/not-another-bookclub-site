@@ -6,68 +6,63 @@
     <title>Title</title>
 </head>
     <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/meeting-create.css">
 <body>
     <nav th:replace="partials.html :: navbar"></nav>
 
-
-<!--    <div class="breadcrumbMeeting narrow-body">-->
-<!--        <nav aria-label="breadcrumb">-->
-<!--            <ol class="breadcrumb">-->
-<!--                <li class="breadcrumb-item active" aria-current="page">Meeting</li>-->
-<!--            </ol>-->
-<!--        </nav>-->
-<!--    </div>-->
-
-
-
-<!--    <div class="breadcrumbMeeting">-->
-<!--        <nav aria-label="breadcrumb">-->
-<!--            <ol class="breadcrumb">-->
-<!--                <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>-->
-<!--                <li class="breadcrumb-item active" aria-current="page">Meeting</li>-->
-<!--                <li class="breadcrumb-item"><a href="#">Edit</a></li>-->
-<!--            </ol>-->
-<!--        </nav>-->
-<!--    </div>-->
-
-
     <div class="container">
-        <div class="breadcrumbMeeting narrow-body">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Meeting</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="row"><div class="d-none d-md-block col-md-4 col-lg-6 py-1 my-2"><img class="img-fluid" src="/img/dinnerwithfriends.jpg"></div>
-            <div class="col-12 col-md-8 col-lg-6 py-1 my-2">
-        <div th:if="${isOwner}" class="narrow-body">
-            you own this. Wanna edit it?
-            <a class="btn btn-warning" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit</a>
-        </div>
-        <h2 class="narrow-body">Detailed information about this meeting for the <span th:text="${bookclub.name}"></span> bookclub.</h2>
+        <div id="meeting-form">
+            <div class="breadcrumbMeeting narrow-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Meeting</li>
+                    </ol>
+                </nav>
+            </div>
 
-        <div class="narrow-body">
-            <h4 >The book to be discussed:</h4>
-            <div id="results1"></div>
+            <div class="row">
+                <div class="d-none d-lg-block col-lg-6 py-1 my-2">
+                    <img class="img-fluid" src="/img/dinnerwithfriends.jpg">
+                </div>
+                <div class="col-12 col-lg-6 py-1 my-2">
+                    <div class="pro-card">
+                        <div class="form-meeting">
+                            <div th:if="${isOwner}" class="">
+                                you own this. Wanna edit it?
+                                <a class="btn btn-warning" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit</a>
+                            </div>
+                            <h2 class="">
+                                <span th:text="${bookclub.name}"></span> Meeting.
+                            </h2>
+
+                            <div class="">
+                                <h4 >The book to be discussed:</h4>
+                                <div id="results1"></div>
+                            </div>
+
+                            <div class="">
+                                <p>
+                                    The meeting is scheduled for <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span>
+                                </p>
+                                <p>
+                                    This meeting is being held at: <span th:text="${meeting.location}"></span>
+                                </p>
+                                <p th:if="${ismemberactive}">
+                                    This meeting is being held at: <span th:text="${meeting.getAddress()}"></span>,
+                                    <span th:text="${meeting.getCity()}"></span>, <span th:text="${meeting.zipPlusFour}"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
 
 
-
-        <div class="narrow-body">
-            <p>The meeting is scheduled for <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span></p>
-            <p>This meeting is being held at: <span th:text="${meeting.location}"></span></p>
-            <p th:if="${ismemberactive}">This meeting is being held at: <span th:text="${meeting.getAddress()}"></span>,
-            <span th:text="${meeting.getCity()}"></span>, <span th:text="${meeting.zipPlusFour}"></span></p>
-        </div>
-<!--        <div th:if="${isowner}" style="border: 2px solid black">-->
-<!--            <span>These will only show if you own the club.</span>-->
-<!--            <button class="btn btn-warning">Edit?</button>-->
-<!--            <button class="btn btn-danger">Delete?</button>-->
-<!--        </div>-->
     </div>
-        </div></div>
     <div th:replace="partials.html::bookclubmodal"></div>
 
     <footer th:replace="partials.html::footer"></footer>
