@@ -6,6 +6,7 @@ public enum Location {
     HOUSE,
     PUBLIC,
     LIBRARY,
+    VIRTUAL,
     OTHER
 
 }
