@@ -1,5 +1,7 @@
 package com.codeup.springboot_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mysql.cj.protocol.ColumnDefinition;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -24,17 +26,21 @@ public class Post implements Comparable<Post> {
     private String body;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "author_id", referencedColumnName = "id", nullable = false)
     private User author;
 
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany (cascade = CascadeType.PERSIST, mappedBy = "post")
+    @JsonBackReference
     private List<Comment> comments;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "book_id", referencedColumnName = "id", nullable = false)
     private Book book;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "bookclub_id", referencedColumnName = "id", nullable = false)
     private Bookclub bookclub;
 

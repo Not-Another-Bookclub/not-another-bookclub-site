@@ -28,7 +28,8 @@
             </ol>
         </nav>
     </div>
-
+    <div class="row"><div class="d-none d-md-block col-md-4 col-lg-6 py-1 my-2"><img class="img-fluid" src="/img/dinnerwithfriends.jpg"></div>
+        <div class="col-12 col-md-8 col-lg-6 py-1 my-2">
     <div th:unless="${isOwner}"><h1>Sorry, you can only create meetings for bookclubs for which you are an owner.</h1>
 
         <p>Check <a th:href="@{'/pro/' + ${loggedin.id}}">your profile page</a> for more information</p></div>
@@ -52,6 +53,7 @@
                     <option value="HOUSE">House</option>
                     <option value="PUBLIC">Public</option>
                     <option value="LIBRARY">Library</option>
+                    <option value="VIRTUAL">Virtual</option>
                     <option value="OTHER">Other</option>
                 </select>
             </div>
@@ -103,6 +105,8 @@
         </form>
     </div>
     </div>
+    </div>
+</div>
 </div>
 
     <footer th:replace="partials.html::footer"></footer>

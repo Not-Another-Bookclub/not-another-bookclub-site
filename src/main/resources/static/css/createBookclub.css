@@ -1,0 +1,53 @@
+ h4, h5, h6{
+    font-family: sans-serif;
+    /*color: #23B023;*/
+     /*color: white;*/
+     color: dodgerblue;
+
+
+}
+
+h1, h2, h3{
+    font-family: "serif";
+    /*color: #23B023;*/
+    /*color: white;*/
+    color: dodgerblue;
+
+}
+
+/*body {*/
+/*    background-color: red;*/
+/*    background-image:*/
+/*            !*linear-gradient(    rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)    ),*!*/
+
+/*        !*url("../img/teddy-roosevelt.jpg");*!*/
+/*    !*url("/img/Hogwarts.jpg");*!*/
+/*    background-position: center;*/
+/*    background-size: cover;    !*animation: ease-in 2s;*!*/
+/*    !*font-family: 'Playfair Display SC', Serif;*!*/
+/*}*/
+body{
+background: url('../img/darkbooks.jpg') no-repeat center;
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+-webkit-background-size: cover;
+-moz-background-size: cover;
+background-size: cover;
+-o-background-size: cover;
+/*color: #23B023;*/
+    color: dodgerblue;
+}
+.form-check {
+    /*color: lawngreen;*/
+    /*color: white;*/
+    /*color: #23B023;*/
+    color: dodgerblue;
+}
+
+
+.btn-secondary{
+    /*background-color: #23B023;*/
+    /*color: #D2F873;*/
+    background-color: blue;
+
+    color: deepskyblue;
+}

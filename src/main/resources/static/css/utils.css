@@ -1,3 +1,13 @@
+body {
+    background: url('../img/magicallibarary.jpg') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+
 .narrow-body {
     margin: 0 auto;
 }
@@ -8,12 +18,17 @@
     }
 }
 
-body {
-    background: url('../img/magicallibarary.jpg') no-repeat center center fixed;
-    background-color: rgba(0, 0, 0, 0.2);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+p, h4, h5, h6{
+    font-family: sans-serif;
 
 }
+
+h1, h2, h3{
+    font-family: "serif";
+}
+
+
+
+
+
+

@@ -1,5 +1,9 @@
 package com.codeup.springboot_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,6 +27,7 @@ public class User {
     private String email;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @Column (columnDefinition = "TEXT")
@@ -41,15 +46,19 @@ public class User {
     private String zipcode;
 
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "id")
+    @JsonBackReference
     private List<Post> posts;
 
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "comment_id")
+    @JsonBackReference
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookclub")
+    @JsonBackReference
     private List<BookclubMembership> bookclubMemberships;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    @JsonBackReference
     private List<UserBook> books;
 
     public User(long id, String username, String firstname, String lastname, String email, String password, String bio, String avatar_path, boolean is_admin, boolean is_private, List<Post> posts, List<Comment> comments) {

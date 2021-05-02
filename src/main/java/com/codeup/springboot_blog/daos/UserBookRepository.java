@@ -9,4 +9,5 @@ import java.util.List;
 public interface UserBookRepository extends JpaRepository<UserBook, Long> {
     List<UserBook> findAllByUser(User user);
     UserBook findUserBookByBook_GoogleIDAndUserIs(String googleID, User user);
+    List<UserBook> findAllByBook_GoogleID(String googleID);
 }

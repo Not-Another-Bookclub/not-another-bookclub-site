@@ -37,8 +37,8 @@
         <input type="text" aria-label="Last name" class="form-control mb-3" th:field="*{lastname}">
     </div>
 
-    <label class="form-label mt-3" for="zipcode">Zip Code - <span class="text-muted">Used to help find bookclubs close to you.</span> </label>
-    <input class="form-control mb-3" th:field="*{zipcode}" />
+    <label class="form-label mt-3 d-none" for="zipcode">Zip Code - <span class="text-muted">Used to help find bookclubs close to you.</span> </label>
+    <input class="form-control mb-3 d-none" th:field="*{zipcode}" />
 
     <label class="form-label mt-3" for="bio">Biography</label>
     <textarea class="form-control mb-3" rows="6" th:field="*{bio}" />

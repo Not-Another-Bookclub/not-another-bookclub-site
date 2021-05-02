@@ -1,0 +1,113 @@
+:root {
+    /*--left: hsla(240, 100%, 0%, 0.65);*/
+    /*--right: hsla(195, 53%, 79%, 0.65);*/
+    /*--right: hsla(240, 100%, 40%, 0.65);*/
+    --profile: #30536C;
+    --bookclub: darkblue;
+}
+
+body {
+    /*background: linear-gradient(135deg, var(--left), var(--right)),*/
+    background: url('../img/magicalLibrary.jpg') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    color: white;
+}
+
+.container {
+    padding-top: 30px;
+}
+
+/*BREADCRUMBS*/
+#breadcrumbBookclubs {
+    /*border: 2px solid cornflowerblue;*/
+    background: var(--bookclub);
+    padding: 1rem;
+    color: white;
+}
+
+/*Styling that wraps the accordion*/
+.pro-card {
+    background: var(--bookclub);
+    opacity: 0.9;
+    padding: 2rem;
+    margin-bottom: 30px;
+}
+
+.pro-card div {
+    background: black;
+    color: white;
+}
+
+
+/*THE ACCORDION STYLING*/
+details > summary {
+    list-style: none;
+    background: black;
+    color: white;
+    opacity: 1;
+}
+
+details > summary i {
+    transition: transform 0.4s ease;
+}
+
+details[open] > summary i {
+    transform: rotate(-180deg);
+}
+
+details > summary::-webkit-details-marker {
+    display: none;
+    cursor: pointer;
+}
+
+.acc-bar {
+    border: 3px solid white;
+    color: white;
+    background: white;
+    margin: 0px;
+}
+
+.butn {
+    border: none;
+    padding: 15px;
+    /*width: 175px;*/
+    /*border-radius: 6px;*/
+    text-decoration: none;
+}
+
+.pro-link {
+    background: var(--profile);
+    color: white;
+    transition: .3s ease;
+}
+
+.pro-link:hover {
+    color: white;
+    /*box-shadow: 0 0 10px rgba(255,255,255,0.9);*/
+    box-shadow: 0 0 10px white;
+}
+
+.pro-link-2:hover {
+    transform: scale(1.1);
+}
+
+
+/*INVITES*/
+.invite-unit {
+    color: white;
+    background: darkblue;
+    border: 2px solid white;
+}
+
+.invite-unit div {
+    background: black;
+    color: white;
+}
+
+.invite-unit > div {
+    max-width: 300px;
+}

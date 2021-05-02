@@ -127,10 +127,6 @@ public class PostController {
         }
     }
 
-        System.out.println("bookclub.getId() = " + bookclub.getId());
-        System.out.println("This is from the Post Controller");
-        System.out.println("startdateshtml = " + startdateshtml);
-
         model.addAttribute("user", user);
         model.addAttribute("books", post.getBook());
         model.addAttribute("bookclub", bookclub);

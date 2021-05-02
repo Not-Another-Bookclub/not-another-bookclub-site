@@ -1,24 +1,30 @@
-:root {
-    --white: #FEFFFE;
-    --lavendar: #E9EBF8;
-    --cadetblue: #B4B8C5;
-    --quicksilver: #A5A299;
-    --taupe: #8D818C;
-}
+/*:root {*/
+/*    --white: #FEFFFE;*/
+/*    --lavendar: #E9EBF8;*/
+/*    --cadetblue: #B4B8C5;*/
+/*    --quicksilver: #A5A299;*/
+/*    --taupe: #8D818C;*/
+/*}*/
 
-a {
-    color: var(--taupe);
-}
-a:hover {
-    color: var(--cadetblue);
-}
+/*a {*/
+/*    color: var(--taupe);*/
+/*}*/
+/*a:hover {*/
+/*    color: var(--cadetblue);*/
+/*}*/
 
-a:visited {
-    color: var(--quicksilver)
-}
+/*a:visited {*/
+/*    color: var(--quicksilver)*/
+/*}*/
 
 body {
     background-color: var(--white);
+    background: url('../img/magicallibarary.jpg') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 }
 
 #footer{
@@ -42,7 +48,6 @@ body {
     height: 150px;
     background-color: #b4b9c5;
     opacity: 0.5;
-
 }
 
 .item-carousel {
@@ -50,13 +55,17 @@ body {
     text-align: center;
 }
 
-body {
-    background: url('../img/magicallibarary.jpg') no-repeat center center fixed;
-    background-color: rgba(0, 0, 0, 0.2);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+p, h4, h5, h6{
+    font-family: sans-serif;
 
 }
+
+h1, h2, h3{
+    font-family: "serif";
+}
+
+
+
+
+
 

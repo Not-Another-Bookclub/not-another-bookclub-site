@@ -1,5 +1,6 @@
 package com.codeup.springboot_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -19,15 +20,15 @@ public class Book {
     private String isbn;
 
     @OneToMany(mappedBy = "bookclub")
-    @JsonManagedReference
+    @JsonBackReference
     private List<BookclubBook> bookclubs;
 
     @OneToMany(mappedBy = "book")
-    @JsonManagedReference
+    @JsonBackReference
     private List<UserBook> users;
 
     @OneToMany(mappedBy = "book")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Post> posts;
 
     public Book() {};

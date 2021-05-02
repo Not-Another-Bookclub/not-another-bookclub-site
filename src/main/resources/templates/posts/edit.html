@@ -8,12 +8,12 @@
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
-<div id="breadcrumbPosts">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Edit</li>
-        </ol>
-    </nav>
+<!--<div id="breadcrumbPosts">-->
+<!--    <nav aria-label="breadcrumb">-->
+<!--        <ol class="breadcrumb">-->
+<!--            <li class="breadcrumb-item active" aria-current="page">Edit</li>-->
+<!--        </ol>-->
+<!--    </nav>-->
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -29,6 +29,8 @@
     </nav>
 
 <div class="container">
+    <div class="row"><div class="d-none d-md-block col-md-4 col-lg-6 py-1 my-2"><img class="img-fluid" src="/img/typing.jpg"></div>
+        <div class="col-12 col-md-8 col-lg-6 py-1 my-2">
     <div th:unless="${isAuthor}"><h1>Sorry, you can't edit a post that isn't yours. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and email the author or Bookclub owner.</h1></div>
     <div th:if="${isAuthor}">
     <h1>Use the form below to edit an existing post!</h1>
@@ -53,6 +55,7 @@
         <button class="btn btn-secondary text-center">Submit Post</button>
     </form>
     </div>
+    </div></div>
 </div>
 <!--<div th:replace="partials.html::bookclubmodal"></div>-->
 
