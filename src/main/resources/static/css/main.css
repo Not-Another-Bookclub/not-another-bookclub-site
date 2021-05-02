@@ -17,9 +17,6 @@
 /*    color: var(--quicksilver)*/
 /*}*/
 
-body {
-    background-color: var(--white);
-}
 
 #footer{
     position: absolute;
@@ -36,6 +33,17 @@ body {
 #logoutmenu:hover, #logoutmenu:active, #logoutmenu:focus {
     background-color: var(--cadetblue);
     color: var(--white)
+}
+
+#nab-carousel {
+    height: 150px;
+    background-color: #b4b9c5;
+    opacity: 0.5;
+}
+
+.item-carousel {
+    display: block;
+    text-align: center;
 }
 
 p, h4, h5, h6{
@@ -101,4 +109,4 @@ h1, h2, h3{
 /*}*/
 
 
-/*background-color: #B4B8C5*/
+
