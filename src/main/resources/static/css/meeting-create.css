@@ -1,0 +1,75 @@
+:root {
+    --left: hsla(240, 100%, 0%, 0.65);
+    /*--right: hsla(195, 53%, 79%, 0.65);*/
+    --right: hsla(240, 100%, 40%, 0.65);
+    --profile: #30536C;
+    --bookclub: darkblue;
+    --meeting: #23B023;
+    --meeting-light: #D2F873;
+}
+
+body {
+    /*background: linear-gradient(135deg, var(--left), var(--right)),*/
+    background: url('../img/magicalLibrary.jpg') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    color: white;
+}
+
+
+
+
+.pro-card {
+    background: var(--meeting);
+    opacity: 0.9;
+    padding: 2rem;
+    margin-bottom: 30px;
+}
+
+
+
+
+.form-meeting {
+    padding: 30px;
+    border-radius: 5px;
+    background: black;
+    color: var(--meeting-light);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--meeting-light);
+    padding: 10px;
+    color: var(--meeting-light);
+    width: 100%;
+    margin: 1rem 0;
+}
+
+#day::-webkit-calendar-picker-indicator {
+    /*color: #c5ecfd;*/
+    /*opacity: 1;*/
+    /*display: block;*/
+    filter: invert(1);
+    color: var(--meeting-light);
+    /*background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;*/
+    /*width: 20px;*/
+    /*height: 20px;*/
+    /*border-width: thin;*/
+}
+
+#time::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    color: var(--meeting-light);
+}
+
+
+
