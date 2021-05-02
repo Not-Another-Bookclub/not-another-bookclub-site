@@ -19,6 +19,12 @@
 
 body {
     background-color: var(--white);
+    background: url('../img/magicallibarary.jpg') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 }
 
 #footer{
@@ -38,6 +44,17 @@ body {
     color: var(--white)
 }
 
+#nab-carousel {
+    height: 150px;
+    background-color: #b4b9c5;
+    opacity: 0.5;
+}
+
+.item-carousel {
+    display: block;
+    text-align: center;
+}
+
 p, h4, h5, h6{
     font-family: sans-serif;
 
@@ -46,6 +63,9 @@ p, h4, h5, h6{
 h1, h2, h3{
     font-family: "serif";
 }
+
+
+
 
 
 
