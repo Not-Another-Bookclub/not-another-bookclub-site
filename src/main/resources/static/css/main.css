@@ -63,6 +63,7 @@ h1, h2, h3{
     font-family: "serif";
 }
 
+/*TRANSPARENT NAVBAR STUFF*/
 .nav-specs {
     border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
     width: 80%;
@@ -87,6 +88,19 @@ h1, h2, h3{
     border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
 }
 
+#logoutmenu {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    transition: 1s;
+    border-bottom: 2px solid hsla(0, 0%, 0%, 0.1);
+}
+
+#logoutmenu:hover {
+    color: white;
+    border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
+}
+
 .navbar-toggler {
     /*background: hsla(180, 100%, 25%, 0.9);*/
     color: white;
@@ -101,8 +115,28 @@ h1, h2, h3{
     color: hsla(180, 100%, 25%, 0.9);
 }
 
+/*FOOTER*/
+footer {
+    border-top: 2px solid hsla(180, 100%, 25%, 0.9);
+    padding: 2rem;
+    min-height: ;
+}
 
-/*custom button*/
+footer div p a {
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    background: var(--profile);
+    opacity: 0.8;
+    margin: 2rem auto;
+}
+
+footer div p a:hover {
+    color: white;
+
+}
+
+/*CUSTOM BUTTONS*/
 .butn {
     border: none;
     padding: 10px;
