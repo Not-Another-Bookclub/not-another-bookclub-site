@@ -86,6 +86,10 @@ h1, h2, h3{
     background: var(--bookclub);
 }
 
+.boo-link-2 {
+
+}
+
 .pro-link:hover {
     color: white;
     /*box-shadow: 0 0 10px rgba(255,255,255,0.9);*/
