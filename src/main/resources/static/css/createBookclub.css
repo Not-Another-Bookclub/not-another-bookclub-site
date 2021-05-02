@@ -1,15 +1,17 @@
  h4, h5, h6{
     font-family: sans-serif;
-    color: #23B023;
+    /*color: #23B023;*/
      /*color: white;*/
+     color: dodgerblue;
 
 
 }
 
 h1, h2, h3{
     font-family: "serif";
-    color: #23B023;
+    /*color: #23B023;*/
     /*color: white;*/
+    color: dodgerblue;
 
 }
 
@@ -31,15 +33,21 @@ background: url('../img/darkbooks.jpg') no-repeat center;
 -moz-background-size: cover;
 background-size: cover;
 -o-background-size: cover;
-color: #23B023;
+/*color: #23B023;*/
+    color: dodgerblue;
 }
 .form-check {
     /*color: lawngreen;*/
     /*color: white;*/
-    color: #23B023;
+    /*color: #23B023;*/
+    color: dodgerblue;
 }
 
+
 .btn-secondary{
-    background-color: #23B023;
-    color: #D2F873;
+    /*background-color: #23B023;*/
+    /*color: #D2F873;*/
+    background-color: blue;
+
+    color: deepskyblue;
 }
