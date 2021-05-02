@@ -47,5 +47,58 @@ h1, h2, h3{
     font-family: "serif";
 }
 
+.nav-specs {
+    border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
+    width: 80%;
+    margin: 0 auto;
+    /*color: white;*/
+}
+
+.nav-specs img {
+    background-color: #B4B8C5;
+    border-radius: 5px;
+}
+
+#navbarSupportedContent a {
+    color: white;
+    text-transform: uppercase;
+    transition: 1s;
+    border-bottom: 2px solid hsla(0, 0%, 0%, 0.1);
+}
+
+#navbarSupportedContent a:hover {
+    /*color: hsla(180, 100%, 25%, 0.9);*/
+    border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
+}
+
+.navbar-toggler {
+    /*background: hsla(180, 100%, 25%, 0.9);*/
+    color: white;
+    border: 1px solid white;
+    transition: 0.5s;
+
+}
+
+.navbar-toggler:hover  {
+    border: 2px solid hsla(180, 100%, 25%, 0.9);
+    color: hsla(180, 100%, 25%, 0.9);
+}
+
+/*#navbarSupportedContent ul li::after {*/
+/*    content: '';*/
+/*    height: 3px;*/
+/*    width: 0;*/
+/*    background: #009688;*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    bottom: -10px;*/
+/*    transition: 0.5s;*/
+/*}*/
+
+/*#navbarSupportedContent ul li:hover::after {*/
+/*    width: 100%;*/
+
+/*}*/
 
 
+/*background-color: #B4B8C5*/
