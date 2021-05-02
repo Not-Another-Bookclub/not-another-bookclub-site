@@ -104,8 +104,8 @@
                     flex-md-wrap
                     p-3">
                 <div th:each="user : ${pendingUsers}" class="invite-unit d-flex flex-row m-3 p-3 row">
-                    <div class="card p-2 m-1 col-12 col-sm-7">
-                        <a class="btn btn-primary" th:href="@{'/pro/' + ${user.id} }" th:text="${user.username}"></a>
+                    <div class="card p-2 m-1 col-12 col-sm-7 text-center">
+                        <a class="butn pro-link" th:href="@{'/pro/' + ${user.id} }" th:text="${user.username}"></a>
                         <span> Wants to join</span>
                     </div>
                     <div class="card p-2 m-1 col-12 col-sm-4">
