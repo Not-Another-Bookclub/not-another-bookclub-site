@@ -12,6 +12,7 @@
     /*--right: hsla(240, 100%, 40%, 0.65);*/
     --profile: #30536C;
     --bookclub: darkblue;
+    --nav-accent: hsla(180, 100%, 25%, 0.9);
 }
 
 /*a {*/
@@ -84,6 +85,17 @@ h1, h2, h3{
 .boo-link {
     color: white;
     background: var(--bookclub);
+}
+
+.boo-link-2 {
+    background: var(--nav-accent);
+    color: white;
+    transition: 0.5s;
+}
+
+.boo-link-2:hover {
+    color: var(--nav-accent);
+    background: white;
 }
 
 .pro-link:hover {
