@@ -29,13 +29,12 @@
     </div>
 
     <div class="narrow-body pro-card">
-        <div class="row d-flex flex-column flex-md-row p-2">
+        <div class="row d-flex flex-column flex-md-row p-3">
             <div class="col-6">
                 <h1 th:text="${bookclub.name}"></h1>
                 <p th:text="${bookclub.description}"></p>
-                <p>
-                    This bookclub is led by: <span th:text="${bookclub.owner.username}"></span> - <a th:href="@{/pro/__${bookclub.owner.id}__}" class="butn pro-link">View Profile</a>
-                </p>
+                <p>This bookclub is lead by -</p>
+                <a th:href="@{/pro/__${bookclub.owner.id}__}" class="butn pro-link mb-2" th:text="${bookclub.owner.username}">View Profile</a>
             </div>
             <div  th:if="${isOwner}" class="col-6 p-3">
 <!--                <div class="col-6 p-3">-->
