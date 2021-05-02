@@ -71,30 +71,6 @@ details > summary::-webkit-details-marker {
     margin: 0px;
 }
 
-.butn {
-    border: none;
-    padding: 10px;
-    /*width: 175px;*/
-    /*border-radius: 6px;*/
-    text-decoration: none;
-}
-
-.pro-link {
-    background: var(--profile);
-    color: white;
-    transition: .3s ease;
-}
-
-.pro-link:hover {
-    color: white;
-    /*box-shadow: 0 0 10px rgba(255,255,255,0.9);*/
-    box-shadow: 0 0 10px white;
-}
-
-.pro-link-2:hover {
-    transform: scale(1.1);
-}
-
 
 /*INVITES*/
 .invite-unit {
