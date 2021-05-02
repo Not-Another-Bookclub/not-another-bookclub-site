@@ -121,6 +121,7 @@ h1, h2, h3{
 }
 
 
+/*CUSTOM SUGGESTION*/
 .custom-thumb {
     /*color: black;*/
     background: var(--bookclub);
@@ -132,7 +133,7 @@ h1, h2, h3{
 }
 
 .custom-thumb div img {
-    height: 100px;
+    /*height: 100px;*/
     width: 100px;
 }
 
