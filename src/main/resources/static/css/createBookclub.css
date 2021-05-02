@@ -1,13 +1,15 @@
-p, h4, h5, h6{
+ h4, h5, h6{
     font-family: sans-serif;
-    color: gray;
+    color: #23B023;
+     /*color: white;*/
 
 
 }
 
 h1, h2, h3{
     font-family: "serif";
-    color: gray;
+    color: #23B023;
+    /*color: white;*/
 
 }
 
@@ -23,11 +25,21 @@ h1, h2, h3{
 /*    !*font-family: 'Playfair Display SC', Serif;*!*/
 /*}*/
 body{
-background: url('../img/darkLibrary.jpg') no-repeat center;
-    background-color: rgba(0, 0, 0, 0.2);
+background: url('../img/darkbooks.jpg') no-repeat center;
+    /*background-color: rgba(0, 0, 0, 0.2);*/
 -webkit-background-size: cover;
 -moz-background-size: cover;
 background-size: cover;
 -o-background-size: cover;
-color: gray;
+color: #23B023;
+}
+.form-check {
+    /*color: lawngreen;*/
+    /*color: white;*/
+    color: #23B023;
+}
+
+.btn-secondary{
+    background-color: #23B023;
+    color: #D2F873;
 }
