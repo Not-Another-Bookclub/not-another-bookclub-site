@@ -15,3 +15,22 @@ body {
 #post-content {
     color: white;
 }
+
+.post-body {
+    background: var(--post);
+}
+
+.post-body > div {
+    background: black;
+}
+
+.post-body > div >form > div {
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--post);
+}
+
+.post-body > div >form > div > input {
+    background: black;
+    color: white;
+    /*width: 100%;*/
+}
