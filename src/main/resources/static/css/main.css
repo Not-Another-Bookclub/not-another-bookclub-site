@@ -13,6 +13,7 @@
     --profile: #30536C;
     --bookclub: darkblue;
     --nav-accent: hsla(180, 100%, 25%, 0.9);
+    --post: #D77A04;
 }
 
 /*a {*/
@@ -178,6 +179,22 @@ footer div p a:hover {
 .boo-link {
     color: white;
     background: var(--bookclub);
+}
+
+/*POST LINK*/
+.post-link {
+    color: white;
+    background: var(--post);
+    transition: 0.5s;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+.post-link:hover {
+    box-shadow: 0 0 10px white;
+    transform: scale(1.1);
+    color: white;
 }
 
 .boo-link-2 {
