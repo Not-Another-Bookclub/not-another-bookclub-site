@@ -78,7 +78,7 @@
 
 
 
-    <div th:each="comment,iterStat : ${post.getComments()}" th:class="${iterStat.count} narrow-body">
+    <div th:each="comment : ${post.getComments()}" th:class="narrow-body">
         <div class="card">
             <div class="card-body">
                 <span th:text="${comment.author.username}"></span> on <span class="text-muted" th:text="${#dates.format(comment.createDate,'E, MMM dd yyyy HH:mm:ss')}"></span><br>
