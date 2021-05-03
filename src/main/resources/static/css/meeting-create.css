@@ -45,6 +45,21 @@ body {
     flex-direction: column;
 }
 
+.breadcrumbMeeting {
+    background: var(--meeting);
+    padding: 10px;
+    color: white;
+}
+
+.breadcrumbMeeting ul {
+    margin-bottom: 0;
+}
+
+.breadcrumbMeeting a {
+    color: black;
+    text-decoration: none;
+}
+
 .input {
     background: transparent;
     border: 0;

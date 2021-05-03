@@ -103,3 +103,13 @@ details > summary::-webkit-details-marker {
 .invite-unit > div {
     max-width: 300px;
 }
+
+
+.breadcrumb-item a {
+    text-decoration: none;
+}
+
+.breadcrumb {
+    margin-bottom: 0;
+}
+
