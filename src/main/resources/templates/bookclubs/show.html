@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/css/show-bookclub.css">
-<link rel="stylesheet" href="/css/utils.css">
-<html lang="en">
-<head th:include="partials.html::head('A detailed view of this bookclub')">
+<head>
     <meta charset="UTF-8">
-    <title>Detailed view of this post</title>
-
+    <head th:include="partials.html::head('A detailed view of this bookclub')">
+        <title>Detailed view of this post</title>
+    </head>
 </head>
+<link rel="stylesheet" href="/css/utils.css">
+<link rel="stylesheet" href="/css/show-bookclub.css">
+<html lang="en">
+
 
 <body>
 <div th:replace="partials.html::navbar"></div>

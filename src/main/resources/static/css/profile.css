@@ -10,9 +10,11 @@
 body {
     /*background: linear-gradient(135deg, var(--left), var(--right)),*/
 
-    background: url('/img/magicalLibrary.jpg') no-repeat center center fixed,
-     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    /*background: url('/img/magicalLibrary.jpg') no-repeat center center fixed,*/
+    /* linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));*/
     /*background-color: rgba(0, 0, 0, 0.8);*/
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/img/magicalLibrary.jpg");
 
     -webkit-background-size: cover;
     -moz-background-size: cover;
