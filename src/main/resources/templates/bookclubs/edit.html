@@ -16,11 +16,11 @@
     <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/edit'}" th:method="post" th:object="${bookclub}" class="narrow-body mb-3">
         <div class="mb-3">
             <label for="name" class="form-label">Name of Your Bookclub</label>
-            <input class="form-control" th:field="*{name}" type="text">
+            <input class="form-control" th:field="*{name}" type="text" maxlength="255" required>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Describe your Bookclub</label>
-            <textarea class="form-control" rows="6" th:field="*{description}">Who are your ideal members? What types of books do you want to read? Where and how often would you like to meet?</textarea>
+            <textarea class="form-control" rows="3" maxlength="255" th:field="*{description}">Who are your ideal members? What types of books do you want to read? Where and how often would you like to meet?</textarea>
         </div>
         <div class="mb-3">
             <div class="form-check">
