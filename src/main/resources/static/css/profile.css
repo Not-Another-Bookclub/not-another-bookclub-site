@@ -13,12 +13,13 @@ body {
     /*background: url('/img/magicalLibrary.jpg') no-repeat center center fixed,*/
     /* linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));*/
     /*background-color: rgba(0, 0, 0, 0.8);*/
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/img/magicalLibrary.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            url("/img/magicalLibrary.jpg") no-repeat center center fixed;
+
 
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-size: cover;
+    background-image-size: cover;
     -o-background-size: cover;
     color: white;
 }
