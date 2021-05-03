@@ -1,0 +1,11 @@
+a {
+    color: white;
+    opacity: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+a:hover {
+    color: var(--bookclub);
+
+}
