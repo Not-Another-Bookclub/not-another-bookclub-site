@@ -11,3 +11,7 @@ body {
     -o-background-size: cover;
     color: white;
 }
+
+#post-content {
+    color: white;
+}

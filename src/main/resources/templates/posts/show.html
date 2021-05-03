@@ -12,8 +12,9 @@
 
 
 
-<div class="container">
-    <div id="breadcrumbPosts">
+<div class="container" id="post-content">
+<!--    BREAD CRUMB-->
+    <div id="breadcrumbPosts" class="narrow-body">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>
@@ -21,40 +22,63 @@
             </ol>
         </nav>
     </div>
-    <div class="text-center p-2 m-2"><h1>Here is post: Post #<span th:text="${post.id}"></span> <span th:text="${post.title}"></span></h1></div>
-<div id="results1"></div>
-<div class="text-start p-2 m-2"><p th:text="${post.getBody()}">Body will go here.</p>
-    <p>Posted by: <span th:text="${post.author.getUsername()}"></span> - <a th:href ="@{/profile/__${post.author.username}__}">profile</a> - <a th:href="'mailto:' + ${post.author.email}">email</a> </p></div>
-<!--    <br><p>Posted: <span th:text="${post.created_on_string}"></span>. Last updated: <span th:text="${post.modified_on_string}"></span> </div>-->
-   <div th:if="${isAuthor}"> <div class="center-text p-2 m-2"><a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}"><button type="button" class="btn btn-primary">Edit</button></a>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
-        Delete
-    </button></div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="deleteModalLabel">Confirm delete?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Deleting your blog post cannot be undone! Are you sure you want to continue?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<!--                    <form th:action="@{/posts/__${post.id}__}" method="post">-->
-                        <form action="/posts/delete" method="post"><input hidden name="id" th:value="${post.id}"><button type="submit" class="btn btn-danger">Delete</button></form>
+    <div class="narrow-body">
+        <h1 class="text-center"> <span th:text="${post.title}"></span></h1>
+        <hr class="acc-bar">
+
+        <h5 th:text="${post.getBody()}">Body will go here.</h5>
+        <p>
+            Posted by: <span th:text="${post.author.getUsername()}"></span> - <a th:href ="@{/profile/__${post.author.username}__}">profile</a> - <a th:href="'mailto:' + ${post.author.email}">email</a>
+        </p>
+
+        <div th:if="${isAuthor}" class="narrow-body">
+            <div class="center-text p-2 m-2">
+                <a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}">
+                    <button type="button" class="btn btn-primary">Edit</button>
+                </a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Delete
+                </button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="deleteModalLabel">Confirm delete?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Deleting your blog post cannot be undone! Are you sure you want to continue?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <!--                    <form th:action="@{/posts/__${post.id}__}" method="post">-->
+                            <form action="/posts/delete" method="post">
+                                <input hidden name="id" th:value="${post.id}">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-   </div>
 
 
-    <div th:each="comment,iterStat : ${post.getComments()}" th:class="${iterStat.count}">
+<!--    <div id="results1" class="narrow-body"></div>-->
+
+<!--    <div class="p-2 narrow-body">-->
+
+<!--    </div>-->
+<!--    <br><p>Posted: <span th:text="${post.created_on_string}"></span>. Last updated: <span th:text="${post.modified_on_string}"></span> </div>-->
+
+
+
+    <div th:each="comment,iterStat : ${post.getComments()}" th:class="${iterStat.count} narrow-body">
         <div class="card">
             <div class="card-body">
                 <span th:text="${comment.author.username}"></span> on <span class="text-muted" th:text="${#dates.format(comment.createDate,'E, MMM dd yyyy HH:mm:ss')}"></span><br>
@@ -63,7 +87,7 @@
             </div>
         </div>
     </div>
-    <div class="card">
+    <div class="card narrow-body">
         <div th:if="${loggedin != null}"  class="card-body">
 <!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
             <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
@@ -79,9 +103,9 @@
     </div>
 </div>
 
-<div th:replace="partials.html::bookclubmodal"></div>
+<!--<div th:replace="partials.html::bookclubmodal"></div>-->
 
     <footer th:replace="partials.html::footer"></footer>
-<script th:replace="partials.html::bookdisplay(${post.book.googleID})"></script>
+<!--<script th:replace="partials.html::bookdisplay(${post.book.googleID})"></script>-->
 </body>
 </html>
