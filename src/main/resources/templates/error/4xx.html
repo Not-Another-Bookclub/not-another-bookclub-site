@@ -6,6 +6,7 @@
 
 
 </head>
+<link rel="stylesheet" href="/css/error.css">
 
 <body>
 
@@ -16,8 +17,8 @@
     <th:block th:switch="${error}">
         <div th:case="'Not Found'">
             <h1>Well, this is embarassing (404ed!)</h1>
-            <p>Our favorite book...it was just...right....here.</p>
-            <img src="/img/binoculars.jpg" width="500px">
+            <p class="text-center" >Our favorite book...it was just...right....here.</p>
+            <img src="/img/binoculars.jpg"  class="rounded mx-auto d-block" width="500px">
             <p>We'll be on the lookout for it. But if you came here following a link: <a href="mailto:ted.mccormick@gmail.com">let us know.</a></p>
         </div>
         <div th:case="Forbidden">
@@ -28,11 +29,15 @@
 
         </div>
     </th:block>
-        <h4>Sorry about that - but besides going back the way you came, you can also check out <a href="/bookclubs">all the current bookclubs</a> to find a place to hang out.</h4>
 
+        <h4>Sorry about that - but besides going back the way you came, you can also check out <a href="/bookclubs">all the current bookclubs</a> to find a place to hang out.</h4>>
     </div></body>
 
+<!--                FOOTER-->
+
     <footer th:replace="partials.html::footer"></footer>
+
+<!--                END FOOTER-->
 
 
 </body>
