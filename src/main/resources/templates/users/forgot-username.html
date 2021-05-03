@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <title>Forgot-Username</title>
 </head>
-<body>
+<head>
+    <link rel="stylesheet" href="/static/css/utils.css">
+    <link rel="stylesheet" href="/css/font.css">
+</head>
+<body id="login-background">
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
 
@@ -15,7 +19,7 @@
 <!--            <input class="form-control mb-3" th:field="*{username}" />-->
 
             <label class="form-label mt-3" for="email">Email</label>
-            <input class="form-control mb-3" type="text" name="email" id="email" />
+            <input class="form-control mb-3" type="text" name="email" id="email"  />
 
 <!--            <input class="form-control mb-3" th:field="*{email}" />-->
 
