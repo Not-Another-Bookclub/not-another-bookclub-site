@@ -1,12 +1,33 @@
 
 
+/*.container{*/
+/*    background: url('../img/darkbooks.jpg') no-repeat center;*/
+/*    !*background-color: rgba(0, 0, 0, 0.2);*!*/
+/*    -webkit-background-size: cover;*/
+/*    -moz-background-size: cover;*/
+/*    background-size: cover;*/
+/*    -o-background-size: cover;*/
+/*    !*color: #23B023;*!*/
+/*    color: white;*/
+/*    height: 1000px;*/
+/*    align-content: center;*/
+/*}*/
+
 body{
-    background: url('../img/errorPhone.jpg') no-repeat center;
-    /*background-color: rgba(0, 0, 0, 0.2);*/
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    /*color: #23B023;*/
-    color: dodgerblue;
+    background-color: black;
 }
+p{
+    font-family: sans-serif;
+}
+h1, h2, h3{
+    font-family: serif;
+}
+
+
+.container{
+    color: white;
+    /*background-color: black;*/
+    height: 1000px;
+    width: 100%;
+}
+
