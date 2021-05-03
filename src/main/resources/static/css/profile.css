@@ -160,9 +160,10 @@ h1, h2, h3{
 }
 
 .util-butn-accept {
-    background: linear-gradient(90deg, #0DA500, #78FF01 );
+    background: linear-gradient(90deg, #0da500, #78FF01 );
 }
 
 .util-butn-decline {
     background: linear-gradient(90deg, #B00005, #FA613F);
 }
+
