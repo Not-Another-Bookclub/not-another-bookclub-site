@@ -93,6 +93,7 @@ details > summary::-webkit-details-marker {
 }
 
 .book-link {
+    display: inline-block;
     text-decoration: none;
     width: 200px;
     height: 200px;
@@ -101,13 +102,16 @@ details > summary::-webkit-details-marker {
     color: white;
     opacity: 1;
     overflow: hidden;
-    text-overflow: ellipsis;
+    /*white-space: nowrap;*/
+    padding: 1rem;
+
 }
 
 .book-link:hover {
     color: white;
     box-shadow: white 0px 0px 4px 4px;
 }
+
 
 
 /*@media screen and (max-width: 576px){*/
@@ -127,24 +131,26 @@ h1, h2, h3{
 
 
 /*CUSTOM SUGGESTION*/
-.custom-thumb {
-    /*color: black;*/
-    background: var(--bookclub);
+/*.custom-thumb {*/
+/*    !*color: black;*!*/
+/*    background: var(--bookclub);*/
 
-}
+/*}*/
 
-.custom-thumb div {
-    background: black;
-}
+/*.custom-thumb div {*/
+/*    background: black;*/
+/*}*/
 
-.custom-thumb div img {
-    /*height: 100px;*/
-    width: 100px;
-}
+/*.custom-thumb div img {*/
+/*    !*height: 100px;*!*/
+/*    width: 100px;*/
+/*}*/
 
-.custom-thumb div hr {
-    border: 3px solid white;
-}
+/*.custom-thumb div hr {*/
+/*    border: 3px solid white;*/
+/*}*/
+
+/*END CUSTOM THUMB*/
 
 .util-butn {
     width: 90px;
@@ -160,9 +166,10 @@ h1, h2, h3{
 }
 
 .util-butn-accept {
-    background: linear-gradient(90deg, #0DA500, #78FF01 );
+    background: linear-gradient(90deg, #0da500, #78FF01 );
 }
 
 .util-butn-decline {
     background: linear-gradient(90deg, #B00005, #FA613F);
 }
+

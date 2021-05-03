@@ -10,16 +10,30 @@
     <title th:text=" 'Ooops, ' + ${error}" ></title>
 </head>
 
-    <nav th:replace="partials.html::navbarnologic"></nav>
-<div class="container">
+<!--    css link-->
+<link rel="stylesheet" href="/css/error.css">
 <body>
+
+    <div>
+
+    <nav th:replace="partials.html::navbarnologic"></nav>
+
+    </div>
+
+<div class="container">
+
     <h1>Oh no! What happened?</h1>
     <h3>We might've forgot to cross our "t", or dot our "i".</h3>
     <img src="/img/buriedbybooks.jpg" width="500px">
     <p>We'll fix it, though. Sorry if our pages got a little creased. But besides going back the way you came, you can also check out <a href="/bookclubs">all the current bookclubs</a> to find a place to hang out.</p>
-</body>
+
 </div>
+
+<!--            footer start-->
+    <div>
     <footer th:replace="partials.html::footer"></footer>
+    </div>
+<!--                footer end-->
 
 
 </body>

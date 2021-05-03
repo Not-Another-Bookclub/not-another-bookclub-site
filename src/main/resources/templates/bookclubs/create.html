@@ -8,17 +8,25 @@
 <!--    <title>You shouldn't see this title!</title>-->
 <!--    <link rel="stylesheet" href="/css/createBookclub.css">-->
 
-
-
-
 </head>
-<link rel="stylesheet" href="/css/createBookclub.css">
+    <link rel="stylesheet" href="/css/createBookclub.css">
+    <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/show-bookclub.css">
 <body>
-<div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
-<div class="container">
 
-    <h1>Thanks for starting a new bookclub, here's what we need to know....</h1>
+<!--                Navbar-->
+    <div th:replace="partials.html::navbar">You shouldn't see this.</div>
+
+<!--                    Navbar end-->
+
+
+<!--            MODIFIED PAGE-->
+  <div class="container">
+    <div ="pro-card narrow-body">
+    <div class="row d-flex flex-column flex-md-row p-3">
+        <div class="col-6">
+            <h1>Thanks for starting a new bookclub, here's what we need to know....</h1>
 
     <form th:action="@{/bookclubs/create}" th:method="post" th:object="${bookclub}">
     <div class="mb-3">
@@ -34,24 +42,37 @@
             <input class="form-check-input" type="checkbox" th:field="*{accepting_members}" checked>
             <label class="form-check-label" for="accepting_members">
                 Are you accepting new members? <span>If you uncheck this box, other users will not be able to ask to join your bookclub. We set this to yes by default, because we want you to meet new book-friends.</span>
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" th:field="*{is_private}" checked>
-            <label class="form-check-label" for="is_private">
+                </label>
+                </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" th:field="*{is_private}" checked>
+                <label class="form-check-label" for="is_private">
                 Would you like to list your bookclub to be private? <span>If you check this box, other users won't be able to see your bookclub to ask to join it. We set this to no by default, because we want you to meet new book-friends.</span>
             </label>
+            </div>
         </div>
-        </div>
-        <div class="mb-3">
+            <div class="mb-3">
             <label for="username" class="form-label">And lastly who's going to be in charge....oh that's you! (you can pick someone else later, but why would you want to?</label>
             <input disabled class="form-control" th:value="*{owner.username}" id="username" type="text">
         </div>
 
 
 
-    <button class="btn btn-secondary text-center">Submit Post</button>
-    </form></div>
+    <button class="btn btn-secondary text-center">Create BookClub</button>
+    </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!--                MODIFIED PAGE END-->
+
+
+<!--                FOOTER START-->
 <footer th:replace="partials.html::footer"></footer>
+<!--                    FOOTER END-->
+
 </body>
 </html>

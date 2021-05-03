@@ -106,6 +106,28 @@ h1, h2, h3{
     color: hsla(180, 100%, 25%, 0.9);
 }
 
+#log-drop {
+    background: var(--profile);
+    color: white;
+}
+
+#log-drop form {
+    background: black;
+}
+
+#log-drop a {
+    background: black;
+}
+
+#log-drop a:hover {
+    background: white;
+    color: black;
+}
+
+#log-drop a[href="/sign-up"] {
+    border-bottom: 2px solid var(--profile);
+}
+
 /*FOOTER*/
 footer {
     border-top: 2px solid hsla(180, 100%, 25%, 0.9);
