@@ -14,10 +14,12 @@
 
 
 
-<nav th:fragment="navbar" style="background-color: #B4B8C5">
-    <nav th:if="${user.username != null}" class="navbar navbar-expand-lg navbar-light" style="background-color: #B4B8C5">
+<nav th:fragment="navbar" class="nav-specs mb-3">
+    <nav th:if="${user.username != null}" class="navbar navbar-expand-lg navbar-light" >
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/img/logo.png" height="75px"></a>
+            <a class="navbar-brand" href="/">
+                <img src="/img/logo.png" height="75px">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -44,16 +46,21 @@
             </div>
         </div>
     </nav>
-    <nav th:if="${user.username == null}" class="navbar navbar-expand-lg navbar-light" style="background-color: #B4B8C5">
+
+<!--    UNLOGGED-->
+    <nav th:if="${user.username == null}" class="navbar navbar-expand-lg" >
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/img/logo.png" height="75px"></a>
+            <a class="navbar-brand" href="/">
+                <img src="/img/logo.png" height="75px">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+<!--                <span class="fas fa-bars"></span>-->
+                <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/bookclubs">Home</a>
+                        <a class="nav-link" href="/bookclubs">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/sign-up">Sign up</a>
@@ -589,12 +596,12 @@ setTimeout(function() {
 
 <!--                                    FOOTER PARTIAL START-->
 
-<footer th:fragment="footer" class="text-muted footer mt-auto py-3" style="background-color: #B4B8C5">
-    <div class="container-fluid">
-        <p class="float-right">
-            <a href="#">Back to top</a>
+<footer th:fragment="footer" class="text-muted footer mt-3 py-3">
+    <div class="container-fluid d-flex flex-column align-items-center">
+        <p class="float-right my-2">
+            <a href="#" class="pro-link-2">Back to top</a>
         </p>
-        <p>Everything here is &copy; 2021 by Daniel Cortes, Walter Smith, Ron Rajski, and Edward C. "Ted" McCormick, all rights reserved.</p>
+        <p class="my-2">Everything here is &copy; 2021 by Daniel Cortes, Walter Smith, Ron Rajski, and Edward C. "Ted" McCormick, all rights reserved.</p>
 <!--        <p>But everything here is available for inspection or to modify and make your own - check out <a href="https://github.com/edwardmccormick"><i class="fab fa-github-square"></i> my Github</a> for more.</p>-->
 
 <!--        <p>All servicemarks, trademarks, and logos are used without permission of the trademark or rights holders. No infringement on any claim of their rights intended.</p>-->

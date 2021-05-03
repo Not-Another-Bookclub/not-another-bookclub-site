@@ -64,9 +64,80 @@ h1, h2, h3{
     font-family: "serif";
 }
 
+/*TRANSPARENT NAVBAR STUFF*/
+.nav-specs {
+    border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
+    width: 80%;
+    margin: 0 auto;
+    /*color: white;*/
+}
+
+.nav-specs img {
+    background-color: #B4B8C5;
+    border-radius: 5px;
+}
+
+#navbarSupportedContent a {
+    color: white;
+    text-transform: uppercase;
+    transition: 1s;
+    border-bottom: 2px solid hsla(0, 0%, 0%, 0.1);
+}
+
+#navbarSupportedContent a:hover {
+    /*color: hsla(180, 100%, 25%, 0.9);*/
+    border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
+}
+
+#logoutmenu {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    transition: 1s;
+    border-bottom: 2px solid hsla(0, 0%, 0%, 0.1);
+}
+
+#logoutmenu:hover {
+    color: white;
+    border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
+}
+
+.navbar-toggler {
+    /*background: hsla(180, 100%, 25%, 0.9);*/
+    color: white;
+    border: 1px solid white;
+    transition: 0.5s;
 
 
-/*custom button*/
+}
+
+.navbar-toggler:hover  {
+    border: 2px solid hsla(180, 100%, 25%, 0.9);
+    color: hsla(180, 100%, 25%, 0.9);
+}
+
+/*FOOTER*/
+footer {
+    border-top: 2px solid hsla(180, 100%, 25%, 0.9);
+    padding: 2rem;
+    min-height: ;
+}
+
+footer div p a {
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    background: var(--profile);
+    opacity: 0.8;
+    margin: 2rem auto;
+}
+
+footer div p a:hover {
+    color: white;
+
+}
+
+/*CUSTOM BUTTONS*/
 .butn {
     border: none;
     padding: 10px;
@@ -108,6 +179,7 @@ h1, h2, h3{
 .pro-link-2:hover {
     transform: scale(1.1);
 }
+
 
 
 
