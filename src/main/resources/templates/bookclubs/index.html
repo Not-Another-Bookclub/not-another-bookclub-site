@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <!--<link rel="stylesheet" href="/css/show-bookclub.css">-->
+
+
 <html lang="en">
 <head th:include="partials.html::head('All Bookclubs :: Not Another Bookclub')">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<link rel="stylesheet" href="/css/show-bookclub.css">
+<link rel="stylesheet" href="css/index-bookclub.css">
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
 <!--<nav aria-label="breadcrumb">-->
@@ -21,10 +25,11 @@
    <div class="row"><div th:each="bookclub, istat : ${bookclubs}" class="text-center col-12 col-md-6 row">
 <!--    <div th:each="book : ${books}"><div th:each="meeting : ${meetings}"-->
             <div  class="col-4" th:text="${books.get(__${istat.index}__)}"></div>
-            <div class="col-8"> <a th:href="@{/bookclubs/__${bookclub.id}__/}"> <h4 th:text="${bookclub.name}"></h4></a>
+            <div class="col-8"> <a th:href="@{/bookclubs/__${bookclub.id}__/}"> <strong><h3 th:text="${bookclub.name}"></h3></strong></a>
             <div class="text-start"><p th:text="${bookclub.description}"></p>
             <div th:if="${bookclub.accepting_members}"><p>Currently accepting new members.</p></div>
-                <div><p>There are currently <span th:text="${bookclub.users.size()}"></span> members.</p>
+                <div>
+<!--                    <p>There are currently <span th:text="${bookclub.users.size()}"></span> members.</p>-->
                     <p>They have a reading list of <span th:text="${numberbooks.get(__${istat.index}__)}"></span> books.</p></div>
              <div th:if="${meetings.get(__${istat.index}__).timedate} != null">They'll be finished with this book and meet: <br><span th:text="${#dates.format(meetings.get(__${istat.index}__).timedate,'E, MMM dd yyyy hh:mm:ss a')}"></span></div>
               <div th:if="${meetings.get(__${istat.index}__).timedate} == null">No meetings scheduled at this time.</div>

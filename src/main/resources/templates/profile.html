@@ -183,7 +183,9 @@
                 <div th:replace="partials.html::booksearch"></div>
             </div>
             <br>
+            <div class="narrow-body pro-card"><div>
   <a th:href="@{'/pro/' + ${id} + '/bookshelf'}"><h3><i class="fas fa-book"></i> Connect with other users through your reading interests on your bookshelf.</h3></a>
+            </div></div>
             <br>
 
 
@@ -191,37 +193,7 @@
             <div id="results1" class="row"></div>
             <br>
             <br>
-            <div class="row">
-                <div class="col-md-3 col-sm-4 col-6 text-center custom-thumb p-3">
-<!--                    added wrapper div-->
-                    <div class="">
-                        <img src='/img/magicalLibrary.jpg' class="image-responsive" alt='Book Cover'>
-                        <hr>
-                    <div class='card-body'>
-                        <h5 class='card-title'>"Name of the book" - "Author of book".</h5>
-                        <hr>
-                        <h6> Started reading: "The start date"</h6>
-                        <h6> Finished reading: "+ finishDate +"</h6>
-                    </div>
-                        <hr>
-                    <div class="d-flex flex-column align-items-center">
-                        <a href="#" class="butn boo-link mb-2" id="1">Remove</a>
-                        <button
-                                href="#"
-                                class="butn book-selector boo-link"
-                                data-google-i-d="'+ idSearch +'"
-                                data-startdate="'+startDate+'"
-                                data-startdatehtml="'+ startDateHTML+'"
-                                data-finishdate="'+ finishDate +'"
-                                data-finishdatehtml="'+ finishDateHTML +'"
-                                data-bs-toggle="modal"
-                                data-bs-target="#myModal">
-                            See details
-                        </button>
-                    </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
