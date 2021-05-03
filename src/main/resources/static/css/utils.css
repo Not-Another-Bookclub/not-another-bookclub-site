@@ -26,6 +26,20 @@ h1, h2, h3{
     font-family: "serif";
 }
 
+/*Created an id for the body tag on the log in html because I had trouble darkening the background*/
+
+#login-background{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/img/magicalLibrary.jpg") no-repeat center center fixed;
+
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-image-size: cover;
+    -o-background-size: cover;
+    /*color: white;*/
+}
+
 
 
 
