@@ -4,10 +4,14 @@
     <meta charset="UTF-8" />
     <title>Sign up</title>
 </head>
-<body>
+<head>
+    <link rel="stylesheet" href="/static/css/utils.css">
+    <link rel="stylesheet" href="/css/font.css">
+</head>
+<body id="login-background">
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 <div class="container text-center">
-<div th:if="${user.username == null}"><h1>Create an account</h1>
+<div th:if="${user.username == null}" class="text-white"><h1>Create an account</h1>
 </div>
 <div th:if="${alert != null}"><h1>Create an account</h1>
 <h4 th:utext="${alert}"></h4>
