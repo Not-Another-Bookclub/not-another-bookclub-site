@@ -34,16 +34,6 @@
     text-align: center;
 }
 
-#logoutmenu {
-    background-color: var(--white);
-    color: var(--cadetblue);
-}
-
-#logoutmenu:hover, #logoutmenu:active, #logoutmenu:focus {
-    background-color: var(--cadetblue);
-    color: var(--white)
-}
-
 #nab-carousel {
     height: 150px;
     background-color: #b4b9c5;
