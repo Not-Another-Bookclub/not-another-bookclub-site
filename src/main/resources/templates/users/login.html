@@ -18,7 +18,7 @@
     <div class="m-5">
 <h1 class="text-white narrow-body" style="text-align: center" >Log In</h1>
 
-    <hr style="width: 70%; margin: auto; height: 2px">
+    <hr style="width: 70%; margin: auto; height: 2px; color: #0DA500">
 
     </div>
 
@@ -74,13 +74,19 @@
 
                 <div class="carousel-inner">
                     <div class="carousel-item active" style="text-align: center">
-                        <p class="item-carousel text-white" >Welcome Back!</p>
+                        <div class="item-carousel text-white" style="margin: auto" >
+                          <h1> Welcome Back! </h1>
+                        </div>
                     </div>
                     <div class="carousel-item" style="text-align: center">
-                        <p class="item-carousel text-white">Not Another Book Club</p>
+                        <div class="item-carousel text-white" style="margin: auto">
+                            <h1>Not Another Book Club</h1>
+                        </div>
                     </div>
                     <div class="carousel-item" style="text-align: center">
-                        <p class="item-carousel text-white">Tell Your Friends</p>
+                        <div class="item-carousel text-white" style="margin: auto">
+                            <h1>Tell Your Friends</h1>
+                        </div>
                     </div>
                 </div>
 
@@ -97,19 +103,21 @@
         </div>
     </div>
 
+    <div class="container" style="border: #0DA500 3px solid; ">
+        <div class="d-flex justify-content-start">
+            <div class="col-sm-8 col-md-4 p-3">
+    <form th:action="@{/login}" method="post" class="my-5">
+        <label class="form-label text-white" for="username"  >Username</label>
+        <input class="form-control mb-3" id="username" name="username" type="text"  />
 
-    <div class="d-flex justify-content-start">
-        <div class="col-sm-8 col-md-4 p-3">
-<form th:action="@{/login}" method="post" class="my-5">
-    <label class="form-label text-white" for="username"  >Username</label>
-    <input class="form-control mb-3" id="username" name="username" type="text"  />
-
-    <label class="form-label mt-3 text-white" for="password">Password</label>
-        <div class="input-group mb-3">   <input class="form-control" id="password" name="password" type="password" />
-        <span class="input-group-text"><i class="fa fa-eye-slash" id="togglePassword"></i></span></div>
-    <button type="submit" class="btn text-white">Log in</button>
-</form>
-        </div></div></div>
+        <label class="form-label mt-3 text-white" for="password">Password</label>
+            <div class="input-group mb-3">   <input class="form-control" id="password" name="password" type="password" />
+            <span class="input-group-text"><i class="fa fa-eye-slash" id="togglePassword"></i></span></div>
+        <button type="submit" class="btn text-white">Log in</button>
+    </form>
+            </div></div>
+    </div>
+</div>
 <footer th:replace="partials.html::footer"></footer>
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>-->
 <script>
