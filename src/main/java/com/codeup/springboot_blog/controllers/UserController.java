@@ -34,7 +34,7 @@ public class UserController {
             User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("loggedin", loggedin);
             model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
-                    "  You are already loggedin as" + loggedin.getUsername() + ". </div>");
+                    "  You are already loggedin as " + loggedin.getUsername() + ". </div>");
         }
         User user = new User();
         user.setIs_admin(false);
