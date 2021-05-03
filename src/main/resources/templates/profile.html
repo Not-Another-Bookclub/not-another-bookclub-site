@@ -143,7 +143,7 @@
                     <a th:each="bookclub : ${ownedClubs}" class="m-3 p-2 book-link" th:href="@{'/bookclubs/' + ${bookclub.id}}" style="text-decoration: none; width: 200px; height: 200px; border: 2px solid black">
                         <div>
                             <h3 th:text="${bookclub.name}"></h3>
-                            <p th:text="${bookclub.description}"></p>
+                            <span th:text="${bookclub.description}"></span>
                         </div>
                     </a>
                 </div>
