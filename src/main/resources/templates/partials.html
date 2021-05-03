@@ -65,12 +65,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/sign-up">Sign up</a>
                     </li>
+<!--                    THIS IS THE DROPDOWN-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sign In
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="loginDropdown">
-                            <form th:action="@{/login}" method="post" class="px-4 py-3">
+                        <div class="dropdown-menu dropdown-menu-lg-right p-3" aria-labelledby="loginDropdown" id="log-drop">
+                            <form th:action="@{/login}" method="post" class="px-4 py-3" >
                                 <div class="form-group">
 
                                     <label class="form-label mt-3" for="username1">Username</label>
@@ -90,7 +91,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                <button type="submit" class="butn pro-link">Sign in</button>
                             </form>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/sign-up">New around here? Sign up</a>
