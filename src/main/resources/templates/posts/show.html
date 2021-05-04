@@ -30,18 +30,20 @@
 
         <h5 th:text="${post.getBody()}">Body will go here.</h5>
         <p>
-            Posted by: <span th:text="${post.author.getUsername()}"></span> - <a th:href ="@{/profile/__${post.author.username}__}">profile</a> - <a th:href="'mailto:' + ${post.author.email}">email</a>
+            Posted by: <a th:href ="@{/pro/__${post.author.id}__}" th:text="${post.author.getUsername()}" class="butn pro-link pro-link-2">profile</a>
         </p>
 
-        <div th:if="${isAuthor}" class="narrow-body">
-            <div class="center-text p-2 m-2">
+        <div th:if="${isAuthor}" class="">
+            <div class=" p-2">
                 <a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}">
-                    <button type="button" class="btn btn-primary">Edit</button>
+                    <button type="button" class="util-butn util-butn-accept">Edit</button>
                 </a>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <a href="#">
+                <button type="button" class="util-butn util-butn-decline" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     Delete
                 </button>
+                </a>
             </div>
 
             <!-- Modal -->
