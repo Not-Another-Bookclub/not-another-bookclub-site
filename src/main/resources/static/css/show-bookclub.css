@@ -3,7 +3,7 @@
     /*--right: hsla(195, 53%, 79%, 0.65);*/
     /*--right: hsla(240, 100%, 40%, 0.65);*/
     --profile: #30536C;
-    --bookclub: darkblue;
+    /*--bookclub: darkblue;*/
 }
 
 body {
@@ -96,12 +96,16 @@ details > summary::-webkit-details-marker {
 }
 
 .invite-unit div {
-    background: black;
+    /*background: black;*/
     color: white;
 }
 
 .invite-unit > div {
     max-width: 300px;
+}
+
+.hidden-content {
+    background: black;
 }
 
 
