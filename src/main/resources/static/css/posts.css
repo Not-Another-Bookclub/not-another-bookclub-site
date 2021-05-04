@@ -34,3 +34,28 @@ body {
     color: white;
     /*width: 100%;*/
 }
+
+
+.post-card {
+    background: var(--post);
+    opacity: 0.9;
+    padding: 2rem;
+    margin-bottom: 30px;
+}
+
+.form-post {
+    padding: 30px;
+    border-radius: 5px;
+    background: black;
+    color: var(--post);
+}
+
+.input {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--post);
+    padding: 10px;
+    color: var(--post);
+    width: 100%;
+    margin: 1rem 0;
+}

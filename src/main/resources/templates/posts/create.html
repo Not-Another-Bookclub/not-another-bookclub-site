@@ -12,42 +12,46 @@
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
     <div class="container">
+        <div id="meeting-form">
         <div class="row">
-            <div class="d-none d-md-block col-md-4 col-lg-6 py-1 my-2">
+            <div class="d-none d-lg-block col-lg-6 py-1 my-2">
                 <img class="img-fluid" src="/img/typing.jpg">
             </div>
-            <div class="col-12 col-md-8 col-lg-6 py-1 my-2">
+            <div class="col-12 col-lg-6 py-1 my-2">
                 <div th:unless="${isMember}">
                     <h1>Sorry, you can't post in a bookclub until you're a member. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and request to join.</h1>
                 </div>
-                <div th:if="${isMember}">
+                <div th:if="${isMember}" class="post-card">
+                    <div class="form-post">
                     <h1>Use the form below to create a new post!</h1>
                     <form th:action="@{/bookclubs/__${bookclub.id}__/posts/create}" th:method="post" th:object="${post}">
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Title of the post</label>
-                            <input class="form-control" th:field="*{title}" type="text">
-                        </div>
+<!--                        <div class="mb-3">-->
+<!--                            <label for="title" class="form-label">Title of the post</label>-->
+                            <input class="input" th:field="*{title}" type="text" placeholder="Title of the post">
+<!--                        </div>-->
 
-                        <div class="mb-3">
-                            <label for="body" class="form-label">Body of the blog post</label>
-                            <textarea class="form-control" rows="6" th:field="*{body}">All text goes here. At this time no formatting is allowed besides line breaks.</textarea>
-                        </div>
+<!--                        <div class="mb-3">-->
+<!--                            <label for="body" class="form-label">Body of the blog post</label>-->
+                            <textarea class="input" placeholder="Details please" rows="6" th:field="*{body}">All text goes here. At this time no formatting is allowed besides line breaks.</textarea>
+<!--                        </div>-->
 
-                        <div class="mb-3">
-                            <label for="book" class="form-label">What book is this about?</label>
-                            <select class="form-control" name="book" id="book">
+<!--                        <div class="mb-3">-->
+<!--                            <label for="book" class="form-label">What book is this about?</label>-->
+                            <select class="input" name="book" id="book">
                                 <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
                             </select>
-                        </div>
+<!--                        </div>-->
 
                         <div id="results1" class="row d-none"></div>
 
-                        <button class="btn btn-secondary text-center">Submit Post</button>
+                        <button class="butn post-link text-center">Submit Post</button>
                     </form>
+                    </div>
                 </div>
 
 
             </div>
+        </div>
         </div>
     </div>
 
