@@ -91,7 +91,7 @@ details > summary::-webkit-details-marker {
 /*INVITES*/
 .invite-unit {
     color: white;
-    background: darkblue;
+    background: var(--bookclub);
     border: 2px solid white;
 }
 

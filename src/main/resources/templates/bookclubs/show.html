@@ -114,12 +114,12 @@
                         <a class="butn pro-link" th:href="@{'/pro/' + ${user.id} }" th:text="${user.username}"></a>
                         <span> Wants to join</span>
                     </div>
-                    <div class="card p-2 m-1 col-12 col-sm-4">
+                    <div class="card p-2 m-1 col-12 col-sm-4 text-center">
                         <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="btn btn-success" value="Accept ">
+                            <input type="submit" class="util-butn util-butn-accept" value="Accept ">
                         </form>
                         <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="btn btn-danger" value="Decline">
+                            <input type="submit" class="util-butn util-butn-decline" value="Decline">
                         </form>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                         p-3">
                         <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}"
                            th:each="post : ${posts}" class="butn post-link m-2">
-                            <span th:text="${post.title}"></span>
+                            <span th:text="${post.title}"></span> by:
                             <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)
                         </a>
                     </div>
