@@ -209,6 +209,11 @@ footer div p a:hover {
     transform: scale(1.1);
 }
 
+.hidden-content {
+    background: black;
+}
+
+
 
 
 
