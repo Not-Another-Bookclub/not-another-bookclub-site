@@ -4,12 +4,18 @@
     <head th:replace="partials.html :: head('Not Another Bookclub :: Welcome')">
     <meta charset="UTF-8" />
     <title>Home</title>
-    </head>
 
-    <link rel="stylesheet" href="/css/font.css">
-    <link rel="stylesheet" href="/css/utils.css">
 </head>
-<!--    <link rel="stylesheet" href="/css/home.css">-->
+
+<!--    CSS-->
+
+<link rel="stylesheet" href="/css/font.css">
+<link rel="stylesheet" href="/css/utils.css">
+
+
+<!--    CSS END-->
+
+
 
 <body>
 
@@ -95,7 +101,14 @@
 </div>
 
 
+<!--    FOOTER-->
 <footer th:replace="partials.html::footer"></footer>
+
+<!--    FOOTER END-->
+
+<!--        JS-->
 <script th:replace="partials.html :: booksearchscript('user', 1)"></script>
+
+<!--        JS END-->
 </body>
 </html>
