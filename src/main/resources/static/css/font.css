@@ -5,14 +5,18 @@ body {
 ;
     background-position: center;
     background-size: cover;    /*animation: ease-in 2s;*/
-    font-family: serif;
+    /*font-family: serif;*/
 }
+
+
 
 .body-enhanced {
     /*linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*/
+
     background-image: url("/img/newmagicalLibrary.jpg");
     background-position: center;
-    background-size: cover;    /*animation: ease-in 2s;*/
+    background-size: cover;
+    background-color: black;/*animation: ease-in 2s;*/
     /*font-family: serif;*/
 }
 

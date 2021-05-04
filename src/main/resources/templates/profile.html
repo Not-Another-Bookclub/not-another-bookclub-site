@@ -5,9 +5,10 @@
     <head th:replace="partials.html :: head('Your Profile Page')">
         <title>Title</title>
     </head>
-
-    <link rel="stylesheet" href="/css/utils.css">
     <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/utils.css">
+
+    <script src="/js/magical_library_background_progressive.js"></script>
 
 <body>
 
@@ -183,12 +184,12 @@
                 <div th:replace="partials.html::booksearch"></div>
             </div>
             <div class="pro-card my-3"><div class="hidden-content">
-  <a th:href="@{'/pro/' + ${id} + '/bookshelf'}"><h2 class="text-white text-center">Connect with other users through<br><i class="fas fa-book"></i>your bookshelf.<i class="fas fa-book"></i></h2></a>
+  <a th:href="@{'/pro/' + ${id} + '/bookshelf'}"><h2 class="text-white text-center">Connect with other users through<br><i class="fas fa-book"></i>  your bookshelf.  <i class="fas fa-book"></i></h2></a>
             </div></div>
             <br>
 
 
-            <h3>Here are the books currently on your reading list: </h3>
+            <h3 class="text-white">Here are the books currently on your reading list: </h3>
             <div id="results1" class="row"></div>
             <br>
             <br>

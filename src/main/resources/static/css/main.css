@@ -211,6 +211,11 @@ footer div p a:hover {
     transform: scale(1.1);
 }
 
+
+.hidden-content {
+    background: black;
+}
+
 .meeting-link {
     color: white;
     background: var(--meeting);
@@ -266,6 +271,7 @@ footer div p a:hover {
 /*    color: black;*/
 /*    border: none;*/
 /*}*/
+
 
 
 

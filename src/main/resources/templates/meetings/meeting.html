@@ -5,8 +5,10 @@
     <head th:replace="partials.html :: head('Meeting Detailed Information :: Not Another Bookclub')">
     <title>Title</title>
 </head>
-    <link rel="stylesheet" href="/css/utils.css">
     <link rel="stylesheet" href="/css/meeting-create.css">
+    <link rel="stylesheet" href="/css/utils.css">
+    <script src="/js/magical_library_background_progressive.js"></script>
+
 <body>
     <nav th:replace="partials.html :: navbar"></nav>
 
@@ -46,7 +48,7 @@
                                     The meeting is scheduled for <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span>
                                 </p>
                                 <p>
-                                    This meeting is being held at: <span th:text="${meeting.location}"></span>
+                                    This meeting is being held at: a <span th:text="${meeting.location.toString().toLowerCase()}"></span>
                                 </p>
                                 <p th:if="${ismemberactive}">
                                     This meeting is being held at: <span th:text="${meeting.getAddress()}"></span>,
@@ -125,7 +127,7 @@
                         // html += "<h6> Started reading: "+ startDate +"</h6>"
                         // html += "<h6> Finished reading: "+ finishDate +"</h6></div>"
                         // // html += '<div><a href="#" class="btn btn-primary" id="'+ idSearch +'">Remove from reading list</a>'
-                        html += '<button href="" class="btn book-selector btn-primary" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div>'
+                        html += '<button href="" class="butn book-selector boo-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div>'
                         // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
                         results.innerHTML += html;
