@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/css/meeting-create.css">
 <link rel="stylesheet" href="/css/utils.css">
+<link rel="stylesheet" href="/css/meeting-create.css">
 <html lang="en">
 <head th:include="partials.html::head('Create a new Meeting!')" >
     <meta charset="UTF-8">
@@ -10,24 +10,24 @@
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
-<div class="breadcrumbEditMeeting">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Edit</li>
-        </ol>
-    </nav>
-</div>
+<!--<div class="breadcrumbEditMeeting">-->
+<!--    <nav aria-label="breadcrumb">-->
+<!--        <ol class="breadcrumb">-->
+<!--            <li class="breadcrumb-item active" aria-current="page">Edit</li>-->
+<!--        </ol>-->
+<!--    </nav>-->
+<!--</div>-->
 
 
 <div class="container">
     <div id="meeting-form">
-        <div id="breadcrumbEditMeeting" class="narrow-body">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
+        <div id="breadcrumbditMeeting" class="breadcrumbMeeting narrow-body mb-3">
+            <nav aria-label="breadcrumb" class="breadcrumbs">
+                <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id}}">Bookclub</a></li>
                     <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id}}">Meeting</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
-                </ol>
+                    <li class="breadcrumb-item" aria-current="page">Edit</li>
+                </ul>
             </nav>
         </div>
     </div>
