@@ -33,18 +33,22 @@
 
         <h5 th:text="${post.getBody()}">Body will go here.</h5>
         <p>
-            Posted by: <span th:text="${post.author.getUsername()}"></span> - <a th:href ="@{/profile/__${post.author.username}__}">profile</a> - <a th:href="'mailto:' + ${post.author.email}">email</a>
+            Posted by: <a th:href ="@{/pro/__${post.author.id}__}" th:text="${post.author.getUsername()}" class="butn pro-link pro-link-2">profile</a>
         </p>
 
-        <div th:if="${isAuthor}" class="narrow-body">
-            <div class="center-text p-2 m-2">
+        <div th:if="${isAuthor}" class="">
+            <div class=" p-2">
                 <a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}">
-                    <button type="button" class="butn post-link">Edit</button>
+
+                    <button type="button" class="util-butn util-butn-accept">Edit</button>
                 </a>
                 <!-- Button trigger modal -->
-                <button type="button" class="butn post-link" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <a href="#">
+                <button type="button" class="util-butn util-butn-decline" data-bs-toggle="modal" data-bs-target="#deleteModal">
+
                     Delete
                 </button>
+                </a>
             </div>
 
             <!-- Modal -->
@@ -97,8 +101,8 @@
         <div th:if="${loggedin != null}"  class="p-3">
 <!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
             <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
-            <div class="input-group mb-3">
-                <input class="form-control" name="comment" id="comment" type="text" placeholder="Add A Comment">
+            <div class="input-group" id="over">
+                <input class="input" name="comment" id="comment" type="text" placeholder="Add A Comment">
 <!--                    <input class="form-control" th:field="*{comment}" type="text">-->
                     <button class="butn pro-link" type="submit">Submit</button></div>
 
