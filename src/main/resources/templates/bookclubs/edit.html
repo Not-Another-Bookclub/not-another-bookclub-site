@@ -22,8 +22,8 @@
 <div class="container">
     <div class="pro-card narrow-body">
         <div class="row d-flex flex-column flex-md-row p-3">
-            <div class="col-6">
-                <h1>Thanks for starting a new bookclub, here's what we need to know....</h1>
+            <div class="col-12">
+                <h1>To edit your BookClub's information, make modifications to the form below....</h1>
 
                 <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/edit'}" th:method="post" th:object="${bookclub}">
                     <div class="mb-3">
@@ -55,7 +55,7 @@
 
 
 
-                    <button class="btn btn-secondary text-center">EDIT BookClub Meeting</button>
+                    <button class="btn btn-secondary text-center">EDIT BookClub Information</button>
                 </form>
             </div>
         </div>
