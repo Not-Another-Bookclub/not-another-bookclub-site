@@ -48,13 +48,13 @@
 
                     <div class="d-flex">
                         <div th:if="${books.size() > 0}">
-                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" class="btn btn-secondary">Make a meeting?</a>
+                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" class="butn meeting-link">Make a meeting?</a>
                         </div>
                         <div th:if="${books.size() < 1}">
                             <p>Add Books to this club's reading list to make meetings.</p>
                         </div>
                         <div class="mx-3">
-                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="btn btn-warning">Edit</a>
+                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="butn boo-link">Edit</a>
                         </div>
                     </div>
 
@@ -222,9 +222,11 @@
             </div>
 
 
-            <p th:if="${isActiveUser}">
-                Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</a>
-            </p>
+            <details th:if="${isActiveUser}" class="pro-card">
+                <summary class="p-3">
+                    Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}" class="butn post-link"> Create your own post</a>
+                </summary>
+            </details>
         </div>
 
 <!--        BOOKS-->
