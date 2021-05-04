@@ -14,6 +14,8 @@
     --bookclub: darkblue;
     --nav-accent: hsla(180, 100%, 25%, 0.9);
     --post: #D77A04;
+    --meeting: #23B023;
+    --meeting-light: #D2F873;
 }
 
 /*a {*/
@@ -208,6 +210,22 @@ footer div p a:hover {
 .pro-link-2:hover {
     transform: scale(1.1);
 }
+
+.meeting-link {
+    color: white;
+    background: var(--meeting);
+    transition: 0.5s;
+    list-style: none;
+    text-decoration: none;
+}
+
+.meeting-link:hover {
+    color: white;
+    /*box-shadow: 0 0 10px rgba(255,255,255,0.9);*/
+    box-shadow: 0 0 10px white;
+}
+
+
 
 
 

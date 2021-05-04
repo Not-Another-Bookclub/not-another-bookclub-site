@@ -59,3 +59,20 @@ body {
     width: 100%;
     margin: 1rem 0;
 }
+
+/*BREADCRUMBS*/
+#breadcrumbPosts {
+    /*border: 2px solid cornflowerblue;*/
+    background: var(--post);
+    padding: 1rem;
+    color: black;
+}
+
+#breadcrumbPosts ul {
+    margin-bottom: 0;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: black;
+}

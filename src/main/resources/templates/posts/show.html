@@ -14,12 +14,12 @@
 
 <div class="container" id="post-content">
 <!--    BREAD CRUMB-->
-    <div id="breadcrumbPosts" class="narrow-body">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Post</li>
-            </ol>
+    <div id="breadcrumbPosts" class="narrow-body mb-3">
+        <nav aria-label="breadcrumb" class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
+                <li class="breadcrumb-item" aria-current="page">Post</li>
+            </ul>
         </nav>
     </div>
 

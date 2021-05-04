@@ -180,7 +180,7 @@
                     <a
                             th:href="@{/bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__}"
                             th:each="meeting : ${meetings}"
-                            class="butn pro-link pro-link-2 m-2">
+                            class="butn meeting-link pro-link-2 m-2">
                         <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span>
                         <!--                <span th:text="${meeting.location}"></span> to discuss-->
                         <!--                <span th:text="${meeting.book.googleID}"></span>-->
