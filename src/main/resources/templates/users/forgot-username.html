@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <title>Forgot-Username</title>
 </head>
-<body>
+<head>
+    <link rel="stylesheet" href="/static/css/utils.css">
+    <link rel="stylesheet" href="/css/font.css">
+</head>
+<body id="login-background">
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
+<div class="m-5">
+    <h1 class="text-white narrow-body" style="text-align: center">Username Recovery</h1>
+
+    <hr style="width: 70%; margin: auto; height: 2px; color: #0DA500">
+</div>
 
 <div class="d-flex justify-content-center">
     <div class="col-sm-8 col-md-6 p-3">
@@ -14,8 +23,8 @@
 <!--            <label class="form-label mt-3" for="username">Username</label>-->
 <!--            <input class="form-control mb-3" th:field="*{username}" />-->
 
-            <label class="form-label mt-3" for="email">Email</label>
-            <input class="form-control mb-3" type="text" name="email" id="email" />
+            <label class="form-label mt-3 text-white" for="email" style="border-bottom: 2px solid hsla(180, 100%, 25%, 0.9)">Email</label>
+            <input class="form-control mb-3" type="text" name="email" id="email" placeholder="Email" />
 
 <!--            <input class="form-control mb-3" th:field="*{email}" />-->
 
@@ -24,7 +33,7 @@
 
 
 
-            <button class="btn" type="submit">Submit!</button>
+            <button class="btn text-white" type="submit" style="border: 2px solid hsla(180, 100%, 25%, 0.9)">Submit!</button>
         </form>
 
         <div></div>

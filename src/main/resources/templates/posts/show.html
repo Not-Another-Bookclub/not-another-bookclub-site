@@ -17,16 +17,17 @@
 
 <div class="container" id="post-content">
 <!--    BREAD CRUMB-->
-    <div id="breadcrumbPosts" class="narrow-body">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Post</li>
-            </ol>
+    <div id="breadcrumbPosts" class="narrow-body mb-3">
+        <nav aria-label="breadcrumb" class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
+                <li class="breadcrumb-item" aria-current="page">Post</li>
+            </ul>
         </nav>
     </div>
 
-    <div class="narrow-body">
+    <div class="narrow-body post-body p-3">
+        <div class="p-3">
         <h1 class="text-center"> <span th:text="${post.title}"></span></h1>
         <hr class="acc-bar">
 
@@ -69,6 +70,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
 
@@ -90,15 +92,16 @@
             </div>
         </div>
     </div>
-    <div class="narrow-body">
-        <div th:if="${loggedin != null}"  class="">
+
+    <div class="narrow-body post-body p-3">
+        <div th:if="${loggedin != null}"  class="p-3">
 <!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
             <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
-            <div class="form-post mb-3">
-                <input class="input" name="comment" id="comment" type="text">
+            <div class="input-group mb-3">
+                <input class="form-control" name="comment" id="comment" type="text" placeholder="Add A Comment">
 <!--                    <input class="form-control" th:field="*{comment}" type="text">-->
-                    <button class="butn post-link" type="submit">Submit</button>
-        </div>
+                    <button class="butn pro-link" type="submit">Submit</button></div>
+
 
             </form>
         </div>

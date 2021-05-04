@@ -26,19 +26,38 @@ body {
     color: white;
 }
 
+
 .avatar {
     background-color: var(--post);
     border-radius: 50px;
 }
 
-.input {
-    background: transparent;
-    border: 0;
+
+.post-body {
+    background: var(--post);
+}
+
+.post-body > div {
+    background: black;
+}
+
+.post-body > div >form > div {
+    padding-bottom: 15px;
     border-bottom: 2px solid var(--post);
-    padding: 10px;
+}
+
+.post-body > div >form > div > input {
+    background: black;
     color: white;
-    width: 100%;
-    margin: 1rem 0;
+    /*width: 100%;*/
+}
+
+
+.post-card {
+    background: var(--post);
+    opacity: 0.9;
+    padding: 2rem;
+    margin-bottom: 30px;
 }
 
 .form-post {
@@ -46,4 +65,33 @@ body {
     border-radius: 5px;
     background: black;
     color: var(--post);
+
+}
+
+.input {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--post);
+    padding: 10px;
+    color: var(--post);
+    width: 100%;
+    margin: 1rem 0;
+}
+
+/*BREADCRUMBS*/
+#breadcrumbPosts {
+    /*border: 2px solid cornflowerblue;*/
+    background: var(--post);
+    padding: 1rem;
+    color: black;
+}
+
+#breadcrumbPosts ul {
+    margin-bottom: 0;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: black;
+
 }
