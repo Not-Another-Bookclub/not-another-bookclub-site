@@ -183,7 +183,7 @@
                     <a
                             th:href="@{/bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__}"
                             th:each="meeting : ${meetings}"
-                            class="butn pro-link pro-link-2 m-2">
+                            class="butn meeting-link pro-link-2 m-2">
                         <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span>
                         <!--                <span th:text="${meeting.location}"></span> to discuss-->
                         <!--                <span th:text="${meeting.book.googleID}"></span>-->
@@ -260,8 +260,7 @@
             </div>
             <div th:if="${!isNotMember}">
                 <div th:if="${isActiveUser}">
-
-<!--                    MEMBERS-->
+                    <!--        MEMBERS-->
                     <details th:if="${members.size() > 0}" class="pro-card my-3">
                         <summary class="d-flex justify-content-between align-items-center p-3">
                             <h2>Current Members</h2>
@@ -287,7 +286,7 @@
                     </details>
 
                     <!--        MEETINGS-->
-                    <div th:if="${isActiveUser}">
+                    <div >
                         <details th:if="${meetings.size() > 0}" class="pro-card my-3">
                             <summary class="d-flex justify-content-between align-items-center p-3">
                                 <h2>Meetings</h2>
@@ -308,7 +307,7 @@
                                 <a
                                         th:href="@{/bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__}"
                                         th:each="meeting : ${meetings}"
-                                        class="butn pro-link pro-link-2 m-2">
+                                        class="butn meeting-link pro-link-2 m-2">
                                     <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span>
                                     <!--                <span th:text="${meeting.location}"></span> to discuss-->
                                     <!--                <span th:text="${meeting.book.googleID}"></span>-->
@@ -320,16 +319,33 @@
                     </div>
 
                     <!--        POSTS-->
-                    <div >
-                        <div th:if="${posts.size() > 0}">
-                            <h1>
-                                Posts for <span th:text="${bookclub.name}"></span>:
-                            </h1>
+                    <div th:if="${isActiveUser}">
+                        <div th:if="${posts.size() > 0}" >
+                            <details class="pro-card my-3">
+                                <summary class="d-flex justify-content-between align-items-center p-3">
+                                    <h2>
+                                        Posts for <span th:text="${bookclub.name}"></span>:
+                                    </h2>
+                                    <i class="fas fa-angle-down fa-2x"></i>
+                                </summary>
+                                <hr class="acc-bar">
+                                <div class="hidden-content
+                        d-flex
+                        align-items-center
+                        align-items-md-start
+                        flex-column
+                        flex-md-row
+                        flex-nowrap
+                        flex-md-wrap
+                        p-3">
+                                    <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}"
+                                       th:each="post : ${posts}" class="butn post-link m-2">
+                                        <span th:text="${post.title}"></span>
+                                        <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)
+                                    </a>
+                                </div>
+                            </details>
 
-                            <ul>
-                                <li th:each="post : ${posts}"> <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}">
-                                    <span th:text="${post.title}"></span></a> about the book: <span th:text="${post.book.googleID}"></span> - <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)</li>
-                            </ul>
                         </div>
 
 
@@ -354,7 +370,6 @@
                         <br>
                         <br>
                     </div>
-
                 </div>
                 <div th:if="${!isActiveUser}">
                     <div th:if="${isNotActiveUser}">

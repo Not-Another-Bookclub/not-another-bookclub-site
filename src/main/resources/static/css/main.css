@@ -14,6 +14,8 @@
     --bookclub: darkblue;
     --nav-accent: hsla(180, 100%, 25%, 0.9);
     --post: #D77A04;
+    --meeting: #23B023;
+    --meeting-light: #D2F873;
 }
 
 /*a {*/
@@ -209,9 +211,66 @@ footer div p a:hover {
     transform: scale(1.1);
 }
 
+
 .hidden-content {
     background: black;
 }
+
+.meeting-link {
+    color: white;
+    background: var(--meeting);
+    transition: 0.5s;
+    list-style: none;
+    text-decoration: none;
+}
+
+.meeting-link:hover {
+    color: white;
+    /*box-shadow: 0 0 10px rgba(255,255,255,0.9);*/
+    box-shadow: 0 0 10px white;
+}
+
+/*CUSTOM ACCEPT DECLINE*/
+.util-butn {
+    width: 90px;
+    text-align: center;
+    box-sizing: border-box;
+    /*background-size: 400%;*/
+    border-radius: 30px;
+    text-decoration: none;
+    padding: 5px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    /*border: 2px solid black;*/
+}
+
+.util-butn-accept {
+    /*background: linear-gradient(90deg, #0da500, #78FF01 );*/
+
+    border: 2px solid #78FF01;
+    color: #0da500;
+    background: black;
+    transition: .5s ease;
+}
+
+/*.util-butn-accept:hover {*/
+/*    background: linear-gradient(90deg, #0da500, #78FF01 );*/
+/*    color: black;*/
+/*    border: none;*/
+/*}*/
+
+.util-butn-decline {
+    border: 2px solid #FA613F;
+    color: #B00005;
+    background: black;
+    transition: .5s ease;
+}
+
+/*.util-butn-decline:hover {*/
+/*    background: linear-gradient(90deg, #B00005, #FA613F);*/
+/*    color: black;*/
+/*    border: none;*/
+/*}*/
 
 
 

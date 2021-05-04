@@ -17,33 +17,38 @@
 
 <div class="container" id="post-content">
 <!--    BREAD CRUMB-->
-    <div id="breadcrumbPosts" class="narrow-body">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Post</li>
-            </ol>
+    <div id="breadcrumbPosts" class="narrow-body mb-3">
+        <nav aria-label="breadcrumb" class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
+                <li class="breadcrumb-item" aria-current="page">Post</li>
+            </ul>
         </nav>
     </div>
 
-    <div class="narrow-body">
+    <div class="narrow-body post-body p-3">
+        <div class="p-3">
         <h1 class="text-center"> <span th:text="${post.title}"></span></h1>
         <hr class="acc-bar">
 
         <h5 th:text="${post.getBody()}">Body will go here.</h5>
         <p>
-            Posted by: <span th:text="${post.author.getUsername()}"></span> - <a th:href ="@{/profile/__${post.author.username}__}">profile</a> - <a th:href="'mailto:' + ${post.author.email}">email</a>
+            Posted by: <a th:href ="@{/pro/__${post.author.id}__}" th:text="${post.author.getUsername()}" class="butn pro-link pro-link-2">profile</a>
         </p>
 
-        <div th:if="${isAuthor}" class="narrow-body">
-            <div class="center-text p-2 m-2">
+        <div th:if="${isAuthor}" class="">
+            <div class=" p-2">
                 <a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}">
-                    <button type="button" class="butn post-link">Edit</button>
+
+                    <button type="button" class="util-butn util-butn-accept">Edit</button>
                 </a>
                 <!-- Button trigger modal -->
-                <button type="button" class="butn post-link" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <a href="#">
+                <button type="button" class="util-butn util-butn-decline" data-bs-toggle="modal" data-bs-target="#deleteModal">
+
                     Delete
                 </button>
+                </a>
             </div>
 
             <!-- Modal -->
@@ -69,6 +74,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
 
@@ -83,22 +89,37 @@
 
     <div th:each="comment : ${post.getComments()}" th:class="narrow-body">
         <div class="">
-            <div class="">
-                <span th:text="${comment.author.username}"></span> on <span class="text-muted" th:text="${#dates.format(comment.createDate,'E, MMM dd yyyy HH:mm:ss')}"></span><br>
-              <div class="d-flex justify-content-between"><div><img th:src="${comment.author.getAvatar_path()}" class="avatar" height="30px" width="30px"> <span th:text="${comment.comment}"></span></div>
-                  <div><span th:if="${user.id == comment.author.id}"><form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment/delete'}" method="post"><input hidden name="id" th:value="${comment.id}"><button type="submit" class="butn btn-danger">Delete</button></form></span></div></div>
+            <div class="p-3">
+                <span th:text="${comment.author.username}"></span> on
+                <span class="text-muted" th:text="${#dates.format(comment.createDate,'E, MMM dd yyyy HH:mm:ss')}"></span>
+                <br>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <img th:src="${comment.author.getAvatar_path()}" class="avatar" height="30px" width="30px">
+                        <span th:text="${comment.comment}"></span>
+                    </div>
+                    <div>
+                        <span th:if="${user.id == comment.author.id}">
+                            <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment/delete'}" method="post">
+                                <input hidden name="id" th:value="${comment.id}">
+                                <button type="submit" class="util-butn util-butn-decline">Delete</button>
+                            </form>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="narrow-body">
-        <div th:if="${loggedin != null}"  class="">
+
+    <div class="narrow-body post-body p-3">
+        <div th:if="${loggedin != null}"  class="p-3">
 <!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
             <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
-            <div class="form-post mb-3">
-                <input class="input" name="comment" id="comment" type="text">
+            <div class="input-group" id="over">
+                <input class="input" name="comment" id="comment" type="text" placeholder="Add A Comment">
 <!--                    <input class="form-control" th:field="*{comment}" type="text">-->
-                    <button class="butn post-link" type="submit">Submit</button>
-        </div>
+                    <button class="butn pro-link" type="submit">Submit</button></div>
+
 
             </form>
         </div>

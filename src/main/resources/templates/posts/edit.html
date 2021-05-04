@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/utils.css">
+<link rel="stylesheet" href="/css/posts.css">
 <html lang="en">
 <head th:include="partials.html::head('Here you can edit a page')" >
     <meta charset="UTF-8">
@@ -8,55 +10,65 @@
 <body>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
-<!--<div id="breadcrumbPosts">-->
-<!--    <nav aria-label="breadcrumb">-->
-<!--        <ol class="breadcrumb">-->
-<!--            <li class="breadcrumb-item active" aria-current="page">Edit</li>-->
-<!--        </ol>-->
-<!--    </nav>-->
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
 
-<!--            <li class="breadcrumb-item active" aria-current="page">Bookclub</li>-->
-            <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>
-            <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/posts/' + ${post.id}}">Post</a></li>
-<!--            <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>-->
+    <div class="container">
+        <div id="breadcrumbPosts" class="mb-3 narrow-body">
+            <nav aria-label="breadcrumb" class="breadcrumbs">
+                <ul class="breadcrumb">
 
-            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                    <!--            <li class="breadcrumb-item active" aria-current="page">Bookclub</li>-->
+                    <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/posts/' + ${post.id}}">Post</a></li>
+                    <!--            <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>-->
 
-        </ol>
-    </nav>
+                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
 
-<div class="container">
-    <div class="row"><div class="d-none d-md-block col-md-4 col-lg-6 py-1 my-2"><img class="img-fluid" src="/img/typing.jpg"></div>
-        <div class="col-12 col-md-8 col-lg-6 py-1 my-2">
-    <div th:unless="${isAuthor}"><h1>Sorry, you can't edit a post that isn't yours. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and email the author or Bookclub owner.</h1></div>
-    <div th:if="${isAuthor}">
-    <h1>Use the form below to edit an existing post!</h1>
-    <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">
-        <div class="mb-3">
-            <label for="title" class="form-label">Title of the post</label>
-            <input class="form-control" type="text" th:field="*{title}">
-        </div>
-        <div class="mb-3">
-            <label for="body" class="form-label">Body of the blog post</label>
-            <textarea class="form-control" rows="6" th:field="*{body}"></textarea>
-<!--            <input hidden id="id" name="id" th:value="${post.id}">-->
+                </ul>
+            </nav>
         </div>
 
-            <div class="mb-3">
-                <label for="book" class="form-label">What book is this about?</label>
-                <select class="form-control" name="book" id="book">
-                    <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
-                </select>
+
+        <div id="meeting-form">
+        <div class="row">
+            <div class="d-none d-lg-block col-lg-6 py-1 my-2">
+                <img class="img-fluid" src="/img/typing.jpg">
             </div>
-        <div id="results1" class="d-none"></div>
-        <button class="btn btn-secondary text-center">Submit Post</button>
-    </form>
+            <div class="col-12 col-lg-6 py-1 my-2">
+                <div th:unless="${isAuthor}">
+                    <h1>Sorry, you can't edit a post that isn't yours. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and email the author or Bookclub owner.</h1>
+                </div>
+                <div th:if="${isAuthor}" class="post-card">
+                    <div class="form-post">
+                    <h1>Use the form below to edit an existing post!</h1>
+                    <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">
+<!--                        <div class="mb-3">-->
+<!--                            <label for="title" class="form-label">Title of the post</label>-->
+                            <input class="input" type="text" th:field="*{title}" placeholder="Title">
+<!--                        </div>-->
+
+<!--                        <div class="mb-3">-->
+<!--                            <label for="body" class="form-label">Body of the blog post</label>-->
+                            <textarea class="input" rows="6" th:field="*{body}" placeholder="Details please"></textarea>
+<!--            <input hidden id="id" name="id" th:value="${post.id}">-->
+<!--                        </div>-->
+
+<!--                        <div class="mb-3">-->
+<!--                            <label for="book" class="form-label">What book is this about?</label>-->
+                            <select class="input" name="book" id="book">
+                                <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
+                            </select>
+<!--                        </div>-->
+
+                        <div id="results1" class="d-none"></div>
+                        <button class="butn post-link text-center">Submit Post</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
     </div>
-    </div></div>
-</div>
 <!--<div th:replace="partials.html::bookclubmodal"></div>-->
 
 <footer th:replace="partials.html::footer"></footer>
