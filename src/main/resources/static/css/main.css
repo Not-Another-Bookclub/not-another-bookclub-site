@@ -236,6 +236,7 @@ footer div p a:hover {
     padding: 5px;
     font-family: sans-serif;
     text-transform: uppercase;
+    /*border: 2px solid black;*/
 }
 
 .util-butn-accept {

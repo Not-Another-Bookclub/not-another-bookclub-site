@@ -95,8 +95,8 @@
         <div th:if="${loggedin != null}"  class="p-3">
 <!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
             <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
-            <div class="input-group mb-3">
-                <input class="form-control" name="comment" id="comment" type="text" placeholder="Add A Comment">
+            <div class="input-group" id="over">
+                <input class="input" name="comment" id="comment" type="text" placeholder="Add A Comment">
 <!--                    <input class="form-control" th:field="*{comment}" type="text">-->
                     <button class="butn pro-link" type="submit">Submit</button></div>
 

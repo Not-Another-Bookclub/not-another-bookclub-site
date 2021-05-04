@@ -60,6 +60,10 @@ body {
     margin: 1rem 0;
 }
 
+#over {
+    border-bottom: none;
+}
+
 /*BREADCRUMBS*/
 #breadcrumbPosts {
     /*border: 2px solid cornflowerblue;*/
