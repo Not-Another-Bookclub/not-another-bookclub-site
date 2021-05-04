@@ -25,7 +25,7 @@
             <div class="col-6">
                 <h1>Thanks for starting a new bookclub, here's what we need to know....</h1>
 
-                <form th:action="@{/bookclubs/create}" th:method="post" th:object="${bookclub}">
+                <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/edit'}" th:method="post" th:object="${bookclub}">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name of Your Bookclub</label>
                         <input class="form-control" th:field="*{name}" type="text" maxlength="255" required>
