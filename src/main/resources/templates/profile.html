@@ -90,12 +90,14 @@
 
 
                 <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog pro-card">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title" id="staticBackdropLabel">Invite to which club?</h5>
+<!--                                <button type="button" class="" data-bs-dismiss="modal" aria-label="Close">-->
+                                    <i class="fas fa-angle-down fa-2x" data-bs-dismiss="modal" aria-label="Close"></i>
+<!--                                </button>-->
                             </div>
                             <div class="modal-body">
                                 <form th:action="@{'/bookclubs/inviteMany/' + ${id} + '/' + ${user.id}}" th:method="post">
@@ -109,13 +111,13 @@
                                         </div>
                                     </div>
 
-                                    <input type="submit" class="btn btn-secondary">
+                                    <input type="submit" class="butn pro-link">
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <!--                        <button type="button" class="btn btn-primary">Understood</button>-->
-                            </div>
+<!--                            <div class="modal-footer">-->
+<!--                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                                &lt;!&ndash;                        <button type="button" class="btn btn-primary">Understood</button>&ndash;&gt;-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>
