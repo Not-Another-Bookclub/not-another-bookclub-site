@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/css/posts.css">
-<link rel="stylesheet" href="/css/utils.css">
+
+
 <html lang="en">
 <head th:include="partials.html::head('A detailed view of this post')">
     <meta charset="UTF-8">
     <title>Detailed view of this post</title>
 </head>
+<link rel="stylesheet" href="/css/posts.css">
+<link rel="stylesheet" href="/css/utils.css">
+<script src="/js/magical_library_background_progressive.js"></script>
 <body>
 <div th:replace="partials.html::navbar"></div>
 
@@ -36,11 +39,13 @@
         <div th:if="${isAuthor}" class="">
             <div class=" p-2">
                 <a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}">
+
                     <button type="button" class="util-butn util-butn-accept">Edit</button>
                 </a>
                 <!-- Button trigger modal -->
                 <a href="#">
                 <button type="button" class="util-butn util-butn-decline" data-bs-toggle="modal" data-bs-target="#deleteModal">
+
                     Delete
                 </button>
                 </a>
@@ -58,11 +63,11 @@
                             Deleting your blog post cannot be undone! Are you sure you want to continue?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="butn post-link" data-bs-dismiss="modal">Cancel</button>
                             <!--                    <form th:action="@{/posts/__${post.id}__}" method="post">-->
                             <form action="/posts/delete" method="post">
                                 <input hidden name="id" th:value="${post.id}">
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="butn btn-danger">Delete</button>
                             </form>
                         </div>
                     </div>
@@ -83,14 +88,15 @@
 
 
     <div th:each="comment : ${post.getComments()}" th:class="narrow-body">
-        <div class="card">
-            <div class="card-body">
+        <div class="">
+            <div class="">
                 <span th:text="${comment.author.username}"></span> on <span class="text-muted" th:text="${#dates.format(comment.createDate,'E, MMM dd yyyy HH:mm:ss')}"></span><br>
-              <div class="d-flex justify-content-between"><div><img th:src="${comment.author.getAvatar_path()}" height="30px" width="30px"> <span th:text="${comment.comment}"></span></div>
-                  <div><span th:if="${user.id == comment.author.id}"><form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment/delete'}" method="post"><input hidden name="id" th:value="${comment.id}"><button type="submit" class="btn btn-danger">Delete</button></form></span></div></div>
+              <div class="d-flex justify-content-between"><div><img th:src="${comment.author.getAvatar_path()}" class="avatar" height="30px" width="30px"> <span th:text="${comment.comment}"></span></div>
+                  <div><span th:if="${user.id == comment.author.id}"><form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment/delete'}" method="post"><input hidden name="id" th:value="${comment.id}"><button type="submit" class="butn btn-danger">Delete</button></form></span></div></div>
             </div>
         </div>
     </div>
+
     <div class="narrow-body post-body p-3">
         <div th:if="${loggedin != null}"  class="p-3">
 <!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
@@ -99,6 +105,7 @@
                 <input class="input" name="comment" id="comment" type="text" placeholder="Add A Comment">
 <!--                    <input class="form-control" th:field="*{comment}" type="text">-->
                     <button class="butn pro-link" type="submit">Submit</button></div>
+
 
             </form>
         </div>
