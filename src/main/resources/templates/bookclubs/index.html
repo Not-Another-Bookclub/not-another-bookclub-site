@@ -33,16 +33,16 @@
 
             <!--    <div th:each="book : ${books}"><div th:each="meeting : ${meetings}"-->
 
-            <div  class="col-4" th:text="${books.get(__${istat.index}__)}"></div>
+            <div  class="col-4" style="margin-top: 30px" th:text="${books.get(__${istat.index}__)}"></div>
 
 
             <div class="col-8"><a th:href="@{/bookclubs/__${bookclub.id}__/}">
                 <strong>
-                    <h3 style="margin-top: 10px " th:text="${bookclub.name}"></h3>
+                    <h3 style="margin-top: 30px " th:text="${bookclub.name}"></h3>
                 </strong></a>
 
 
-                <div class="text-start"><p th:text="${bookclub.description}"></p>
+                <div class="text-start" style="margin-top: 30px"><p th:text="${bookclub.description}"></p>
 
 
                     <div th:if="${bookclub.accepting_members}"><p>Currently accepting new members.</p></div>
