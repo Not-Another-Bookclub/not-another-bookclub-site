@@ -69,13 +69,16 @@
 
     </div>
 
-    <div th:if="${user.username != null}" class="narrow-body pro-card my-3">
-        <div th:if="${isAccepting}" class="">
+    <div th:if="${user.username != null}" class="">
+        <div th:if="${isAccepting}">
+        <div th:if="${isNotMember}" class="narrow-body pro-card my-3">
 <!--            <hr class="acc-bar">-->
-            <form th:if="${isNotMember}" class="p-2" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
+            <div>
+            <form  class="p-2" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
                 <label for="join-club">Want to join?</label>
                 <input type="submit" id="join-club" class="butn pro-link" value="Join">
             </form>
+            </div>
         </div>
         <div th:if="${!isAccepting}">
             <hr>
@@ -86,6 +89,7 @@
                 </form>
             </div>
 
+        </div>
         </div>
     </div>
 

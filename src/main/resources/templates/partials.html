@@ -26,19 +26,23 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/bookclubs">Home</a>
+                        <a class="nav-link active" href="/bookclubs"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active"  th:href="@{'/profile/'}">Profile</a>
+                        <a class="nav-link active"  th:href="@{'/profile/'}"><i class="fas fa-user-circle"></i> Profile</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/bookclubs/create">Create</a>
+                        <a class="nav-link active"  th:href="@{'/aboutus'}"><i class="fas fa-users"></i> About us</a>
                     </li>
 
-                    <li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bookclubs/create"><i class="fas fa-plus"></i> Create</a>
+                    </li>
+
+                    <li class="nav-item">
                         <form th:action="@{/logout}" th:method="post">
-                            <button class="btn-link btn" id="logoutmenu">Logout</button>
+                            <button class="btn-link btn" id="logoutmenu"><i class="fas fa-sign-out-alt"></i> Logout</button>
                         </form>
                     </li>
 
@@ -60,15 +64,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/bookclubs">Home</a>
+                         <a class="nav-link" href="/bookclubs"><i class="fas fa-home"></i> Home</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="/sign-up">Sign up</a>
+                        <a class="nav-link active"  th:href="@{'/aboutus'}"><i class="fas fa-users"></i> About us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sign-up"><i class="fas fa-user-plus"></i> Sign up</a>
                     </li>
 <!--                    THIS IS THE DROPDOWN-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sign In
+                            <i class="fas fa-sign-in-alt"></i> Sign In
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg-right p-3" aria-labelledby="loginDropdown" id="log-drop">
                             <form th:action="@{/login}" method="post" class="px-4 py-3" >
@@ -116,10 +125,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/bookclubs">Home</a>
+                    <a class="nav-link active" href="/bookclubs"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"  th:href="@{'/profile/'}">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active"  th:href="@{'/aboutus'}"><i class="fas fa-users"></i> About us</a>
                 </li>
 
                 <li class="nav-item">
@@ -127,7 +140,7 @@
                 </li>
                 <li>
                     <form th:action="@{/logout}" th:method="post">
-                        <button class="btn-link btn" id="logoutmenu">Logout</button>
+                        <button class="btn-link btn" id="logoutmenu"><i class="fas fa-sign-out-alt"></i> Logout</button>
                     </form>
                 </li>
 
