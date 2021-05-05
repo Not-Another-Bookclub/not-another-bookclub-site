@@ -7,6 +7,7 @@
     </head>
 
 <link rel="stylesheet" href="/css/show-bookclub.css">
+
 <link rel="stylesheet" href="/css/utils.css">
 <script src="/js/magical_library_background_progressive.js"></script>
 
@@ -51,46 +52,43 @@
 
                     <div class="d-flex">
                         <div th:if="${books.size() > 0}">
-                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" class="btn btn-secondary">Make a meeting?</a>
+                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" class="butn meeting-link">Make a meeting?</a>
                         </div>
                         <div th:if="${books.size() < 1}">
                             <p>Add Books to this club's reading list to make meetings.</p>
                         </div>
                         <div class="mx-3">
-                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="btn btn-warning">Edit</a>
+                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="butn boo-link">Edit Club</a>
                         </div>
                     </div>
 
-<!--                </div>-->
             </div>
-            <div th:if="${!isOwner}" class="col-6 p-3">
-<!--                <div class="col-6 p-3">-->
 
-<!--                </div>-->
-            </div>
         </div>
+<!--        HERE-->
 
+    </div>
 
-        <div th:if="${user.username != null}">
-            <div th:if="${isAccepting}">
-                <hr class=".acc-bar">
+    <div th:if="${user.username != null}" class="narrow-body pro-card my-3">
+        <div th:if="${isAccepting}" class="">
+<!--            <hr class="acc-bar">-->
+            <form th:if="${isNotMember}" class="p-2" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
+                <label for="join-club">Want to join?</label>
+                <input type="submit" id="join-club" class="butn pro-link" value="Join">
+            </form>
+        </div>
+        <div th:if="${!isAccepting}">
+            <hr>
+            <div th:if="${isOwner}">
                 <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
                     <label for="join-club">Want to join?</label>
                     <input type="submit" id="join-club" class="btn btn-danger" value="Join">
                 </form>
             </div>
-            <div th:if="${!isAccepting}">
-                <hr>
-                <div th:if="${isOwner}">
-                    <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
-                        <label for="join-club">Want to join?</label>
-                        <input type="submit" id="join-club" class="btn btn-danger" value="Join">
-                    </form>
-                </div>
 
-            </div>
         </div>
     </div>
+
 <!--    END OF INFO / OWNER -->
 
 <!--    PEOPLE WHO WANT TO JOIN-->
@@ -111,18 +109,18 @@
                     flex-md-row
                     flex-nowrap
                     flex-md-wrap
-                    p-3">
+                    ">
                 <div th:each="user : ${pendingUsers}" class="invite-unit d-flex flex-row m-3 p-3 row">
                     <div class="card p-2 m-1 col-12 col-sm-7 text-center">
                         <a class="butn pro-link" th:href="@{'/pro/' + ${user.id} }" th:text="${user.username}"></a>
                         <span> Wants to join</span>
                     </div>
-                    <div class="card p-2 m-1 col-12 col-sm-4">
+                    <div class="card p-2 m-1 col-12 col-sm-4 text-center d-flex flex-column align-items-center justify-content-evenly">
                         <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="btn btn-success" value="Accept ">
+                            <input type="submit" class="util-butn util-butn-accept" value="Accept ">
                         </form>
                         <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="btn btn-danger" value="Decline">
+                            <input type="submit" class="util-butn util-butn-decline" value="Decline">
                         </form>
                     </div>
                 </div>
@@ -216,7 +214,7 @@
                         p-3">
                         <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}"
                            th:each="post : ${posts}" class="butn post-link m-2">
-                            <span th:text="${post.title}"></span>
+                            <span th:text="${post.title}"></span> by:
                             <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)
                         </a>
                     </div>
@@ -225,9 +223,11 @@
             </div>
 
 
-            <p th:if="${isActiveUser}">
-                Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</a>
-            </p>
+            <details th:if="${isActiveUser}" class="pro-card">
+                <summary class="p-3">
+                    Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}" class="butn post-link"> Create your own post</a>
+                </summary>
+            </details>
         </div>
 
 <!--        BOOKS-->

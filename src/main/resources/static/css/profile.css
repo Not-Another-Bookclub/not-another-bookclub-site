@@ -148,9 +148,23 @@ details > summary::-webkit-details-marker {
 
 p, h4, h5, h6{
     font-family: sans-serif;
-
 }
 
 h1, h2, h3{
     font-family: "serif";
+}
+
+
+/*INVITE MODAL*/
+
+.modal-header button {
+    background: black;
+}
+
+.modal-header button i {
+    color: white;
+}
+.modal-content {
+    background: black;
+    color: white;
 }
