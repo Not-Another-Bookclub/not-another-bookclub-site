@@ -32,19 +32,19 @@
         <hr class="acc-bar">
 
         <h5 th:text="${post.getBody()}">Body will go here.</h5>
-        <p>
-            Posted by: <a th:href ="@{/pro/__${post.author.id}__}" th:text="${post.author.getUsername()}" class="butn pro-link pro-link-2">profile</a>
-        </p>
+        <span>
+            Posted by: <a th:href ="@{/pro/__${post.author.id}__}" th:text="${post.author.getUsername()}" class="">profile</a>
+        </span>
 
         <div th:if="${isAuthor}" class="">
             <div class=" p-2">
                 <a th:href="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id} + '/edit'}">
 
-                    <button type="button" class="util-butn util-butn-accept">Edit</button>
+                    <button type="button" class="butn btn-warning">Edit</button>
                 </a>
                 <!-- Button trigger modal -->
                 <a href="#">
-                <button type="button" class="util-butn util-butn-decline" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <button type="button" class="butn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
 
                     Delete
                 </button>
@@ -102,7 +102,7 @@
                         <span th:if="${user.id == comment.author.id}">
                             <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment/delete'}" method="post">
                                 <input hidden name="id" th:value="${comment.id}">
-                                <button type="submit" class="util-butn util-butn-decline">Delete</button>
+                                <button type="submit" class="butn btn-danger">Delete</button>
                             </form>
                         </span>
                     </div>
