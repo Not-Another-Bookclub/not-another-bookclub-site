@@ -225,14 +225,14 @@
 
 <!-- Modal that updates User-Books i.e. if it is on a User related page, it must use this modal -->
 <div th:fragment="usermodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog pro-card">
+    <div class="modal-dialog modal-lg pro-card">
         <div class="modal-content hidden-content text-white">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Modal title</h5>
-                <br>
-                <div id="modalImage"><img src="/img/logo-small.png"></div>
+            <div class="modal-header d-flex justify-content-between">
+                <div><h5 class="modal-title" id="myModalLabel">Modal title</h5></div>
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="d-flex justify-content-between"><div id="modalImage"><img src="/img/logo-small.png"></div>
+
+                <button type="button" class="btn-close btn-secondary align-self-start" data-bs-dismiss="modal" aria-label="Close"></button></div>
             </div>
             <div class="modal-body" id="modalBody">
 
@@ -240,29 +240,30 @@
             </div>
 
             <form th:action="@{/pro/__${id}__/book/edit}" method="Post">
-                <label for="startDate" id="startDateText">Start on: </label> <label for="finishDate" id="finishDateText">Finish on: </label>
-                <input type="date" id="startDate" name="startDate">
-                <input type="date" id="finishDate" name="finishDate">
+                <div class="d-flex justify-content-between"><label for="startDate" id="startDateText">Start on: </label> <label for="finishDate" id="finishDateText">Finish on: </label></div>
+                <div class="d-flex justify-content-between"><input type="date" id="startDate" name="startDate">
+                    <input type="date" id="finishDate" name="finishDate"></div>
                 <input type="hidden" id="modalbookid" name="book" value="">
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer d-flex justify-content-around">
+
+                    <div><button type="button" class="butn boo-link" data-bs-dismiss="modal">Close</button></div>
+                    <div><button type="submit" class="butn boo-link">Save changes</button></form></div>
+        <div><form th:action="@{/pro/__${id}__/book/delete}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div>
                 </div>
-            </form>
+
         </div>
     </div>
-</div>
 
 <!-- Modal that updates Bookclub-Books from posts page, because of weird bugs with our posts i.e. if it is on a post related page, it must use this modal -->
 <div th:fragment="bookclubmodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content pro-card">
-            <div class="modal-header hidden-content">
-                <h5 class="modal-title hidden-content" id="myModalLabel">Modal title</h5>
-                <br>
-                <div id="modalImage"><img src="/img/logo-small.png"></div>
+            <div class="modal-header hidden-content d-flex justify-content-around">
+                <div><h5 class="modal-title hidden-content" id="myModalLabel">Modal title</h5></div>
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="d-flex justify-content-between"><div id="modalImage"><img src="/img/logo-small.png"></div>
+
+                    <button type="button" class="btn-close btn-light align-self-start" data-bs-dismiss="modal" aria-label="Close"></button></div>
             </div>
             <div class="modal-body hidden-content" id="modalBody">
 
@@ -270,17 +271,18 @@
             </div>
 
             <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/edit'}" method="Post">
-                <label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label>
-                <input type="date" id="startDate" name="startDate"><div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div>
+                <div class="d-flex justify-content-between"><label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label></div>
+                <div class="d-flex justify-content-between"><div><input type="date" id="startDate" name="startDate"></div><div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div></div>
                 <input type="hidden" id="modalbookid" name="book" value="">
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <div th:if="${isOwner}"> <button type="submit" class="btn btn-primary">Save changes</button></div>
-                </div>
-            </form>
+                <div class="d-flex justify-content-around"><div class="modal-footer">
+                    <button type="button" class="butn boo-link" data-bs-dismiss="modal">Close</button></div>
+                    <div th:if="${isOwner}" class="modal-footer"> <button type="submit" class="butn boo-link">Save changes</button></div></form>
+            <div th:if="${isOwner}" class="modal-footer"><form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/delete'}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div></div>
+<!--                </div>-->
+<!--            </form>-->
         </div>
     </div>
-</div>
+<!--</div>-->
 
 
 <script th:fragment="booksearchscript(path,bookclubid)" th:inline="javascript">
@@ -413,7 +415,7 @@ var html = '<div class="col-md-3 col-sm-4 col-6 text-center text-white p-3">'
     html += "<h6> Start "+ startDate +"</h6>"
     html += "<h6> Finish: "+ finishDate +"</h6></div>"
     html += '<hr> <div class="d-flex flex-column align-items-center">'
-    html += '<div><a href="#" class="butn boo-link mb-2" id="'+ idSearch +'">Remove</a></div>'
+    // html += '<div><a href="#" class="butn boo-link mb-2" id="'+ idSearch +'">Remove</a></div>'
     html += '<div><button href="" class="butn book-selector boo-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div>'
     // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
@@ -465,6 +467,7 @@ for(let i = 0; i < idsearch.length; i++) {
     const startdatecalendar = document.getElementById('startDate');
     const finishdatecalendar = document.getElementById('finishDate');
     const modalbookid = document.getElementById('modalbookid');
+    const modaldeletebookid = document.getElementById('modaldeletebookid');
 
 
 
@@ -498,6 +501,7 @@ for(let i = 0; i < idsearch.length; i++) {
                 startdatecalendar.value = startHTML;
                 finishdatecalendar.value = finishHTML;
                 modalbookid.value = idSearch;
+                modaldeletebookid.value = idSearch;
             },
 
             type: 'Get'

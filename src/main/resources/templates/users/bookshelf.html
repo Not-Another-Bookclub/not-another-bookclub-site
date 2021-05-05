@@ -17,10 +17,10 @@
     <div>
         <h4>Click the "User" or "Bookclub" buttons to find other users and bookclubs who have read (or plan to read) the books you like.</h4>
 <div class="row" id="results1"></div>
-<h2 id="resultsuserheadline" class="d-none">Here are the other users that have read <span id="bookname1">that book</span>:</h2>
-<div class="row" id="resultsuser"></div>
-<h2 id="resultsbookclubheadline" class="d-none">Here are bookclubs that have read or are planning to read <span id="bookname2">that book</span>:</h2>
-<div class="row" id="resultsbookclub"></div>
+    <div class="pro-card d-none" id="usercard"><div class="narrow-body hidden-content my-2 py-2"><h2 id="resultsuserheadline" class="d-none text-center my-2 py-2">Here are the other users that have read <span id="bookname1">that book</span>:</h2>
+        <div class="" id="resultsuser"></div></div></div>
+<div class="pro-card d-none" id="bookclubcard"><div class="narrow-body hidden-content my-2 py-2"><h2 id="resultsbookclubheadline" class="d-none text-center my-2 py-2">Here are bookclubs that have read or are planning to read <span id="bookname2">that book</span>:</h2>
+    <div class="" id="resultsbookclub"></div></div></div>
 
     </div>
  <div class="text-body"><div th:replace="partials.html::usermodal"></div></div>
@@ -146,16 +146,19 @@ function findUsersWithSameBook(googleID, booktitle) {
             if (data.length == 0) {
                 html = "<h3>I'm sorry, so far no one else is reading " + booktitle +". Try another?</h3>"
                 document.getElementById('resultsuser').innerHTML = html;
+                $('#usercard').removeClass("d-none")
             }
-            else {html = "<ul>"
+            else {html = "<ul class='my-2 py-2'>"
                 for (let i = 0; i < data.length; i++){
-                    html += "<li><a href='/pro/" + data[i].id + "'><img src='"+ data[i].avatar_path +"' height='50px'> "+ data[i].username + "</a> has also read " + booktitle;
-                }
-                html += "</ul>"
+                    html += "<li class='py-2 my-2'><a href='/pro/" + data[i].id + "'><img src='"+ data[i].avatar_path +"' height='50px' class='avatar'> "+ data[i].username + "</a> has also read " + booktitle + "</li>";
+                } html += "</ul>"
+
 
                 document.getElementById('resultsuser').innerHTML = html;
                 document.getElementById('bookname1').innerText = booktitle;
                 $('#resultsuserheadline').removeClass("d-none")
+                $('#usercard').removeClass("d-none")
+
             }
         console.log(data)},
         type: 'Get'
@@ -171,16 +174,18 @@ function findBookclubsWithSameBook(googleID, booktitle) {
             if (data.length == 0) {
                 html = "<h3>I'm sorry, so far no other bookclub is reading " + booktitle +". Try another?</h3>"
                 document.getElementById('resultsbookclub').innerHTML = html;
+                $('#bookclubcard').removeClass("d-none")
             }
-            else {html = "<ul>"
+            else {html = "<ul class='my-2 py-2'"
                 for (let i = 0; i < data.length; i++){
-                    html += "<li><a href='/bookclubs/" + data[i].id + "'>"+ data[i].name + "</a> has also read " + booktitle;
+                    html += "<li class='py-2 my-2'><a href='/bookclubs/" + data[i].id + "'>"+ data[i].name + "</a> has also read " + booktitle +"</li>";
                 }
                 html += "</ul>"
 
                 document.getElementById('resultsbookclub').innerHTML = html;
                 document.getElementById('bookname2').innerText = booktitle;
                 $('#resultsbookclubheadline').removeClass("d-none")
+                $('#bookclubcard').removeClass("d-none")
             }
         console.log(data)},
         type: 'Get'
