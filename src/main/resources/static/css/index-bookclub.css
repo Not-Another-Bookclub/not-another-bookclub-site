@@ -12,4 +12,5 @@ a:hover {
 
 .card {
     flex-direction: row; !important;
+    background-color: #834e4a;
 }
