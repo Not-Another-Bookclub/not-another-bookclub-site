@@ -32,13 +32,18 @@
 <!--    <div th:each="book : ${books}"><div th:each="meeting : ${meetings}"-->
             <div  class="col-4" th:text="${books.get(__${istat.index}__)}"></div>
             <div class="card-title col-8"> <a th:href="@{/bookclubs/__${bookclub.id}__/}"> <strong><h3 th:text="${bookclub.name}"></h3></strong></a>
-                <div class="text-start"><p th:text="${bookclub.description}"></p>
-                    <div th:if="${bookclub.accepting_members}"><p>Currently accepting new members.</p></div>
-                    <div>
-    <!--                    <p>There are currently <span th:text="${bookclub.users.size()}"></span> members.</p>-->
-                        <p>They have a reading list of <span th:text="${numberbooks.get(__${istat.index}__)}"></span> books.</p>
+<!--                <div class="text-start">-->
+                    <div class="card-text">
+                            <p th:text="${bookclub.description}"></p>
+                            <div th:if="${bookclub.accepting_members}"><p>Currently accepting new members.</p></div>
+                            <div>
+            <!--                    <p>There are currently <span th:text="${bookclub.users.size()}"></span> members.</p>-->
+                                <p>They have a reading list of <span th:text="${numberbooks.get(__${istat.index}__)}"></span> books.</p>
+                            </div>
                     </div>
-                    <div>
+
+<!--This is the card footer area which contains the book completion date and meeting & scheduled meeting time-->
+                    <div class="card-footer " >
 
                         <div th:if="${meetings.get(__${istat.index}__).timedate} != null">They'll be finished with this book and meet: <br><span th:text="${#dates.format(meetings.get(__${istat.index}__).timedate,'E, MMM dd yyyy hh:mm:ss a')}"></span>
                         </div>
@@ -46,7 +51,9 @@
                         </div>
                     </div>
 
-                </div>
+
+<!--                </div>-->
+
             </div>
 
        </div>
