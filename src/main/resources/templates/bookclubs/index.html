@@ -36,7 +36,10 @@
             <div  class="col-4" th:text="${books.get(__${istat.index}__)}"></div>
 
 
-            <div class="col-8"><a th:href="@{/bookclubs/__${bookclub.id}__/}"> <strong><h3  th:text="${bookclub.name}"></h3></strong></a>
+            <div class="col-8"><a th:href="@{/bookclubs/__${bookclub.id}__/}">
+                <strong>
+                    <h3 style="margin-top: 10px " th:text="${bookclub.name}"></h3>
+                </strong></a>
 
 
                 <div class="text-start"><p th:text="${bookclub.description}"></p>
