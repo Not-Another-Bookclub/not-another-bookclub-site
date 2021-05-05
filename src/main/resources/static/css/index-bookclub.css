@@ -9,3 +9,7 @@ a:hover {
     color: var(--bookclub);
 
 }
+
+.card {
+    flex-direction: row; !important;
+}
