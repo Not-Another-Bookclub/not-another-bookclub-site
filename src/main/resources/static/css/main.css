@@ -2,10 +2,9 @@
 :root {
     --profile: #30536C;
     --bookclub: darkblue;
+    --card-yellow: #f0c88f;
     --nav-accent: hsl(178, 70%, 73%);
-
     --post: #ae5454;
-
     --meeting: #987775;
     --meeting-light: #eeeeee;
 }
@@ -249,6 +248,10 @@ footer div p a:hover {
     color: #B00005;
     background: black;
     transition: .5s ease;
+}
+
+.book-card {
+    background: var(--card-yellow);
 }
 
 /*.util-butn-decline:hover {*/

@@ -1,14 +1,15 @@
 a {
-    color: white;
+    color: var(--bookclub);
     opacity: 1;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 a:hover {
-    color: var(--bookclub);
-
+    color: lemonchiffon;
 }
+
+
 
 .card {
     flex-direction: row; !important;

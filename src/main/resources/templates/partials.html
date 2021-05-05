@@ -227,13 +227,20 @@
 
 
 <div th:fragment="booksearch">
-    <h1>Book finder</h1>
+    <div class="pro-card">
+        <div class="hidden-content my-2 py-2">
+        <h1 class="text-center py-2 my-2">Book finder - add more books to your reading lists!</h1>
 
-    <div class="row g-2 my-2 py-2"> <div class="col-5"> <label for="search Title">Title or Other Keywords</label> <input type="text" class="form-control" id="search title" placeholder="Title"></div>
+            <div class="d-flex justify-content-around g-2 my-2 py-2">
 
-        <div class="col-auto"> <label for="search Author">Author (not required)</label><input type="text" class="form-control" id="search Author" placeholder="Author"></div></div>
-    <button id = "button" type="button" class="btn btn-primary">Search for books!</button>
-    <div id="results" class="row"></div>
+                <div class="col-5 mb-2"> <label for="search Title">Title or Other Keywords</label> <input type="text" class="form-control" id="search title" placeholder="Title"></div>
+                <div class="col-auto mb-2"> <label for="search Author">Author (not required)</label><input type="text" class="form-control" id="search Author" placeholder="Author"></div>
+                <div class="col-auto mb-2 align-self-end"><button id = "button" type="button" class="butn boo-link">Search for books!</button></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="results" class="row row-col-1 row-cols-sm-3 row-cols-md-4 g-4"></div>
 </div>
 
 <!-- Modal that updates User-Books i.e. if it is on a User related page, it must use this modal -->
@@ -243,9 +250,9 @@
             <div class="modal-header d-flex justify-content-between">
                 <div><h5 class="modal-title" id="myModalLabel">Modal title</h5></div>
 
-                <div class="d-flex justify-content-between"><div id="modalImage"><img src="/img/logo-small.png"></div>
+                <div id="modalImage"><img src="/img/logo-small.png"></div>
 
-                <button type="button" class="btn-close btn-secondary align-self-start" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="align-self-start"><i type="button" class="fas fa-window-close fa-2x boo-link align-self-start" data-bs-dismiss="modal" aria-label="Close"></i></div>
             </div>
             <div class="modal-body" id="modalBody">
 
@@ -253,13 +260,13 @@
             </div>
 
             <form th:action="@{/pro/__${id}__/book/edit}" method="Post">
-                <div class="d-flex justify-content-between"><label for="startDate" id="startDateText">Start on: </label> <label for="finishDate" id="finishDateText">Finish on: </label></div>
-                <div class="d-flex justify-content-between"><input type="date" id="startDate" name="startDate">
+                <div class="d-flex justify-content-around"><div>Start reading</div><div>Finish reading</div></div>
+                <div class="d-flex justify-content-around"><label for="startDate" id="startDateText">Start on: </label> <label for="finishDate" id="finishDateText">Finish on: </label></div>
+                <div class="d-flex justify-content-around"><input type="date" id="startDate" name="startDate">
                     <input type="date" id="finishDate" name="finishDate"></div>
                 <input type="hidden" id="modalbookid" name="book" value="">
-                <div class="modal-footer d-flex justify-content-around">
+                <div class="modal-footer d-flex flex-row-reverse justify-content-around">
 
-                    <div><button type="button" class="butn boo-link" data-bs-dismiss="modal">Close</button></div>
                     <div><button type="submit" class="butn boo-link">Save changes</button></form></div>
         <div><form th:action="@{/pro/__${id}__/book/delete}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div>
                 </div>
@@ -271,12 +278,12 @@
 <div th:fragment="bookclubmodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content pro-card">
-            <div class="modal-header hidden-content d-flex justify-content-around">
+            <div class="modal-header hidden-content d-flex justify-content-between">
                 <div><h5 class="modal-title hidden-content" id="myModalLabel">Modal title</h5></div>
 
-                <div class="d-flex justify-content-between"><div id="modalImage"><img src="/img/logo-small.png"></div>
+                <div id="modalImage"><img src="/img/logo-small.png"></div>
 
-                    <button type="button" class="btn-close btn-light align-self-start" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="align-self-start"><i type="button" class="fas fa-window-close fa-2x boo-link" data-bs-dismiss="modal" aria-label="Close"></i></div>
             </div>
             <div class="modal-body hidden-content" id="modalBody">
 
@@ -284,13 +291,14 @@
             </div>
 
             <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/edit'}" method="Post">
-                <div class="d-flex justify-content-between"><label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label></div>
-                <div class="d-flex justify-content-between"><div><input type="date" id="startDate" name="startDate"></div><div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div></div>
+                <div class="d-flex justify-content-around"><div>Start reading</div><div>Finish reading</div></div>
+                <div class="d-flex justify-content-around"><label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label></div>
+                <div class="d-flex justify-content-around"><div><input type="date" id="startDate" name="startDate"></div><div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="The 'finish date' for your bookclub is set based on the meeting you have scheduled for it - to change (or set) a finish date, please create a meeting discussing this book."><input type="date" id="finishDate" name="finishDate" disabled></div></div>
                 <input type="hidden" id="modalbookid" name="book" value="">
-                <div class="d-flex justify-content-around"><div class="modal-footer">
-                    <button type="button" class="butn boo-link" data-bs-dismiss="modal">Close</button></div>
-                    <div th:if="${isOwner}" class="modal-footer"> <button type="submit" class="butn boo-link">Save changes</button></div></form>
-            <div th:if="${isOwner}" class="modal-footer"><form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/delete'}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div></div>
+                <div class="d-flex flex-row-reverse justify-content-around modal-footer">
+<!--                    <button type="button" class="butn boo-link" data-bs-dismiss="modal">Close</button></div>-->
+                    <div th:if="${isOwner}" class=""> <button type="submit" class="butn boo-link">Save changes</button></div></form>
+            <div th:if="${isOwner}" class=""><form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/delete'}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div></div>
 <!--                </div>-->
 <!--            </form>-->
         </div>
@@ -316,13 +324,13 @@
                 else {author = data.items[i].volumeInfo.authors[0]}
                 console.log(thumbnail);
 
-                var html = '<div class="col-md-3 col-sm-4 col-6 text-center custom-thumb p-3">'
-                html +=  "<div><img src='" + thumbnail + "' class='img-fluid' alt='Book Cover'><hr>"
-                html += "<div class='card-body'>"
-                html += "<h5 class='card-title'>" + data.items[i].volumeInfo.title + " - " + author + "</h5></div></div>"
+                var html = '<div class="col"><div class="card justify-content-between text-center book-card body-text h-100 p-2">'
+                html +=  "<img src='" + thumbnail + "' class='card-img-top' alt='Book Cover'>"
+                // html += "<div class='card-body'>"
+                html += "<h5 class='card-title'>" + data.items[i].volumeInfo.title + " - " + author + "</h5>"
 
-                html += "<div><form action='/book/add' method='post'> <input hidden value=" + data.items[i].id +" name='book'><input hidden value='" + path + "' name='path'>"
-                html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <input hidden value="'+ bookclubid + '" name="bookclubid"><button class="butn boo-link mb-2">Add</button></form></div>'
+                html += "<div class='card-footer'><form action='/book/add' method='post'> <input hidden value=" + data.items[i].id +" name='book'><input hidden value='" + path + "' name='path'>"
+                html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <input hidden value="'+ bookclubid + '" name="bookclubid"><button class="butn boo-link mb-2">Add</button></form></div></div></div>'
 
 
                 results.innerHTML+=html;
@@ -420,7 +428,7 @@ success: function (data) {
     if (startDate === null) {startDate = "Not yet started."};
     if (finishDate === null) {finishDate = "Not finished yet."}
 
-var html = '<div class="col-md-3 col-sm-4 col-6 text-center text-white p-3">'
+var html = '<div class="col my-2"><div class="card text-center text-body book-card h-100 p-3">'
     // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
     html += "<img src='" + thumbnail + "' class='img-fluid' alt='Book Cover'><hr>"
     html += "<div class='card-body'>"
@@ -429,7 +437,7 @@ var html = '<div class="col-md-3 col-sm-4 col-6 text-center text-white p-3">'
     html += "<h6> Finish: "+ finishDate +"</h6></div>"
     html += '<hr> <div class="d-flex flex-column align-items-center">'
     // html += '<div><a href="#" class="butn boo-link mb-2" id="'+ idSearch +'">Remove</a></div>'
-    html += '<div><button href="" class="butn book-selector boo-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div>'
+    html += '<div class="card-footer"><button href="" class="butn book-selector boo-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div></div>'
     // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
     results.innerHTML += html;

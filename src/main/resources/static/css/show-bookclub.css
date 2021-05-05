@@ -156,3 +156,7 @@ details > summary::-webkit-details-marker {
     margin-bottom: 0;
 }
 
+.bkcard {
+    background-color: var(--card-yellow);
+    color: black;
+}
