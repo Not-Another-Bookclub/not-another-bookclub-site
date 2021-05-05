@@ -58,40 +58,37 @@
                             <p>Add Books to this club's reading list to make meetings.</p>
                         </div>
                         <div class="mx-3">
-                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="butn boo-link">Edit Bookclub</a>
+                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="butn boo-link">Edit Club</a>
                         </div>
                     </div>
 
-<!--                </div>-->
             </div>
-            <div th:if="${!isOwner}" class="col-6 p-3">
-<!--                <div class="col-6 p-3">-->
 
-<!--                </div>-->
-            </div>
         </div>
+<!--        HERE-->
 
+    </div>
 
-        <div th:if="${user.username != null}">
-            <div th:if="${isAccepting}">
-                <hr class=".acc-bar">
+    <div th:if="${user.username != null}" class="narrow-body pro-card my-3">
+        <div th:if="${isAccepting}" class="">
+<!--            <hr class="acc-bar">-->
+            <form th:if="${isNotMember}" class="p-2" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
+                <label for="join-club">Want to join?</label>
+                <input type="submit" id="join-club" class="butn pro-link" value="Join">
+            </form>
+        </div>
+        <div th:if="${!isAccepting}">
+            <hr>
+            <div th:if="${isOwner}">
                 <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
                     <label for="join-club">Want to join?</label>
                     <input type="submit" id="join-club" class="btn btn-danger" value="Join">
                 </form>
             </div>
-            <div th:if="${!isAccepting}">
-                <hr>
-                <div th:if="${isOwner}">
-                    <form th:if="${isNotMember}" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
-                        <label for="join-club">Want to join?</label>
-                        <input type="submit" id="join-club" class="btn btn-danger" value="Join">
-                    </form>
-                </div>
 
-            </div>
         </div>
     </div>
+
 <!--    END OF INFO / OWNER -->
 
 <!--    PEOPLE WHO WANT TO JOIN-->
