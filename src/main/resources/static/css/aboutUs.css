@@ -13,7 +13,7 @@ body {
     background-size: cover;
     -o-background-size: cover;
     background-color: black;
-    color: white;
+    color: black;
 }
 
 .body-enhanced {
@@ -29,134 +29,32 @@ body {
     background-size: cover;
     -o-background-size: cover;
     background-color: black;
-    color: white;
-}
-
-:root {
-    /*--left: hsla(240, 100%, 0%, 0.65);*/
-    /*--right: hsla(195, 53%, 79%, 0.65);*/
-    /*--right: hsla(240, 100%, 40%, 0.65);*/
-    --profile: #30536C;
-    /*--bookclub: darkblue;*/
-}
-
-/*body {*/
-/*    !*background: linear-gradient(135deg, var(--left), var(--right)),*!*/
-/*    !*background: url('../img/magicalLibrary.jpg') no-repeat center center fixed;*!*/
-
-/*    !*background: linear-gradient(    rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)    ),*!*/
-/*    !*url('../img/magicalLibrary.jpg') no-repeat center center fixed;*!*/
-
-/*    !*background: url('/img/magicalLibrary.jpg') no-repeat center center fixed,*!*/
-/*    !*linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));*!*/
-
-/*    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*/
-/*    url("/img/magicalLibrary.jpg") no-repeat center center fixed;*/
-
-/*    !*background-color: rgba(0, 0, 0, 0.2);*!*/
-/*    -webkit-background-size: cover;*/
-/*    -moz-background-size: cover;*/
-/*    background-size: cover;*/
-/*    -o-background-size: cover;*/
-/*    color: white;*/
-/*}*/
-
-/*background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*/
-/*url("/img/magicalLibrary.jpg");*/
-/*background-position: center;*/
-/*background-size: cover;    !*animation: ease-in 2s;*!*/
-/*font-family: 'Playfair Display SC', Serif;*/
-
-.container {
-    padding-top: 30px;
-}
-
-/*BREADCRUMBS*/
-#breadcrumbBookclubs {
-    /*border: 2px solid cornflowerblue;*/
-    background: var(--bookclub);
-    padding: 1rem;
-    color: white;
-}
-
-/*Styling that wraps the accordion*/
-.pro-card {
-    background: var(--bookclub);
-    opacity: 0.9;
-    padding: 2rem;
-    margin-bottom: 30px;
-}
-
-.pro-card div {
-    background: black;
-    color: white;
-}
-
-.pro-card a {
-    text-decoration: none;
-    color: white;
-}
-
-
-/*THE ACCORDION STYLING*/
-details > summary {
-    list-style: none;
-    background: black;
-    color: white;
-    opacity: 1;
-}
-
-details > summary i {
-    transition: transform 0.4s ease;
-}
-
-details[open] > summary i {
-    transform: rotate(-180deg);
-}
-
-details > summary::-webkit-details-marker {
-    display: none;
-    cursor: pointer;
-}
-
-.acc-bar {
-    border: 3px solid white;
-    color: white;
-    background: white;
-    margin: 0px;
-}
-
-
-/*INVITES*/
-.invite-unit {
-    color: white;
-    background: var(--bookclub);
-    border: 2px solid white;
-}
-
-.invite-unit div {
-    /*background: black;*/
-    color: white;
-}
-
-.invite-unit > div {
-    max-width: 300px;
-}
-
-.hidden-content {
-    background: black;
-}
-
-
-.breadcrumb-item a {
-    text-decoration: none;
-}
-
-.breadcrumb {
-    margin-bottom: 0;
-}
-
-.bkcard {
-    background-color: var(--card-yellow);
     color: black;
 }
+
+h1{
+    text-align: center;
+}
+
+h1, h2, h3{
+    font-family: serif;
+}
+
+p h4, h5, h5{
+    font-family: sans-serif;
+}
+
+.card{
+    text-align: center;
+}
+
+.card-img-top{
+    justify-content: center;
+}
+
+img{
+    max-height: 634px;
+}
+
+/*<img src="img/Veteran.jpeg" alt="" class="img-fluid rounded-circle d-none d-md-block about-img">*/
+

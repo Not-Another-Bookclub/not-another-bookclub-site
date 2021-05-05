@@ -30,10 +30,6 @@
                 <div class="col-12 col-lg-6 py-1 my-2">
                     <div class="pro-card">
                         <div class="form-meeting">
-                            <div th:if="${isOwner}" class="">
-                                you own this. Wanna edit it?
-                                <a class="btn btn-warning" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit</a>
-                            </div>
                             <h2 class="">
                                 <span th:text="${bookclub.name}"></span> Meeting.
                             </h2>
@@ -54,6 +50,9 @@
                                     This meeting is being held at: <span th:text="${meeting.getAddress()}"></span>,
                                     <span th:text="${meeting.getCity()}"></span>, <span th:text="${meeting.zipPlusFour}"></span>
                                 </p>
+                            </div>
+                            <div th:if="${isOwner}" class="mb-1 text-center">
+                                <a class="butn btn-warning" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit Meeting</a>
                             </div>
                         </div>
 

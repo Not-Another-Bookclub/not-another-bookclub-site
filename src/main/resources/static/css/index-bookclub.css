@@ -9,6 +9,9 @@ a:hover {
     color: lemonchiffon;
 }
 
+
+
 .card {
     flex-direction: row; !important;
+    background-color: #563e2b;
 }

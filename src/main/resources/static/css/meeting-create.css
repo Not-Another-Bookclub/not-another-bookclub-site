@@ -35,8 +35,8 @@ body {
 :root {
     --profile: #30536C;
     --bookclub: darkblue;
-    --meeting: #23B023;
-    --meeting-light: #D2F873;
+    /*--meeting: #23B023;*/
+    /*--meeting-light: #bea6a6;*/
 }
 
 /*body {*/

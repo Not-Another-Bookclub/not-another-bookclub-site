@@ -1,34 +1,13 @@
-/*:root {*/
-/*    --white: #FEFFFE;*/
-/*    --lavendar: #E9EBF8;*/
-/*    --cadetblue: #B4B8C5;*/
-/*    --quicksilver: #A5A299;*/
-/*    --taupe: #8D818C;*/
-/*}*/
 
 :root {
-    /*--left: hsla(240, 100%, 0%, 0.65);*/
-    /*--right: hsla(195, 53%, 79%, 0.65);*/
-    /*--right: hsla(240, 100%, 40%, 0.65);*/
     --profile: #30536C;
     --bookclub: darkblue;
-    --nav-accent: hsla(180, 100%, 25%, 0.9);
-    --post: #D77A04;
-    --meeting: #23B023;
-    --meeting-light: #D2F873;
     --card-yellow: #f0c88f;
+    --nav-accent: hsl(178, 70%, 73%);
+    --post: #ae5454;
+    --meeting: #987775;
+    --meeting-light: #eeeeee;
 }
-
-/*a {*/
-/*    color: var(--taupe);*/
-/*}*/
-/*a:hover {*/
-/*    color: var(--cadetblue);*/
-/*}*/
-
-/*a:visited {*/
-/*    color: var(--quicksilver)*/
-/*}*/
 
 
 #footer{
@@ -108,6 +87,10 @@ h1, h2, h3{
 .navbar-toggler:hover  {
     border: 2px solid hsla(180, 100%, 25%, 0.9);
     color: hsla(180, 100%, 25%, 0.9);
+}
+
+.nav-item i {
+    color: var(--nav-accent);
 }
 
 #log-drop {

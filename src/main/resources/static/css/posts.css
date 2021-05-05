@@ -73,6 +73,11 @@ body {
     margin-bottom: 30px;
 }
 
+#post-content div span a {
+    text-decoration: none;
+    color: white;
+}
+
 .form-post {
     padding: 30px;
     border-radius: 5px;

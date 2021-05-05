@@ -53,15 +53,15 @@
                             flex-lg-wrap">
                         <div th:each="invite : ${invites}" class="invite-unit d-flex flex-row m-3 p-3 row">
                             <div class="card p-2 m-1 col-12 col-sm-7">
-                                <a th:text="${invite.name}" th:href="@{'/bookclubs/' + ${invite.id}}" class="butn boo-link-2"></a>
+                                <a th:text="${invite.name}" th:href="@{'/bookclubs/' + ${invite.id}}" class="butn boo-link"></a>
                                 <p>Wants you to join their Club</p>
                             </div>
                             <div class="card p-2 m-1 col-12 col-sm-4 d-flex flex-column align-items-center justify-content-evenly" >
                                 <form th:action="@{'/bookclubs/invite/accept/' + ${invite.id} + '/' + ${user.id}}" th:method="post">
-                                    <input type="submit" class="util-butn util-butn-accept" value="Accept">
+                                    <input type="submit" class="butn btn-success" value="Accept">
                                 </form>
                                 <form th:action="@{'/bookclubs/invite/decline/' + ${invite.id} + '/' + ${user.id}}" th:method="post">
-                                    <input type="submit" class="util-butn util-butn-decline" value="Decline">
+                                    <input type="submit" class="butn btn-danger" value="Decline">
                                 </form>
                             </div>
                         </div>
