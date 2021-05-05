@@ -52,5 +52,9 @@ p h4, h5, h5{
     justify-content: center;
 }
 
+img{
+    max-height: 634px;
+}
+
 /*<img src="img/Veteran.jpeg" alt="" class="img-fluid rounded-circle d-none d-md-block about-img">*/
 
