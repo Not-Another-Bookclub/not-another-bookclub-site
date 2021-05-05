@@ -13,16 +13,7 @@
 <body>
 
 <!--        IF USER IS LOGGED IN THEN THIS NAVBAR WILL BE VISIBLE-->
-<div th:if="${user != null}">
     <nav th:replace="partials.html :: navbar"></nav>
-
-</div>
-
-
-<div th:if="${user == null}">
-    <nav th:replace="partials.html :: visitor-navbar"></nav>
-
-</div>
 
 
 <div id="main">
@@ -182,10 +173,10 @@
             <div th:if="${isOwner}">
                 <h4>Add more books to your personal reading list here: </h4>
                 <div th:replace="partials.html::booksearch"></div>
-            </div>
+
             <div class="pro-card my-3"><div class="hidden-content">
   <a th:href="@{'/pro/' + ${id} + '/bookshelf'}"><h2 class="text-white text-center">Connect with other users through<br><i class="fas fa-book"></i>  your bookshelf.  <i class="fas fa-book"></i></h2></a>
-            </div></div>
+            </div></div></div>
             <br>
 
 
@@ -197,9 +188,13 @@
         </div>
     </div>
 </div>
-<div th:replace="partials.html::usermodal"></div>
+
+<div th:replace="partials.html::usermodal"></div></div></div>
+
 <footer th:replace="partials.html::footer"></footer>
+
 <script th:replace="partials.html::bookdisplay(${books})"></script>
+
 <div th:if="${isOwner}"> <script th:replace="partials.html::booksearchscript(user,1)"></script></div>
 </body>
 </html>
