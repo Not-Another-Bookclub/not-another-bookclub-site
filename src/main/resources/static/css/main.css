@@ -16,6 +16,7 @@
     --post: #D77A04;
     --meeting: #23B023;
     --meeting-light: #D2F873;
+    --card-yellow: #f0c88f;
 }
 
 /*a {*/
@@ -264,6 +265,10 @@ footer div p a:hover {
     color: #B00005;
     background: black;
     transition: .5s ease;
+}
+
+.book-card {
+    background: var(--card-yellow);
 }
 
 /*.util-butn-decline:hover {*/
