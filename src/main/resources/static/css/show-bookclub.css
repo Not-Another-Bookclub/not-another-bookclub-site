@@ -92,6 +92,11 @@ body {
     color: white;
 }
 
+.pro-card a {
+    text-decoration: none;
+    color: white;
+}
+
 
 /*THE ACCORDION STYLING*/
 details > summary {
