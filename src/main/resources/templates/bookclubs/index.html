@@ -35,11 +35,13 @@
 <!--                <div class="text-start">-->
                     <div class="card-text">
                             <p th:text="${bookclub.description}"></p>
-                            <div th:if="${bookclub.accepting_members}"><p>Currently accepting new members.</p></div>
-                            <div>
+<!--                            <div th:if="${bookclub.accepting_members}">-->
+                                <p th:if="${bookclub.accepting_members}" >Currently accepting new members.</p>
+<!--                            </div>-->
+<!--                            <div>-->
             <!--                    <p>There are currently <span th:text="${bookclub.users.size()}"></span> members.</p>-->
                                 <p>They have a reading list of <span th:text="${numberbooks.get(__${istat.index}__)}"></span> books.</p>
-                            </div>
+<!--                            </div>-->
                     </div>
 
 <!--This is the card footer area which contains the book completion date and meeting & scheduled meeting time-->
