@@ -39,31 +39,71 @@
     </div>
 
     <div class="narrow-body pro-card">
-        <div class="row d-flex flex-column flex-md-row p-3">
-            <div class="col-6">
+
+        <div class="
+            row
+            d-flex
+            flex-column
+            align-items-center
+            text-center
+            text-md-start
+            flex-md-row
+            p-3"
+             th:if="${isOwner}">
+            <div class="col-12 col-md-6">
                 <h1 th:text="${bookclub.name}"></h1>
                 <p th:text="${bookclub.description}"></p>
-                <p>This bookclub is lead by -</p>
-                <a th:href="@{/pro/__${bookclub.owner.id}__}" class="butn pro-link mb-2" th:text="${bookclub.owner.username}">View Profile</a>
+                <p>
+                    This bookclub is lead by - <a th:href="@{/pro/__${bookclub.owner.id}__}" class="" th:text="${bookclub.owner.username}">View Profile</a>
+                </p>
             </div>
-            <div  th:if="${isOwner}" class="col-6 p-3">
+            <div   class="col-12 col-md-6 p-3">
 <!--                <div class="col-6 p-3">-->
-                    <h2>You own this Bookclub</h2>
+                <hr class="acc-bar d-block d-md-none m-2">
+                    <h2 class="text-center ">You own this Bookclub</h2>
 
-                    <div class="d-flex">
-                        <div th:if="${books.size() > 0}">
+
+
+                    <div class="
+                        d-flex
+                        flex-column
+                        align-items-center
+
+                        ">
+                        <div th:if="${books.size() > 0}" class="my-3">
                             <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" class="butn meeting-link">Make a meeting?</a>
                         </div>
-                        <div th:if="${books.size() < 1}">
+                        <div th:if="${books.size() < 1}" class="">
                             <p>Add Books to this club's reading list to make meetings.</p>
                         </div>
-                        <div class="mx-3">
-                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="butn boo-link">Edit Club</a>
+
+                        <div class="my-3">
+                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="butn boo-link">Edit Bookclub</a>
                         </div>
                     </div>
 
             </div>
 
+        </div>
+
+<!--        IF NOT OWNER-->
+        <div class="
+            row
+            d-flex
+            flex-column
+            align-items-center
+            text-center
+            text-md-start
+            flex-md-row
+            p-3"
+             th:if="${!isOwner}">
+            <div class="col-12 text-center text-md-start">
+                <h1 th:text="${bookclub.name}" class="text-center"></h1>
+                <p th:text="${bookclub.description}"></p>
+                <p>
+                    This bookclub is lead by - <a th:href="@{/pro/__${bookclub.owner.id}__}" class="" th:text="${bookclub.owner.username}">View Profile</a>
+                </p>
+            </div>
         </div>
 <!--        HERE-->
 
@@ -108,11 +148,11 @@
             <div  class="hidden-content
                     d-flex
                     align-items-center
-                    align-items-md-start
+                    align-items-lg-start
                     flex-column
-                    flex-md-row
+                    flex-lg-row
                     flex-nowrap
-                    flex-md-wrap
+                    flex-lg-wrap
                     ">
                 <div th:each="user : ${pendingUsers}" class="invite-unit d-flex flex-row m-3 p-3 row">
                     <div class="card p-2 m-1 col-12 col-sm-7 text-center">
@@ -121,10 +161,10 @@
                     </div>
                     <div class="card p-2 m-1 col-12 col-sm-4 text-center d-flex flex-column align-items-center justify-content-evenly">
                         <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="util-butn util-butn-accept" value="Accept ">
+                            <input type="submit" class="butn btn-success" value="Accept ">
                         </form>
                         <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="util-butn util-butn-decline" value="Decline">
+                            <input type="submit" class="butn btn-danger" value="Decline">
                         </form>
                     </div>
                 </div>

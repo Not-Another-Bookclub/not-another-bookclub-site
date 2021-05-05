@@ -2,10 +2,12 @@
 :root {
     --profile: #30536C;
     --bookclub: darkblue;
-    --nav-accent: hsla(180, 98%, 34%, 0.9);
-    --post: #D77A04;
-    --meeting: #23B023;
-    --meeting-light: #D2F873;
+    --nav-accent: hsl(178, 70%, 73%);
+
+    --post: #ae5454;
+
+    --meeting: #987775;
+    --meeting-light: #eeeeee;
 }
 
 
