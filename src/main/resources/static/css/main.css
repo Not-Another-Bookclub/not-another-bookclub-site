@@ -7,15 +7,9 @@
     --post: #ae5454;
     --meeting: #987775;
     --meeting-light: #eeeeee;
+    --footer-back: hsla(0, 0%, 35%, 0.8);
 }
 
-
-#footer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-}
 
 #nab-carousel {
     height: 150px;
@@ -118,8 +112,16 @@ h1, h2, h3{
 /*FOOTER*/
 footer {
     border-top: 2px solid hsla(180, 100%, 25%, 0.9);
-    padding: 2rem;
-    /*min-height: ;*/
+    padding: 3rem;
+    margin-top: 4rem;
+    position: absolute;
+    background: var(--footer-back);
+    width: 100%;
+    text-align: center;
+}
+
+footer p {
+    color: white;
 }
 
 footer div p a {
@@ -140,8 +142,6 @@ footer div p a:hover {
 .butn {
     border: none;
     padding: 10px;
-    /*width: 175px;*/
-    /*border-radius: 6px;*/
     transition: .3s ease;
     text-decoration: none;
 }

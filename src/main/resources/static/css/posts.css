@@ -37,6 +37,7 @@ body {
 
 #post-content {
     color: white;
+    min-height: 60vh;
 }
 
 
@@ -106,6 +107,7 @@ body {
     background: var(--post);
     padding: 1rem;
     color: black;
+    margin-top: 2rem;
 }
 
 #breadcrumbPosts ul {
@@ -114,6 +116,10 @@ body {
 
 .breadcrumb-item a {
     text-decoration: none;
-    color: black;
+    color: white;
 
+}
+
+.breadcrumb-item {
+    color: white;
 }
