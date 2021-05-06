@@ -16,6 +16,20 @@ body {
     color: black;
 }
 
+.narrow-body {
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 1200px){
+    .narrow-body {
+        max-width: 70%;
+    }
+
+    #meeting-form {
+        max-width: 80%;
+    }
+}
+
 .pro-card {
     background: var(--profile);
     opacity: 0.9;
@@ -148,6 +162,26 @@ footer div p a:hover {
     color: white;
 
 }
+
+
+.input {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--post);
+    padding: 10px;
+    color: white;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.input:focus {
+    background: black !important;
+}
+
+.search-under {
+    border-bottom: 2px solid var(--bookclub) !important;
+}
+
 
 /*CUSTOM BUTTONS*/
 .butn {
