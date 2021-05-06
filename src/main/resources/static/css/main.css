@@ -292,4 +292,13 @@ a {
     color: var(--ebony)
 }
 
+.bc-link{
+    text-decoration: none;
+}
+.bc-link:hover{
+
+    color: #CB997E;
+
+}
+
 
