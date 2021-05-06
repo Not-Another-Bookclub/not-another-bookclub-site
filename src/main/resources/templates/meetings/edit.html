@@ -5,19 +5,18 @@
     <meta charset="UTF-8">
     <title>You shouldn't see this title!</title>
 </head>
+<!--    CSS-->
 <link rel="stylesheet" href="/css/meeting-create.css">
 <link rel="stylesheet" href="/css/utils.css">
-<script src="/js/magical_library_background_progressive.js"></script>
-<body>
-<div th:replace="partials.html::navbar">You shouldn't see this.</div>
+<!--    END CSS-->
 
-<!--<div class="breadcrumbEditMeeting">-->
-<!--    <nav aria-label="breadcrumb">-->
-<!--        <ol class="breadcrumb">-->
-<!--            <li class="breadcrumb-item active" aria-current="page">Edit</li>-->
-<!--        </ol>-->
-<!--    </nav>-->
-<!--</div>-->
+<body>
+
+<!--    NAVBAR-->
+<div th:replace="partials.html::navbar">You shouldn't see this.</div>
+<!--    END NAVBAR-->
+
+
 
 
 <div class="container">
@@ -54,8 +53,7 @@
                     </h2>
                     <form th:action="@{'/bookclubs/'+ ${bookclub.id} +'/meeting/' + ${meeting.id} + '/edit'}" th:object="${meeting}" th:method="post"  class="form-field">
 
-                        <!--                            <div class="mb-3">-->
-                        <!--                                <label for="location" class="form-label">Location:</label>-->
+
                         <select class="input" id="location" placeholder="Location" name="location" aria-label="Default select example">
                             <option value="BAR">Bar</option>
                             <option value="RESTAURANT">Restaurant</option>
@@ -64,37 +62,23 @@
                             <option value="LIBRARY">Library</option>
                             <option value="OTHER">Other</option>
                         </select>
-                        <!--                            </div>-->
 
-                        <!--                            <div class="mb-3">-->
-                        <!--                                <label for="address" class="form-label">Street Address:</label>-->
                         <input type="text" th:field="*{address}" class="input" placeholder="Address">
-                        <!--                            </div>-->
 
-                        <!--                            <div class="mb-3">-->
-                        <!--                                <label for="city" class="form-label">City:</label>-->
                         <input type="text" th:field="*{city}" class="input" placeholder="City">
-                        <!--                            </div>-->
+
 
                         <div class="mt-3 row">
                             <div class="col col-md-6">
-                                <!--                                    <label for="day" class="form-label">Date:</label>-->
                                 <input type="date" name="day" id="day" class="input">
                             </div>
 
                             <div class="col col-md-6">
-                                <!--                                    <label for="time" class="form-label">Time:</label>-->
                                 <input type="time" name="time" id="time" class="input">
                             </div>
                         </div>
-
-                        <!--                            <div class="mb-3">-->
-                        <!--                                <label for="zipPlusFour" class="form-label">Zip Code:</label>-->
                         <input type="text" th:field="*{zipPlusFour}" class="input" placeholder="Zip Code">
-                        <!--                            </div>-->
 
-                        <!--                            <div class="mb-3">-->
-                        <!--                                <label for="book" class="form-label">What book will be discussed?</label>-->
                         <select class="input" name="book" id="book">
                             <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
                         </select>
@@ -108,96 +92,18 @@
     </div>
 </div>
 
-<!--    START HERE-->
-<!--    <div class="row">-->
-<!--        <div class="d-none d-md-block col-md-4 col-lg-6 py-1 my-2">-->
-<!--            <img class="img-fluid" src="/img/dinnerwithfriends.jpg">-->
-<!--        </div>-->
-<!--        <div class="col-12 col-md-8 col-lg-6 py-1 my-2">-->
-<!--            <div th:unless="${isOwner}">-->
-<!--                <h1>Sorry, you can only create meetings for bookclubs for which you are an owner.</h1>-->
-
-<!--                <p>-->
-<!--                    Check <a th:href="@{'/pro/' + ${loggedin.id}}">your profile page</a> for more information-->
-<!--                </p>-->
-<!--            </div>-->
-
-<!--            <div th:if="${isOwner}" class="narrow-body">-->
-
-<!--                <h2>-->
-<!--                    Showing the create meeting form for bookclub <span th:text="${bookclub.name}"></span>-->
-<!--                </h2>-->
-<!--                <div class="card">-->
-<!--                    <div class="card-header">-->
-<!--                        <h3>Fill out the details</h3>-->
-<!--                    </div>-->
-<!--                    <form th:action="@{'/bookclubs/'+ ${bookclub.id} +'/meeting/' + ${meeting.id} + '/edit'}" th:object="${meeting}" th:method="post"  class="card-body">-->
-
-<!--                    <div class="mb-3">-->
-<!--                        <label for="location" class="form-label">Location:</label>-->
-<!--                        <select class="form-control" name="location" id="location" th:field="*{location}" aria-label="Default select example">-->
-<!--                    <option value="BAR">Bar</option>-->
-<!--                    <option value="RESTAURANT">Restaurant</option>-->
-<!--                    <option value="HOUSE">House</option>-->
-<!--                    <option value="PUBLIC">Public</option>-->
-<!--                    <option value="LIBRARY">Library</option>-->
-<!--                    <option value="OTHER">Other</option>-->
-<!--                </select>-->
-<!--            </div>-->
-
-<!--            <div class="mb-3">-->
-<!--                <label for="address" class="form-label">Street Address:</label>-->
-<!--                <input type="text" name="address" id="address" th:field="*{address}" class="form-control">-->
-<!--            </div>-->
-
-<!--            <div class="mb-3">-->
-<!--                <label for="city" class="form-label">City:</label>-->
-<!--                <input type="text" name="city" id="city" th:field="*{city}" class="form-control">-->
-<!--            </div>-->
-
-<!--            <div class="mb-3 row">-->
-<!--                <div class="form-group col col-md-6">-->
-<!--                    <label for="day" class="form-label">Date:</label>-->
-<!--                    <input type="date" name="day" id="day" class="form-control">-->
-<!--                </div>-->
-<!--                <div class="form-group col col-md-6">-->
-<!--                    <label for="time" class="form-label">Time:</label>-->
-<!--                    <input type="time" name="time" id="time" class="form-control">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label for="day" class="form-label">Date:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="date" name="day" id="day" required class="form-control">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label for="time" class="form-label">Time:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="time" name="time" id="time" required class="form-control">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-
-<!--            <div class="mb-3">-->
-<!--                <label for="zipPlusFour" class="form-label">Zip Code:</label>-->
-<!--                <input type="text" th:field="*{zipPlusFour}" class="form-control">-->
-<!--            </div>-->
-
-<!--            <div class="mb-3">-->
-<!--                <label for="book" class="form-label">What book will be discussed?</label>-->
-<!--                <select class="form-control" name="book" id="book" required >-->
-<!--                    <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>-->
-<!--                </select>-->
-<!--            </div>-->
-
-<!--            <input  type="submit">-->
-<!--        </form>-->
-<!--    </div>-->
-<!--    </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 </div>
 
+<!--    FOOTER-->
+
     <footer th:replace="partials.html::footer"></footer>
+
+<!--    END FOOTER-->
+
+<!--    JS-->
     <script th:replace="partials.html::findreplace"></script>
+
+<!--    END JS-->
 </body>
 </html>
