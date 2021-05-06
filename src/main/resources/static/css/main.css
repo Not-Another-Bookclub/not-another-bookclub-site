@@ -181,6 +181,10 @@ footer div p a:hover {
     background: black !important;
 }
 
+.search-under {
+    border-bottom: 2px solid var(--bookclub) !important;
+}
+
 
 /*CUSTOM BUTTONS*/
 .butn {

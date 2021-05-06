@@ -23,17 +23,15 @@
 <div class="container">
     <div class="pro-card narrow-body">
         <div class="row d-flex flex-column flex-md-row p-3">
-            <div class="col-12">
+            <div class="">
                 <h1>To edit your BookClub's information, make modifications to the form below....</h1>
 
                 <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/edit'}" th:method="post" th:object="${bookclub}">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name of Your Bookclub</label>
-                        <input class="form-control" th:field="*{name}" type="text" maxlength="255" required>
+                        <input class="input" th:field="*{name}" type="text" maxlength="255" required>
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Describe your Bookclub</label>
-                        <textarea class="form-control" rows="3" maxlength="255" th:field="*{description}">Who are your ideal members? What types of books do you want to read? Where and how often would you like to meet?</textarea>
+                        <textarea class="input" rows="3" maxlength="255" th:field="*{description}">Who are your ideal members? What types of books do you want to read? Where and how often would you like to meet?</textarea>
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
@@ -50,13 +48,12 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="username" class="form-label">And lastly who's going to be in charge....oh that's you! (you can pick someone else later, but why would you want to?</label>
                         <input disabled class="form-control" th:value="*{owner.username}" id="username" type="text">
                     </div>
 
 
 
-                    <button class="btn btn-secondary text-center">EDIT BookClub Information</button>
+                    <button class="butn meeting-link text-center">EDIT BookClub Information</button>
                 </form>
             </div>
         </div>
