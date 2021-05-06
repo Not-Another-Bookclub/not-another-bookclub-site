@@ -2,7 +2,7 @@ h4, h5, h6{
     font-family: sans-serif;
     /*color: #23B023;*/
      /*color: white;*/
-     color: dodgerblue;
+     color: white;
 
 
 }
@@ -11,8 +11,12 @@ h1, h2, h3{
     font-family: "serif";
     /*color: #23B023;*/
     /*color: white;*/
-    color: dodgerblue;
+    color: white;
 
+}
+
+.input {
+    color: white;
 }
 
 
@@ -32,7 +36,7 @@ h1, h2, h3{
     /*color: lawngreen;*/
     /*color: white;*/
     /*color: #23B023;*/
-    color: dodgerblue;
+    color: white;
 }
 
 
@@ -53,14 +57,14 @@ h1, h2, h3{
 
 /*Styling that wraps the accordion*/
 .pro-card {
-    background: var(--bookclub);
+    background: var(--profile);
     opacity: 0.9;
     padding: 2rem;
     margin-bottom: 30px;
 }
 
 .pro-card div {
-    background: black;
+    background: var(--bookclub);
     color: white;
 }
 
