@@ -161,7 +161,7 @@ details > summary::-webkit-details-marker {
     color: black;
 }
 
-.fa-2x {
+.fa-window-close {
     color: var(--bookclub);
     background-color: black;
 }

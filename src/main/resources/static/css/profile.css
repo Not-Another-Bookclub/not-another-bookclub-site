@@ -170,7 +170,7 @@ h1, h2, h3{
     color: white;
 }
 
-.fa-2x {
+.fa-window-close {
     color: var(--profile);
     background-color: black;
 }
