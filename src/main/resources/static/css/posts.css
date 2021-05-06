@@ -83,7 +83,7 @@ body {
     padding: 30px;
     border-radius: 5px;
     background: black;
-    color: var(--post);
+    color: white;
 
 }
 
@@ -92,7 +92,7 @@ body {
     border: 0;
     border-bottom: 2px solid var(--post);
     padding: 10px;
-    color: var(--post);
+    color: white;
     width: 100%;
     margin: 1rem 0;
 }
