@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="/css/main.css">
 </head>
-<!--<link rel="stylesheet" href="" th:fragment="">-->
+
 <body>
 
 
@@ -189,41 +189,7 @@
 
 </div>
 
-
-
-
-<!--                                DATETIMEPICKER MODAL END-->
-
-
-
-<!--NOT LOGGED IN-->
-<!--<nav th:fragment="navbar">-->
-<!--    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #B4B8C5">-->
-<!--        <div class="container">-->
-<!--            <a class="navbar-brand" href="/"><img src="/img/logo.png" height="75px"></a>-->
-<!--            <a href="/home">Home</a>-->
-<!--            <a href="/register">Register</a>-->
-<!--            <a href="/login">Login</a>-->
-<!--        </div>-->
-
-<!--    </nav>-->
-<!--</nav>-->
-
-
-<!--LOGGED IN-->
-<!--<nav th:fragment="navbar">-->
-<!--    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #B4B8C5">-->
-<!--        <div class="container">-->
-<!--            <a class="navbar-brand" href="/"><img src="/img/logo.png" height="75px"></a>-->
-<!--            <a href="/home">Home</a>-->
-<!--            <a href="/profile">Profile</a>-->
-<!--        </div>-->
-
-<!--    </nav>-->
-<!--</nav>-->
-
-
-                        // BOOKSEARCH GOOGLE BOOK API BEGIN
+    // BOOKSEARCH GOOGLE BOOK API BEGIN
 
 
 <div th:fragment="booksearch">
@@ -588,32 +554,6 @@ for(let i = 0; i < idsearch.length; i++) {
     }
 
 setTimeout(function() {
-        //This was the original version set to run on a timeout, instead of set to run on the success.
-        // if (typeof idsearch == "string")
-        // {$('body :not(script)').contents().filter(function () {
-        //     return this.nodeType === 3;
-        // }).replaceWith(function () {
-        //     return this.nodeValue.replace(idsearch, findreplace[idsearch])})
-        //
-        // }
-        // else {
-        // for (let i = 0; i < idsearch.length; i++) {
-        //     $('body :not(script)').contents().filter(function () {
-        //         return this.nodeType === 3;
-        //     }).replaceWith(function () {
-        //         return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
-        //     })
-        // }
-
-            // $("* :contains(idsearch[i])").each(function() {
-            //     var replaced = $(this).html().replace(/idsearch[i]/g, findreplace[idsearch[i]])
-            //     $(this).html(replaced);
-            // })
-        // }
-        // document.getElementsByClassName('book-selector').click(function (e){
-        //     e.preventDefault()
-        //     document.getElementById('book').value = this.id;
-        // })
         $('.book-selector').click(function() {
             // console.log(this);
             modalPopulate(this.dataset.googleID, this.dataset.startdate, this.dataset.finishdate, this.dataset.startdatehtml, this.dataset.finishdatehtml)
@@ -650,31 +590,6 @@ setTimeout(function() {
         findandreplacepopulate(idsearch[i])
     }
 
-    // setTimeout(function() {
-    //     if (typeof idsearch == "string") {
-    //         $('body :not(script)').contents().filter(function () {
-    //             return this.nodeType === 3;
-    //         }).replaceWith(function () {
-    //             return this.nodeValue.replace(idsearch, findreplace[idsearch])
-    //         })
-    //
-    //     } else {
-    //         for (let i = 0; i < idsearch.length; i++) {
-    //             $('body :not(script)').contents().filter(function () {
-    //                 return this.nodeType === 3;
-    //             }).replaceWith(function () {
-    //                 return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
-    //             })
-    //         }
-    //
-    //     }
-    //
-    // }
-    //     , 500)
-
-
-
-
 </script>
 
 <!--                                    FOOTER PARTIAL START-->
@@ -685,27 +600,9 @@ setTimeout(function() {
             <a href="#" class="pro-link-2">Back to top</a>
         </p>
         <p class="my-2">Everything here is &copy; 2021 by Daniel Cortes, Walter Smith, Ron Rajski, and Edward C. "Ted" McCormick, all rights reserved.</p>
-<!--        <p>But everything here is available for inspection or to modify and make your own - check out <a href="https://github.com/edwardmccormick"><i class="fab fa-github-square"></i> my Github</a> for more.</p>-->
-
-<!--        <p>All servicemarks, trademarks, and logos are used without permission of the trademark or rights holders. No infringement on any claim of their rights intended.</p>-->
-
-<!--        <div class="d-flex flex-row justify-content-around flex-wrap">-->
-<!--            <img src="/img/Bootstrap_logo.svg" height="50px">-->
-<!--            <img src="/img/spring-icon.svg" height="50px">-->
-<!--            <img src="/img/logo-java-text-color.svg" height="50px">-->
-<!--            <img src="/img/IntelliJ_IDEA_Icon.svg" height="50px">-->
-
-<!--            <img src="/img/Tomcat-logo.svg" height="50px">-->
-<!--            <img src="/img/thymeleaf.png" height="50px">-->
-<!--            <img src="/img/mysql-horizontal.svg" height="50px">-->
-<!--        </div></div>-->
-
-<!--                                FOOTER PARTIAL END-->
 
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
