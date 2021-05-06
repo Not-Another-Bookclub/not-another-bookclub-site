@@ -7,11 +7,15 @@
     <meta charset="UTF-8">
     <title>Detailed view of this post</title>
 </head>
-<link rel="stylesheet" href="/css/posts.css">
-<link rel="stylesheet" href="/css/utils.css">
-<script src="/js/magical_library_background_progressive.js"></script>
+<!--        CCS-->
+    <link rel="stylesheet" href="/css/posts.css">
+    <link rel="stylesheet" href="/css/utils.css">
+<!--        CSS-->
 <body>
+
+<!--        NAVBAR-->
 <div th:replace="partials.html::navbar"></div>
+<!--        END NAVBAR-->
 
 
 
@@ -77,16 +81,6 @@
         </div>
     </div>
 
-
-<!--    <div id="results1" class="narrow-body"></div>-->
-
-<!--    <div class="p-2 narrow-body">-->
-
-<!--    </div>-->
-<!--    <br><p>Posted: <span th:text="${post.created_on_string}"></span>. Last updated: <span th:text="${post.modified_on_string}"></span> </div>-->
-
-
-
     <div th:each="comment : ${post.getComments()}" th:class="narrow-body">
         <div class="">
             <div class="p-3">
@@ -112,7 +106,7 @@
     </div>
 
 
-    <div th:if="${loggedin != null}"  class="narrow-body post-body p-3">
+    <div th:if="${loggedin != null}"  class="narrow-body post-body p-1">
         <div class="p-3">
         <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
             <div class="input-group" id="over">
@@ -128,7 +122,7 @@
     </div>
 </div>
 
-<!--<div th:replace="partials.html::bookclubmodal"></div>-->
+
 
     <footer th:replace="partials.html::footer"></footer>
 <!--<script th:replace="partials.html::bookdisplay(${post.book.googleID})"></script>-->

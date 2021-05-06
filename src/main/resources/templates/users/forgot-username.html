@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="partials.html::head('Login Here')" >
     <meta charset="UTF-8" />
     <title>Forgot-Username</title>
 </head>
 <head>
+<!--    CSS-->
     <link rel="stylesheet" href="/static/css/utils.css">
     <link rel="stylesheet" href="/css/font.css">
+<!--    CSS END-->
 </head>
 <body id="login-background">
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
@@ -20,30 +22,23 @@
 <div class="d-flex justify-content-center">
     <div class="col-sm-8 col-md-6 p-3">
         <form th:action="@{/forgot-username}" method="POST" th:object="${user}">
-<!--            <label class="form-label mt-3" for="username">Username</label>-->
-<!--            <input class="form-control mb-3" th:field="*{username}" />-->
+
 
             <label class="form-label mt-3 text-white" for="email" style="border-bottom: 2px solid hsla(180, 100%, 25%, 0.9)">Email</label>
             <input class="form-control mb-3" type="text" name="email" id="email" placeholder="Email" />
-
-<!--            <input class="form-control mb-3" th:field="*{email}" />-->
-
-<!--            <label class="form-label mt-3" for="password">Password</label>-->
-<!--            <input class="form-control mb-3" type="password" th:field="*{password}" />-->
-
-
 
             <button class="btn text-white" type="submit" style="border: 2px solid hsla(180, 100%, 25%, 0.9)">Submit!</button>
         </form>
 
         <div></div>
 
-<!--        <h3 th:text="${email}"></h3>-->
+
 
     </div>
 
 </div>
-</div>
+    <!--    FOOTER-->
 <footer th:replace="partials.html::footer"></footer>
+    <!--    FOOTER-->
 </body>
 </html>
