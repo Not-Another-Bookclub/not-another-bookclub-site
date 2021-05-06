@@ -8,57 +8,62 @@
 <head>
 <!--    CSS-->
     <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/profile">
+    <link rel="stylesheet" href="/css/users.css">
     <link rel="stylesheet" href="/static/css/utils.css">
 <!--    CSS END-->
 
 </head>
 <body id="login-background">
-<div th:replace="partials.html::navbar">You shouldn't see this.</div>
-<div class="container text-center">
-<div th:if="${user.username == null}" class="text-white"><h1>Create an account</h1>
-</div>
-<div th:if="${alert != null}"><h1 class="text-white">Create an account</h1>
-<!--<h4 th:utext="${alert}"></h4>-->
-</div>
+    <div th:replace="partials.html::navbar">You shouldn't see this.</div>
+<!--    <div class="text-center">-->
+<!--        <div th:if="${user.username == null}" class="text-white">-->
+<!--            <h1>Create an account</h1>-->
+<!--        </div>-->
+<!--        <div th:if="${alert != null}">-->
+<!--            <h1 class="text-white">Create an account</h1>-->
+<!--        </div>-->
 
-</div>
+<!--    </div>-->
 
     <hr style="width: 40%; margin: auto; height: 2px; color: #0DA500">
 
-    <div class="d-flex justify-content-center">
-    <div class="col-sm-8 col-md-6 p-3">
-<form th:action="@{/sign-up}" method="POST" th:object="${user}">
+    <div class="d-flex justify-content-center narrow-body">
+        <div class="col-sm-8 p-3 pro-card ">
+            <form th:action="@{/sign-up}" method="POST" th:object="${user}" class=" p-3">
+                <div class="text-center">
+                    <div th:if="${user.username == null}" class="">
+                        <h1>Create an account</h1>
+                    </div>
+                    <div th:if="${alert != null}">
+                        <h1 class="text-white">Create an account</h1>
+                    </div>
 
-    <label class="form-label mt-3 text-white" for="username">Username</label>
-    <input class="form-control mb-3" th:field="*{username}" />
+                </div>
+
+<!--                <label class="form-label mt-3 text-white" for="username">Username</label>-->
+                <input class="input mb-3" th:field="*{username}" placeholder="Username"/>
 
 
-    <label class="form-label mt-3 text-white" for="email">Email</label>
-    <input class="form-control mb-3" th:field="*{email}" />
+                <input class="input mb-3" th:field="*{email}" placeholder="Email"/>
 
-    <label class="form-label mt-3 text-white" for="password">Password</label>
-    <input class="form-control mb-3" type="password" th:field="*{password}" />
+                <input class="input mb-3" type="password" th:field="*{password}" placeholder="Password"/>
 
-    <label class="form-label mt-3 text-white" for="avatar_path">Avatar Link</label>
-    <input class="form-control mb-3"  th:field="*{avatar_path}" />
+                <input class="input  mb-3"  th:field="*{avatar_path}" placeholder="Avatar Link"/>
+
+                <div class="input-group" id="realname">
+                    <input type="text" aria-label="First name" class="input  mb-3" th:field="*{firstname}" placeholder="First Name">
+                    <input type="text" aria-label="Last name" class="input  mb-3" th:field="*{lastname}" placeholder="Last Name">
+                </div>
+
+                <input class="input  mb-3 d-none" th:field="*{zipcode}" placeholder="Zip Code"/>
 
 
-    <label class="form-label mt-3 text-white" for="realname">First and last name</label>
-    <div class="input-group" id="realname">
-        <input type="text" aria-label="First name" class="form-control mb-3" th:field="*{firstname}">
-        <input type="text" aria-label="Last name" class="form-control mb-3" th:field="*{lastname}">
-    </div>
+                <textarea class="input mb-3" rows="6" th:field="*{bio}" placeholder="Your Bio Here...."/>
 
-    <label class="form-label mt-3 d-none text-white" for="zipcode">Zip Code - <span class="text-muted">Used to help find bookclubs close to you.</span> </label>
-    <input class="form-control mb-3 d-none" th:field="*{zipcode}" />
-
-    <label class="form-label mt-3 text-white" for="bio">Biography</label>
-    <textarea class="form-control mb-3" rows="6" th:field="*{bio}" />
-
-    <button class="btn text-white" type="submit" style="border: #0DA500 3px solid">Sign me up!</button>
-</form>
-
-    </div>
+                <button class="butn meeting-link" type="submit" >Sign me up!</button>
+            </form>
+        </div>
     </div>
 </div>
 <!--    FOOTER-->
