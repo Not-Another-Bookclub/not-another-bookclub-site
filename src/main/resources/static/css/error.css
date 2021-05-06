@@ -1,21 +1,3 @@
-
-
-/*.container{*/
-/*    background: url('../img/darkbooks.jpg') no-repeat center;*/
-/*    !*background-color: rgba(0, 0, 0, 0.2);*!*/
-/*    -webkit-background-size: cover;*/
-/*    -moz-background-size: cover;*/
-/*    background-size: cover;*/
-/*    -o-background-size: cover;*/
-/*    !*color: #23B023;*!*/
-/*    color: white;*/
-/*    height: 1000px;*/
-/*    align-content: center;*/
-/*}*/
-
-body{
-    background-color: black;
-}
 p{
     font-family: sans-serif;
 }

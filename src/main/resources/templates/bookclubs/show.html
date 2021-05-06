@@ -8,10 +8,6 @@
 
 <!--    CSS-->
 
-    <link rel="stylesheet" href="/css/show-bookclub.css">
-
-    <link rel="stylesheet" href="/css/utils.css">
-
 <!--    CSS END-->
 
 
@@ -39,7 +35,7 @@
                     <a th:href="@{/bookclubs}">Bookclubs</a>
                 </li>
                 <li class="breadcrumb-item" aria-current="page">
-                    BookClub
+                    Bookclub
                 </li>
             </ul>
         </nav>
@@ -55,7 +51,8 @@
             text-center
             text-md-start
             flex-md-row
-            p-3"
+            p-3
+            hidden-content"
              th:if="${isOwner}">
             <div class="col-12 col-md-6">
                 <h1 th:text="${bookclub.name}"></h1>
@@ -85,7 +82,7 @@
                         </div>
 
                         <div class="my-3">
-                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="butn boo-link">Edit Bookclub</a>
+                            <a th:href="@{'/bookclubs/' + ${bookclub.id} + '/edit' }" class="butn meeting-link">Edit Bookclub</a>
                         </div>
                     </div>
             </div>
@@ -100,7 +97,8 @@
             text-center
             text-md-start
             flex-md-row
-            p-3"
+            p-3
+            hidden-content"
              th:if="${!isOwner}">
             <div class="col-12 text-center text-md-start">
                 <h1 th:text="${bookclub.name}" class="text-center"></h1>
@@ -118,7 +116,7 @@
         <div th:if="${isAccepting}">
         <div th:if="${isNotMember}" class="narrow-body pro-card my-3">
 <!--            <hr class="acc-bar">-->
-            <div>
+            <div class="hidden-content">
             <form  class="p-2" th:action="@{'/bookclubs/invite/' + ${bookclub.id}}" th:method="post" th:object="${bookclub}">
                 <label for="join-club">Want to join?</label>
                 <input type="submit" id="join-club" class="butn pro-link" value="Join">
@@ -143,7 +141,7 @@
 <!--    PEOPLE WHO WANT TO JOIN-->
     <div th:if="${isOwner}" class="narrow-body">
         <details th:if="${pendingUsers.size() > 0}" class="pro-card my-3">
-            <summary class="d-flex justify-content-between align-items-center p-3">
+            <summary class="d-flex justify-content-between align-items-center hidden-content p-3">
                 <h2 >Pending Requests</h2>
                 <i class="fas fa-angle-down fa-2x"></i>
             </summary>
@@ -182,7 +180,7 @@
     <div th:if="${!isPrivate}" class="narrow-body">
 <!--        MEMBERS-->
         <details th:if="${members.size() > 0}" class="pro-card my-3">
-            <summary class="d-flex justify-content-between align-items-center p-3">
+            <summary class="d-flex justify-content-between align-items-center hidden-content p-3">
                 <h2>Current Members</h2>
                 <i class="fas fa-angle-down fa-2x"></i>
             </summary>
@@ -208,7 +206,7 @@
 <!--        MEETINGS-->
         <div th:if="${isActiveUser}">
             <details th:if="${meetings.size() > 0}" class="pro-card my-3">
-                <summary class="d-flex justify-content-between align-items-center p-3">
+                <summary class="d-flex justify-content-between align-items-center hidden-content p-3">
                     <h2>Meetings</h2>
                     <i class="fas fa-angle-down fa-2x"></i>
                 </summary>
@@ -308,7 +306,7 @@
                 <div th:if="${isActiveUser}">
                     <!--        MEMBERS-->
                     <details th:if="${members.size() > 0}" class="pro-card my-3">
-                        <summary class="d-flex justify-content-between align-items-center p-3">
+                        <summary class="d-flex justify-content-between align-items-center hidden-content p-3">
                             <h2>Current Members</h2>
                             <i class="fas fa-angle-down fa-2x"></i>
                         </summary>
@@ -334,7 +332,7 @@
                     <!--        MEETINGS-->
                     <div >
                         <details th:if="${meetings.size() > 0}" class="pro-card my-3">
-                            <summary class="d-flex justify-content-between align-items-center p-3">
+                            <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
                                 <h2>Meetings</h2>
                                 <i class="fas fa-angle-down fa-2x"></i>
                             </summary>
@@ -368,7 +366,7 @@
                     <div th:if="${isActiveUser}">
                         <div th:if="${posts.size() > 0}" >
                             <details class="pro-card my-3">
-                                <summary class="d-flex justify-content-between align-items-center p-3">
+                                <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
                                     <h2>
                                         Posts for <span th:text="${bookclub.name}"></span>:
                                     </h2>
