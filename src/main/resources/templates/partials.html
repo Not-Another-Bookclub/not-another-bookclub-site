@@ -201,7 +201,7 @@
 
                 <div class="col-5 mb-2"> <label for="search Title">Title or Other Keywords</label> <input type="text" class="form-control" id="search title" placeholder="Title"></div>
                 <div class="col-auto mb-2"> <label for="search Author">Author (not required)</label><input type="text" class="form-control" id="search Author" placeholder="Author"></div>
-                <div class="col-auto mb-2 align-self-end"><button id = "button" type="button" class="butn boo-link">Search for books!</button></div>
+                <div class="col-auto mb-2 align-self-end"><button id = "button" type="button" class="butn meeting-link">Search for books!</button></div>
             </div>
         </div>
     </div>
@@ -218,7 +218,7 @@
 
                 <div id="modalImage"><img src="/img/logo-small.png"></div>
 
-                <div class="align-self-start"><i type="button" class="fas fa-window-close fa-2x boo-link align-self-start" data-bs-dismiss="modal" aria-label="Close"></i></div>
+                <div class="align-self-start"><i type="button" class="fas fa-window-close fa-2x meeting-link align-self-start" data-bs-dismiss="modal" aria-label="Close"></i></div>
             </div>
             <div class="modal-body" id="modalBody">
 
@@ -233,7 +233,7 @@
                 <input type="hidden" id="modalbookid" name="book" value="">
                 <div class="modal-footer d-flex flex-row-reverse justify-content-around">
 
-                    <div th:if="${isOwner}"><button type="submit" class="butn boo-link">Save changes</button></form></div>
+                    <div th:if="${isOwner}"><button type="submit" class="butn meeting-link">Save changes</button></form></div>
         <div th:if="${isOwner}"><form th:action="@{/pro/__${id}__/book/delete}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div>
             </div>
             </div>
@@ -250,7 +250,7 @@
 
                 <div id="modalImage"><img src="/img/logo-small.png"></div>
 
-                    <div class="align-self-start"><i type="button" class="fas fa-window-close fa-2x boo-link" data-bs-dismiss="modal" aria-label="Close"></i></div>
+                    <div class="align-self-start"><i type="button" class="fas fa-window-close fa-2x meeting-link" data-bs-dismiss="modal" aria-label="Close"></i></div>
             </div>
             <div class="modal-body hidden-content" id="modalBody">
 
@@ -264,7 +264,7 @@
                 <input type="hidden" id="modalbookid" name="book" value="">
                 <div class="d-flex flex-row-reverse justify-content-around modal-footer">
 <!--                    <button type="button" class="butn boo-link" data-bs-dismiss="modal">Close</button></div>-->
-                    <div th:if="${isOwner}" class=""> <button id="savechanges" type="submit" class="butn boo-link">Save changes</button></div></form>
+                    <div th:if="${isOwner}" class=""> <button id="savechanges" type="submit" class="butn meeting-link">Save changes</button></div></form>
             <div th:if="${isOwner}" class=""><form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/delete'}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button id="deletebook" type="submit" class="butn btn-danger">Delete book</button></form></div></div>
 
             </div>
@@ -297,7 +297,7 @@
                 html += "<h5 class='card-title'>" + data.items[i].volumeInfo.title + " - " + author + "</h5>"
 
                 html += "<div class='card-footer'><form action='/book/add' method='post'> <input hidden value=" + data.items[i].id +" name='book'><input hidden value='" + path + "' name='path'>"
-                html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <input hidden value="'+ bookclubid + '" name="bookclubid"><button class="butn boo-link mb-2">Add</button></form> <button href="" class="butn search-selector boo-link" data-google-i-d="'+ data.items[i].id +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div>'
+                html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <input hidden value="'+ bookclubid + '" name="bookclubid"><button class="butn meeting-link mb-2">Add</button></form> <button href="" class="butn search-selector meeting-link" data-google-i-d="'+ data.items[i].id +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div>'
 
 
                 results.innerHTML+=html;
@@ -456,7 +456,7 @@ var html = '<div class="col my-2"><div class="card text-center text-body book-ca
     html += "<h6> Finish: "+ finishDate +"</h6></div>"
     html += '<hr> <div class="d-flex flex-column align-items-center">'
     // html += '<div><a href="#" class="butn boo-link mb-2" id="'+ idSearch +'">Remove</a></div>'
-    html += '<div class="card-footer"><button href="" class="butn book-selector boo-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div></div>'
+    html += '<div class="card-footer"><button href="" class="butn book-selector meeting-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div></div>'
     // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
     results.innerHTML += html;
