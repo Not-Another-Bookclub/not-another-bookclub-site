@@ -8,11 +8,11 @@
 </head>
 <body>
 <!--    CSS-->
-<link rel="stylesheet" href="/css/show-bookclub.css">
-<link rel="stylesheet" href="css/index-bookclub.css">
+
 <!--    END CSS-->
 
 <!--    NAVBAR-->
+
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 <!--    END NAVBAR-->
 
@@ -26,7 +26,7 @@
 
 
         <div th:each="bookclub, istat : ${bookclubs}" class="col">
-            <div class=" card m-1 text-center  row text-body h-100">
+            <div class=" card m-1 text-center  row text-body bookclubindex h-100">
 
             <!--    <div th:each="book : ${books}"><div th:each="meeting : ${meetings}"-->
 
