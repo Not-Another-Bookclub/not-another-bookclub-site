@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<link rel="stylesheet" href="/css/show-bookclub.css">-->
-
-
 
 <html lang="en">
 <head th:include="partials.html::head('All Bookclubs :: Not Another Bookclub')">
@@ -10,16 +7,16 @@
     <title>Title</title>
 </head>
 <body>
+<!--    CSS-->
 <link rel="stylesheet" href="/css/show-bookclub.css">
 <link rel="stylesheet" href="css/index-bookclub.css">
-<script src="/js/magical_library_background_progressive.js"></script>
-<div th:replace="partials.html::navbar">You shouldn't see this.</div>
+<!--    END CSS-->
 
-<!--<nav aria-label="breadcrumb">-->
-<!--    <ol class="breadcrumb">-->
-<!--        <li class="breadcrumb-item active" aria-current="BookClubs"></li>-->
-<!--    </ol>-->
-<!--</nav>-->
+<!--    NAVBAR-->
+<div th:replace="partials.html::navbar">You shouldn't see this.</div>
+<!--    END NAVBAR-->
+
+
 
 <div class="container">
     <h1 class="py-2 my-2">Here's all the current bookclubs in Not Another Bookclub:</h1>
@@ -63,10 +60,6 @@
             </div>
             </div>
         </div>
-
-
-
-
     </div>
 
 
@@ -118,27 +111,7 @@
         findandreplacepopulate(idsearch[i])
     }
 
-    // setTimeout(function() {
-    //     if (typeof idsearch == "string") {
-    //         $('body :not(script)').contents().filter(function () {
-    //             return this.nodeType === 3;
-    //         }).replaceWith(function () {
-    //             return this.nodeValue.replace(idsearch, findreplace[idsearch])
-    //         })
-    //
-    //     } else {
-    //         for (let i = 0; i < idsearch.length; i++) {
-    //             $('body :not(script)').contents().filter(function () {
-    //                 return this.nodeType === 3;
-    //             }).replaceWith(function () {
-    //                 return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
-    //             })
-    //         }
-    //
-    //     }
-    //
-    // }
-    //     , 500)
+
 
 
 
