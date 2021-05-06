@@ -1,14 +1,28 @@
-
 :root {
-    --profile: #30536C;
-    --bookclub: darkblue;
+    --profile: #CB997E;
+    --bookclub: #DDBEA9;
     --card-yellow: #f0c88f;
-    --nav-accent: hsl(178, 70%, 73%);
-    --post: #ae5454;
-    --meeting: #987775;
-    --meeting-light: #eeeeee;
+    --nav-accent: #CB997E;
+    --post: #FFE8D6;
+    --meeting: #b7b7a4;
+    --meeting-light: #A5A58D;
+    --ebony: #6b705c;
     --footer-back: hsla(0, 0%, 35%, 0.8);
 }
+
+body {
+    background-image: url("/img/moroccan-flower.png");
+    background-repeat: repeat;
+    color: black;
+}
+
+.pro-card {
+    background: var(--profile);
+    opacity: 0.9;
+    padding: 2rem;
+    margin-bottom: 30px;
+}
+
 
 
 #nab-carousel {
@@ -45,20 +59,20 @@ h1, h2, h3{
 }
 
 #navbarSupportedContent a {
-    color: white;
+    color: var(--ebony);
     text-transform: uppercase;
     transition: 1s;
-    border-bottom: 2px solid hsla(0, 0%, 0%, 0.1);
+    /*border-bottom: 2px solid hsla(0, 0%, 0%, 0.1);*/
 }
 
 #navbarSupportedContent a:hover {
     /*color: hsla(180, 100%, 25%, 0.9);*/
-    border-bottom: 2px solid hsla(180, 100%, 25%, 0.9);
+    border-bottom: 2px solid var(--ebony);
 }
 
 #logoutmenu {
     text-decoration: none;
-    color: white;
+    color: var(--ebony);
     text-transform: uppercase;
     transition: 1s;
     border-bottom: 2px solid hsla(0, 0%, 0%, 0.1);
@@ -144,13 +158,14 @@ footer div p a:hover {
     padding: 10px;
     transition: .3s ease;
     text-decoration: none;
+    background-color: var(--meeting);
 }
 
 /*profile coloring button*/
-.pro-link {
-    background: var(--profile);
-    color: white;
-}
+/*.pro-link {*/
+/*    background: var(--profile);*/
+/*    color: white;*/
+/*}*/
 
 .boo-link {
     color: white;
@@ -197,12 +212,13 @@ footer div p a:hover {
 
 
 .hidden-content {
-    background: black;
+    background: var(--post);
+    color: black;
 }
 
 .meeting-link {
     color: white;
-    background: var(--meeting);
+    background: var(--ebony);
     transition: 0.5s;
     list-style: none;
     text-decoration: none;
@@ -254,13 +270,20 @@ footer div p a:hover {
     background: var(--card-yellow);
 }
 
+.avatar {
+    background-color: var(--post);
+    border-radius: 50px;
+}
+
 /*.util-butn-decline:hover {*/
 /*    background: linear-gradient(90deg, #B00005, #FA613F);*/
 /*    color: black;*/
 /*    border: none;*/
 /*}*/
 
-
+a {
+    color: var(--ebony);
+}
 
 
 

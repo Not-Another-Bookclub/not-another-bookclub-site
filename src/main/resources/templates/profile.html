@@ -5,8 +5,7 @@
     <head th:replace="partials.html :: head('Your Profile Page')">
         <title>Title</title>
     </head>
-    <link rel="stylesheet" href="/css/profile.css">
-    <link rel="stylesheet" href="/css/utils.css">
+
 
     <script src="/js/magical_library_background_progressive.js"></script>
 
@@ -19,15 +18,15 @@
 <div id="main">
     <div class="container">
         <div class="pro-card narrow-body">
-            <div th:if="${isOwner}" class="">
+            <div th:if="${isOwner}" class="hidden-content">
                 <h1 >Welcome <span th:text="${name}"></span></h1>
             </div>
-            <div th:if="${!isOwner}" class="">
+            <div th:if="${!isOwner}" class="hidden-content">
                 <h1>Welcome to <span th:text="${name}"></span>'s Profile</h1>
             </div>
 
-            <div style="border: 2px solid black" class="">
-            </div>
+<!--            <div style="border: 2px solid black" class="">-->
+<!--            </div>-->
 
 
         </div>
@@ -36,7 +35,7 @@
 <!--            INVITES-->
             <div th:if="${invites}">
                 <details th:if="${invites.size() > 0}" class="pro-card my-3">
-                    <summary class="d-flex justify-content-between align-items-center p-3">
+                    <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
                         <h2>You have Invites</h2>
                         <i class="fas fa-angle-down fa-2x"></i>
                     </summary>
@@ -71,7 +70,7 @@
 
             <div th:if="${canInvite}" class="my-1">
                 <div class="d-flex pro-card">
-                    <h2 class="mx-3">You can invite this person</h2>
+                    <h2 class="mx-3 hidden-content">You can invite this person</h2>
 
                     <!-- Button trigger modal -->
                     <button type="button" class="butn boo-link-2 " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -83,7 +82,7 @@
                 <!-- Modal -->
                 <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog pro-card">
-                        <div class="modal-content">
+                        <div class="modal-content hidden-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="staticBackdropLabel">Invite to which club?</h5>
 <!--                                <button type="button" class="" data-bs-dismiss="modal" aria-label="Close">-->
@@ -116,7 +115,7 @@
 
             <!--        BOOKCLUBS YOU OWN-->
             <details th:if="${ownedClubs.size() > 0}" id="acc-cont" class="pro-card my-3">
-                <summary class="d-flex justify-content-between align-items-center p-3">
+                <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
                     <h2>These are the Bookclubs you own</h2>
                     <i class="fas fa-angle-down fa-2x"></i>
 
@@ -146,7 +145,7 @@
 
 
             <details th:if="${memberClubs.size() > 0}" class="pro-card my-3">
-                <summary class="d-flex justify-content-between align-items-center p-3">
+                <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
                     <h2>These are the Bookclubs you are a member of.</h2>
                     <i class="fas fa-angle-down fa-2x"></i>
                 </summary>
@@ -181,7 +180,7 @@
             <br>
 
 
-            <h3 class="text-white">Here are the books currently on your reading list: </h3>
+            <h3 class="">Here are the books currently on your reading list: </h3>
             <div id="results1" class="row row-col-1 row-cols-sm-3 row-cols-md-4"></div>
             <br>
             <br>
