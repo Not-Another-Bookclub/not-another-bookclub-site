@@ -5,15 +5,22 @@
     <head th:replace="partials.html :: head('Your Profile Page')">
         <title>Title</title>
     </head>
+
+<!--    CSS    -->
+
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/utils.css">
 
-    <script src="/js/magical_library_background_progressive.js"></script>
+<!--    CSS END-->
+
+
 
 <body>
 
 <!--        IF USER IS LOGGED IN THEN THIS NAVBAR WILL BE VISIBLE-->
     <nav th:replace="partials.html :: navbar"></nav>
+
+<!--        NAVBAR END-->
 
 
 <div id="main">
@@ -73,11 +80,14 @@
                 <div class="d-flex pro-card">
                     <h2 class="mx-3">You can invite this person</h2>
 
-                    <!-- Button trigger modal -->
+
+                    <!-- BUTTON TRIGGER MODAL -->
                     <button type="button" class="butn boo-link-2 " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Invite
                     </button>
                 </div>
+
+<!--                    END BUTTON TRIGGER MODAL-->
 
 
                 <!-- Modal -->
@@ -105,14 +115,13 @@
                                     <input type="submit" class="butn pro-link">
                                 </form>
                             </div>
-<!--                            <div class="modal-footer">-->
-<!--                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--                                &lt;!&ndash;                        <button type="button" class="btn btn-primary">Understood</button>&ndash;&gt;-->
-<!--                            </div>-->
                         </div>
                     </div>
                 </div>
             </div>
+
+
+<!--            MODAL END-->
 
             <!--        BOOKCLUBS YOU OWN-->
             <details th:if="${ownedClubs.size() > 0}" id="acc-cont" class="pro-card my-3">
@@ -130,9 +139,7 @@
                     flex-md-row
                     flex-nowrap
                     flex-md-wrap">
-<!--                    flex-column -->
-<!--                    flex-sm-row -->
-<!--                    flex-wrap-->
+
 
                     <a th:each="bookclub : ${ownedClubs}" class="m-3 p-2 book-link" th:href="@{'/bookclubs/' + ${bookclub.id}}" style="text-decoration: none; width: 200px; height: 200px; border: 2px solid black">
                         <div>
@@ -190,9 +197,17 @@
     </div>
 </div>
 
+<!--     USER MODAL-->
+
 <div th:replace="partials.html::usermodal"></div></div></div>
 
+<!--    USER MODAL END-->
+
+<!--    FOOTER-->
+
 <footer th:replace="partials.html::footer"></footer>
+
+<!--        FOOTER END-->
 
 <script th:replace="partials.html::bookdisplay(${books})"></script>
 
