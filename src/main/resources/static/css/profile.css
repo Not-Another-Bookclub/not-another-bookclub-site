@@ -169,3 +169,12 @@ h1, h2, h3{
     background: black;
     color: white;
 }
+
+.fa-2x {
+    color: var(--profile);
+    background-color: black;
+}
+
+.fa-book {
+    color: var(--profile)
+}

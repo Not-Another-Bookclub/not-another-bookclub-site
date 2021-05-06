@@ -258,7 +258,7 @@
 
 
             </div>
-
+            <div id="modalbottom" class="user">
             <form th:action="@{/pro/__${id}__/book/edit}" method="Post">
                 <div class="d-flex justify-content-around"><div>Start reading</div><div>Finish reading</div></div>
                 <div class="d-flex justify-content-around"><label for="startDate" id="startDateText">Start on: </label> <label for="finishDate" id="finishDateText">Finish on: </label></div>
@@ -267,9 +267,10 @@
                 <input type="hidden" id="modalbookid" name="book" value="">
                 <div class="modal-footer d-flex flex-row-reverse justify-content-around">
 
-                    <div><button type="submit" class="butn boo-link">Save changes</button></form></div>
-        <div><form th:action="@{/pro/__${id}__/book/delete}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div>
-                </div>
+                    <div th:if="${isOwner}"><button type="submit" class="butn boo-link">Save changes</button></form></div>
+        <div th:if="${isOwner}"><form th:action="@{/pro/__${id}__/book/delete}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div>
+            </div>
+            </div>
 
         </div>
     </div>
@@ -289,7 +290,7 @@
 
 
             </div>
-
+            <div id="modalbottom" class="bookclub">
             <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/edit'}" method="Post">
                 <div class="d-flex justify-content-around"><div>Start reading</div><div>Finish reading</div></div>
                 <div class="d-flex justify-content-around"><label for="startDate" id="startDateText">Start reading: </label> <label for="finishDate" id="finishDateText">Finish reading: </label></div>
@@ -297,10 +298,10 @@
                 <input type="hidden" id="modalbookid" name="book" value="">
                 <div class="d-flex flex-row-reverse justify-content-around modal-footer">
 <!--                    <button type="button" class="butn boo-link" data-bs-dismiss="modal">Close</button></div>-->
-                    <div th:if="${isOwner}" class=""> <button type="submit" class="butn boo-link">Save changes</button></div></form>
-            <div th:if="${isOwner}" class=""><form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/delete'}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button type="submit" class="butn btn-danger">Delete book</button></form></div></div>
-<!--                </div>-->
-<!--            </form>-->
+                    <div th:if="${isOwner}" class=""> <button id="savechanges" type="submit" class="butn boo-link">Save changes</button></div></form>
+            <div th:if="${isOwner}" class=""><form th:action="@{'/bookclubs/' + ${bookclub.id} + '/book/delete'}" method="Post"><input type="hidden" id="modaldeletebookid" name="book" value=""><button id="deletebook" type="submit" class="butn btn-danger">Delete book</button></form></div></div>
+
+            </div>
         </div>
     </div>
 <!--</div>-->
@@ -330,14 +331,21 @@
                 html += "<h5 class='card-title'>" + data.items[i].volumeInfo.title + " - " + author + "</h5>"
 
                 html += "<div class='card-footer'><form action='/book/add' method='post'> <input hidden value=" + data.items[i].id +" name='book'><input hidden value='" + path + "' name='path'>"
-                html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <input hidden value="'+ bookclubid + '" name="bookclubid"><button class="butn boo-link mb-2">Add</button></form></div></div></div>'
+                html += '<input hidden value="' + csrf + '" name="' + csrfname + '"> <input hidden value="'+ bookclubid + '" name="bookclubid"><button class="butn boo-link mb-2">Add</button></form> <button href="" class="butn search-selector boo-link" data-google-i-d="'+ data.items[i].id +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div>'
 
 
                 results.innerHTML+=html;
 
 
             }
-
+        setTimeout(function() {
+                $('.search-selector').click(function() {
+                    console.log(this);
+                    console.log("Firing from the click listener on search-selector!")
+                    modalPopulateShow(this.dataset.googleID)
+                })
+            }
+            , 750)
     }
 
 
@@ -382,6 +390,51 @@
         if (event.keyCode === 13) {document.getElementById('button').click()}})
     document.getElementById('search title').addEventListener('keyup', function (event){
             if (event.keyCode === 13) {document.getElementById('button').click()}})
+
+
+
+    function modalPopulateShow(idSearch){
+        $.ajax({
+            url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+            dataType: 'json',
+            success: function (data) {
+                console.log("Firing from the Ajax call on modalPopulateShow!")
+                let thumbnail
+                let author
+
+                if (!data.volumeInfo.hasOwnProperty('imageLinks')) {
+                    thumbnail = "http://localhost:8080/img/logo-small.png"
+                } else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {
+                    thumbnail = "http://localhost:8080/img/logo-small.png"
+                } else {
+                    thumbnail = data.volumeInfo.imageLinks.thumbnail
+                }
+                console.log(thumbnail);
+                if (!data.volumeInfo.hasOwnProperty('authors')) {
+                    author = "Unknown or not listed"
+                } else {
+                    author = data.volumeInfo.authors[0]
+                }
+
+
+
+                document.getElementById('myModalLabel').innerText = data.volumeInfo.title + " - " + author;
+                document.getElementById('modalImage').innerHTML = '<img src="' + thumbnail + '">'
+                document.getElementById('modalBody').innerHTML = data.volumeInfo.description;
+                document.getElementById('startDateText').innerText = "Not added yet.";
+                document.getElementById('finishDateText').innerText = "Not added yet";
+                document.getElementById('startDate').disabled = true;
+                document.getElementById('finishDate').disabled = true;
+                document.getElementById('modalbookid').value = idSearch;
+                document.getElementById('modaldeletebookid').value = idSearch;
+                if(!$('#modalbottom').hasClass('d-none')) {$('#modalbottom').addClass('d-none')}
+            },
+
+            type: 'Get'
+
+        });
+    }
+
 
 
 
@@ -519,10 +572,14 @@ for(let i = 0; i < idsearch.length; i++) {
                 body.innerHTML = data.volumeInfo.description;
                 startdatetext.innerText = "Currently set to: " + start;
                 finishdatetext.innerText = "Currently set to: " + finish;
+                startdatecalendar.disabled = false;
                 startdatecalendar.value = startHTML;
+                if($('#modalbottom').hasClass('bookclub')) {finishdatecalendar.disabled = true;}
+                else if ($('#modalbottom').hasClass('user')) {finishdatecalendar.disable = false;}
                 finishdatecalendar.value = finishHTML;
                 modalbookid.value = idSearch;
                 modaldeletebookid.value = idSearch;
+                if($('#modalbottom').hasClass('d-none')) {$('#modalbottom').removeClass('d-none')}
             },
 
             type: 'Get'
