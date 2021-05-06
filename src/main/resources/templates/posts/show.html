@@ -26,7 +26,7 @@
         </nav>
     </div>
 
-    <div class="narrow-body post-body p-3">
+    <div class="narrow-body post-body p-3 my-3">
         <div class="p-3">
         <h1 class="text-center"> <span th:text="${post.title}"></span></h1>
         <hr class="acc-bar">
@@ -111,18 +111,18 @@
         </div>
     </div>
 
-    <div class="narrow-body post-body p-3">
-        <div th:if="${loggedin != null}"  class="p-3">
-<!--            <form th:action="@{'/posts/'+ ${post.id}+'/comment'}" th:method="post" th:object="${comment}"> I'm not sure why the form binding didn't work - but this solution did and was much easier-->
-            <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
+
+    <div th:if="${loggedin != null}"  class="narrow-body post-body p-3">
+        <div class="p-3">
+        <form th:action="@{'/bookclubs/'+ ${post.bookclub.id} +'/posts/'+ ${post.id}+'/comment'}" method="post" >
             <div class="input-group" id="over">
                 <input class="input" name="comment" id="comment" type="text" placeholder="Add A Comment">
-<!--                    <input class="form-control" th:field="*{comment}" type="text">-->
-                    <button class="butn pro-link" type="submit">Submit</button></div>
+                    <button class="butn pro-link" type="submit">Submit</button>
+            </div>
 
-
-            </form>
+        </form>
         </div>
+    </div>
 
 
     </div>
