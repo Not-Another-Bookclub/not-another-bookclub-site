@@ -83,7 +83,7 @@ body {
 .pro-card {
     background: var(--bookclub);
     opacity: 0.9;
-    padding: 2rem;
+    padding: 1rem;
     margin-bottom: 30px;
 }
 
