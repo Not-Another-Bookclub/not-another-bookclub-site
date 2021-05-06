@@ -61,6 +61,19 @@ body {
 }
 
 .avatar {
-    background-color: var(--post);
+    background-color: white;
     border-radius: 75px;
+}
+
+.fa-2x {
+    color: var(--bookclub);
+    background-color: black;
+}
+
+.card {
+    background-color: var(--card-yellow);
+}
+
+ul {
+    list-style-type: none;
 }

@@ -49,12 +49,17 @@ p h4, h5, h5{
 }
 
 .card-img-top{
-    justify-content: center;
+    /*justify-content: center;*/
+    /*border-radius: 50%;*/
 }
 
-img{
-    max-height: 634px;
-}
+/*.headshot{*/
+/*    max-height: 549px;*/
+/*    height: auto;*/
+/*    width: auto;*/
+/*    !*max-width: 100%;*!*/
+/*    !*height: auto;*!*/
+/*}*/
 
 /*<img src="img/Veteran.jpeg" alt="" class="img-fluid rounded-circle d-none d-md-block about-img">*/
 

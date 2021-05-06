@@ -160,3 +160,8 @@ details > summary::-webkit-details-marker {
     background-color: var(--card-yellow);
     color: black;
 }
+
+.fa-2x {
+    color: var(--bookclub);
+    background-color: black;
+}
