@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/css/utils.css">
-<link rel="stylesheet" href="/css/posts.css">
+
+<!--        CSS-->
+    <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/posts.css">
+<!--       END CSS-->
 
 <html lang="en">
 <head th:include="partials.html::head('Create a new post')" >
@@ -9,7 +12,10 @@
     <title>Create a new Blog Post!</title>
 </head>
 <body>
+
+<!--    NAVBAR-->
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
+<!--    END NAVBAR-->
 
     <div class="container">
         <div id="meeting-form">
@@ -25,9 +31,8 @@
                     <div class="form-post">
                     <h1>Use the form below to create a new post!</h1>
                     <form th:action="@{/bookclubs/__${bookclub.id}__/posts/create}" th:method="post" th:object="${post}">
-<!--                        <div class="mb-3">-->
-<!--                            <label for="title" class="form-label">Title of the post</label>-->
-                            <input class="input" th:field="*{title}" type="text" placeholder="Title of the post">
+
+                        <input class="input" th:field="*{title}" type="text" placeholder="Title of the post">
 <!--                        </div>-->
 
 <!--                        <div class="mb-3">-->
@@ -55,9 +60,14 @@
         </div>
     </div>
 
-
+<!--    FOOTER-->
 <footer th:replace="partials.html::footer"></footer>
+<!--    END FOOTER-->
+
+<!--    JS-->
 
 <script th:replace="partials.html::findreplace"></script>
+
+<!--    END JS-->
 </body>
 </html>

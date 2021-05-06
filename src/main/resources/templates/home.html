@@ -19,6 +19,7 @@
 
 <div class="container">
 
+
     <h1 class="narrow-body">Welcome to Not Another BookClub</h1>
 <br>
 
@@ -47,47 +48,17 @@
 
         </div>
     </div>
+</div>
 
 
 
 
 
 
-
-
-    </div>
-
-
-
-
-<!--                               code formerly known as JUMBOTRON END-->
-
-
-
-
-
-
-
-<!--<div class="container">-->
-
-
-
-
-<!--    <div class="text-center">-->
-<!--&lt;!&ndash;        <img src="/img/magicalLibrary.jpg" height="500px"/>&ndash;&gt;-->
-
-
-<!--        <div th:if="${user.username != null}"> -->
-<!--            Maybe you'd like to view <a th:href="@{/pro/__${user.id}__}">your profile?</a>-->
-<!--        </div>-->
-
-
-<!--&lt;!&ndash;<div th:replace="partials.html :: booksearch"></div>&ndash;&gt;-->
-<!--    </div>-->
-<!--</div>-->
-
-
+<!--    FOOTER-->
 <footer th:replace="partials.html::footer"></footer>
+
+<!--    FOOTER END-->
 <script th:replace="partials.html :: booksearchscript('user', 1)"></script>
 </body>
 </html>

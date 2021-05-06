@@ -5,12 +5,17 @@
     <head th:replace="partials.html :: head('Meeting Detailed Information :: Not Another Bookclub')">
     <title>Title</title>
 </head>
+<!--    CSS-->
     <link rel="stylesheet" href="/css/meeting-create.css">
     <link rel="stylesheet" href="/css/utils.css">
-    <script src="/js/magical_library_background_progressive.js"></script>
+<!--    END CSS-->
+
 
 <body>
+
+<!--    NAVBAR-->
     <nav th:replace="partials.html :: navbar"></nav>
+<!--    NAVBAR-->
 
     <div class="container">
         <div id="meeting-form">
@@ -63,20 +68,18 @@
         </div>
 
 
-
-
-<!--        <div class="narrow-body">-->
-<!--            <p>The meeting is scheduled for <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span></p>-->
-<!--            <p>This meeting is being held at: a <span th:text="${meeting.location.toString().toLowerCase()}"></span></p>-->
-<!--            <p th:if="${ismemberactive}">This meeting is being held at: <span th:text="${meeting.getAddress()}"></span>,-->
-<!--            <span th:text="${meeting.getCity()}"></span>, <span th:text="${meeting.zipPlusFour}"></span></p>-->
-<!--        </div>-->
-
-
     </div>
-    <div th:replace="partials.html::bookclubmodal"></div>
 
+<!--    BOOKCLUB MODAL-->
+    <div th:replace="partials.html::bookclubmodal"></div>
+<!--    END BOOKCLUB MODAL-->
+
+
+<!--    FOOTER-->
     <footer th:replace="partials.html::footer"></footer>
+<!--    END FOOTER-->
+
+<!--    JS-->
 
 <script th:inline="javascript">
         let idsearch = [[${books}]]
@@ -94,10 +97,9 @@
 
 
         function googleIdSearch(idSearch,startDate,finishDate,startDateHTML,finishDateHTML){
-// console.log("This function runs");
-// let idSearch = document.getElementById('search google_id').value
+
             let results = document.getElementById('results1')
-// console.log("search google_id")
+
 
             $.ajax({
                     url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
@@ -120,13 +122,9 @@
                         if (finishDate === null) {finishDate = "Not finished yet."}
 
                         var html = '<div class="card col-md-3 col-sm-4 text-center">'
-                        // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
+
                         html += "<img src='" + thumbnail + "' alt='Book Cover'>"
-                        // html += "<div class='card-body'>"
-                        // html += "<h5 class='card-title'>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5><br>"
-                        // html += "<h6> Started reading: "+ startDate +"</h6>"
-                        // html += "<h6> Finished reading: "+ finishDate +"</h6></div>"
-                        // // html += '<div><a href="#" class="btn btn-primary" id="'+ idSearch +'">Remove from reading list</a>'
+
                         html += '<button href="" class="butn book-selector boo-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div>'
                         // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
 
@@ -146,29 +144,13 @@
             )
         }
         if (typeof idsearch == "string") {googleIdSearch(idsearch,startdateshtml,finishdateshtml);}
-            // console.log("This book is a string!")
-            // $(".card-bottom1").hide()
-            // console.log("Firing after the hide from string!")
-            // $('.card-top1').click(function() {
-            // console.log("I'm firing from the click listener!")
-            // let thisCardBottom = $(this).next()
-            // // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
-            // $(".card-bottom1").not(thisCardBottom).slideUp(500)
-        // $(this).next().slideToggle(1000)})}
+
         else {
             for(let i = 0; i < idsearch.length; i++) {
                 googleIdSearch(idsearch[i],startdates[i],finishdates[i],startdateshtml[i], finishdateshtml[i]);
             }
         }
-        // console.log("These books are a list!")
-        // $(".card-bottom1").hide()
-        //     console.log("Firing after the hide from list!")
-        // $('.card-top1').click(function() {
-        //     console.log("I'm firing from the click listener!")
-        //     let thisCardBottom = $(this).next()
-        //     // $(this).parent().toggleClass("col-lg-4").toggleClass("col-lg-2");
-        //     $(".card-bottom1").not(thisCardBottom).slideUp(500)
-        //     $(this).next().next().slideToggle(1000)}
+
 
         const title = document.getElementById('myModalLabel');
         const modalImage = document.getElementById('modalImage');
@@ -219,32 +201,7 @@
         }
 
         setTimeout(function() {
-                //This was the original version set to run on a timeout, instead of set to run on the success.
-                // if (typeof idsearch == "string")
-                // {$('body :not(script)').contents().filter(function () {
-                //     return this.nodeType === 3;
-                // }).replaceWith(function () {
-                //     return this.nodeValue.replace(idsearch, findreplace[idsearch])})
-                //
-                // }
-                // else {
-                // for (let i = 0; i < idsearch.length; i++) {
-                //     $('body :not(script)').contents().filter(function () {
-                //         return this.nodeType === 3;
-                //     }).replaceWith(function () {
-                //         return this.nodeValue.replace(idsearch[i], findreplace[idsearch[i]]);
-                //     })
-                // }
 
-                // $("* :contains(idsearch[i])").each(function() {
-                //     var replaced = $(this).html().replace(/idsearch[i]/g, findreplace[idsearch[i]])
-                //     $(this).html(replaced);
-                // })
-                // }
-                // document.getElementsByClassName('book-selector').click(function (e){
-                //     e.preventDefault()
-                //     document.getElementById('book').value = this.id;
-                // })
                 $('.book-selector').click(function() {
                     // console.log(this);
                     modalPopulate(this.dataset.googleID, this.dataset.startdate, this.dataset.finishdate, this.dataset.startdatehtml, this.dataset.finishdatehtml)

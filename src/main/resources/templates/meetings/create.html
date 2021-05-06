@@ -10,12 +10,19 @@
 
 
 </head>
-<link rel="stylesheet" href="/css/font.css">
-<link rel="stylesheet" href="/css/utils.css">
-<link rel="stylesheet" href="/css/meeting-create.css">
-<script src="/js/magical_library_background_progressive.js"></script>
+<!--    CSS-->
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/meeting-create.css">
+
+<!--    END CSS-->
+
 <body>
+
+<!--    NAVBAR-->
     <div th:replace="partials.html::navbar">You shouldn't see this.</div>
+<!--    END NAVBAR-->
+
     <div class="container">
         <div id="meeting-form">
         <div class="row">
@@ -47,43 +54,31 @@
                                     <option value="LIBRARY">Library</option>
                                     <option value="OTHER">Other</option>
                                 </select>
-<!--                            </div>-->
 
-
-<!--                            <div class="mb-3">-->
-<!--                                <label for="address" class="form-label">Street Address:</label>-->
                                 <input type="text" th:field="*{address}" class="input" placeholder="Address">
-<!--                            </div>-->
-
-
-<!--                            <div class="mb-3">-->
-<!--                                <label for="city" class="form-label">City:</label>-->
                                 <input type="text" th:field="*{city}" class="input" placeholder="City">
-<!--                            </div>-->
+
 
                             <div class="mt-3 row">
                                 <div class="col col-md-6">
-<!--                                    <label for="day" class="form-label">Date:</label>-->
+
                                     <input type="date" name="day" id="day" class="input">
                                 </div>
 
                                 <div class="col col-md-6">
-<!--                                    <label for="time" class="form-label">Time:</label>-->
                                     <input type="time" name="time" id="time" class="input">
                                 </div>
                             </div>
 
-<!--                            <div class="mb-3">-->
-<!--                                <label for="zipPlusFour" class="form-label">Zip Code:</label>-->
-                                <input type="text" th:field="*{zipPlusFour}" class="input" placeholder="Zip Code">
-<!--                            </div>-->
 
-<!--                            <div class="mb-3">-->
-<!--                                <label for="book" class="form-label">What book will be discussed?</label>-->
+                                <input type="text" th:field="*{zipPlusFour}" class="input" placeholder="Zip Code">
+
+
+
                                 <select class="input" name="book" id="book">
                                     <option th:each="book : ${books}" th:value="${book}" th:text="${book}"></option>
                                 </select>
-<!--                            </div>-->
+
 
                             <input  type="Create Meeting" class="butn meeting-link" value="Create Meeting">
                         </form>
@@ -94,7 +89,13 @@
         </div>
     </div>
 
+<!--    FOOTER-->
     <footer th:replace="partials.html::footer"></footer>
+
+<!--    END FOOTER-->
+
+<!--    JS-->
     <script th:replace="partials.html::findreplace"></script>
+<!--    JS END-->
 </body>
 </html>
