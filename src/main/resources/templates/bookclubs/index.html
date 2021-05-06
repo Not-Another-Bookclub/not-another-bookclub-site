@@ -10,9 +10,6 @@
     <title>Title</title>
 </head>
 <body>
-<link rel="stylesheet" href="/css/show-bookclub.css">
-<link rel="stylesheet" href="css/index-bookclub.css">
-<script src="/js/magical_library_background_progressive.js"></script>
 <div th:replace="partials.html::navbar">You shouldn't see this.</div>
 
 <!--<nav aria-label="breadcrumb">-->
@@ -29,7 +26,7 @@
 
 
         <div th:each="bookclub, istat : ${bookclubs}" class="col">
-            <div class=" card m-1 text-center  row text-body h-100">
+            <div class=" card m-1 text-center  row text-body bookclubindex h-100">
 
             <!--    <div th:each="book : ${books}"><div th:each="meeting : ${meetings}"-->
 
