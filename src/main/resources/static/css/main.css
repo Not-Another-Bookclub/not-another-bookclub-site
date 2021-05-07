@@ -136,6 +136,14 @@ h1, h2, h3{
     color: black;
 }
 
+#shelf {
+    text-decoration: none;
+}
+
+#shelf:hover {
+    color: black;
+}
+
 /*#log-drop a[href="/sign-up"] {*/
 /*    border-bottom: 2px solid var(--profile);*/
 /*}*/
