@@ -60,13 +60,12 @@ h1, h2, h3{
 
 /*TRANSPARENT NAVBAR STUFF*/
 .nav-specs {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     /*color: white;*/
 }
 
 .nav-specs img {
-    width: ;
     /*background-color: #B4B8C5;*/
     border-radius: 5px;
 }
