@@ -82,12 +82,12 @@
                         <div class="dropdown-menu dropdown-menu-lg-right p-3" aria-labelledby="loginDropdown" id="log-drop">
                             <form th:action="@{/login}" method="post" class="px-4 py-3" >
                                 <div class="">
-                                    <input class="input mb-3" id="username1" name="username" type="text" placeholder="Username"/>
+                                    <input class="input search-under mb-3" id="username1" name="username" type="text" placeholder="Username"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="input mb-3" id="password1" name="password" placeholder="Password">
+                                    <input type="password" class="input mb-3 search-under" id="password1" name="password" placeholder="Password">
                                 </div>
-                                <button type="submit" class="butn pro-link">Sign in</button>
+                                <button type="submit" class="butn meeting-link">Sign in</button>
                             </form>
 <!--                            <div class="dropdown-divider"></div>-->
                             <a class="dropdown-item" href="/sign-up">New around here? Sign up</a>
@@ -205,11 +205,11 @@
 <!-- Modal that updates User-Books i.e. if it is on a User related page, it must use this modal -->
 <div th:fragment="usermodal" class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg pro-card">
-        <div class="modal-content hidden-content text-white">
+        <div class="modal-content hidden-content">
             <div class="modal-header d-flex justify-content-between">
-                <div><h5 class="modal-title" id="myModalLabel">Modal title</h5></div>
+                <div><h5 class="modal-title px-2" id="myModalLabel">Modal title</h5></div>
 
-                <div id="modalImage"><img src="/img/logo-small.png"></div>
+                <div id="modalImage"><img class="px-2" src="/img/logo-small.png"></div>
 
                 <div class="align-self-start"><i type="button" class="fas fa-window-close fa-2x meeting-link align-self-start" data-bs-dismiss="modal" aria-label="Close"></i></div>
             </div>
@@ -442,12 +442,12 @@ success: function (data) {
 
 var html = '<div class="col my-2"><div class="card text-center text-body book-card h-100 p-3">'
     // html += "<img src='https://books.google.com/books/content?id=" + data.items[i].id + "&printsec=frontcover&img' alt='Book Cover'>"
-    html += "<img src='" + thumbnail + "' class='img-fluid' alt='Book Cover'><hr>"
+    html += "<img src='" + thumbnail + "' class='img-fluid' alt='Book Cover'>"
     html += "<div class='card-body'>"
     html += "<h5 class=''>" + data.volumeInfo.title + " - " + data.volumeInfo.authors[0] + "</h5><br>"
     html += "<h6> Start "+ startDate +"</h6>"
     html += "<h6> Finish: "+ finishDate +"</h6></div>"
-    html += '<hr> <div class="d-flex flex-column align-items-center">'
+    html += '<div class="d-flex flex-column align-items-center">'
     // html += '<div><a href="#" class="butn boo-link mb-2" id="'+ idSearch +'">Remove</a></div>'
     html += '<div class="card-footer"><button href="" class="butn book-selector meeting-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div></div></div>'
     // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"

@@ -3,7 +3,7 @@
     --bookclub: #DDBEA9;
     --card-yellow: #f0c88f;
     --nav-accent: #CB997E;
-    --post: #FFE8D6;
+    --post: #ffe8d6;
     --meeting: #b7b7a4;
     --meeting-light: #A5A58D;
     --ebony: #6b705c;
@@ -26,7 +26,7 @@ body {
     }
 
     #meeting-form {
-        max-width: 80%;
+        /*max-width: 80%;*/
     }
 }
 
@@ -91,7 +91,7 @@ h1, h2, h3{
 }
 
 #logoutmenu:hover {
-    color: white;
+    /*color: white;*/
     border-bottom: 2px solid var(--ebony);
 }
 
@@ -128,12 +128,13 @@ h1, h2, h3{
 }
 
 #log-drop a {
+
     background: var(--post);
+
 }
 
 #log-drop a:hover {
-    background: white;
-    color: black;
+    color: white;
 }
 
 /*#log-drop a[href="/sign-up"] {*/
@@ -334,3 +335,40 @@ a {
 }
 
 
+.card-footer {
+    background-color: unset; !important;
+    border-top: none; !important;
+}
+
+.narrow-body {
+    margin: 0 auto;
+}
+
+.fa-window-close {
+    color: var(--meeting);
+    background-color: unset;
+}
+
+@media screen and (min-width: 1200px){
+    .narrow-body {
+        max-width: 70%;
+    }
+}
+
+.bc-link{
+    text-decoration: none;
+}
+.bc-link:hover{
+
+    color: #CB997E;
+
+}
+
+.alert {
+
+    color: #6B705C;
+    background-color:#FFE8D6 ;
+    font-family: serif;
+    font-size: 150%;
+    text-align: center;
+}

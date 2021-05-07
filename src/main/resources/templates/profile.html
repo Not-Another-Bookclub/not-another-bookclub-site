@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="/css/profile.css">
 
 
-    <!--    CSS    -->
+
+<!--    CSS    -->
+
 
 <!--    CSS END-->
 
@@ -24,11 +26,12 @@
 
 <div id="main">
     <div class="container">
-        <div class="pro-card narrow-body">
-            <div th:if="${isOwner}" class="hidden-content p-1">
+        <div class="pro-card narrow-body p-2">
+            <div th:if="${isOwner}" class="hidden-content m-2">
                 <h1 >Welcome <span th:text="${name}"></span></h1>
             </div>
-            <div th:if="${!isOwner}" class="hidden-content p-1">
+            <div th:if="${!isOwner}" class="hidden-content m-2">
+
                 <h1>Welcome to <span th:text="${name}"></span>'s Profile</h1>
             </div>
 
@@ -41,7 +44,7 @@
 
 <!--            INVITES-->
             <div th:if="${invites}">
-                <details th:if="${invites.size() > 0}" class="pro-card my-3">
+                <details th:if="${invites.size() > 0}" class="pro-card p-3 my-3">
                     <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
                         <h2>You have Invites</h2>
                         <i class="fas fa-angle-down fa-2x"></i>
@@ -76,7 +79,7 @@
             </div>
 
             <div th:if="${canInvite}" class="my-1">
-                <div class="d-flex pro-card">
+                <div class="d-flex pro-card p-3">
                     <h2 class="mx-3 hidden-content">You can invite this person</h2>
 
 
@@ -123,9 +126,9 @@
 <!--            MODAL END-->
 
             <!--        BOOKCLUBS YOU OWN-->
-            <details th:if="${ownedClubs.size() > 0}" id="acc-cont" class="pro-card my-3">
+            <details th:if="${ownedClubs.size() > 0}" id="acc-cont" class="pro-card p-3 my-3">
                 <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
-                    <h2>These are the Bookclubs you own</h2>
+                    <h2>Bookclubs You Own</h2>
                     <i class="fas fa-angle-down fa-2x"></i>
 
                 </summary>
@@ -151,9 +154,9 @@
             </details>
 
 
-            <details th:if="${memberClubs.size() > 0}" class="pro-card my-3">
+            <details th:if="${memberClubs.size() > 0}" class="pro-card p-3 my-3">
                 <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
-                    <h2>These are the Bookclubs you are a member of.</h2>
+                    <h2>Your Bookclubs</h2>
                     <i class="fas fa-angle-down fa-2x"></i>
                 </summary>
 
@@ -181,13 +184,13 @@
             <div th:if="${isOwner}">
                 <div th:replace="partials.html::booksearch"></div>
 
-            <div class="pro-card my-3"><div class="hidden-content">
+            <div class="pro-card p-3 my-3"><div class="hidden-content">
   <h2 class="text-center m-3 p-3">Connect with other users through<br><i class="fas fa-book"></i>  <a th:href="@{'/pro/' + ${id} + '/bookshelf'}">your bookshelf.</a>  <i class="fas fa-book"></i></h2>
             </div></div></div>
             <br>
 
 
-            <h3 class="">Here are the books currently on your reading list: </h3>
+            <h3 class="">Here is your reading list: </h3>
             <div id="results1" class="row row-col-1 row-cols-sm-3 row-cols-md-4"></div>
             <br>
             <br>
