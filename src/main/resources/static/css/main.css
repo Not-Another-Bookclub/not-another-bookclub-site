@@ -292,4 +292,23 @@ a {
     color: var(--ebony)
 }
 
+.card-footer {
+    background-color: unset; !important;
+    border-top: none; !important;
+}
+
+.narrow-body {
+    margin: 0 auto;
+}
+
+.fa-window-close {
+    color: var(--meeting);
+    background-color: unset;
+}
+
+@media screen and (min-width: 1200px){
+    .narrow-body {
+        max-width: 70%;
+    }
+}
 
