@@ -1,6 +1,6 @@
 :root {
-    --profile: #30536c;
-    --bookclub: darkblue;
+    /*--profile: #30536c;*/
+    /*--bookclub: darkblue;*/
     /*--meeting: #23B023;*/
     /*--meeting-light: #bea6a6;*/
 }
@@ -36,7 +36,7 @@
 .form-meeting {
     padding: 30px;
     border-radius: 5px;
-    background: black;
+    background: var(--post);
     color: var(--meeting-light);
 }
 
