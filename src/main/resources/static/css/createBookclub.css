@@ -17,6 +17,7 @@
 
 .input {
     color: black;
+    border-bottom: 2px solid var(--meeting);
 }
 
 
@@ -98,8 +99,8 @@ details > summary::-webkit-details-marker {
 }
 
 .invite-unit div {
-    background: black;
-    color: white;
+    /*background: black;*/
+    color: black;
 }
 
 .invite-unit > div {
