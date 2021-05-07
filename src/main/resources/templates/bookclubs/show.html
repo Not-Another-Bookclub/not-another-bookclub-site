@@ -14,6 +14,7 @@
 <html lang="en">
 
 
+    <link rel="stylesheet" href="/css/createBookclub.css">
 <body>
 
 <!--    NAVBAR-->
@@ -163,10 +164,10 @@
                     </div>
                     <div class="card p-2 m-1 col-12 col-sm-4 text-center d-flex flex-column align-items-center justify-content-evenly">
                         <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="butn btn-success" value="Accept ">
+                            <input type="submit" class="butn meeting-link" value="Accept ">
                         </form>
                         <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="butn btn-danger" value="Decline">
+                            <input type="submit" class="butn meeting-link" value="Decline">
                         </form>
                     </div>
                 </div>

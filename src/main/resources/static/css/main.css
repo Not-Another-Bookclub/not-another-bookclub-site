@@ -3,7 +3,7 @@
     --bookclub: #DDBEA9;
     --card-yellow: #f0c88f;
     --nav-accent: #CB997E;
-    --post: #FFE8D6;
+    --post: #ffe8d6;
     --meeting: #b7b7a4;
     --meeting-light: #A5A58D;
     --ebony: #6b705c;
@@ -49,7 +49,7 @@ body {
     text-align: center;
 }
 
-p, h4, h5, h6{
+p, h4, h5, h6, input, .input{
     font-family: sans-serif;
 
 }
@@ -115,7 +115,12 @@ h1, h2, h3{
 
 #log-drop {
     background: var(--profile);
-    color: white;
+    color: black;
+}
+
+#log-drop input {
+    color: black;
+    border-bottom: 2px solid var(--meeting);
 }
 
 #log-drop form {
@@ -123,17 +128,18 @@ h1, h2, h3{
 }
 
 #log-drop a {
-    background: var(--meeting);
-    color: black;
+
+    background: var(--post);
+
 }
 
 #log-drop a:hover {
     color: white;
 }
 
-#log-drop a[href="/sign-up"] {
-    border-bottom: 2px solid var(--profile);
-}
+/*#log-drop a[href="/sign-up"] {*/
+/*    border-bottom: 2px solid var(--profile);*/
+/*}*/
 
 /*FOOTER*/
 footer {
@@ -181,6 +187,7 @@ footer div p a:hover {
 .search-under {
     border-bottom: 2px solid var(--bookclub) !important;
     color: black;
+    margin: 0;
 }
 
 
@@ -357,4 +364,11 @@ a {
 
 }
 
+.alert {
 
+    color: #6B705C;
+    background-color:#FFE8D6 ;
+    font-family: serif;
+    font-size: 150%;
+    text-align: center;
+}
