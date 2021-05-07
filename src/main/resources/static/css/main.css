@@ -60,7 +60,7 @@ h1, h2, h3{
 
 /*TRANSPARENT NAVBAR STUFF*/
 .nav-specs {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     /*color: white;*/
 }
@@ -379,4 +379,10 @@ a {
     font-family: serif;
     font-size: 150%;
     text-align: center;
+}
+
+/*NAVBAR BACKGROUND COLOR*/
+nav {
+    background-color:#b7b7a4;
+    /*background-color: #A5A58D ;*/
 }
