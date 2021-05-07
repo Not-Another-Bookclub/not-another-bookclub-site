@@ -6,8 +6,8 @@
     <title>Title</title>
 </head>
 <!--    CSS-->
-<!--    <link rel="stylesheet" href="/css/meeting-create.css">-->
-<!--    <link rel="stylesheet" href="/css/utils.css">-->
+    <link rel="stylesheet" href="/css/meeting-create.css">
+    <link rel="stylesheet" href="/css/utils.css">
 <!--    END CSS-->
 
 
@@ -28,11 +28,11 @@
                 </nav>
             </div>
 
-            <div class="row">
-                <div class="d-none d-lg-block col-lg-6 py-1 my-2">
-                    <img class="img-fluid" src="/img/dinnerwithfriends.jpg">
+            <div class="d-flex flex-direction-row justify-content-center justify-content-between-lg">
+                <div class="d-none d-lg-block flex-shrink-1 py-1 my-2 h-100">
+                    <img class="img-fluid" src="/img/dinnerwithfriends.jpg" id="friends">
                 </div>
-                <div class="col-12 col-lg-6 py-1 my-2">
+                <div class="py-1 my-2 flex-grow-1 h-auto">
                     <div class="pro-card">
                         <div class="form-meeting">
                             <h2 class="">
@@ -57,7 +57,7 @@
                                 </p>
                             </div>
                             <div th:if="${isOwner}" class="mb-1 text-center">
-                                <a class="butn meeting-link" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit Meeting</a>
+                                <a class="butn btn-warning" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit Meeting</a>
                             </div>
                         </div>
 
