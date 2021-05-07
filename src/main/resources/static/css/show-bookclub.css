@@ -88,6 +88,10 @@ details > summary::-webkit-details-marker {
     text-decoration: none;
 }
 
+.breadcrumb-item a:hover {
+    color: var(--meeting);
+}
+
 .breadcrumb {
     margin-bottom: 0;
 }
