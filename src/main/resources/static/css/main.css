@@ -3,7 +3,7 @@
     --bookclub: #DDBEA9;
     --card-yellow: #f0c88f;
     --nav-accent: #CB997E;
-    --post: #FFE8D6;
+    --post: #ffe8d6;
     --meeting: #b7b7a4;
     --meeting-light: #A5A58D;
     --ebony: #6b705c;
@@ -357,4 +357,9 @@ a {
 
 }
 
+.alert {
 
+    color: #6B705C;
+    background-color:#FFE8D6 ;
+
+}

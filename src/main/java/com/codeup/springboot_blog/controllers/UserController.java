@@ -50,13 +50,13 @@ public class UserController {
 
         if (user.getAvatar_path().isEmpty()) {user.setAvatar_path("/img/user-solid.svg");}
         if (userDao.findByUsername(user.getUsername()) != null) {
-            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+            model.addAttribute("alert", "<div class=\"alert \" role=\"alert\">\n" +
                     "  That username is already in use, please select another.</div>");
             model.addAttribute("user", user);
             return "users/sign-up";
         }
         if (userDao.findByEmail(user.getEmail()) != null) {
-            model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
+            model.addAttribute("alert", "<div class=\"alert\" role=\"alert\">\n" +
                     "  That email address is already in use, please select another.</div>");
             model.addAttribute("user", user);
             return "users/sign-up";
