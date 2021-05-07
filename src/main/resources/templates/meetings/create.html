@@ -34,10 +34,16 @@
                 </nav>
             </div>
         <div class="row">
-            <div class="d-none d-lg-block col-lg-6 py-1 my-2" >
-                <img class="img-fluid" src="/img/dinnerwithfriends.jpg">
-            </div>
-            <div class="col-12 col-lg-6 py-1 my-2">
+
+<!--            <div class="col-12 col-lg-6 py-1 my-2 h100 dinner>-->
+<!--                <img  class="img-fluid" src="/img/dinnerwithfriends.jpg">-->
+<!--&lt;!&ndash;                d-none d-lg-block col-lg-6 py-1 my-2 h100&ndash;&gt;-->
+
+
+<!--            </div>-->
+
+            <div class="col-12  py-1 my-2 h100">
+
                 <div th:unless="${isOwner}">
                     <h1>Sorry, you can only create meetings for bookclubs for which you are an owner.</h1>
                     <p>
@@ -46,9 +52,9 @@
                 </div>
 
                 <div th:if="${isOwner}" class="pro-card">
-                    <div class="form-meeting">
+                    <div class="form-meeting h90">
                         <h2>
-                            Edit Meeting for: <span th:text="${bookclub.name}"></span>
+                            Create a meeting for: <span th:text="${bookclub.name}"></span>
                         </h2>
                         <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/meeting/create'}" th:object="${meeting}" th:method="post"  class="form-field">
 
@@ -88,7 +94,9 @@
                                 </select>
 
 
-                            <input  type="Create Meeting" class="butn meeting-link text-center" value="Create Meeting">
+
+                            <input  type="submit" class="butn meeting-link text-center" value="Create Meeting">
+
                         </form>
                     </div>
                 </div>
