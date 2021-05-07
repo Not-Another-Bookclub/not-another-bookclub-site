@@ -91,7 +91,7 @@
     height: 200px;
     /*border: 2px solid black;*/
     background: var(--post);
-    color: white;
+    color: black;
     opacity: 1;
     overflow: hidden;
     padding: 1rem;
@@ -99,7 +99,7 @@
 }
 
 .book-link:hover {
-    color: white;
+    color: var(--meeting);
     box-shadow: white 0px 0px 4px 4px;
 }
 
