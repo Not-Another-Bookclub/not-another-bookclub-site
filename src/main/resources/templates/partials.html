@@ -82,12 +82,12 @@
                         <div class="dropdown-menu dropdown-menu-lg-right p-3" aria-labelledby="loginDropdown" id="log-drop">
                             <form th:action="@{/login}" method="post" class="px-4 py-3" >
                                 <div class="">
-                                    <input class="input mb-3" id="username1" name="username" type="text" placeholder="Username"/>
+                                    <input class="input search-under mb-3" id="username1" name="username" type="text" placeholder="Username"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="input mb-3" id="password1" name="password" placeholder="Password">
+                                    <input type="password" class="input mb-3 search-under" id="password1" name="password" placeholder="Password">
                                 </div>
-                                <button type="submit" class="butn pro-link">Sign in</button>
+                                <button type="submit" class="butn meeting-link">Sign in</button>
                             </form>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/sign-up">New around here? Sign up</a>
@@ -207,9 +207,9 @@
     <div class="modal-dialog modal-lg pro-card">
         <div class="modal-content hidden-content">
             <div class="modal-header d-flex justify-content-between">
-                <div><h5 class="modal-title" id="myModalLabel">Modal title</h5></div>
+                <div><h5 class="modal-title px-2" id="myModalLabel">Modal title</h5></div>
 
-                <div id="modalImage"><img src="/img/logo-small.png"></div>
+                <div id="modalImage"><img class="px-2" src="/img/logo-small.png"></div>
 
                 <div class="align-self-start"><i type="button" class="fas fa-window-close fa-2x meeting-link align-self-start" data-bs-dismiss="modal" aria-label="Close"></i></div>
             </div>

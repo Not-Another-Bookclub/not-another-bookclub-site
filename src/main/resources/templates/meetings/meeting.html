@@ -6,8 +6,8 @@
     <title>Title</title>
 </head>
 <!--    CSS-->
-    <link rel="stylesheet" href="/css/meeting-create.css">
-    <link rel="stylesheet" href="/css/utils.css">
+<!--    <link rel="stylesheet" href="/css/meeting-create.css">-->
+<!--    <link rel="stylesheet" href="/css/utils.css">-->
 <!--    END CSS-->
 
 
@@ -57,7 +57,7 @@
                                 </p>
                             </div>
                             <div th:if="${isOwner}" class="mb-1 text-center">
-                                <a class="butn btn-warning" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit Meeting</a>
+                                <a class="butn meeting-link" th:href="@{'/bookclubs/' + ${bookclub.id} + '/meeting/' + ${meeting.id} + '/edit'}">Edit Meeting</a>
                             </div>
                         </div>
 
