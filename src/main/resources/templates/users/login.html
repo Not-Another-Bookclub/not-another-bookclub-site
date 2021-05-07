@@ -32,14 +32,14 @@
 
 
 <div th:if="${param.error}">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Warning!</strong> Invalid Username and Password.
+    <div class="alert alert-warning alert-dismissible fade show hidden-content" role="alert">
+    <h3 class="text-center" style="color: #6b705c"><strong>Warning!</strong> Invalid Username and Password.</h3>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 </div>
 <div th:if="${param.logout}">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Signout complete.</strong> You have been logged out.
+    <div class="alert  alert-dismissible fade show hidden-content" role="alert" >
+        <h3 class="text-center" style="color: #6b705c"><strong>Signout complete.</strong> You have been logged out.</h3>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </div>
@@ -77,13 +77,15 @@
             <div class="pro-card rounded-3 " style="width: 40%">
                <div class="d-flex justify-content-center p-3 hidden-content">
                     <form th:action="@{/login}" method="post" class="my-3">
-                        <label class="form-label" for="username" style=" color: #6b705c"  >Username</label>
-                        <input class="form-control mb-3" id="username" name="username" type="text"/>
+<!--                        <label class="form-label" for="username" style=" color: #6b705c"  >Username</label>-->
+                        <input class="input search-under mb-3" id="username" name="username" type="text" placeholder="Username"/>
 
-                        <label class="form-label mt-3" for="password" style=" color: #6b705c">Password</label>
-                            <div class="input-group mb-3">   <input class="form-control" id="password" name="password" type="password" />
-                            <span class="input-group-text"><i class="fa fa-eye-slash" id="togglePassword"></i></span></div>
-                        <button type="submit" class="btn   " style="border:#6b705c 2px solid; color: #6b705c">Log in</button>
+<!--                        <label class="form-label mt-3" for="password" style=" color: #6b705c">Password</label>-->
+                        <div class="input-group mb-3">
+                            <input class="input search-under" id="password" name="password" type="password" placeholder="Password"/>
+<!--                            <span class="input-group-text"><i class="fa fa-eye-slash" id="togglePassword"></i></span>-->
+                        </div>
+                        <button type="submit" class="butn  meeting-link ">Log in</button>
                     </form>
                 </div>
             </div>

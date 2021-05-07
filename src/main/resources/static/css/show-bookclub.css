@@ -2,6 +2,10 @@
     padding-top: 30px;
 }
 
+.is-private {
+    margin-bottom: 3rem;
+}
+
 /*BREADCRUMBS*/
 #breadcrumbBookclubs {
     /*border: 2px solid cornflowerblue;*/
@@ -16,6 +20,7 @@
     opacity: 0.9;
     padding: 1rem;
     margin-bottom: 30px;
+
 }
 
 .pro-card div {

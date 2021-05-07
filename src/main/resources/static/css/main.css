@@ -16,6 +16,20 @@ body {
     color: black;
 }
 
+.narrow-body {
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 1200px){
+    .narrow-body {
+        max-width: 70%;
+    }
+
+    #meeting-form {
+        max-width: 80%;
+    }
+}
+
 .pro-card {
     background: var(--profile);
     opacity: 0.9;
@@ -124,7 +138,7 @@ h1, h2, h3{
 /*FOOTER*/
 footer {
     padding: 3rem;
-    margin-top: 4rem;
+    margin-top: 6rem;
     position: absolute;
     background: var(--footer-back);
     width: 100%;
@@ -148,6 +162,27 @@ footer div p a:hover {
     color: white;
 
 }
+
+
+.input {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--post);
+    padding: 10px;
+    color: white;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.input:focus {
+    background: transparent;
+}
+
+.search-under {
+    border-bottom: 2px solid var(--bookclub) !important;
+    color: black;
+}
+
 
 /*CUSTOM BUTTONS*/
 .butn {
@@ -292,6 +327,7 @@ a {
     color: var(--ebony)
 }
 
+
 .card-footer {
     background-color: unset; !important;
     border-top: none; !important;
@@ -311,4 +347,14 @@ a {
         max-width: 70%;
     }
 }
+
+.bc-link{
+    text-decoration: none;
+}
+.bc-link:hover{
+
+    color: #CB997E;
+
+}
+
 

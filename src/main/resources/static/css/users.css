@@ -1,0 +1,11 @@
+.input {
+    color: black;
+}
+
+.pro-card {
+    color: black;
+}
+
+.pro-card form {
+    background: var(--bookclub);
+}

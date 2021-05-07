@@ -5,9 +5,12 @@
     <head th:replace="partials.html :: head('Your Profile Page')">
         <title>Title</title>
     </head>
+    <link rel="stylesheet" href="/css/profile.css">
+
 
 
 <!--    CSS    -->
+
 
 <!--    CSS END-->
 
@@ -28,6 +31,7 @@
                 <h1 >Welcome <span th:text="${name}"></span></h1>
             </div>
             <div th:if="${!isOwner}" class="hidden-content m-2">
+
                 <h1>Welcome to <span th:text="${name}"></span>'s Profile</h1>
             </div>
 

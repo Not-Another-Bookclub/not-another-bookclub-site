@@ -1,37 +1,37 @@
 #post-content {
-    color: white;
+    color: black;
     min-height: 60vh;
 }
 
 
 .avatar {
-    background-color: var(--post);
+    background-color: var(--meeting);
     border-radius: 50px;
 }
 
 
 .post-body {
-    background: var(--post);
+    background: var(--meeting);
 }
 
 .post-body > div {
-    background: black;
+    background: var(--post);
 }
 
 .post-body > div >form > div {
     padding-bottom: 15px;
-    border-bottom: 2px solid var(--post);
+    border-bottom: 2px solid var(--meeting);
 }
 
 .post-body > div >form > div > input {
-    background: black;
-    color: white;
+    background: transparent;
+    color: black;
     /*width: 100%;*/
 }
 
 
 .post-card {
-    background: var(--post);
+    background: var(--meeting);
     opacity: 0.9;
     padding: 2rem;
     margin-bottom: 30px;
@@ -39,26 +39,43 @@
 
 #post-content div span a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .form-post {
     padding: 30px;
     border-radius: 5px;
-    background: black;
-    color: white;
+    background: var(--post);
+    color: black;
 
+}
+
+.form-post form {
+    color: black;
+}
+
+.form-post form input,
+.form-post form textarea {
+    color: black;
+    border-bottom: 2px solid var(--meeting);
+}
+
+.form-post form select {
+    color: black;
+    border-bottom: 2px solid var(--meeting);
 }
 
 .input {
     background: transparent;
     border: 0;
-    border-bottom: 2px solid var(--post);
+    border-bottom: 2px solid var(--meeting);
     padding: 10px;
     color: white;
     width: 100%;
     margin: 1rem 0;
 }
+
+
 
 #over {
     border-bottom: none;
@@ -67,9 +84,9 @@
 /*BREADCRUMBS*/
 #breadcrumbPosts {
     /*border: 2px solid cornflowerblue;*/
-    background: var(--post);
+    background: var(--meeting);
     padding: 1rem;
-    color: black;
+    color: white;
     margin-top: 2rem;
 }
 
@@ -85,4 +102,12 @@
 
 .breadcrumb-item {
     color: white;
+}
+
+.comment-frame {
+    background: var(--meeting);
+}
+
+.comment-frame div {
+    background: var(--post);
 }

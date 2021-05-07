@@ -1,95 +1,95 @@
-/*body {*/
-/*    !*background: linear-gradient(135deg, var(--left), var(--right)),*!*/
+/*!*body {*!*/
+/*!*    !*background: linear-gradient(135deg, var(--left), var(--right)),*!*!*/
 
-/*    !*background: url('/img/magicalLibrary.jpg') no-repeat center center fixed,*!*/
-/*    !* linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));*!*/
-/*    !*background-color: rgba(0, 0, 0, 0.8);*!*/
-/*    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*/
-/*            url("/img/magicalLibrary.jpg") no-repeat center center fixed;*/
+/*!*    !*background: url('/img/magicalLibrary.jpg') no-repeat center center fixed,*!*!*/
+/*!*    !* linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));*!*!*/
+/*!*    !*background-color: rgba(0, 0, 0, 0.8);*!*!*/
+/*!*    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*!*/
+/*!*            url("/img/magicalLibrary.jpg") no-repeat center center fixed;*!*/
 
 
-/*    -webkit-background-size: cover;*/
-/*    -moz-background-size: cover;*/
-/*    background-image-size: cover;*/
-/*    -o-background-size: cover;*/
+/*!*    -webkit-background-size: cover;*!*/
+/*!*    -moz-background-size: cover;*!*/
+/*!*    background-image-size: cover;*!*/
+/*!*    -o-background-size: cover;*!*/
+/*!*    color: white;*!*/
+/*!*}*!*/
+
+/*.container {*/
+/*    padding-top: 30px;*/
+/*}*/
+
+/*.modal {*/
+/*    color: black;*/
+/*}*/
+
+/*!*Styling that wraps the accordion*!*/
+/*.pro-card {*/
+/*    background: var(--profile);*/
+/*    opacity: 0.9;*/
+/*    padding: 2rem;*/
+/*    margin-bottom: 30px;*/
+/*}*/
+
+
+/*!*INVITES*!*/
+/*.invite-unit {*/
+/*    color: white;*/
+/*    background: var(--bookclub);*/
+/*}*/
+
+/*.invite-unit div {*/
+/*    background: black;*/
 /*    color: white;*/
 /*}*/
 
-.container {
-    padding-top: 30px;
-}
-
-.modal {
-    color: black;
-}
-
-/*Styling that wraps the accordion*/
-.pro-card {
-    background: var(--profile);
-    opacity: 0.9;
-    padding: 2rem;
-    margin-bottom: 30px;
-}
-
-
-/*INVITES*/
-.invite-unit {
-    color: white;
-    background: var(--bookclub);
-}
-
-.invite-unit div {
-    background: black;
-    color: white;
-}
-
-.invite-unit > div {
-    max-width: 300px;
-}
-
-/*.invite-unit form {*/
+/*.invite-unit > div {*/
 /*    max-width: 300px;*/
 /*}*/
 
-/*THE ACCORDION STYLING*/
-details > summary {
-    list-style: none;
-    background: black;
-    color: white;
-    opacity: 1;
-}
+/*!*.invite-unit form {*!*/
+/*!*    max-width: 300px;*!*/
+/*!*}*!*/
 
-details > summary i {
-    transition: transform 0.4s ease;
-}
+/*!*THE ACCORDION STYLING*!*/
+/*details > summary {*/
+/*    list-style: none;*/
+/*    background: black;*/
+/*    color: white;*/
+/*    opacity: 1;*/
+/*}*/
 
-details[open] > summary i {
-    transform: rotate(-180deg);
-}
+/*details > summary i {*/
+/*    transition: transform 0.4s ease;*/
+/*}*/
 
-details > summary::-webkit-details-marker {
-    display: none;
-    cursor: pointer;
-}
+/*details[open] > summary i {*/
+/*    transform: rotate(-180deg);*/
+/*}*/
+
+/*details > summary::-webkit-details-marker {*/
+/*    display: none;*/
+/*    cursor: pointer;*/
+/*}*/
 
 
-.acc-bar {
-    border: 2px solid white;
-    color: white;
-    background: white;
-    margin: 0px;
-}
+/*.acc-bar {*/
+/*    border: 2px solid white;*/
+/*    color: white;*/
+/*    background: white;*/
+/*    margin: 0px;*/
+/*}*/
 
-.hidden-content {
-    background: black;
-}
+/*.hidden-content {*/
+/*    background: black;*/
+/*}*/
 
 .book-link {
     display: inline-block;
     text-decoration: none;
     width: 200px;
     height: 200px;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     background: var(--bookclub);
     color: white;
     opacity: 1;
@@ -104,34 +104,27 @@ details > summary::-webkit-details-marker {
 }
 
 
-p, h4, h5, h6{
-    font-family: sans-serif;
-}
-
-h1, h2, h3{
-    font-family: "serif";
-}
 
 
 /*INVITE MODAL*/
 
-.modal-header button {
-    background: black;
-}
+/*.modal-header button {*/
+/*    background: black;*/
+/*}*/
 
-.modal-header button i {
-    color: white;
-}
-.modal-content {
-    background: black;
-    color: white;
-}
+/*.modal-header button i {*/
+/*    color: white;*/
+/*}*/
+/*.modal-content {*/
+/*    background: black;*/
+/*    color: white;*/
+/*}*/
 
-.fa-window-close {
-    color: var(--profile);
-    background-color: black;
-}
+/*.fa-window-close {*/
+/*    color: var(--profile);*/
+/*    background-color: black;*/
+/*}*/
 
-.fa-book {
-    color: var(--profile)
-}
+/*.fa-book {*/
+/*    color: var(--profile)*/
+/*}*/

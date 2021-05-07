@@ -299,7 +299,7 @@
         </div>
         <div th:if="${user}">
             <div th:if="${isNotMember}">
-                <h3>I'm sorry this group is Private.</h3>
+                <h3 class="is-private mb-3">I'm sorry this group is Private.</h3>
             </div>
             <div th:if="${!isNotMember}">
                 <div th:if="${isActiveUser}">
@@ -416,7 +416,7 @@
                 </div>
                 <div th:if="${!isActiveUser}">
                     <div th:if="${isNotActiveUser}">
-                        <h3>Pending</h3>
+                        <h3 class="is-private mb-3">Pending</h3>
                     </div>
                 </div>
             </div>
