@@ -1,22 +1,22 @@
-h4, h5, h6{
-    font-family: sans-serif;
-    /*color: #23B023;*/
-     /*color: white;*/
-     color: white;
+/*h4, h5, h6{*/
+/*    font-family: sans-serif;*/
+/*    !*color: #23B023;*!*/
+/*     !*color: white;*!*/
+/*     color: white;*/
 
 
-}
+/*}*/
 
-h1, h2, h3{
-    font-family: "serif";
-    /*color: #23B023;*/
-    /*color: white;*/
-    color: white;
+/*h1, h2, h3{*/
+/*    font-family: "serif";*/
+/*    !*color: #23B023;*!*/
+/*    !*color: white;*!*/
+/*    color: white;*/
 
-}
+/*}*/
 
 .input {
-    color: white;
+    color: black;
 }
 
 
@@ -40,14 +40,6 @@ h1, h2, h3{
 }
 
 
-.btn-secondary{
-    /*background-color: #23B023;*/
-    /*color: #D2F873;*/
-    background-color: blue;
-
-
-    color: deepskyblue;
-}
 #breadcrumbBookclubs {
     /*border: 2px solid cornflowerblue;*/
     background: var(--bookclub);
@@ -64,8 +56,8 @@ h1, h2, h3{
 }
 
 .pro-card div {
-    background: var(--bookclub);
-    color: white;
+    background: var(--post);
+    color: black;
 }
 
 
@@ -73,7 +65,7 @@ h1, h2, h3{
 details > summary {
     list-style: none;
     background: black;
-    color: white;
+    color: black;
     opacity: 1;
 }
 
