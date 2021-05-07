@@ -19,6 +19,13 @@
 
     <div class="container">
         <div id="meeting-form">
+            <div id="breadcrumbPosts" class="narrow-body mb-3">
+                <nav aria-label="breadcrumb" class="breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
+                    </ul>
+                </nav>
+            </div>
         <div class="row">
             <div class="d-none d-lg-block col-lg-6 py-1 my-2">
                 <img class="img-fluid" src="/img/typing.jpg">
