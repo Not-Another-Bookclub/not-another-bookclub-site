@@ -19,11 +19,18 @@
 
     <div class="container">
         <div id="meeting-form">
-        <div class="row">
-            <div class="d-none d-lg-block col-lg-6 py-1 my-2">
-                <img class="img-fluid" src="/img/typing.jpg">
+            <div id="breadcrumbPosts" class="narrow-body mb-3">
+                <nav aria-label="breadcrumb" class="breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="col-12 col-lg-6 py-1 my-2">
+        <div class="row d-flex justify-content-center">
+<!--            <div class="d-none d-lg-block col-lg-6 py-1 my-2">-->
+<!--                <img class="img-fluid" src="/img/typing.jpg">-->
+<!--            </div>-->
+            <div class="col-6  py-1 my-2">
                 <div th:unless="${isMember}">
                     <h1>Sorry, you can't post in a bookclub until you're a member. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and request to join.</h1>
                 </div>

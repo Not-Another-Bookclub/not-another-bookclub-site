@@ -14,6 +14,7 @@
 <html lang="en">
 
 
+    <link rel="stylesheet" href="/css/createBookclub.css">
 <body>
 
 <!--    NAVBAR-->
@@ -163,10 +164,10 @@
                     </div>
                     <div class="card p-2 m-1 col-12 col-sm-4 text-center d-flex flex-column align-items-center justify-content-evenly">
                         <form th:action="@{'/bookclubs/invite/accept/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="butn btn-success" value="Accept ">
+                            <input type="submit" class="butn meeting-link" value="Accept ">
                         </form>
                         <form th:action="@{'/bookclubs/invite/decline/' + ${bookclub.id} + '/' + ${user.id}}" th:method="post" th:object="${bookclub}">
-                            <input type="submit" class="butn btn-danger" value="Decline">
+                            <input type="submit" class="butn meeting-link" value="Decline">
                         </form>
                     </div>
                 </div>
@@ -321,7 +322,7 @@
                     flex-nowrap
                     flex-md-wrap
                     p-3">
-                            <a th:each="member : ${members}" th:href="@{'/pro/' + ${member.id}}" class="butn pro-link pro-link-2 m-2">
+                            <a th:each="member : ${members}" th:href="@{'/pro/' + ${member.id}}" class="butn pro-link m-2">
                                 <span th:text="${member.username}"></span>
                             </a>
                         </div>
@@ -329,9 +330,9 @@
                     </details>
 
                     <!--        MEETINGS-->
-                    <div >
+                    <div th:if="${isActiveUser}">
                         <details th:if="${meetings.size() > 0}" class="pro-card my-3">
-                            <summary class="d-flex justify-content-between align-items-center p-3 hidden-content">
+                            <summary class="d-flex justify-content-between align-items-center hidden-content p-3">
                                 <h2>Meetings</h2>
                                 <i class="fas fa-angle-down fa-2x"></i>
                             </summary>
@@ -350,7 +351,7 @@
                                 <a
                                         th:href="@{/bookclubs/__${bookclub.id}__/meeting/__${meeting.id}__}"
                                         th:each="meeting : ${meetings}"
-                                        class="butn meeting-link pro-link-2 m-2">
+                                        class="butn pro-link m-2">
                                     <span th:text="${#dates.format(meeting.timedate,'E, MMM dd yyyy HH:mm:ss')}"></span>
                                     <!--                <span th:text="${meeting.location}"></span> to discuss-->
                                     <!--                <span th:text="${meeting.book.googleID}"></span>-->
@@ -382,8 +383,8 @@
                         flex-md-wrap
                         p-3">
                                     <a th:href="@{/bookclubs/__${bookclub.id}__/posts/__${post.id}__}"
-                                       th:each="post : ${posts}" class="butn post-link m-2">
-                                        <span th:text="${post.title}"></span>
+                                       th:each="post : ${posts}" class="butn pro-link m-2">
+                                        <span th:text="${post.title}"></span> by:
                                         <span th:text="${post.author.username}"></span> (There are <span th:text="${post.comments.size()}"></span> comments)
                                     </a>
                                 </div>
@@ -392,9 +393,11 @@
                         </div>
 
 
-                        <p th:if="${isActiveUser}">
-                            Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}"> Create your own post</a>
-                        </p>
+                        <div th:if="${isActiveUser}" class="pro-card">
+                            <div class="p-3 hidden-content">
+                                Don't see what you're looking for? <a th:href="@{/bookclubs/__${bookclub.id}__/posts/create}" class="butn meeting-link"> Create your own post</a>
+                            </div>
+                        </div>
                     </div>
 
                     <!--        BOOKS-->
@@ -409,7 +412,7 @@
                         <h1>
                             Here's the books on the <span th:text="${bookclub.name}"></span> reading list.
                         </h1>
-                        <div id="results1" class="row row-col-1 row-cols-sm-3 row-cols-md-4"></div>
+                        <div id="results1" class="row row-col-1 row-cols-sm-3 row-cols-md-4 p-3"></div>
                         <br>
                         <br>
                     </div>

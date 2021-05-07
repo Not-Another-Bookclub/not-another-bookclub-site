@@ -5,13 +5,13 @@
 
 
 .avatar {
-    background-color: var(--meeting);
+    background-color: var(--profile);
     border-radius: 50px;
 }
 
 
 .post-body {
-    background: var(--meeting);
+    background: var(--profile);
 }
 
 .post-body > div {
@@ -31,7 +31,7 @@
 
 
 .post-card {
-    background: var(--meeting);
+    background: var(--profile);
     opacity: 0.9;
     padding: 2rem;
     margin-bottom: 30px;
@@ -84,9 +84,9 @@
 /*BREADCRUMBS*/
 #breadcrumbPosts {
     /*border: 2px solid cornflowerblue;*/
-    background: var(--meeting);
+    background: var(--profile);
     padding: 1rem;
-    color: white;
+    color: black;
     margin-top: 2rem;
 }
 
@@ -96,16 +96,16 @@
 
 .breadcrumb-item a {
     text-decoration: none;
-    color: white;
+    color: black;
 
 }
 
 .breadcrumb-item {
-    color: white;
+    color: black;
 }
 
 .comment-frame {
-    background: var(--meeting);
+    background: var(--profile);
 }
 
 .comment-frame div {

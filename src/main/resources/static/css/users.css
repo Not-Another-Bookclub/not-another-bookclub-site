@@ -1,5 +1,6 @@
 .input {
     color: black;
+    border-bottom: 2px solid var(--meeting-light);
 }
 
 .pro-card {
@@ -7,5 +8,5 @@
 }
 
 .pro-card form {
-    background: var(--bookclub);
+    background: var(--post);
 }

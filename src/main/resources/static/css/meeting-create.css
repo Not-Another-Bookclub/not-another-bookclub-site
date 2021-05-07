@@ -1,30 +1,11 @@
-:root {
-    /*--profile: #30536c;*/
-    /*--bookclub: darkblue;*/
-    /*--meeting: #23B023;*/
-    /*--meeting-light: #bea6a6;*/
+body {
+    min-height: 100vh;
 }
-
-/*body {*/
-/*    !*background: linear-gradient(135deg, var(--left), var(--right)),*!*/
-/*    !*background: url('../img/magicalLibrary.jpg') no-repeat center center fixed;*!*/
-/*    !*background-color: rgba(0, 0, 0, 0.2);*!*/
-/*    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*/
-/*    url("/img/magicalLibrary.jpg") no-repeat center center fixed;*/
-
-
-/*    -webkit-background-size: cover;*/
-/*    -moz-background-size: cover;*/
-/*    background-size: cover;*/
-/*    -o-background-size: cover;*/
-/*    color: white;*/
-/*}*/
-
 
 
 
 .pro-card {
-    background: var(--meeting);
+    background: var(--profile);
     opacity: 0.9;
     padding: 2rem;
     margin-bottom: 30px;
@@ -37,7 +18,7 @@
     padding: 30px;
     border-radius: 5px;
     background: var(--post);
-    color: var(--meeting-light);
+    color: black;
 }
 
 .form-field {
@@ -46,9 +27,9 @@
 }
 
 .breadcrumbMeeting {
-    background: var(--meeting);
+    background: var(--profile);
     padding: 10px;
-    color: white;
+    color: black;
 }
 
 .breadcrumbMeeting ul {
@@ -65,34 +46,25 @@
     border: 0;
     border-bottom: 2px solid var(--meeting-light);
     padding: 10px;
-    color: var(--meeting-light);
+    color: black;
     width: 100%;
     margin: 1rem 0;
 }
 
 #day::-webkit-calendar-picker-indicator {
-    /*color: #c5ecfd;*/
-    /*opacity: 1;*/
-    /*display: block;*/
-    filter: invert(1);
-    color: var(--meeting-light);
-    /*background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;*/
-    /*width: 20px;*/
-    /*height: 20px;*/
-    /*border-width: thin;*/
+    /*filter: invert(1);*/
+    color: black;
 }
 
 #time::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    color: var(--meeting-light);
+    color: black;
 }
 
 .hidden-content {
     background: black;
 }
 
-/*.equal-height {*/
-/*    padding-bottom: 100%;*/
-/*    margin-bottom: -100%;*/
-/*}*/
-
+.dinner{
+    width: 480px;
+    height: 726.367px;
+}
