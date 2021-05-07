@@ -20,37 +20,35 @@ p h4, h5, h5{
 }
 
 .fa-linkedin {
-    color: #808080;
+    color: #0a66c2;
     height: 50px;
     width: 50px;
+    transition-duration: .5s;
 }
 
 .fa-linkedin:hover {
-    color: #0a66c2;
+    transform: scale(1.1);
 }
 
 .fa-github {
-    color: #808080;
+    color: black;
     height: 50px;
     width: 50px;
+    transition-duration: .5s;
 }
 
 .fa-github:hover {
-    color: black;
+    transform: scale(1.1);
 }
 
 .codeup {
-    filter: grayscale();
+    transition-duration: .5s;
     height: 50px;
     width: 50px;
 }
 
 .codeup:hover {
-    filter: unset;
-}
-
-.hub {
-    color: gray;
+    transform: scale(1.1);
 }
 
 .credits {
