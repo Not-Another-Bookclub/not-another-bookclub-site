@@ -380,3 +380,8 @@ a {
     font-size: 150%;
     text-align: center;
 }
+
+/*NAVBAR BACKGROUND COLOR*/
+nav {
+    background-color:#b7b7a4 ;
+}
