@@ -27,7 +27,7 @@ body {
 }
 
 .breadcrumbMeeting {
-    background: var(--profile);
+    background: var(--bookclub);
     padding: 10px;
     color: black;
 }

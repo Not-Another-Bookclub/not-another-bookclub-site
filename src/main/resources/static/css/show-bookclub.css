@@ -14,6 +14,10 @@
     color: white;
 }
 
+#breadcrumbBookclubs ul {
+    background: var(--post);
+}
+
 /*Styling that wraps the accordion*/
 .pro-card {
     background: var(--bookclub);
@@ -94,6 +98,10 @@ details > summary::-webkit-details-marker {
 
 .breadcrumb {
     margin-bottom: 0;
+}
+
+.breadcrumb ul {
+    background: var(--profile);
 }
 
 .bkcard {
