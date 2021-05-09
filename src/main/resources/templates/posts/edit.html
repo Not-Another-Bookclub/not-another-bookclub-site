@@ -19,13 +19,9 @@
         <div id="breadcrumbPosts" class="mb-3 narrow-body">
             <nav aria-label="breadcrumb" class="breadcrumbs">
                 <ul class="breadcrumb">
-
-                    <!--            <li class="breadcrumb-item active" aria-current="page">Bookclub</li>-->
-                    <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
-                    <li class="breadcrumb-item"><a th:href="@{'/bookclubs/' + ${bookclub.id} + '/posts/' + ${post.id}}">Post</a></li>
-                    <!--            <li class="breadcrumb-item"><a th:href="@{/pro/__${bookclub.owner.id}__}">Bookclub</a></li>-->
-
-                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                    <li class="breadcrumb-item"><a href="/bookclubs">All Bookclubs</a> </li>
+                    <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}"><span th:text="${bookclub.name}"></span></a></li>
+                    <li class="breadcrumb-item" aria-current="page">Editing post: <span th:text="${post.title}"></span></li>
 
                 </ul>
             </nav>

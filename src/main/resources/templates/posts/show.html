@@ -24,15 +24,18 @@
     <div id="breadcrumbPosts" class="narrow-body mb-3">
         <nav aria-label="breadcrumb" class="breadcrumbs">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
-                <li class="breadcrumb-item" aria-current="page">Post</li>
+                <li class="breadcrumb-item"><a href="/bookclubs">All Bookclubs</a> </li>
+                <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}"><span th:text="${bookclub.name}"></span></a></li>
+                <li class="breadcrumb-item" aria-current="page">Post: <span th:text="${post.title}"></span></li>
             </ul>
         </nav>
     </div>
 
     <div class="narrow-body post-body p-3 my-3">
         <div class="p-3">
-        <h1 class="text-center"> <span th:text="${post.title}"></span></h1>
+        <div class="d-flex justify-content-between align-items-end">
+            <div><h1 class="text-center"> <span th:text="${post.title}"></span></h1></div>
+            <div id="results1"></div></div>
         <hr class="acc-bar">
 
         <h5 th:text="${post.getBody()}">Body will go here.</h5>
@@ -122,11 +125,146 @@
     </div>
 </div>
 
+<!--    BOOKCLUB MODAL-->
+<div th:replace="partials.html::bookclubmodal"></div></div>
+<!--    END BOOKCLUB MODAL-->
+
 
 <!--    FOOTER-->
-    <footer th:replace="partials.html::footer"></footer>
-
+<footer th:replace="partials.html::footer"></footer>
 <!--    END FOOTER-->
+</body>
+<!--    JS-->
 
+<script th:inline="javascript">
+    let idsearch = [[${books}]]
+    let startdates = [[${startdates}]]
+    let startdateshtml = [[${startdateshtml}]]
+    let finishdates = [[${finishdates}]]
+    let finishdateshtml = [[${finishdateshtml}]]
+
+    let findreplace = {}
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+
+
+    function googleIdSearch(idSearch,startDate,finishDate,startDateHTML,finishDateHTML){
+
+        let results = document.getElementById('results1')
+
+
+        $.ajax({
+                url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+                dataType: "json",
+
+                success: function (data) {
+
+                    let thumbnail
+                    let author
+
+                    // use dom to display ajax rtn
+
+                    if (!data.volumeInfo.hasOwnProperty('imageLinks')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
+                    else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {thumbnail = "http://localhost:8080/img/logo-small.png"}
+                    else {thumbnail = data.volumeInfo.imageLinks.thumbnail}
+                    console.log(thumbnail);
+                    if (!data.volumeInfo.hasOwnProperty('authors')) {author = "Unknown or not listed"}
+                    else {author = data.volumeInfo.authors[0]}
+                    if (startDate === null) {startDate = "Not yet started."};
+                    if (finishDate === null) {finishDate = "Not finished yet."}
+
+                    var html = '<div class="card col-lg-12 col-md-6 col-sm-8 text-center m-3">'
+
+                    html += "<img src='" + thumbnail + "' alt='Book Cover'>"
+
+                    html += '<button href="" class="butn book-selector boo-link" data-google-i-d="'+ idSearch +'" data-startdate="'+startDate+'" data-startdatehtml="'+ startDateHTML+'" data-finishdate="'+ finishDate +'" data-finishdatehtml="'+ finishDateHTML +'" data-bs-toggle="modal" data-bs-target="#myModal">See details</button></div></div>'
+                    // html += "<div class='card-bottom1'><p class='card-text'>" + data.volumeInfo.description + "</p></div></div>"
+
+                    results.innerHTML += html;
+                    findreplace[idSearch] = data.volumeInfo.title;
+
+                    $('body :not(script)').contents().filter(function () {
+                        return this.nodeType === 3;
+                    }).replaceWith(function () {
+                        return this.nodeValue.replace(idSearch, data.volumeInfo.title)})
+
+                },
+
+
+                type: 'Get',
+            }
+        )
+    }
+    if (typeof idsearch == "string") {googleIdSearch(idsearch,startdateshtml,finishdateshtml);}
+
+    else {
+        for(let i = 0; i < idsearch.length; i++) {
+            googleIdSearch(idsearch[i],startdates[i],finishdates[i],startdateshtml[i], finishdateshtml[i]);
+        }
+    }
+
+
+    const title = document.getElementById('myModalLabel');
+    const modalImage = document.getElementById('modalImage');
+    const body = document.getElementById('modalBody');
+    const startdatetext = document.getElementById('startDateText');
+    const finishdatetext = document.getElementById('finishDateText');
+    const startdatecalendar = document.getElementById('startDate');
+    const finishdatecalendar = document.getElementById('finishDate');
+    const modalbookid = document.getElementById('modalbookid');
+
+
+
+    function modalPopulate(idSearch,start,finish,startHTML,finishHTML){
+        $.ajax({
+            url: "https://www.googleapis.com/books/v1/volumes/" + idSearch,
+            dataType: 'json',
+            success: function (data) {
+                let thumbnail
+                let author
+
+                if (!data.volumeInfo.hasOwnProperty('imageLinks')) {
+                    thumbnail = "http://localhost:8080/img/logo-small.png"
+                } else if (!data.volumeInfo.imageLinks.hasOwnProperty('thumbnail')) {
+                    thumbnail = "http://localhost:8080/img/logo-small.png"
+                } else {
+                    thumbnail = data.volumeInfo.imageLinks.thumbnail
+                }
+                console.log(thumbnail);
+                if (!data.volumeInfo.hasOwnProperty('authors')) {
+                    author = "Unknown or not listed"
+                } else {
+                    author = data.volumeInfo.authors[0]
+                }
+
+                title.innerText = data.volumeInfo.title + " - " + author;
+                modalImage.innerHTML = '<img src="' + thumbnail + '">'
+                body.innerHTML = data.volumeInfo.description;
+                startdatetext.innerText = "Currently set to: " + start;
+                finishdatetext.innerText = "Currently set to: " + finish;
+                startdatecalendar.value = startHTML;
+                startdatecalendar.disabled = true;
+                finishdatecalendar.value = finishHTML;
+                finishdatecalendar.disabled = true;
+                modalbookid.value = idSearch;
+            },
+
+            type: 'Get'
+
+        });
+    }
+
+    setTimeout(function() {
+
+            $('.book-selector').click(function() {
+                // console.log(this);
+                modalPopulate(this.dataset.googleID, this.dataset.startdate, this.dataset.finishdate, this.dataset.startdatehtml, this.dataset.finishdatehtml)
+            })
+        }
+        , 750)
+</script>
 </body>
 </html>

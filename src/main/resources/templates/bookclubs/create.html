@@ -26,17 +26,23 @@
 
 <!--            MODIFIED PAGE-->
   <div class="container">
-    <div class="pro-card narrow-body">
+      <div class="d-flex justify-content-center justify-content-lg-between my-3">
+          <div class="m-2 p-2 d-none d-lg-block col-lg-4" id="happyman">
+              <p>    </p>
+              <!--                    <img class="img-fluid" src="/img/dinnerwithfriends.jpg">-->
+          </div>
+          <div class="col-8 p-2 mx-2">
+
+    <div class="pro-card h-100">
     <div class="d-flex flex-column flex-md-row justify-content-center p-3">
         <div class="">
             <h1>Thanks for starting a new bookclub, here's what we need to know....</h1>
-
             <form th:action="@{/bookclubs/create}" th:method="post" th:object="${bookclub}">
                 <div class="mb-3">
                     <input class="input" placeholder="Name of Bookclub" th:field="*{name}" type="text" maxlength="255" required>
                 </div>
                 <div class="mb-3">
-                    <textarea class="input" rows="3" maxlength="255" th:field="*{description}" placeholder="Details of Meeting">Who are your ideal members? What types of books do you want to read? Where and how often would you like to meet?</textarea>
+                    <textarea class="input" rows="3" maxlength="255" th:field="*{description}" placeholder="Who are your ideal members? What types of books do you want to read? Where and how often would you like to meet?">Who are your ideal members? What types of books do you want to read? Where and how often would you like to meet?</textarea>
                 </div>
                 <div class="mb-3">
                     <div class="form-check">
@@ -64,6 +70,7 @@
   </div>
 
 </div>
+      </div></div>
 
 <!--                MODIFIED PAGE END-->
 

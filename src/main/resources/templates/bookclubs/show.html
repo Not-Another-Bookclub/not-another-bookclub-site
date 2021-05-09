@@ -32,10 +32,10 @@
         <nav aria-label="breadcrumb" class="breadcrumbs">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a th:href="@{/bookclubs}">Bookclubs</a>
+                    <a href="/bookclubs">Bookclubs</a>
                 </li>
                 <li class="breadcrumb-item" aria-current="page">
-                    Bookclub
+                    <span th:text="${bookclub.name}"></span>
                 </li>
             </ul>
         </nav>
