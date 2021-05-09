@@ -92,9 +92,10 @@ public class BookclubController {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             ;
         } else {
+            model.addAttribute("user", user);
             model.addAttribute("alert", "<div class=\"alert alert-warning\" role=\"alert\">\n" +
                     "  You must be logged in to create a bookclub.. </div>");
-            return "user/login";
+            return "users/login";
         }
 
         bookclub.setOwner(user);

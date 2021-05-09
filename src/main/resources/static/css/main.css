@@ -32,9 +32,9 @@ body {
 
 .pro-card {
     background: var(--profile);
-    opacity: 0.9;
+    /*opacity: 0.9;*/
     padding: 2rem;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 
 
@@ -389,4 +389,48 @@ nav {
 
 nav[aria-label="breadcrumb"] ul {
     background-color: var(--bookclub) !important;
+}
+
+#friends {
+    background-image: url("/img/dinnerwithfriends.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#happyman {
+    background-image: url("/img/happymanwithbooks.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#typing {
+    background-image: url("/img/typing.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#breadcrumbBookclubs {
+    /*border: 2px solid cornflowerblue;*/
+    background: var(--bookclub);
+    padding: 1rem;
+    color: white;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: var(--ebony)
+}
+
+.breadcrumb-item a:hover {
+    color: black
+}
+
+.breadcrumb {
+    background: var(--bookclub);
+    padding: 1rem;
+    color: white;
+    /*margin-bottom: 0;*/
 }

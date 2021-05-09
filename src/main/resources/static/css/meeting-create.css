@@ -26,20 +26,20 @@ body {
     flex-direction: column;
 }
 
-.breadcrumbMeeting {
-    background: var(--bookclub);
-    padding: 10px;
-    color: black;
-}
+/*.breadcrumbMeeting {*/
+/*    background: var(--bookclub);*/
+/*    padding: 10px;*/
+/*    color: black;*/
+/*}*/
 
-.breadcrumbMeeting ul {
-    margin-bottom: 0;
-}
+/*.breadcrumbMeeting ul {*/
+/*    margin-bottom: 0;*/
+/*}*/
 
-.breadcrumbMeeting a {
-    color: black;
-    text-decoration: none;
-}
+/*.breadcrumbMeeting a {*/
+/*    color: black;*/
+/*    text-decoration: none;*/
+/*}*/
 
 .input {
     background: transparent;
@@ -51,20 +51,3 @@ body {
     margin: 1rem 0;
 }
 
-#day::-webkit-calendar-picker-indicator {
-    /*filter: invert(1);*/
-    color: black;
-}
-
-#time::-webkit-calendar-picker-indicator {
-    color: black;
-}
-
-.hidden-content {
-    background: black;
-}
-
-.dinner{
-    width: 480px;
-    height: 726.367px;
-}

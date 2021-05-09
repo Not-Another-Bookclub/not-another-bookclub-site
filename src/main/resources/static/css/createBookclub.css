@@ -112,6 +112,10 @@ details > summary::-webkit-details-marker {
     text-decoration: none;
 }
 
+.breadcrumb-item a:hover {
+    color: black
+}
+
 .breadcrumb {
     margin-bottom: 0;
 }

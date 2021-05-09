@@ -128,7 +128,7 @@ public class PostController {
     }
 
         model.addAttribute("user", user);
-        model.addAttribute("books", post.getBook());
+        model.addAttribute("books", post.getBook().getGoogleID());
         model.addAttribute("bookclub", bookclub);
         model.addAttribute("startdateshtml", startdateshtml);
         model.addAttribute("finishdateshtml", finishdateshtml);

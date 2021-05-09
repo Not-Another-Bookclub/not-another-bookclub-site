@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <html lang="en">
-<head th:include="partials.html::head('Create a new Bookclub!')" >
+<head th:include="partials.html::head('Edit your bookclub!')" >
     <meta charset="UTF-8">
     <title>You shouldn't see this title!</title>
 </head>
@@ -29,16 +29,22 @@
                     <a th:href="@{/bookclubs}">Bookclubs</a>
                 </li>
                 <li class="breadcrumb-item" aria-current="page">
-                    Bookclub
+                    Editing: <span th:text="${bookclub.name}"Bookclub</span>
                 </li>
             </ul>
         </nav>
     </div>
+        <div class="d-flex justify-content-center justify-content-lg-between my-3">
+            <div class="m-2 p-2 d-none d-lg-block col-lg-4" id="happyman">
+                <p>    </p>
+                <!--                    <img class="img-fluid" src="/img/dinnerwithfriends.jpg">-->
+            </div>
+            <div class="col-8 p-2 mx-2">
 
-    <div class="pro-card narrow-body">
+                <div class="pro-card h-100">
         <div class="row d-flex flex-column flex-md-row p-3">
             <div class="">
-                <h1>To edit your BookClub's information, make modifications to the form below....</h1>
+                <h1>To edit your Bookclub's information, make modifications to the form below....</h1>
 
                 <form th:action="@{'/bookclubs/' + ${bookclub.id} + '/edit'}" th:method="post" th:object="${bookclub}">
                     <div class="mb-3">
@@ -73,7 +79,7 @@
             </div>
         </div>
     </div>
-
+            </div></div>
 </div>
 <!--                    FOOTER-->
 <footer th:replace="partials.html::footer"></footer>

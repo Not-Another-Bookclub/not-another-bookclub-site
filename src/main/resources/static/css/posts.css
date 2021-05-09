@@ -82,27 +82,27 @@
 }
 
 /*BREADCRUMBS*/
-#breadcrumbPosts {
-    /*border: 2px solid cornflowerblue;*/
-    background: var(--bookclub);
-    padding: 1rem;
-    color: black;
-    margin-top: 2rem;
-}
+/*#breadcrumbPosts {*/
+/*    !*border: 2px solid cornflowerblue;*!*/
+/*    background: var(--bookclub);*/
+/*    padding: 1rem;*/
+/*    color: black;*/
+/*    margin-top: 2rem;*/
+/*}*/
 
-#breadcrumbPosts ul {
-    margin-bottom: 0;
-}
+/*#breadcrumbPosts ul {*/
+/*    margin-bottom: 0;*/
+/*}*/
 
-.breadcrumb-item a {
-    text-decoration: none;
-    color: black;
+/*.breadcrumb-item a {*/
+/*    text-decoration: none;*/
+/*    color: black;*/
 
-}
+/*}*/
 
-.breadcrumb-item {
-    color: black;
-}
+/*.breadcrumb-item {*/
+/*    color: black;*/
+/*}*/
 
 .comment-frame {
     background: var(--profile);

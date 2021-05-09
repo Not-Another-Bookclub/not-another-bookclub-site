@@ -22,19 +22,37 @@
             <div id="breadcrumbPosts" class="narrow-body mb-3">
                 <nav aria-label="breadcrumb" class="breadcrumbs">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}">Bookclub</a></li>
+                        <li class="breadcrumb-item"><a href="/bookclubs">All Bookclubs</a> </li>
+                        <li class="breadcrumb-item"><a th:href="@{/bookclubs/__${bookclub.id}__}"><span th:text="${bookclub.name}"></span></a></li>
+                        <li class="breadcrumb-item" aria-current="page">Creating a new post</li>
                     </ul>
                 </nav>
             </div>
-        <div class="row d-flex justify-content-center">
-<!--            <div class="d-none d-lg-block col-lg-6 py-1 my-2">-->
-<!--                <img class="img-fluid" src="/img/typing.jpg">-->
-<!--            </div>-->
-            <div class="col-6  py-1 my-2">
-                <div th:unless="${isMember}">
-                    <h1>Sorry, you can't post in a bookclub until you're a member. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and request to join.</h1>
+<!--        <div class="row d-flex justify-content-center">-->
+<!--&lt;!&ndash;            <div class="d-none d-lg-block col-lg-6 py-1 my-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                <img class="img-fluid" src="/img/typing.jpg">&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            <div class="col-6  py-1 my-2">-->
+<!--                <div th:unless="${isMember}">-->
+<!--                    <h1>Sorry, you can't post in a bookclub until you're a member. Please return to the <a th:href="@{/bookclubs/__${bookclub.id}__/}">bookclub homepage</a> and request to join.</h1>-->
+<!--                </div>-->
+<!--                <div th:if="${isMember}" class="post-card">-->
+            <div class="d-flex justify-content-center justify-content-lg-between my-3">
+                <div class="mx-2 px-2 d-none d-lg-block col-lg-4" id="typing">
+                    <p></p>
                 </div>
-                <div th:if="${isMember}" class="post-card">
+
+                <div class="col-12 col-lg-8 px-2 mx-2 h-100">
+
+                    <div th:unless="${isMember}">
+                        <h1>Sorry, you can only create posts for bookclubs for which you are an active member.</h1>
+                        <p>
+                            Check <a th:href="@{'/pro/' + ${loggedin.id}}">your profile page</a> for more information
+                        </p>
+                    </div>
+
+                    <div th:if="${isMember}" class="pro-card h-100">
+
                     <div class="form-post">
                     <h1>Use the form below to create a new post!</h1>
                     <form th:action="@{/bookclubs/__${bookclub.id}__/posts/create}" th:method="post" th:object="${post}">
