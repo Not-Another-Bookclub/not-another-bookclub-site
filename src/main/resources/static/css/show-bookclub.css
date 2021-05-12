@@ -8,7 +8,6 @@
 
 /*BREADCRUMBS*/
 #breadcrumbBookclubs {
-    /*border: 2px solid cornflowerblue;*/
     background: var(--bookclub);
     padding: 1rem;
     color: white;
@@ -75,7 +74,6 @@ details > summary::-webkit-details-marker {
 }
 
 .invite-unit div {
-    /*background: black;*/
     color: white;
 }
 

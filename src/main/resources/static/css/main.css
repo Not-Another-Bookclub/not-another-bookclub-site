@@ -24,10 +24,6 @@ body {
     .narrow-body {
         max-width: 70%;
     }
-
-    #meeting-form {
-        /*max-width: 80%;*/
-    }
 }
 
 .pro-card {
