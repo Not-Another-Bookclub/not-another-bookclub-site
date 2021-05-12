@@ -435,12 +435,23 @@ nav[aria-label="breadcrumb"] ul {
     /*margin-bottom: 0;*/
 }
 
+/*#library {*/
+/*    color: black;*/
+/*    background-color: black;*/
+/*    background-image: linear-gradient(rgba(255 , 255, 255, 0.7),*/
+/*    rgba(255, 255, 255, 0.7)),*/
+/*                        url("/img/readingwithpup.jpg");*/
+/*    background-position: center;*/
+/*    background-size: cover;*/
+/*    background-repeat: no-repeat;*/
+/*}*/
+
 #library {
-    color: black;
+    color: white;
     background-color: black;
-    background-image: linear-gradient(rgba(255 , 255, 255, 0.7),
-    rgba(255, 255, 255, 0.7)),
-                        url("/img/readingwithpup.jpg");
+    background-image: linear-gradient(rgba(0 , 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7)),
+    url("/img/magicallibrary.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
