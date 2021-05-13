@@ -20,9 +20,10 @@
     <div>
         <h4>Click the "User" or "Bookclub" buttons to find other users and bookclubs who have read (or plan to read) the books you like.</h4>
 <div class="row row-col-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 my-3" id="results1"></div>
-    <div class="pro-card my-3 p-3 d-none" id="usercard"><div class="hidden-content my-2 py-2"><h2 id="resultsuserheadline" class="d-none text-center my-2 py-2">Here are the other users that have read <span id="bookname1">that book</span>:</h2>
-        <div class="" id="resultsuser"></div></div></div>
-<div class="pro-card my-3 p-3 d-none" id="bookclubcard"><div class="hidden-content my-2 py-2"><h2 id="resultsbookclubheadline" class="d-none text-center my-2 py-2">Here are bookclubs that have read or are planning to read <span id="bookname2">that book</span>:</h2>
+    <div class="pro-card my-3 p-3 d-none" id="usercard"><div class="hidden-content my-2 py-2">
+        <h2 id="resultsuserheadline" class="d-none text-center my-2 py-2">Here are the other users that have read <span id="bookname1">that book</span>:</h2>
+<!--        <div class="" id="resultsuser"></div></div></div>-->
+<!--<div class="pro-card my-3 p-3 d-none" id="bookclubcard"><div class="hidden-content my-2 py-2"><h2 id="resultsbookclubheadline" class="d-none text-center my-2 py-2">Here are bookclubs that have read or are planning to read <span id="bookname2">that book</span>:</h2>-->
     <div class="" id="resultsbookclub"></div></div></div>
 
     </div>
@@ -150,8 +151,9 @@ function findUsersWithSameBook(googleID, booktitle) {
             let html
             if (data.length == 0) {
                 html = "<h3>I'm sorry, so far no one else is reading " + booktitle +". Try another?</h3>"
-                document.getElementById('resultsuser').innerHTML = html;
+                document.getElementById('resultsbookclub').innerHTML = html;
                 $('#usercard').removeClass("d-none")
+                if (!$('#resultsuserheadline').hasClass('d-none')) {$('#resultsuserheadline').addClass('d-none')}
             }
             else {html = "<ul class='my-2 py-2'>"
                 for (let i = 0; i < data.length; i++){
@@ -159,10 +161,11 @@ function findUsersWithSameBook(googleID, booktitle) {
                 } html += "</ul>"
 
 
-                document.getElementById('resultsuser').innerHTML = html;
-                document.getElementById('bookname1').innerText = booktitle;
-                $('#resultsuserheadline').removeClass("d-none")
-                $('#usercard').removeClass("d-none")
+                document.getElementById('resultsbookclub').innerHTML = html;
+                document.getElementById('resultsuserheadline').innerText = "Here are the other users that have read " + booktitle + ":";
+                // if ($('#resultsuserheadline').hasClass("d-none")) {$('#resultsuserheadline').removeClass("d-none")}
+                if ($('#resultsuserheadline').hasClass('d-none')) {$('#resultsuserheadline').removeClass("d-none")}
+                if ($('#usercard').hasClass('d-none')) {$('#usercard').removeClass("d-none")}
 
             }
         console.log(data)},
@@ -179,7 +182,8 @@ function findBookclubsWithSameBook(googleID, booktitle) {
             if (data.length == 0) {
                 html = "<h3>I'm sorry, so far no other bookclub is reading " + booktitle +". Try another?</h3>"
                 document.getElementById('resultsbookclub').innerHTML = html;
-                $('#bookclubcard').removeClass("d-none")
+                if ($('#usercard').hasClass('d-none')) {$('#usercard').removeClass("d-none")}
+                if (!$('#resultsuserheadline').hasClass('d-none')) {$('#resultsuserheadline').addClass('d-none')}
             }
             else {html = "<ul class='my-2 py-2'"
                 for (let i = 0; i < data.length; i++){
@@ -187,10 +191,12 @@ function findBookclubsWithSameBook(googleID, booktitle) {
                 }
                 html += "</ul>"
 
+                if ($('#usercard').hasClass('d-none')) {$('#usercard').removeClass("d-none")}
                 document.getElementById('resultsbookclub').innerHTML = html;
-                document.getElementById('bookname2').innerText = booktitle;
-                $('#resultsbookclubheadline').removeClass("d-none")
-                $('#bookclubcard').removeClass("d-none")
+                document.getElementById('resultsuserheadline').innerText = "Here are bookclubs that have read or are planning to read " + booktitle + ":";
+                if ($('#resultsuserheadline').hasClass("d-none")) {$('#resultsuserheadline').removeClass("d-none")}
+                // if ($('#resultsbookclubheadline').hasClass('d-none')) {$('#resultsbookclubheadline').removeClass("d-none")}
+                // if ($('#boo').hasClass('d-none')) {$('#bookclubcard').removeClass("d-none")}
             }
         console.log(data)},
         type: 'Get'
